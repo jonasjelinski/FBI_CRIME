@@ -3,20 +3,32 @@ var commonfunctions_namespace = commonfunctions_namespace || {};
 commonfunctions_namespace.loadCSV = function(){
 
 	try{
-        data = d3.csv(config_namespace.FILE_PATHES.csvpath, 
-                      function(csvdata){
+        data = d3.csv(config_namespace.FILE_PATHES.csvpath, function(csvdata){
                             return csvdata;
-                      }
-                );
+                            }
+                      );
                    
         
-            return data;
+        return data;
 
   }
-
    catch(err){
         console.log("couldn't load csv "+err);   
   } 
+};
+
+commonfunctions_namespace.loadJson = function(){
+  try{
+      data = d3.json(onfig_namespace.FILE_PATHES.jsonpath, function(jsondata) {
+                            return jsondata;
+                          }
+                    );
+      return data;
+  }
+  catch(err){
+    console.log("couldn't load json "+err);   
+  }
+
 };
 
 commonfunctions_namespace.getRootElement = function(environment){
@@ -97,7 +109,7 @@ commonfunctions_namespace.getAllYears = function(){
 };
 
 //returns a rgb color depending on the paramter 'multipiler'
-// 0 is red, 120 is  green
+// 0 is red, 100 is  green
 //source: https://stackoverflow.com/questions/17525215/calculate-color-values-from-green-to-red
 commonfunctions_namespace.getSingleColor = function(multipiler){
   let degree = 1.2;

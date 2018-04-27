@@ -14,7 +14,8 @@ config_namespace.HTML_TYPES = {
 };
  
 config_namespace.FILE_PATHES = {
-	csvpath: "./store/elements-by-episode.csv"
+	csvpath: "./store/elements-by-episode.csv",
+	jsonpath: "./store/crimes.json"
 };
 
 config_namespace.CONSTANTS = {
