@@ -5,13 +5,19 @@ config_namespace.CLICKLISTENER = {
 };
 
 config_namespace.HTML_IDS = {
-    mychart: "#myChart"
+    mychart: "myChart"
 };
 
 config_namespace.HTML_TYPES = {
-    g: "g"
+    g: "g",
+    svg: "svg"
 };
  
 config_namespace.FILE_PATHES = {
 	csvpath: "./store/elements-by-episode.csv"
+};
+
+config_namespace.CONSTANTS = {
+	states : [''],
+	crimecategories : { propertyCrime : ['Burglary', 'Larcency', 'Motorverhicletheft'], violentCrime : ['Aggravatedassault', 'MurderManslaughter', 'Rape', 'Robbery'] }
 };
