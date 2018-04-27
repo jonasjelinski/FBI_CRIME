@@ -99,7 +99,7 @@ commonfunctions_namespace.getAllYears = function(){
 //returns a rgb color depending on the paramter 'multipiler'
 // 0 is red, 120 is  green
 //source: https://stackoverflow.com/questions/17525215/calculate-color-values-from-green-to-red
-commonfunctions_namespace.getStateColor = function(multipiler){
+commonfunctions_namespace.getSingleColor = function(multipiler){
   let degree = 1.2;
   let fullCircle = 360;
   let hueColor = multipiler * degree/fullCircle;
