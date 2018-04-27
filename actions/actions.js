@@ -1,3 +1,5 @@
+//this file includes all actions, which the listener call
+
 var action_namespace = action_namespace || {};
 
 action_namespace.actionStartDrawing = function(){
