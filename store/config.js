@@ -33,5 +33,16 @@ config_namespace.CONSTANTS = {
 		Robbery:[125,0,125]
 	},
 	maxYear : 2016,
-	minYear : 2000 
+	minYear : 2000
 };
+
+config_namespace.JSON_OBJECT = false;
+
+config_namespace.SCRIPT_PATHES = ["./libs/d3/d3.js", "./store/config.js", "./store/dynamics.js",
+"./htmlelements/magicCircle.js","./store/commonfunctions.js", "./classes/lama.js", "./classes/magicCircle.js",
+  "./components/components.js", "./actions/actions.js", "./listener/listener.js"];  
+
+config_namespace.FIRST_SCRIPTS = ["./libs/d3/d3.js", "./store/config.js", 
+"./store/dynamics.js","./store/commonfunctions.js", "./htmlelements/magicCircle.js"];
+config_namespace.SECOND_SCRIPTS = ["./classes/lama.js", "./classes/magicCircle.js",
+  "./components/components.js", "./actions/actions.js", "./listener/listener.js"];

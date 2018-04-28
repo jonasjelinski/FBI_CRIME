@@ -3,10 +3,12 @@ var commonfunctions_namespace = commonfunctions_namespace || {};
 commonfunctions_namespace.loadCSV = function(){
 
 	try{
-        data = d3.csv(config_namespace.FILE_PATHES.csvpath, function(csvdata){
-                            return csvdata;
-                            }
-                      );
+        let data; 
+
+        d3.csv(config_namespace.FILE_PATHES.csvpath, function(csvdata){
+                          data = csvdata;
+                        }
+                  );
                    
         
         return data;
@@ -17,18 +19,37 @@ commonfunctions_namespace.loadCSV = function(){
   } 
 };
 
-commonfunctions_namespace.loadJson = function(){
-  try{
-      data = d3.json(onfig_namespace.FILE_PATHES.jsonpath, function(jsondata) {
-                            return jsondata;
-                          }
-                    );
-      return data;
+commonfunctions_namespace.loadJson = function(callback){
+  try{        
+        d3.json(config_namespace.FILE_PATHES.jsonpath, function(jsondata) {         
+                            config_namespace.JSON_OBJECT = jsondata;
+                            callback(null);                            
+                          }                          
+                    );    
   }
   catch(err){
     console.log("couldn't load json "+err);   
   }
 
+};
+
+commonfunctions_namespace.setJsonObject = function(){
+  "use strict"; 
+  var q=d3.queue();
+  q.defer(commonfunctions_namespace.loadJson);  
+  q.await(function(error) {
+    if (error) throw error;
+    commonfunctions_namespace.setChartsCanBeBuild(true);
+  }); 
+};
+
+commonfunctions_namespace.setChartsCanBeBuild = function(trueOrFalse){
+  console.log("load js", config_namespace.JSON_OBJECT);
+  dynamics_namespace.chartsCanBeBuild = trueOrFalse;
+};
+
+commonfunctions_namespace.getJsonObject = function(){
+    return config_namespace.CONSTANTS.jsonObject;
 };
 
 commonfunctions_namespace.getRootElement = function(environment){

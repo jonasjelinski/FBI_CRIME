@@ -14,7 +14,7 @@ class MagicCircle{
     }
     
     getData (){
-         return commonfunctions_namespace.loadCSV();    
+         return config_namespace.JSON_OBJECT;  
     }
 
     doChart (){

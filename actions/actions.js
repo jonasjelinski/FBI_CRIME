@@ -4,7 +4,14 @@ var action_namespace = action_namespace || {};
 
 action_namespace.actionStartDrawing = function(){
 	'use strict';
-    components_namespace.lama.doChart();
+		
+	if(dynamics_namespace.chartsCanBeBuild){
+		components_namespace.lama.doChart();
+		console.log(components_namespace.lama.getData());
     components_namespace.magicCircle.doChart();
+
+
+	}
+    
 }
 

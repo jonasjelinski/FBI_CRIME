@@ -1,14 +1,13 @@
 class Lama{
     constructor(){
-        data: this.getData();
+        this.data = this.getData ();
+    }    
+    
+    getData () {
+      return config_namespace.JSON_OBJECT;        
     }
     
-    
-    getData (){
-      return commonfunctions_namespace.loadCSV();        
-    }
-    
-    doChart (){
-        console.log("ein lama erzeugt einen chart");
+    doChart () {
+        console.log("ein lama erzeugt einen chart", this.data);
     }
 }
