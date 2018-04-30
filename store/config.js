@@ -44,5 +44,5 @@ config_namespace.SCRIPT_PATHES = ["./libs/d3/d3.js", "./store/config.js", "./sto
 
 config_namespace.FIRST_SCRIPTS = ["./libs/d3/d3.js", "./store/config.js", 
 "./store/dynamics.js","./store/commonfunctions.js", "./htmlelements/magicCircle.js"];
-config_namespace.SECOND_SCRIPTS = ["./classes/lama.js", "./classes/magicCircle.js",
+config_namespace.SECOND_SCRIPTS = ["./classes/lama.js", "./classes/magicCircle.js", "./classes/sunburst.js",
   "./components/components.js", "./actions/actions.js", "./listener/listener.js"];

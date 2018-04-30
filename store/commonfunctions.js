@@ -59,12 +59,13 @@ commonfunctions_namespace.getRootElement = function(environment){
 
 commonfunctions_namespace.getStatesAndDataByYear = function(year, jsondata){
   let yearAsString = year.toString();
+
   return jsondata.years[yearAsString];
 };
 
 commonfunctions_namespace.getCrimesAndDataByYearAndState = function(year, statename, jsondata){
-  let statesData = commonfunctions_namespace.getStatesAndDataByYear(year, jsondata);
-  let crimeData = statesData.statename;
+  let statesData = commonfunctions_namespace.getStatesAndDataByYear(year, jsondata); 
+  let crimeData = statesData.states[statename]; 
   return crimeData; 
 };
 

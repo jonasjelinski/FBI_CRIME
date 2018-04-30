@@ -7,6 +7,7 @@ class MagicCircle{
         this.htmlElementID = this.htmlelement.rootid;
         this.htmlElementType = this.htmlelement.type;
         this.rootElement = this.getRootElement(); 
+        this.getRootElement = this.getRootElement.bind(this);
     }
     
     getRootElement(){
@@ -18,7 +19,7 @@ class MagicCircle{
     }
 
     doChart (){
-        console.log("ein magischerKreis erzeugt sich selbst");
+        console.log("ein magischerKreis erzeugt sich selbst", this.rootElement);
         this.drawCircle();   
     }
 
