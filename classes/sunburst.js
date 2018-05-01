@@ -3,7 +3,9 @@ class Sunburst extends MagicCircle{
         super();
         this.self = this; 
         this.htmlelement = htmlel_namespace.SUN_BURST; 
-        this.htmlElementID = this.htmlelement.rootid;  
+        this.htmlElementID = this.htmlelement.rootid;
+        this.width = this.htmlelement.width;
+        this.height = this.htmlelement.height;   
         this.state = "ALABAMA",
         this.year = "2003",
         this.categories = [],
@@ -13,7 +15,7 @@ class Sunburst extends MagicCircle{
         this.createD3Data = this.createD3Data.bind(this);
         this.createNewNode  = this.createNewNode.bind(this);
         this.createSunburst = this.createSunburst.bind(this);
-        this.computeTextRotation = this.computeTextRotation.bind(this);
+        //this.computeTextRotation = this.computeTextRotation.bind(this);
         this.rootElement = this.getRootElement();   
     }    
     
@@ -42,7 +44,7 @@ class Sunburst extends MagicCircle{
 		let crimesdata = crimedata.crimes;    
         let children_object = {};     
         let root_json_object = {};
-        root_json_object.name = "CRIMES";
+        root_json_object.name = "Crimes";
         root_json_object.children = [];
         let newChild = {}; 
              
@@ -52,7 +54,7 @@ class Sunburst extends MagicCircle{
             let children_array = [];
 
             for(let crime in categorie_crimes){
-                children_object.crime = crime;
+                children_object.name = crime;
                 children_object.size = parseFloat(categorie_crimes[crime]);
               //  console.log("typeofe", typeof children_object.size);
                 children_array.push(children_object);
@@ -88,23 +90,32 @@ class Sunburst extends MagicCircle{
 
     //source: https://bl.ocks.org/denjn5/f059c1f78f9c39d922b1c208815d18af
     createSunburst(jsondata){
-        //console.log("createSunburst jsondata ",jsondata, " this ", this, " self ", this.self);
+      //  console.log("createSunburst jsondata ",jsondata, " this ", this, " self ", this.self);
         let data = JSON.parse(JSON.stringify(jsondata));
             
         let height = this.self.getHeight();
         let width = this.self.getWidth();
       //  console.log("wh ", width, height)
         
-        let radius = Math.min(width, height) / 2;
+        
             // Size our <svg> element, add a <g> element, and move translate 0,0 to the center of the element.
-        let rootElement=this.rootElement.append(this.htmlElementType);    
-        console.log("htmlelement ", this.htmlelement, " rootElement ", rootElement);
+        let rootElement=this.rootElement.attr("width", width).attr("height", height);
+       
 
-        var g = rootElement
-            .attr('width', width)
-            .attr('height', height)
-            .append('g')
-            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');            
+        let linefunction = d3.line().x(function(d){return 20;})
+                                    .y(function(d){return 2;})
+                                    .curve(d3.curveLinear);   
+        
+        let widthGrafic = width*0.5;
+        let heightGrafic = height*0.5;
+        let radius = Math.min(widthGrafic, heightGrafic) / 2;                            
+        var grafic = rootElement
+            .append(this.htmlElementType)
+            .attr("width", width)
+            .attr('class', 'grafic')
+            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+            
+                      
 
         // Create our sunburst data structure and size it.
         var partition = d3.partition()
@@ -116,15 +127,8 @@ class Sunburst extends MagicCircle{
                .sum(function (d) {    
 
                     let value = parseFloat(d.size);
-                    
-                   // console.log("data in hierarchy", d);
-                   // console.log(d, " d.value 1", value, "type", typeof(d.size));
-                    if( d.value != undefined && !isNaN(d.size)){
-                        d.size = value;
-                      //  console.log("d.value", d.size);
-                        return d.size;
-                    }
-                    else return 1;
+                
+                   return value;
                     });
 
                         // console.log("createSunburst data ",data);  
@@ -138,40 +142,130 @@ class Sunburst extends MagicCircle{
                 .innerRadius(function (d) { return d.y0})
                 .outerRadius(function (d) { return d.y1});
 
+            var labelarc = d3.arc()
+                .startAngle(function (d) { return d.x0;})
+                .endAngle(function (d) { return d.x1;})
+                .innerRadius(function (d) { return d.y0})
+                .outerRadius(function (d) { return (d.y1)});
+
 
             // Add a <g> element for each node in thd data, then append <path> elements and draw lines based on the arc
             // variable calculations. Last, color the lines and the slices.
-            g.selectAll('g')
+            grafic.selectAll('g')
                 .data(root.descendants())
                 .enter().append('g').attr("class", "node").append('path')
                 .attr("display", function (d) { return d.depth ? null : "none"; })
                 .attr("d", arc)
                 .style("stroke", "blue")
-                .style("fill", "yellow");
+                .style("fill", function(d){
+                    let crimename = d.data.name;
+                       //console.log(" data", d.data);
+                       let color = commonfunctions_namespace.getCrimeColor(crimename);
 
-/*
-          // Populate the <text> elements with our data-driven titles.
-            g.selectAll(".node")
+                       if(color != undefined){
+                        return color;
+                       }
+
+                       else{
+                        let defaultcolor = "rgb(6,6,6)";
+                        return defaultcolor;
+                       }  
+                    } );
+
+            let labelWidth = width/2;
+            let labelHeight = labelWidth;
+            let labelradius = labelWidth;
+
+            //console.log(this);
+            var labels = rootElement            
+            .append('g')
+            .attr("width", width)
+            .attr('class', 'labels')
+            .attr('transform', 'translate(' + labelWidth + ',' + labelHeight + ')');
+
+            labels.selectAll('g')
+                .data(root.descendants())
+                .enter().append('g').attr("class", "label");    
+                   
+                labels.selectAll('g')
+                .append('g').attr("class", "labelname")
                 .append("text")
-                .attr("transform", function(d) {
-                    return "translate(" + arc.centroid(d) + ")rotate(" + function(d){
-                       
-                    let angle = (d.x0 + d.x1) / Math.PI * 90;                   
-                    return (angle < 120 || angle > 270) ? angle : angle + 180;  // labels as rims                    
-                    } + ")"; })
-                .attr("dx", "-20") // radius margin
-                .attr("dy", ".5em") // rotation align
-                .text(function(d) { return d.parent ? d.data.name : "" });*/
+               /* .attr("transform", function(d) {
+                    
+                    let pos = labelarc.centroid(d);
+                    return "translate(" + pos + ")rotate(" + computeTextRotation(d) + ")"; }) */
+                .attr("x", function (d, i) { return computeTextXPos(d,i); })
+                .attr("y",  function (d, i) { return computeTextYPos(d, i); }) 
+                .attr("text-anchor", function(d,i){return computeTextAnchor(d,i);})
+                .attr("font-size", "10px")
+                .text(function(d) { return d.parent ? d.data.name : "" }); // rotation align
+
+         var lines = labels.append("line")
+                .data(root.descendants())
+                .attr("x1", function (d, i) {return labelarc.centroid(d)[0];})
+                .attr("y1", function (d, i) {return labelarc.centroid(d)[1];}) 
+                .attr("x2", function (d, i) {return computeLineX2(d)})
+                .attr("y2", function (d, i) {return computeLineY2(d)})
+                .attr("stroke-width", 2)
+                .attr("stroke", "black");
+                
+        
 
 
-    }
-
-    computeTextRotation(data) {
+        function computeTextRotation(data) {
         var angle = (data.x0 + data.x1) / Math.PI * 90;
+            // Avoid upside-down labels
+            return (angle < 120 || angle > 270) ? angle : angle + 180;  // labels as rims
+            //return (angle < 180) ? angle - 90 : angle + 90;  // labels as spokes
+        }  
 
-        // Avoid upside-down labels
-        return (angle < 120 || angle > 270) ? angle : angle + 180;  // labels as rims
-        //return (angle < 180) ? angle - 90 : angle + 90;  // labels as spokes
-    }
+        function computeTextXPos(data, index){
+            let centroid = labelarc.centroid(data);
+            let midAngle = Math.atan2(centroid[1], centroid[0]);
+            let x = Math.cos(midAngle) * labelWidth/2;
+            console.log("x ",x);
+            let sign = (x > 0) ? 1 : -1;
+            let multiplier = index;
+            let labelX = x + (multiplier * sign);
+            
+            return labelX;
+        }
+
+        function computeTextYPos(data, index){
+            let centroid = labelarc.centroid(data);
+            let midAngle = Math.atan2(centroid[1], centroid[0]);
+            let multiplier = index/6    ;
+            let y = Math.sin(midAngle)*labelWidth*multiplier;
+            return y;
+        }
+
+        function computeTextAnchor(data, index){
+            let centroid = labelarc.centroid(data);
+            let midAngle = Math.atan2(centroid[1], centroid[0]);
+            let x = Math.cos(midAngle) * width/2;
+            return (x > 0) ? "start" : "end";
+        }
+
+        function computeLineX2(data, index){
+            let centroid = labelarc.centroid(data);
+            let midAngle = Math.atan2(centroid[1], centroid[0]);
+            let x = Math.cos(midAngle) * labelWidth/2;
+            return x;
+        }
+
+        function computeLineY2(data, index){
+            let centroid = labelarc.centroid(data);
+            let midAngle = Math.atan2(centroid[1], centroid[0]);
+            let y = Math.sin(midAngle) * labelWidth/2;
+            return y;
+        }
+
+         
+    }  
+    /*attr("transform", function(d) {
+                    
+                    let pos = labelarc.centroid(d);
+                    return "translate(" + pos + ")rotate(" + computeTextRotation(d) + ")"; })*/      
 
 }
+

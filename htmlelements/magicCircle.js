@@ -12,7 +12,7 @@ htmlel_namespace.SUN_BURST = {
 	parentElement: htmlel_namespace.MAGIC_CIRCLE,
 	rootclassname: "sunburst",
 	rootid: "sunburst",
-	width:200,
-    height:200,
+	width:400,
+    height:400,
     type: "g"
 };

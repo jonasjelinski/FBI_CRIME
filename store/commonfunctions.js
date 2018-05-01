@@ -130,6 +130,27 @@ commonfunctions_namespace.getAllYears = function(){
   return allYears;
 };
 
+commonfunctions_namespace.getCrimeColor = function(crimename){
+  try{
+
+
+  let colorArray = config_namespace.CONSTANTS.crimeColors[crimename];
+  console.log("name ", crimename);
+  console.log("cA",colorArray);
+  let r = colorArray[0];
+  let g = colorArray[1];
+  let b = colorArray[2];  
+  let color = 'rgb(' + r + ',' + g + ',' + b + ')';
+  
+  return color;
+  }
+
+  catch(error){
+   // console.log("getCrimeColor ",error);
+  }  
+
+};
+
 //returns a rgb color depending on the paramter 'multipiler'
 // 0 is red, 100 is  green
 //source: https://stackoverflow.com/questions/17525215/calculate-color-values-from-green-to-red
