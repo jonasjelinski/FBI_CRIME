@@ -135,8 +135,7 @@ commonfunctions_namespace.getCrimeColor = function(crimename){
 
 
   let colorArray = config_namespace.CONSTANTS.crimeColors[crimename];
-  console.log("name ", crimename);
-  console.log("cA",colorArray);
+  
   let r = colorArray[0];
   let g = colorArray[1];
   let b = colorArray[2];  

@@ -25,7 +25,8 @@ class MagicCircle{
 
     drawCircle(){
         let xpos=30, ypos=20;
-        let circle=this.rootElement.append(this.htmlElementType).append("circle").attr("cx", xpos).attr("cy", ypos).attr("r",20);
+        let circle=this.rootElement.append(this.htmlElementType).append("circle").attr("cx", xpos).attr("cy", ypos).attr("r",20)
+        .transition().duration(2000);
         
     }
 }
