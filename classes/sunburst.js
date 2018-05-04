@@ -133,8 +133,8 @@ class Sunburst extends MagicCircle{
         var arc = d3.arc()
             .startAngle(function (d) { return d.x0;})
             .endAngle(function (d) { return d.x1;})
-            .innerRadius(function (d) { return d.y0})
-            .outerRadius(function (d) { return d.y1});
+            .innerRadius(function (d) { return d.y0;})
+            .outerRadius(function (d) { return d.y1;});
 
        
         var labelarc = arc;
