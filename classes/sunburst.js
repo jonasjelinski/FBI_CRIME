@@ -6,8 +6,8 @@ class Sunburst extends MagicCircle{
         this.htmlElementID = this.htmlelement.rootid;
         this.width = this.htmlelement.width;
         this.height = this.htmlelement.height;   
-        this.state = "ALABAMA",
-        this.year = "2003",
+        this.state = this.state = dynamics_namespace.currentState,
+        this.year = dynamics_namespace.currentYear,
         this.categories = [],
         this.crimes = [],
         this.doChart = this.doChart.bind(this);
@@ -92,7 +92,8 @@ class Sunburst extends MagicCircle{
     //source: https://www.safaribooksonline.com/blog/2014/03/11/solving-d3-label-placement-constraint-relaxing/
     createSunburst(jsondata){
       
-        let data = JSON.parse(JSON.stringify(jsondata));      
+        let data = JSON.parse(JSON.stringify(jsondata));
+        console.log("data", data);      
         let height = this.self.getHeight();
         let width = this.self.getWidth();
         let widthGrafic = width*0.5;

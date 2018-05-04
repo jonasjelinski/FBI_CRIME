@@ -72,14 +72,16 @@ commonfunctions_namespace.getCrimesAndDataByYearAndState = function(year, staten
 //returns violent crimes object
 commonfunctions_namespace.getViolentCrimes = function(year, statename, jsondata){
   let crimeData = commonfunctions_namespace.getCrimesAndDataByYearAndState(year, statename, jsondata);
-  let violentCrimes = crimeData.violentCrime;
+  let violentCrimes = crimeData.crimes.violentCrime;
+ // console.log("getVC ", crimeData, " violentCrimes", violentCrimes);
   return violentCrimes;
 };
 
 //returns property crimes object
 commonfunctions_namespace.getPropertyCrimes = function(year, statename, jsondata){
   let crimeData = commonfunctions_namespace.getCrimesAndDataByYearAndState(year, statename, jsondata);
-  let propertyCrimes = crimeData.propertyCrimes;
+  let propertyCrimes = crimeData.crimes.propertyCrime;
+  //console.log("getPC ", crimeData, " propCrimes", propertyCrimes);
   return propertyCrimes;
 };
 
@@ -88,17 +90,22 @@ commonfunctions_namespace.getCrimerateByCrimeType = function(year, statename, cr
   let propertyCrimes = config_namespace.CONSTANTS.crimeTypesProperty;
   let violentCrimes = config_namespace.CONSTANTS.crimeTypesViolence;
   let errorValue = 0;
-  
+
+
   if (propertyCrimes.includes(crime)){
-    let propertyCrimes = commonfunctions_namespace.getPropertyCrimes(year, statename, jsondata);
-    let crimerate = propertyCrimes.crime;
+    let propCrimes = commonfunctions_namespace.getPropertyCrimes(year, statename, jsondata);
+    let crimeString = ''+crime+'';
+    
+    let crimerate = propCrimes[crimeString];
+    //console.log("prop ",propCrimes," crime", crimeString," crimerate", crimerate);  
     return crimerate;
 
   }
 
   else if(violentCrimes.includes(crime)){
-    let violentCrimes = commonfunctions_namespace.getViolentCrimes(year, statename, jsondata);
-    let crimerate = violentCrimes.crime;
+    let vioCrimes = commonfunctions_namespace.getViolentCrimes(year, statename, jsondata);
+    let crimeString = ''+crime+'';
+    let crimerate = vioCrimes[crimeString];
     return crimerate;
   }
 
