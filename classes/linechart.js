@@ -72,10 +72,10 @@ class LineChart extends MagicCircle{
 		let chartHeight = height - margin.top - margin.bottom;
 		let timeformat = d3.timeParse("%y");
 		
-		var xRange = d3.scaleTime().domain([minYear, maxYear	]).range([0,chartWidth ]); 
+		var xRange = d3.scaleTime().domain([minYear, maxYear]).range([0,chartWidth ]); 
 		var yRange = d3.scaleLinear().domain([minCrime, maxCrime]).range([chartHeight, 0]);
 		
-		var xAxis = d3.axisBottom(xRange);
+		var xAxis = d3.axisBottom(xRange).tickFormat(d3.format(".2f"));
 		var yAxis = d3.axisLeft(yRange);
 		
 		var coordinateSystem = rootElement.append("g").attr("class", "coordinateSystem")
@@ -85,8 +85,9 @@ class LineChart extends MagicCircle{
 							
 			coordinateSystem.append("g").attr("class", "xAxis")
 										.attr("transform", "translate(0,"+chartHeight+")")
+										
 										//.style("fill", "black")
-										.call(xAxis);
+										.call(xAxis);	
 
 			coordinateSystem.append("g").attr("class", "yAxis")
 										//.attr("transform","translate(0,-"+margin.bottom+")")	
@@ -96,7 +97,7 @@ class LineChart extends MagicCircle{
 
 		var simpleline = d3.line()
 					.x(function(d,i){
-						let year = parseInt(d.year);						
+						let year = parseInt(d.year);							
 						//console.log("linedata x", d.year); 
 						return xRange(year)})								 
 					.y(function(d,i){
@@ -114,7 +115,7 @@ class LineChart extends MagicCircle{
 								.style("fill", "white");
 			
 			var lineSelection =rootElement.selectAll(".lines");
-			var testdata = [1,2,3,4,5];
+			
 
 			lineSelection
 			.selectAll("line")
@@ -124,30 +125,16 @@ class LineChart extends MagicCircle{
 			.attr("class", "line")
 			.attr("d", function(d){
 				let sl = simpleline(d.values);
-				console.log("sl ",sl);
+				//console.log("sl ",sl);
 				return sl;
 			})
 			//.attr("stroke-width", 2)
-			.style("fill", "black");
+			.attr("stroke", function(d){
+				let crime = d.key;
+				return commonfunctions_namespace.getCrimeColor(crime);
+			})
+			.attr("fill","none");
 
-       		
-			
-			/*lineSelection
-			.selectAll(".line")
-    		.data(data)
-  			.enter()
-  			.append("rect")
-  			.attr("width", function(d){
-  				console.log("d",d);
-  				return 20;});
-
-			/*	rootElement.selectAll(".lines")
-					.data(data)
-					.enter()
-					.append("path")
-					.attr("class", "line")
-					.attr("id", function(d,i){return d[i]})*/
-					//					
-		}
+       	}
 	
 }
