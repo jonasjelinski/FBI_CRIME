@@ -1,4 +1,4 @@
-var htmlel_namespace = htmlel_namespace || {};
+    var htmlel_namespace = htmlel_namespace || {};
 
 htmlel_namespace.MAGIC_CIRCLE = { //Elternelement aller anderen HTML-Elemente
     rootclassname: "magicCircle", //im html-Element class="magicCircle"
@@ -17,7 +17,7 @@ htmlel_namespace.SUN_BURST = {
     type: "g"
 };
 
-htmlel_namepsace.LINE_DIAGRAM = {
+htmlel_namespace.LINE_DIAGRAM = {
     parentElement: htmlel_namespace.MAGIC_CIRCLE,
     rootclassname: "linediagram",
     rootid: "linediagram",

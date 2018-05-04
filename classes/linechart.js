@@ -3,6 +3,9 @@ class LineChart extends MagicCircle{
 		super();
 
 		this.state = dynamics_namespace.currentState;
+		this.htmlelement = htmlel_namespace.LINE_DIAGRAM; 
+        this.htmlElementID = this.htmlelement.rootid;
+        this.rootElement = this.getRootElement();
 	}
 	
 	doChart(){
@@ -62,7 +65,7 @@ class LineChart extends MagicCircle{
 		let maxYear = config_namespace.CONSTANTS.maxYear;
 		let minYear = config_namespace.CONSTANTS.minYear;
 		let minCrime = 0;
-		let maxCrime = 400;
+		let maxCrime = 2000;
 		
 		let margin = {top: 20, right: 20, bottom: 20, left: 40};
 		let chartWidth = width - margin.left - margin.right;
