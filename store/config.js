@@ -20,8 +20,8 @@ config_namespace.FILE_PATHES = {
 
 config_namespace.CONSTANTS = {
 	states : ['TEXAS'],
-	crimeCategories : {Crimes : { propertyCrime : ['Burglary', 'Larcencytheft', 'Motorvehicletheft'], violentCrime : ['Aggravatedassault', 'MurderManslaughter', 'Rape', 'Robbery']}},
-	crimeTypesProperty : ['Burglary', 'Larcencytheft', 'Motorvehicletheft'],
+	crimeCategories : {Crimes : { propertyCrime : ['Burglary', 'Larcenytheft', 'Motorvehicletheft'], violentCrime : ['Aggravatedassault', 'MurderManslaughter', 'Rape', 'Robbery']}},
+	crimeTypesProperty : ['Burglary', 'Larcenytheft', 'Motorvehicletheft'],
 	crimeTypesViolence : ['Aggravatedassault', 'MurderManslaughter', 'Rape', 'Robbery'],
 	crimeColors :{
 		Crimes: [22,22,22],
