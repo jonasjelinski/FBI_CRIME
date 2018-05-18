@@ -38,7 +38,7 @@ class LineChart extends MagicCircle{
 			newObject.key = crimename;
 			
 
-			for(let year = minYear; year <=maxYear; year++){
+			for(let year = minYear; year <=2012; year++){
 				let newValueObject = {};
 				let numberOfCrimes = commonfunctions_namespace.getCrimerateByCrimeType(year, this.state, crimename, this.data);			
 				newValueObject.year = year;
@@ -53,9 +53,7 @@ class LineChart extends MagicCircle{
 
 		return d3Data;
 	}
-	
-
-	
+		
 	//sources:
 	//https://bl.ocks.org/EfratVil/92f894ac0ba265192411e73f633a3e2f
 	//https://bl.ocks.org/deristnochda/1ffe16ccf8bed2035ea5091ab9bb53fb

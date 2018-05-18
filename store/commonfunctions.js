@@ -66,7 +66,7 @@ commonfunctions_namespace.getStatesAndDataByYear = function(year, jsondata){
 commonfunctions_namespace.getCrimesAndDataByYearAndState = function(year, statename, jsondata){
   let statesData = commonfunctions_namespace.getStatesAndDataByYear(year, jsondata); 
   let crimeData = statesData.states[statename];
-   //console.log("statesData ",statesData, " crimeData ", crimeData, "statename", statename, "type", typeof(statename)); 
+  //console.log("year ",year, " statesData ",statesData, " crimeData ", crimeData, "statename", statename, "type", typeof(statename)); 
   return crimeData; 
 };
 
