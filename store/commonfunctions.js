@@ -65,7 +65,8 @@ commonfunctions_namespace.getStatesAndDataByYear = function(year, jsondata){
 
 commonfunctions_namespace.getCrimesAndDataByYearAndState = function(year, statename, jsondata){
   let statesData = commonfunctions_namespace.getStatesAndDataByYear(year, jsondata); 
-  let crimeData = statesData.states[statename]; 
+  let crimeData = statesData.states[statename];
+   //console.log("statesData ",statesData, " crimeData ", crimeData, "statename", statename, "type", typeof(statename)); 
   return crimeData; 
 };
 
@@ -73,13 +74,15 @@ commonfunctions_namespace.getCrimesAndDataByYearAndState = function(year, staten
 commonfunctions_namespace.getViolentCrimes = function(year, statename, jsondata){
   let crimeData = commonfunctions_namespace.getCrimesAndDataByYearAndState(year, statename, jsondata);
   let violentCrimes = crimeData.crimes.violentCrime;
- // console.log("getVC ", crimeData, " violentCrimes", violentCrimes);
+ //console.log("getVC ", crimeData, " violentCrimes", violentCrimes);
   return violentCrimes;
 };
 
 //returns property crimes object
 commonfunctions_namespace.getPropertyCrimes = function(year, statename, jsondata){
   let crimeData = commonfunctions_namespace.getCrimesAndDataByYearAndState(year, statename, jsondata);
+  //console.log(year, statename);
+  //console.log("gPC ",crimeData);
   let propertyCrimes = crimeData.crimes.propertyCrime;
   //console.log("getPC ", crimeData, " propCrimes", propertyCrimes);
   return propertyCrimes;

@@ -25,3 +25,12 @@ htmlel_namespace.LINE_DIAGRAM = {
     height:400,
     type: "g"
 }
+
+htmlel_namespace.THE_FORCE = {
+    parentElement: htmlel_namespace.THE_FORCE,
+    rootclassname: "theforce",
+    rootid: "theforce",
+    width:600,
+    height:400,
+    type: "g"
+}
