@@ -27,10 +27,10 @@ htmlel_namespace.LINE_DIAGRAM = {
 }
 
 htmlel_namespace.THE_FORCE = {
-    parentElement: htmlel_namespace.THE_FORCE,
+    parentElement: htmlel_namespace.MAGIC_CIRCLE,
     rootclassname: "theforce",
     rootid: "theforce",
-    width:600,
-    height:400,
+    width:3000,
+    height:3000,
     type: "g"
 }
