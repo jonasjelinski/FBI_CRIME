@@ -156,9 +156,7 @@ class TheForce extends MagicCircle{
 		let center = [centerX, centerY];
 		let distance = width/10
 		let violenceX = width*this.violencePos;
-		console.log("vY", violenceX);
 		let propertyX = width*this.propertyPos;
-		console.log("propertyX", propertyX);
 		let foci = [{x: violenceX, y: centerY}, {x: propertyX, y: centerY}];
 		let dutationtime = 500;
 
