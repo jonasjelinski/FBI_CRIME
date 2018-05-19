@@ -156,7 +156,9 @@ class TheForce extends MagicCircle{
 		let center = [centerX, centerY];
 		let distance = width/10
 		let violenceX = width*this.violencePos;
+		console.log("vY", violenceX);
 		let propertyX = width*this.propertyPos;
+		console.log("propertyX", propertyX);
 		let foci = [{x: violenceX, y: centerY}, {x: propertyX, y: centerY}];
 		let dutationtime = 500;
 
@@ -231,7 +233,7 @@ class TheForce extends MagicCircle{
 			let sourceX = translateXPosDependingOnGroup(source.x, group);
 			let targetX = translateXPosDependingOnGroup(target.x, group);
 			xPositions.push(sourceX, targetX);
-			xPositions[sourceX, targetX];		
+			xPositions[sourceX, targetX];	
 			return xPositions[index];
 		}
 
@@ -250,7 +252,7 @@ class TheForce extends MagicCircle{
       		}
 
       		else if(group === that.propertyGroup){
-      		 	xPos = foci[that.propertyGroup].y+x
+      		 	xPos = foci[that.propertyGroup].x+x;
       		}      		 
       		return xPos;
 		}
