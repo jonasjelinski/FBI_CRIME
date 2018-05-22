@@ -12,6 +12,16 @@ class TheForce extends MagicCircle{
         this.propertyGroup = 1;
         this.violencePos= 0.75;
         this.propertyPos= 0.25;
+        this.standards = {
+			standardRadius: this.width/50,
+			minRadius: this.width/55,
+			standardDistanceToSun: this.width/10,
+			minDistanceToSun: this.with/10,
+			violenceSunX: this.width*this.violencePos,
+			violenceSunY: this.height/2,
+			propertySunX: this.width*this.propertyPos,
+			propertySunY: this.height/2 
+		}
 	}
 
 	doChart(){
@@ -106,6 +116,29 @@ class TheForce extends MagicCircle{
 		return newArray;
 	}
 
+	createUniverse(sortedQuotients){
+		let newArray = [];
+		sortedQuotients.forEach(function(stateObject){
+			
+		});
+	}
+
+	createStandardNode(node){
+		let factor = node.quotient;
+		let fullCircle = 360;
+		node.group = node.quotient > 0.5 ? this.violenceGroup: this.propertyGroup;
+		node.color = node.group === this.violenceGroup ? "red": "blue";
+		node.radius = this.standards.standardRadius*factor + this.standards.minRadius;
+		node.distanceToSun = this.standards.standardDistanceToSun*factor+this.standards.minDistanceToSun+2*node.radius;
+		node.speed = this.standards.standardSpeed*factor+this.standards.minSpeed;
+		node.startAngle = Math.floor((Math.random() * fullCircle) + 1)* Math.PI/180;
+		node.xSun = node.group === this.violenceGroup ? this.standards.violenceSunX: this.standards.propertySunX;
+		node.ySun = node.group === this.violenceGroup ? this.standards.violenceSunY: this.standards.propertySunY;
+		node.x = node.xSun + node.distanceToSun*Math.cos(node.startAngle);
+		node.y = node.ySun + node.distanceToSun*Math.csin(node.startAngle);
+		return node;
+	}
+
 	createId(statename){	
 		let id =  statename.substring(0,8);
 		return id;
@@ -114,10 +147,13 @@ class TheForce extends MagicCircle{
 	createCenterNodes(newArray){
 		let quotientProp = 2;
 		let quotientVio = 2;
+		let distanceToSun = 0;
 		let propertyNode = {};
 		propertyNode.id = "Property";
 		propertyNode.group = this.propertyGroup;
-		propertyNode.quotient = quotientProp;
+		propertyNode.quotient = quotientProp;	
+		
+
 		let violenceNode = {};
 		violenceNode.id = "Violence";
 		violenceNode.group = this.violenceGroup;
@@ -125,6 +161,44 @@ class TheForce extends MagicCircle{
 		newArray.push(propertyNode, violenceNode);
 		return newArray;
 	}
+
+	createSuns(){
+		let propertyNode = {};
+		let violenceNode = {};
+		propertyNode.id = "Property";
+		violenceNode.id = "Violence";
+		propertyNode = createSun(propertyNode);
+		violenceNode = createSun(violenceNode);
+	}
+
+	createSun(node){
+		let factor = node.quotient;	
+		node.quotient = 2;
+		node.distanceToSun =0;
+		node.speed = 0;
+		node.startAngle = 0;
+		node.radius = this.standards.standardRadius*factor + this.standards.minRadius;
+		if(node.id === "Violence"){
+			node.group = this.violenceGroup;
+			node.color = "blue";		
+			node.xSun = this.standards.violenceSunX;
+			node.ySun = this.standards.violenceSunY;
+			node.x = node.xSun;
+			node.y = node.ySun;
+		}
+		else if(node.id === "Property"){
+			node.group = this.propertyGroup;
+			node.color = "blue";		
+			node.xSun = this.standards.propertySunX;
+			node.ySun = this.standards.propertySunY;
+			node.x = node.xSun;
+			node.y = node.ySun;
+		}
+		else{
+			console.log("couldnt create centernode: ", node);
+		}
+		return node;
+	}	
 
 	createLinks(sortedQuotients){		
 		let links = [];
@@ -145,7 +219,7 @@ class TheForce extends MagicCircle{
 		let sortedQuotients = data;
 		let links = this.createLinks(sortedQuotients);
 		let nodes = this.createNodes(sortedQuotients);
-		//console.log(links," ",nodes);
+		console.log(links," ",nodes);
 		let width = this.width;
 		let height = this.height;
 		let rootElement = this.rootElement.attr("width", width).attr("height", height);
@@ -163,7 +237,7 @@ class TheForce extends MagicCircle{
 		
 
 		let simulation = d3.forceSimulation()
-			.nodes(nodes)		   
+			//.nodes(nodes)		   
 		    .force("charge", d3.forceManyBody())
 		    .force("center", d3.forceCenter(centerX, centerY))
 		    .force("collision", d3.forceCollide().radius(radius))

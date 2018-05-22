@@ -43,11 +43,11 @@ config_namespace.JSON_OBJECT = false;
 
 config_namespace.SCRIPT_PATHES = ["./libs/d3/d3.js", "./store/config.js", "./store/dynamics.js",
 "./htmlelements/magicCircle.js","./store/commonfunctions.js", "./classes/lama.js",
-"./classes/linechart.js", "classes/magicCircle.js","./classes/force.js",
+"./classes/linechart.js", "classes/magicCircle.js","./classes/force.js","./classes/universe.js",
   "./components/components.js", "./actions/actions.js", "./listener/listener.js"];  
 
 config_namespace.FIRST_SCRIPTS = ["./libs/d3/d3.js", "./store/config.js", 
 "./store/dynamics.js","./store/commonfunctions.js", "./htmlelements/magicCircle.js"];
 config_namespace.SECOND_SCRIPTS = ["./classes/lama.js", "./classes/magicCircle.js", 
-"./classes/sunburst.js", "./classes/linechart.js","./classes/force.js",
+"./classes/sunburst.js", "./classes/linechart.js","./classes/force.js","./classes/universe.js",
   "./components/components.js", "./actions/actions.js", "./listener/listener.js"];
