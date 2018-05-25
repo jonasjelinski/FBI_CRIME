@@ -2,7 +2,7 @@ class Map extends MagicCircle{
 
 	constructor(){
 		super();
-		this.htmlelement = htmlel_namespace.THE_FORCE; 
+		this.htmlelement = htmlel_namespace.THE_MAP; 
         this.htmlElementID = this.htmlelement.rootid;
         this.rootElement = this.getRootElement();
         this.width = this.htmlelement.width;
