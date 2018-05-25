@@ -6,3 +6,4 @@ components_namespace.sunburst = new Sunburst();
 components_namespace.lineChart = new LineChart();
 components_namespace.force = new TheForce();
 components_namespace.universe = new Universe();
+components_namespace.map = new Map();

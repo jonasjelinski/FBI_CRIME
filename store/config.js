@@ -15,7 +15,8 @@ config_namespace.HTML_TYPES = {
  
 config_namespace.FILE_PATHES = {
 	csvpath: "./store/elements-by-episode.csv",
-	jsonpath: "./store/crimes.json"
+	jsonpath: "./store/crimes.json",
+	mappath: "./store/states.json"
 };
 
 config_namespace.CONSTANTS = {
@@ -41,13 +42,15 @@ config_namespace.CONSTANTS = {
 
 config_namespace.JSON_OBJECT = false;
 
-config_namespace.SCRIPT_PATHES = ["./libs/d3/d3.js", "./store/config.js", "./store/dynamics.js",
-"./htmlelements/magicCircle.js","./store/commonfunctions.js", "./classes/lama.js",
-"./classes/linechart.js", "classes/magicCircle.js","./classes/force.js","./classes/universe.js",
+config_namespace.MAP_JSON_OBJECT = false;
+
+config_namespace.SCRIPT_PATHES = ["./libs/d3/d3.js","./libs/d3/d3.tip.js","./libs/topoJson/topojson.v1.min.js", "./store/config.js", "./store/dynamics.js",
+"./htmlelements/htmlelements.js","./store/commonfunctions.js", "./classes/lama.js",
+"./classes/linechart.js", "classes/magicCircle.js","./classes/force.js","./classes/universe.js","./classes/map.js",
   "./components/components.js", "./actions/actions.js", "./listener/listener.js"];  
 
-config_namespace.FIRST_SCRIPTS = ["./libs/d3/d3.js", "./store/config.js", 
-"./store/dynamics.js","./store/commonfunctions.js", "./htmlelements/magicCircle.js"];
-config_namespace.SECOND_SCRIPTS = ["./classes/lama.js", "./classes/magicCircle.js", 
+config_namespace.FIRST_SCRIPTS = ["./libs/d3/d3.js", "./libs/d3/d3.tip.js","./libs/topoJson/topojson.v1.min.js","./store/config.js", 
+"./store/dynamics.js","./store/commonfunctions.js", "./htmlelements/htmlelements.js"];
+config_namespace.SECOND_SCRIPTS = ["./classes/lama.js", "./classes/magicCircle.js", "./classes/map.js",
 "./classes/sunburst.js", "./classes/linechart.js","./classes/force.js","./classes/universe.js",
   "./components/components.js", "./actions/actions.js", "./listener/listener.js"];
