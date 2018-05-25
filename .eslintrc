@@ -37,7 +37,8 @@
         "semi": "error",
         "strict": "error",
         "vars-on-top": "error",
-        "yoda": "error"
+        "yoda": "error",
+        "indent": ["error", "tab"]
     },
     "env":
     {
