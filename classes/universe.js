@@ -325,7 +325,7 @@ class Universe extends MagicCircle{
 				fontSize = n.style.fontSize,
 				durationTime = 500;									
 			opacity = opacity === "1" ? "0.1": "1";	
-			fontSize = fontSize === "20px"? "30px" : "20px"; 			
+			fontSize = opacity === "1" ? "30px" : "20px"; 			
 			d3.select(that).transition().duration(durationTime).style("opacity", opacity).style("font-size", fontSize);
 		}
 
