@@ -2,7 +2,7 @@ class Universe extends MagicCircle{
 	constructor(){
 		super();
 		this.state = dynamics_namespace.currentState;
-		this.htmlelement = htmlel_namespace.THE_FORCE; 
+		this.htmlelement = htmlel_namespace.THE_UNIVERSE; 
 		this.htmlElementID = this.htmlelement.rootid;
 		this.rootElement = this.getRootElement();
 		this.width = this.htmlelement.width;
@@ -28,7 +28,7 @@ class Universe extends MagicCircle{
 	}
 
 	doChart(){
-		console.log("A lama uses the force");
+		console.log("A lama creates the universe");
 		this.drawForceChart();
 	}
 

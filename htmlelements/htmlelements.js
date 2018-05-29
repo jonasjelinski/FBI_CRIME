@@ -24,7 +24,7 @@ htmlel_namespace.LINE_DIAGRAM = {
 	width:600,
 	height:400,
 	type: "g"
-}
+};
 
 htmlel_namespace.THE_FORCE = {
 	parentElement: htmlel_namespace.MAGIC_CIRCLE,
@@ -33,7 +33,16 @@ htmlel_namespace.THE_FORCE = {
 	width:3000,
 	height:3000,
 	type: "g"
-}
+};
+
+htmlel_namespace.THE_UNIVERSE = {
+	parentElement: htmlel_namespace.MAGIC_CIRCLE,
+	rootclassname: "universe",
+	rootid: "universe",
+	width:3000,
+	height:3000,
+	type: "g"
+};
 
 htmlel_namespace.THE_MAP = {
 	parentElement: htmlel_namespace.MAGIC_CIRCLE,
@@ -42,4 +51,4 @@ htmlel_namespace.THE_MAP = {
 	width:3000,
 	height:3000,
 	type: "g"
-}
+};
