@@ -140,7 +140,7 @@ class Universe extends MagicCircle{
 
 	createPlanet(node, maxPlanets, planetNumber, lastRadius){
 		let factor = node.quotient,
-			speedFactor = factor/2,	
+			speedFactor = (1/(factor+1)),	
 			fullCircle = 360,			
 			radiusFactor = 0,
 			halfCircle = 180;
@@ -350,20 +350,15 @@ class Universe extends MagicCircle{
 			d.y = d.ySun + Math.sin(newAngel)*d.distanceToSun;
 			d.x = d.xSun + Math.cos(newAngel)*d.distanceToSun;		
 			return d;
-
 		}
 
 		function animateRotation(){
 			let angle = 0,
 				delay = 100,
-				time = 100,
-				fullCircle = 360,	
+				time = 100,	
 				t = d3.interval(function(elapsed) {				
 					updatePlanetPositions(angle);
-					angle++; 
-					if(angle>fullCircle){					
-						angle = 0;
-					}				 			
+					angle++; 				 			
 				}, delay, time);			
 		}	
 	}  
