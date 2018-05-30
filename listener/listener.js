@@ -20,11 +20,12 @@ listener_namespace.createListener = function (id, type, action) {
     let listener=listener_namespace.doc.getElementById(id);
     listener.addEventListener(type, () => {
     action();});
-    
+
     return listener;
 };
 
 //this listeners starts the action drawing
 //and should draw a nice circle
-listener_namespace.startDrawingListener = listener_namespace.createListener("dochart", "click", action_namespace.actionStartDrawing);
-	
+listener_namespace.startDrawingListener = listener_namespace.createListener("time", "click", action_namespace.actionStartDrawing);
+
+listener_namespace.blub = listener_namespace.createListener("planet", "click", action_namespace.actionPaintUniverse);

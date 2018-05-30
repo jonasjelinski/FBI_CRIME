@@ -1,6 +1,6 @@
 body {
-    background-color: darkgrey;
-    font-family: sans-serif;
+    background-color: #CACACB;
+  /*  font-family: 'Quattrocento Sans', sans-serif;*/
 }
 
 #myChart div {
@@ -16,4 +16,56 @@ body {
     fill: white;
     font: 10px sans-serif;
     text-anchor: end;
+}
+
+h1{
+  margin: auto;
+  text-align: center;
+  height: 50px;
+}
+
+.buttons button{
+  background-color: #9C9C9C;
+  border: 1px solid white;
+  padding: 10px 24px;
+  color: #3F3F42;
+  cursor: pointer;
+  float: left;
+  width: 33%;
+}
+
+.buttons button:not(:last-child){
+  border-right: none;
+}
+
+.buttons button:hover{
+  background-color: #7C7C7D;
+}
+
+svg{
+  position: absolute;
+}
+
+#dochart{
+  height: 50px;
+  text-align: center;
+}
+
+#map{
+  background-color: pink;
+  top: 124px;
+  width:100%;
+  height: 520px; /*angepasst an Chris Kartenformat*/
+  z-index: 0;
+  visibility: visible;
+}
+
+#sunburst{
+  background-color: #CACACB;
+  right: 10px;
+  top: 134px;
+  z-index: 1;
+  width: 500px;
+  height: 500px;
+  visibility: visible;
 }

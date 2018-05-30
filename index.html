@@ -4,26 +4,33 @@
     <meta charset="UTF-8">
     <title>Bob Ross Painting Elements</title>
     <link rel="stylesheet" href="./store/bob.css">
+    <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans" rel="stylesheet">
   <!--  <script src="./data/config.js"></script> -->
 </head>
-    
+
 <body>
-    <h1>Bob Ross Paint  ing Elements</h1>
-    <div id= "dochart" >Hier klicken um den Chart anzuzeigen!</div>
+    <h1>Crime in the USA</h1>
+    <div class="buttons">
+      <button id="time">Zeitverlauf</button>
+      <button id="force">Collapsible Force</button>
+      <button id="planet">Planeten</button>
+    </div>
+    <div id= "dochart" >Raten der Verbrechen auf die USA verteilt</div>
+    <svg id="map">hier sollte die Map erscheinen</svg>
     <svg id="myChart"></svg>
     <svg id="magicCircle">hier sollte ein Kreis erscheinen</svg>
     <svg id="sunburst">hier sollte ein Kreis erscheinen</svg>
     <svg id="linediagram">hier sollte der Zeitverlauf erscheinen</svg>
     <svg id="theforce">hier sollte der Zeitverlauf erscheinen</svg>
-    <svg id="map">hier sollte der Zeitverlauf erscheinen</svg>
+
 
     <!-- Scripts should be loaded when the dom model is done and thus are included at the bottom -->
     <!-- reasons: script error doesnt lead to blank page; receiving and parsing large scripts increases load time -->
-    <!-- dom model is ready and modifiable -->    
+    <!-- dom model is ready and modifiable -->
     <script src="./libs/d3/d3.js"></script>
     <script src="./store/config.js"></script>
     <script src="./store/commonfunctions.js"></script>
-    <script src="./store/startpage.js"></script>  
-   
+    <script src="./store/startpage.js"></script>
+
 </body>
-</html> 
+</html>
