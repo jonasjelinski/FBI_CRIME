@@ -1,24 +1,22 @@
 var commonfunctions_namespace = commonfunctions_namespace || {};
 
 commonfunctions_namespace.loadCSV = function(){
-
+	"use strict"
 	try{
-				let data; 
-
-				d3.csv(config_namespace.FILE_PATHES.csvpath, function(csvdata){
-													data = csvdata;
-												}
-									);			 
-				
-				return data;
-
+		let data; 
+		d3.csv(config_namespace.FILE_PATHES.csvpath, function(csvdata){
+			data = csvdata;
+		}
+		);
+		return data;
 	}
-	 catch(err){
-				console.log("couldn't load csv "+err);   
+	catch(err){
+		console.log("couldn't load csv "+err);   
 	} 
 };
 
 commonfunctions_namespace.loadJson = function(callback){
+	"use strict"
 	try{        
 				d3.json(config_namespace.FILE_PATHES.jsonpath, function(jsondata) {         
 														config_namespace.JSON_OBJECT = jsondata;
