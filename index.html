@@ -11,26 +11,28 @@
 <body>
     <h1>Crime in the USA</h1>
     <div class="buttons">
-      <button id="time">Zeitverlauf</button>
-      <button id="force">Collapsible Force</button>
-      <button id="planet">Planeten</button>
+      <button id="mapButton">Map</button>
+      <button id="timeButton">Zeitverlauf</button>
+      <button id="forceButton">Collapsible Force</button>
+      <button id="planetButton">Planeten</button>
     </div>
     <div id= "dochart" >Raten der Verbrechen auf die USA verteilt</div>
-    <svg id="map">hier sollte die Map erscheinen</svg>
-    <svg id="myChart"></svg>
-    <svg id="magicCircle">hier sollte ein Kreis erscheinen</svg>
-<<<<<<< HEAD
-    <svg id="sunburst">hier sollte ein Kreis erscheinen</svg>
+    <svg id="map">hier sollte die Map erscheinen </svg>
+    <div id="popup">
+      <h1>Staaten-Name</h1>
+      <button class="closeButton">X<button>
+      <p id="stateInformation">Infos über den Staat</p>
+      <svg id="tree">hier soll der collapsible Tree hin</svg>
+      <svg id="sunburst">hier sollte ein Kreis erscheinen</svg>
+    </div>
     <svg id="linediagram">hier sollte der Zeitverlauf erscheinen</svg>
     <svg id="theforce">hier sollte der Zeitverlauf erscheinen</svg>
-
-=======
-    <svg id="sunburst">hier sollte ein Sunburst erscheinen</svg>
     <svg id="linediagram">hier sollte das lineDiagramm erscheinen</svg>
-    <svg id="theforce">hier sollte ein Forcelayout erscheinen</svg>
-    <svg id="map">hier sollte die Karte der USA erscheinen</svg>
     <svg id="universe">hier sollte ein Sonnensystem erscheinen</svg>
->>>>>>> e82dfcac9c8defe9b9b00711df4dc7c0d0837483
+
+
+<svg id="myChart"></svg>
+  <svg id="magicCircle">hier sollte ein Kreis erscheinen</svg>
 
     <!-- Scripts should be loaded when the dom model is done and thus are included at the bottom -->
     <!-- reasons: script error doesnt lead to blank page; receiving and parsing large scripts increases load time -->
@@ -40,5 +42,7 @@
     <script src="./store/commonfunctions.js"></script>
     <script src="./store/startpage.js"></script>
 
+    <footer>
+    </footer>
 </body>
 </html>

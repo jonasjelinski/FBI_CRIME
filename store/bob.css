@@ -1,5 +1,27 @@
+
+:root{
+  --background: #CACACB;;
+  --fonts: #3F3F42;
+  --buttons: #9C9C9C;
+  --buttonsHover: #7C7C7D;
+  --borders: #FFFFFF;
+  --violentCrime: rgb(214, 20, 0);
+  --propertyCrime : rgb(12, 67, 206);
+  --Burglary: rgb(0, 209, 114);
+  --Larcenytheft: rgb(0, 195, 195);
+  --Motorvehicletheft : rgb(7, 117, 201);
+  --Aggravatedassault : rgb(255, 113, 0);
+  --MurderManslaughter : rgb(255, 211, 85);
+  --Rape: rgb(255, 188, 0);
+  --Robbery: rgb(255, 154, 0);
+
+
+
+}
+
+
 body {
-    background-color: #CACACB;
+    background-color: var(--background);
   /*  font-family: 'Quattrocento Sans', sans-serif;*/
 }
 
@@ -21,17 +43,18 @@ body {
 h1{
   margin: auto;
   text-align: center;
+  color: var(--fonts);
   height: 50px;
 }
 
 .buttons button{
-  background-color: #9C9C9C;
-  border: 1px solid white;
+  background-color: var(--buttons);
+  border: 1px solid var(--borders);
   padding: 10px 24px;
-  color: #3F3F42;
+  color: var(--fonts);
   cursor: pointer;
   float: left;
-  width: 33%;
+  width: 25%;
 }
 
 .buttons button:not(:last-child){
@@ -39,7 +62,7 @@ h1{
 }
 
 .buttons button:hover{
-  background-color: #7C7C7D;
+  background-color: var(--buttonsHover);
 }
 
 svg{
@@ -54,18 +77,65 @@ svg{
 #map{
   background-color: pink;
   top: 124px;
-  width:100%;
+  left: 5%;
+  width: 90%;
   height: 520px; /*angepasst an Chris Kartenformat*/
   z-index: 0;
   visibility: visible;
 }
 
-#sunburst{
-  background-color: #CACACB;
-  right: 10px;
+#popup{
+  position: absolute;
+  left: 10%;
+  background-color: green;
   top: 134px;
-  z-index: 1;
-  width: 500px;
+  width: 80%;
   height: 500px;
+  z-index:1;
+  visibility: hidden;
+}
+
+.closeButton{
+  position: absolute;
+  top: 0%;
+  right: 0%;
+}
+
+#stateInformation{
+  background-color: var(--background);
+  position: absolute;
+  border: 1px solid red;
+  left: 5%;
+  top: 7.5%;
+  width: 45%;
+  height: 15%;
+}
+
+#tree{
+  background-color: var(--background);
+  border: 1px solid red;
+  left: 5%;
+  bottom: 5%;
+  width: 45%;
+  height: 70%;
+}
+
+#sunburst{
+  background-color: var(--background);
+  border: 1px solid red;
+  right: 5%;
+  top: 10%;
+  width: 45%;
+  height: 85%;
+}
+
+#universe{
+  position: absolute;
+  background-color: yellow;
+  top: 124px;
+  left: 5%;
+  width: 90%;
+  height: 520px; 
+  z-index: 0;
   visibility: visible;
 }

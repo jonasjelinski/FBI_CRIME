@@ -3,8 +3,8 @@
 htmlel_namespace.MAGIC_CIRCLE = { //Elternelement aller anderen HTML-Elemente
 	rootclassname: "magicCircle", //im html-Element class="magicCircle"
 	rootid: "magicCircle", //im html-Element id="magicCircle"
-	width:1000,
-	height:100,
+	//width:1000,
+	//height:100,
 	type: "g"
 }
 
@@ -22,8 +22,8 @@ htmlel_namespace.LINE_DIAGRAM = {
 	parentElement: htmlel_namespace.MAGIC_CIRCLE,
 	rootclassname: "linediagram",
 	rootid: "linediagram",
-	width:650,
-	height:400,
+	//width:650,
+	//height:400,
 	type: "g"
 };
 
@@ -49,16 +49,7 @@ htmlel_namespace.THE_MAP = {
 	parentElement: htmlel_namespace.MAGIC_CIRCLE,
 	rootclassname: "map",
 	rootid: "map",
-<<<<<<< HEAD
-	//width:3000,
-	//height:3000,
-	//type: "g"
-//	z-index: 0,
-
-}
-=======
-	width:3000,
-	height:3000,
+	width: 3000,
+	height: 3000,
 	type: "g"
 };
->>>>>>> e82dfcac9c8defe9b9b00711df4dc7c0d0837483
