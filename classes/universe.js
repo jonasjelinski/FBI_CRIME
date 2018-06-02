@@ -144,8 +144,7 @@ class Universe extends MagicCircle{
 			fullCircle = 360,			
 			radiusFactor = 0,
 			halfCircle = 180;
-		node.group = node.quotient > this.groupSplitter ? this.violenceGroup: this.propertyGroup;
-		//node.color = node.group === this.violenceGroup ? "red": "blue";		
+		node.group = node.quotient > this.groupSplitter ? this.violenceGroup: this.propertyGroup;			
 		node.color = this.getRGBColor(factor);
 		console.log(node.color);
 		radiusFactor = node.group === this.violenceGroup ? factor : factor*2;
