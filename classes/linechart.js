@@ -9,10 +9,9 @@ class LineChart extends MagicCircle{
 	
 	doChart(){
 		console.log("ein lama erzeugt einen linechart");       
-		this.drawLineChart();
-		
+		this.drawLineChart();		
 	}
-
+	
 	drawLineChart(){
 		let data = this.createD3Data();
 		this.createCoordinateSystem(data);
