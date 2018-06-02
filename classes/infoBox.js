@@ -25,11 +25,11 @@ class InfoBox extends MagicCircle{
 			textLabels,
 			textArray = [text],
 			that =this;
-		prepareRoot();
+		prepareRootElement();
 		prepareTextBox();	
 		appendText();
 
-		function prepareRoot(){			
+		function prepareRootElement(){			
 			root = that.rootElement.attr("class","InfoBox").attr("width", that.width).attr("height", that.height);
 		}
 

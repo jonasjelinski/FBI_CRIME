@@ -146,7 +146,6 @@ class Universe extends MagicCircle{
 			halfCircle = 180;
 		node.group = node.quotient > this.groupSplitter ? this.violenceGroup: this.propertyGroup;			
 		node.color = this.getRGBColor(factor);
-		console.log(node.color);
 		radiusFactor = node.group === this.violenceGroup ? factor : factor*2;
 		node.radius = this.standards.standardRadius*radiusFactor + this.standards.minRadius;
 		node.distanceToSun = this.standards.standardDistanceToSun/maxPlanets*planetNumber+2*lastRadius+this.standards.minDistanceToSun;
@@ -246,25 +245,46 @@ class Universe extends MagicCircle{
 
 	//source: https://bl.ocks.org/mbostock/4062045
 	drawForceNodes(data){
-		let sortedQuotients = data,			
+		let sortedQuotients = data,	
+			that = this,		
 			universe = this.createUniverse(sortedQuotients),
 			width = this.width,
 			height = this.height,
-			rootElement = this.rootElement.attr("width", width).attr("height", height),
+			rootElement,
+			node,
+			label,
+			link;
+		
+		prepareRootNode();
+		initNode();
+		initLabel();
+		initLink();
+		setForceNodesSettings();
+		drawUniverse();
+		animateRotation();
+
+		function prepareRootNode(){
+			rootElement = that.rootElement.attr("width", width).attr("height", height);
+		}
+
+		function initNode(){
 			node = rootElement.attr("class", "nodes")
 				.selectAll("circle")
-				.data(universe),
+				.data(universe);
+		}
+
+		function initLabel(){
 			label = rootElement.attr("class", "lables")
 				.selectAll(".lables")
-				.data(universe),
+				.data(universe);
+		}
+
+		function initLink(){
 			link = rootElement      	 	
 				.attr("class", "links").attr("width",width).attr("height",height)
 				.selectAll("line")
 				.data(universe);
-		
-		setForceNodesSettings();
-		drawUniverse();
-		animateRotation();
+		}
 
 		function setForceNodesSettings(){
 			node.data(universe);

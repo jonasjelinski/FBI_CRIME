@@ -31,7 +31,7 @@ htmlel_namespace.THE_FORCE = {
 	parentElement: htmlel_namespace.MAGIC_CIRCLE,
 	rootclassname: "theforce",
 	rootid: "theforce",
-	width:300,
+	width:3000,
 	height:3000,
 	type: "g"
 };

@@ -236,13 +236,13 @@ class TheForce extends MagicCircle{
 		
 
 		let simulation = d3.forceSimulation()
-			//.nodes(nodes)		   
+			.nodes(nodes)		   
 			.force("charge", d3.forceManyBody())
 			.force("center", d3.forceCenter(centerX, centerY))
 			.force("collision", d3.forceCollide().radius(radius))
 			.force("link", d3.forceLink().links(links).id(linkId).distance(linkDistance))
 			.on('tick', updatePos)
-		   .on('end', animateRotation);
+		   //.on('end', animateRotation);
 
 		
 
@@ -311,8 +311,8 @@ class TheForce extends MagicCircle{
 
 		function enterNode(){
 			node = node.enter().append("circle")						
-				.attr("r", calculateCircleRadius)
-				.attr("fill", fillCircle);
+				.attr("r", calculateCircleRadius);
+				
 		}
 
 		function enterLabel(){
@@ -323,13 +323,14 @@ class TheForce extends MagicCircle{
 
 		function enterLink(){
 			link = link.enter().append("line")
-				.attr("stroke-width", strokeWidth);
+				.attr("stroke-width", strokeWidth)
+				.attr("fill", "black")
+				.style("stroke", "black");;
 		}
 
 		function linkId(d){
 			return d.id;
 		}	
-
 
 		function linkDistance(d){
 			let factor = d.source.quotient+1;

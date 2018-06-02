@@ -1,351 +1,330 @@
 class Sunburst extends MagicCircle{
-    constructor(){
-        super();
-        this.self = this; 
-        this.htmlelement = htmlel_namespace.SUN_BURST; 
-        this.htmlElementID = this.htmlelement.rootid;
-        this.width = this.htmlelement.width;
-        this.height = this.htmlelement.height;   
-        this.state = this.state = dynamics_namespace.currentState,
-        this.year = dynamics_namespace.currentYear,
-        this.categories = [],
-        this.crimes = [],
-        this.doChart = this.doChart.bind(this);
-        this.drawSunburst = this.drawSunburst.bind(this);
-        this.createD3Data = this.createD3Data.bind(this);
-        this.createNewNode  = this.createNewNode.bind(this);
-        this.createSunburst = this.createSunburst.bind(this);
-        //this.computeTextRotation = this.computeTextRotation.bind(this);
-        this.rootElement = this.getRootElement();   
-    }    
-    
-    getData () {
-      return config_namespace.JSON_OBJECT;        
-    }
-    
-    doChart () {
-        console.log("ein lama erzeugt einen sunburst", this);
-        this.self.drawSunburst();
-    }
-
-    drawSunburst () {
-        //console.log("drawSunburst");
-        let data = this.createD3Data();
-      //  console.log("drawSunburst ",this);
-        this.self.createSunburst(data);           
+	constructor(){
+		super();
+		this.self = this; 
+		this.htmlelement = htmlel_namespace.SUN_BURST; 
+		this.htmlElementID = this.htmlelement.rootid;
+		this.width = this.htmlelement.width;
+		this.height = this.htmlelement.height;   
+		this.state = dynamics_namespace.currentState,
+		this.year = dynamics_namespace.currentYear,
+		this.categories = [],
+		this.crimes = [],
+		this.doChart = this.doChart.bind(this);
+		this.drawSunburst = this.drawSunburst.bind(this);
+		this.createD3Data = this.createD3Data.bind(this);
+		this.createNewNode  = this.createNewNode.bind(this);
+		this.createSunburst = this.createSunburst.bind(this);		
+		this.rootElement = this.getRootElement();   
+	}    
+	
+	getData () {
+		return config_namespace.JSON_OBJECT;        
+	}
+	
+	doChart () {
+		console.log("ein lama erzeugt einen sunburst", this);
+		this.self.drawSunburst();
 	}
 
-    getRootElement(){
-          return commonfunctions_namespace.getRootElement(this);      
-    }
+	drawSunburst () {
+		let data = this.createD3Data();
+		this.self.createSunburst(data);           
+	}
+
+	getRootElement(){
+		return commonfunctions_namespace.getRootElement(this);      
+	}
 
 	createD3Data () {
-    	let crimedata = commonfunctions_namespace.getCrimesAndDataByYearAndState(this.year, this.state, this.data);
-		let crimesdata = crimedata.crimes;    
-        let children_object = {};     
-        let root_json_object = {};
-        root_json_object.name = "Crimes";
-        root_json_object.children = [];
-        let newChild = {}; 
-             
-        for(let categorie in crimesdata){  
-           
-            let categorie_crimes = crimesdata[categorie];           
-            let children_array = [];
+		let crimedata = commonfunctions_namespace.getCrimesAndDataByYearAndState(this.year, this.state, this.data),
+			crimesdata = crimedata.crimes,    
+			childrenObject = {},     
+			rootJsonObject = {},
+			newChild = {};
+		rootJsonObject.name = "Crimes";
+		rootJsonObject.children = [];
+			
+		for(let categorie in crimesdata){
+			let categorieCrimes = crimesdata[categorie],
+				childrenArray = [];
 
-            for(let crime in categorie_crimes){
-                children_object.name = crime;
-                children_object.size = parseFloat(categorie_crimes[crime]);
-              //  console.log("typeofe", typeof children_object.size);
-                children_array.push(children_object);
-                //console.log("children_object", children_object);       
-                children_object = {};                    
-            }    
-           
-            newChild = this.self.createNewNode(categorie, children_array);
-
-            root_json_object.children.push(newChild);              
-        }; 
-     //console.log("root_json_object root_json_object ",root_json_object); 
-          
-         return root_json_object;
+			for(let crime in categorieCrimes){
+				childrenObject.name = crime;
+				childrenObject.size = parseFloat(categorieCrimes[crime]);		
+				childrenArray.push(childrenObject);
+				childrenObject = {};
+			}
+			newChild = this.self.createNewNode(categorie, childrenArray);
+			rootJsonObject.children.push(newChild);              
+		};
+		return rootJsonObject;
 	}
 
-    createNewNode(name, childrenarray){ 
-        let newjsonobject = {};     
-        newjsonobject.children = childrenarray;         
-        newjsonobject.name = name;
-        //console.log(" 3 createJsonObjectOfCrimes", json_object);
-        return newjsonobject;
-    }
+	createNewNode(name, childrenarray){ 
+		let newJsonObject = {};     
+		newJsonObject.children = childrenarray;         
+		newJsonObject.name = name;
+		return newJsonObject;
+	}
 
-    getWidth(){
-        return this.width;
-    }
+	getWidth(){
+		return this.width;
+	}
 
-    getHeight(){
-        return this.height;
-    }
+	getHeight(){
+		return this.height;
+	}
 
+	//source: https://bl.ocks.org/denjn5/f059c1f78f9c39d922b1c208815d18af
+	//source: https://www.safaribooksonline.com/blog/2014/03/11/solving-d3-label-placement-constraint-relaxing/
+	createSunburst(jsondata){ 
+		let data = JSON.parse(JSON.stringify(jsondata)),     
+			height = this.self.getHeight(),
+			width = this.self.getWidth(),
+			that = this,
+			widthGrafic = width*0.5,
+			heightGrafic = height*0.5,
+			radius = Math.min(widthGrafic, heightGrafic) / 2,
+			labelWidth = width/2,
+			labelHeight = labelWidth,			
+			lastLabelYPos = 0,
+			lineWidth = labelWidth,
+			lineHeight = labelHeight,
+			durationTime = 2000,      
+			rootElement,
+			sunburst,
+			labels,
+			lines,
+			partition,
+			parentNode,
+			arc,
+			labelarc;
 
-    //source: https://bl.ocks.org/denjn5/f059c1f78f9c39d922b1c208815d18af
-    //source: https://www.safaribooksonline.com/blog/2014/03/11/solving-d3-label-placement-constraint-relaxing/
-    createSunburst(jsondata){
-      
-        let data = JSON.parse(JSON.stringify(jsondata));
-        console.log("data", data);      
-        let height = this.self.getHeight();
-        let width = this.self.getWidth();
-        let widthGrafic = width*0.5;
-        let heightGrafic = height*0.5;
-        let radius = Math.min(widthGrafic, heightGrafic) / 2;
-        let labelWidth = width/2;
-        let labelHeight = labelWidth;
-        let labelradius = labelWidth;
-        let lastLabelYPos = 0;
-        let lineWidth = labelWidth;
-        let lineHeight = labelHeight;      
-        let rootElement=this.rootElement.attr("width", width).attr("height", height);
-       
-                           
-        var grafic = rootElement
-            .append(this.htmlElementType)
-            .attr("width", width)
-            .attr('class', 'grafic')
-            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
-            
-        // Create our sunburst data structure and size it.
-        var partition = d3.partition()
-            .size([2 * Math.PI, radius]);
+		prepareRootElement();
+		initSunburst();
+		initLabels();
+		initLines();
+		initPartitionStructure();
+		initParentNode();
+		initArc();
+		initLabelArc();
+		structureParentNode();
+		setSunBurstDataAndEnterSettings();	
+		setLabelDataAndEnterSettings();
+		setLinesDataAndEnterSettings();	
 
+		function prepareRootElement(){
+			rootElement = that.rootElement.attr("width", width).attr("height", height);
+		}
 
-        // Find the root node of our data, and begin sizing process.
-        var root = d3.hierarchy(data)
-           .sum(function (d) { 
-                let value = parseFloat(d.size);            
-               return value;
-                });
+		function initSunburst(){
+			sunburst = rootElement
+				.append(that.htmlElementType)
+				.attr("width", width)
+				.attr('class', 'sunburst')
+				.attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+		}
 
-                        // console.log("createSunburst data ",data);  
-  
-        // Calculate the sizes of each arc that we'll draw later.
-      //console.log("d3 hierarchy ",d3.hierarchy(data));
-        partition(root);
-        var arc = d3.arc()
-            .startAngle(function (d) { return d.x0;})
-            .endAngle(function (d) { return d.x1;})
-            .innerRadius(function (d) { return d.y0;})
-            .outerRadius(function (d) { return d.y1;});
+		function initLabels(){
+			labels = rootElement            
+				.append('g')
+				.attr("width", labelWidth)
+				.attr("height", labelHeight)
+				.attr('class', 'labels')
+				.attr('transform', 'translate(' + labelWidth + ',' + labelHeight + ')');
+		}
 
-       
-        var labelarc = arc;
+		function initLines(){
+			lines = rootElement
+				.append(that.htmlElementType)
+				.attr("width", width)
+				.attr("height", height)
+				.attr('class', 'lines')
+				.attr('transform', 'translate(' + lineWidth + ',' + lineHeight + ')');
+		}
 
+		function initPartitionStructure(){
+			partition = d3.partition()
+				.size([2 * Math.PI, radius]);
+		}
 
-        //part to draw sunburst, each node is a slice
+		function initParentNode(){
+			parentNode = d3.hierarchy(data)
+				.sum(function (d) { 
+					let slizeSize = parseFloat(d.size);            		   		
+					return slizeSize;
+				});
+		}
 
-        // Add a <g> element for each node in thd data, then append <path> elements and draw lines based on the arc
-        // variable calculations. Last, color the lines and the slices.
-        grafic.selectAll('g')
-            .data(root.descendants())
-            .enter().append('g').attr("class", "node").append('path')
-            
-            .attr("display", function (d) { return d.depth ? null : "none"; })
-            .attr("d", computeTransition())  
-            .transition()
-            .ease(d3.easeLinear)
-            .duration(2000)            
-            .attr("d", arc)
-            .style("stroke", "black ")
+		function structureParentNode(){
+			partition(parentNode);
+		}
 
-            .style("fill", function(d){
-                let crimename = d.data.name;
-                   //console.log(" data", d.data);
-                   let color = commonfunctions_namespace.getCrimeColor(crimename);
+		function initArc(){
+			arc = d3.arc()
+				.startAngle(function (d) { return d.x0;})
+				.endAngle(function (d) { return d.x1;})
+				.innerRadius(function (d) { return d.y0;})
+				.outerRadius(function (d) { return d.y1;});
+			
+		} 
 
-                   if(color != undefined){
-                    return color;
-                   }    
+		function initLabelArc(){
+			labelarc = arc;
+		}
 
-                   else{
-                    let defaultcolor = "rgb(6,6,6)";
-                    return defaultcolor;
-                   }  
-                } )
+		function setSunBurstDataAndEnterSettings(){
+			sunburst.selectAll('g')
+				.data(parentNode.descendants())
+				.enter().append('g').attr("class", "node").append('path')			
+				.attr("display", function (d) { return d.depth ? null : "none"; })
+				.attr("d", computeTransition())  
+				.transition()
+				.ease(d3.easeLinear)
+				.duration(durationTime)            
+				.attr("d", arc)
+				.style("stroke", "black ")
+				.style("fill", function(d){ return getColorByCrime(d);});  
+		}
 
-          
-            
-        
-        // Part adding text-labels to the root -Element    
+		function getColorByCrime(d){
+			let crimename = d.data.name,				  
+				color = commonfunctions_namespace.getCrimeColor(crimename),
+				defaultcolor = "rgb(6,6,6)";
+			if(color !== undefined){
+				return color;
+			}    
+			return defaultcolor;
+		}	
 
-        //console.log(this);
-        var labels = rootElement            
-        .append('g')
-        .attr("width", labelWidth)
-        .attr("height", labelHeight)
-        .attr('class', 'labels')
-        .attr('transform', 'translate(' + labelWidth + ',' + labelHeight + ')');
+		function setLabelDataAndEnterSettings(){
+			labels.selectAll('g')				
+				.attr("class", "labelname")
+				.data(parentNode.descendants())
+				.enter()
+				.append('g').attr("class", "label")
+				.append("text")
+				.transition()
+				.ease(d3.easeLinear)
+				.duration(durationTime)               
+				.attr("x", function (d, i) { return computeTextXPos(d,i); })
+				.attr("y",  function (d, i) { return computeTextYPos(d,i); }) 
+				.attr("text-anchor", function(d,i){return computeTextAnchor(d,i);})
+				.attr("font-size", "10px")
+				.style('fill', 'blue')
+				.text(function(d) { return d.parent ? d.data.name : "" }); 
+		}
 
-        labels.selectAll('g')
-            .data(root.descendants())
-            .enter().append('g').attr("class", "label");    
-               
-            labels.selectAll('g')
-            .attr("class", "labelname")
-            .append("text")
-            .transition()
-            .ease(d3.easeLinear)
-            .duration(2000)               
-            .attr("x", function (d, i) { return computeTextXPos(d,i); })
-            .attr("y",  function (d, i) { return computeTextYPos(d,i); }) 
-            .attr("text-anchor", function(d,i){return computeTextAnchor(d,i);})
-            .attr("font-size", "10px")
-            .style('fill', 'blue')
-            .text(function(d) { return d.parent ? d.data.name : "" }); // rotation align
+		function setLinesDataAndEnterSettings(){
+			lines.selectAll('g')
+				.data(parentNode.descendants())
+				.enter().append('line').attr("class", "line")
+				.transition()
+				.ease(d3.easeLinear)
+				.duration(2000)  
+				.attr("x1", function (d, i) {return computeTextXPos(d,i);})
+				.attr("y1", function (d, i) {return computeTextYPos(d,i);}) 
+				.attr("x2", function (d, i) {return computeNodePosition(d,i)[0]})
+				.attr("y2", function (d, i) {return computeNodePosition(d,i)[1]})
+				.attr("stroke-width", 1)
+				.attr("stroke", "black");		
+		}
+								
+		//functions to compute positions and transitions    
 
-          
-        //part to draw all lines bewteen the node and the texposition
+		function computeTextRotation(data) {
+			let angle = (data.x0 + data.x1) / Math.PI * 90;
+			// Avoid upside-down labels
+			return (angle < 120 || angle > 270) ? angle : angle + 180;  // labels as rims
+			//return (angle < 180) ? angle - 90 : angle + 90;  // labels as spokes
+		}  
 
-        var lines = rootElement
-            .append(this.htmlElementType)
-            .attr("width", width)
-            .attr("height", height)
-            .attr('class', 'lines')
-            .attr('transform', 'translate(' + lineWidth + ',' + lineHeight + ')');
+		function computeTextXPos(data, index){
+			if(data.data.name === 'Crimes'){
+				return 0;
+			}
+			let centroid = labelarc.centroid(data),
+				midAngle = Math.atan2(centroid[1], centroid[0]),
+				x = Math.cos(midAngle) * labelWidth/2,
+				sign = (x > 0) ? 1 : -1,
+				multiplier = 4*index,
+				labelX = x + (multiplier * sign);			
+			return labelX;
+		}
 
-                
-        lastLabelYPos=0;
-        lines.selectAll('g')
-        .data(root.descendants())
-        .enter().append('line').attr("class", "line")
-        .transition()
-        .ease(d3.easeLinear)
-        .duration(2000)  
-        .attr("x1", function (d, i) {return computeTextXPos(d,i);})
-        .attr("y1", function (d, i) {return computeTextYPos(d,i);}) 
-        .attr("x2", function (d, i) {return computeNodePosition(d,i)[0]})
-        .attr("y2", function (d, i) {return computeNodePosition(d,i)[1]})
-        .attr("stroke-width", 1)
-        .attr("stroke", "black");
-        
-                
-        
-        //functions to compute positions and transitions    
+		function computeTextYPos(data, index){
+			if(data.data.name === 'Crimes'){
+				return 0;
+			}
+			let centroid = labelarc.centroid(data),
+				midAngle = Math.atan2(centroid[1], centroid[0]),
+				multiplier = index*9,
+				y = Math.sin(midAngle)*labelWidth,
+				sign = 0.75;            
+			y = y*sign;			 
+			y = asureDistanceToLabels(y);	
+			return y;
+		}
+		
+		function asureDistanceToLabels(y){	  
+			let minDistance = 40,
+				distance = Math.abs(lastLabelYPos-y);
+			if(distance < minDistance){			
+				y = y+minDistance;
+			}
 
-        function computeTextRotation(data) {
-        var angle = (data.x0 + data.x1) / Math.PI * 90;
-            // Avoid upside-down labels
-            return (angle < 120 || angle > 270) ? angle : angle + 180;  // labels as rims
-            //return (angle < 180) ? angle - 90 : angle + 90;  // labels as spokes
-        }  
+			lastLabelYPos = y;
+			return y;           
+		}
 
-        function computeTextXPos(data, index){
-            if(data.data.name === 'Crimes'){
-                return 0;
-            }
-            let centroid = labelarc.centroid(data);
-            let midAngle = Math.atan2(centroid[1], centroid[0]);
-            let x = Math.cos(midAngle) * labelWidth/2;
-            let sign = (x > 0) ? 1 : -1;
-            let multiplier = 4*index;
-            let labelX = x + (multiplier * sign);
-            
-            return labelX;
-        }
+		function computeTextAnchor(data, index){
+			let centroid = labelarc.centroid(data),
+				midAngle = Math.atan2(centroid[1], centroid[0]),
+				x = Math.cos(midAngle) * width/2;
+			return (x > 0) ? "start" : "end";
+		}
 
-        
+		function computeLineX2(data, index){
+			if(data.data.name === "Crimes"){
+				console.log("return 0", data.data," i ",index );
+				return 0;
+			}
+			let centroid = labelarc.centroid(data),
+				midAngle = Math.atan2(centroid[1], centroid[0]),
+				x = Math.cos(midAngle) * labelWidth/2;
+			return x;
+		}
 
-        function computeTextYPos(data, index){
-            if(data.data.name === 'Crimes'){
-                return 0;
-            }
-            let centroid = labelarc.centroid(data);
-            let midAngle = Math.atan2(centroid[1], centroid[0]);
-            let multiplier = index*9;
-            let y = Math.sin(midAngle)*labelWidth;
-            let sign = 0.75;            
-            y = y*sign;
-            //console.log("y ",y); 
-            y = asureDistanceToLabels(y);
-            
-            //console.log("y Pos Label ",y);            
-            return y;
-        }
+		function computeLineY2(data, index){
+			if(data.name === "Crimes"){
+				return 0;
+			}
+			let centroid = labelarc.centroid(data), 
+				midAngle = Math.atan2(centroid[1], centroid[0]),
+				y = Math.sin(midAngle) * labelWidth/2;
+			return y;
+		}
 
-        
-        function asureDistanceToLabels(y){
-          
-            let minDistance = 40;
-            let distance = Math.abs(lastLabelYPos-y);
-            if(distance < minDistance){
-                //console.log("tosmall y ", y, " y+", y+minDistance)
-                y = y+minDistance;
-            }
+		function computeNodePosition(data, index){
+			let pos = [0,0];    
+			if(data.data.name === "Crimes"){					
+				return pos;
+			}
+			pos = labelarc.centroid(data);
+			return pos;                     
+					
+		}   
 
-            lastLabelYPos = y;
-            return y;           
-        }
-
-
-        function computeTextAnchor(data, index){
-            let centroid = labelarc.centroid(data);
-            let midAngle = Math.atan2(centroid[1], centroid[0]);
-            let x = Math.cos(midAngle) * width/2;
-            return (x > 0) ? "start" : "end";
-        }
-
-        function computeLineX2(data, index){
-            if(data.data.name === "Crimes"){
-                console.log("return 0", data.data," i ",index );
-                return 0;
-            }
-            let centroid = labelarc.centroid(data);
-            let midAngle = Math.atan2(centroid[1], centroid[0]);
-            let x = Math.cos(midAngle) * labelWidth/2;
-            return x;
-        }
-
-        function computeLineY2(data, index){
-            if(data.name === "Crimes"){
-                return 0;
-            }
-            let centroid = labelarc.centroid(data); 
-            let midAngle = Math.atan2(centroid[1], centroid[0]);
-            let y = Math.sin(midAngle) * labelWidth/2;
-            return y;
-        }
-
-        function computeNodePosition(data, index){
-        let pos = [0,0];    
-        //console.log("cnp, " ,data.data.name); 
-        if(data.data.name === "Crimes"){
-                //console.log("isCrimes" ,pos);
-                return pos;
-            }
-        else{
-            pos = labelarc.centroid(data);
-            //console.log("nodePos", pos);
-             return pos;
-            }                       
-                    
-        }   
-
-        function computeTransition(data){            
-             var startArc = d3.arc()
-            .startAngle(function (data) { return 0})
-            .endAngle(function (data) { return  0})
-            .innerRadius(function (data) { return 0})
-            .outerRadius(function (data) { return 0});
-            console.log("startArc" ,startArc);
-
-
-            return startArc;
-        }
-       
-    }  
-    /*attr("transform", function(d) {
-                    
-                    let pos = labelarc.centroid(d);
-                    return "translate(" + pos + ")rotate(" + computeTextRotation(d) + ")"; })*/      
+		function computeTransition(data){            
+			let startArc = d3.arc()
+				.startAngle(function (data) { return 0})
+				.endAngle(function (data) { return  0})
+				.innerRadius(function (data) { return 0})
+				.outerRadius(function (data) { return 0});
+			return startArc;
+		} 
+	}   
 
 }
 
