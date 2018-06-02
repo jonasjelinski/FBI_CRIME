@@ -2,24 +2,24 @@ class Sunburst extends MagicCircle{
 	constructor(){
 		super();
 		this.self = this; 
-		this.htmlelement = htmlel_namespace.SUN_BURST; 
+		this.htmlelement = htmlelementsNamespace.SUN_BURST; 
 		this.htmlElementID = this.htmlelement.rootid;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;   
-		this.state = dynamics_namespace.currentState,
-		this.year = dynamics_namespace.currentYear,
-		this.categories = [],
-		this.crimes = [],
+		this.state = dynamicsNamespace.currentState;
+		this.year = dynamicsNamespace.currentYear;
+		this.categories = [];
+		this.crimes = [];
 		this.doChart = this.doChart.bind(this);
 		this.drawSunburst = this.drawSunburst.bind(this);
 		this.createD3Data = this.createD3Data.bind(this);
-		this.createNewNode  = this.createNewNode.bind(this);
+		this.createNewNode = this.createNewNode.bind(this);
 		this.createSunburst = this.createSunburst.bind(this);		
 		this.rootElement = this.getRootElement();   
 	}    
 	
 	getData () {
-		return config_namespace.JSON_OBJECT;        
+		return configNamespace.JSON_OBJECT;        
 	}
 	
 	doChart () {
@@ -33,11 +33,11 @@ class Sunburst extends MagicCircle{
 	}
 
 	getRootElement(){
-		return commonfunctions_namespace.getRootElement(this);      
+		return commonfunctionsNamespace.getRootElement(this);      
 	}
 
 	createD3Data () {
-		let crimedata = commonfunctions_namespace.getCrimesAndDataByYearAndState(this.year, this.state, this.data),
+		let crimedata = commonfunctionsNamespace.getCrimesAndDataByYearAndState(this.year, this.state, this.data),
 			crimesdata = crimedata.crimes,    
 			childrenObject = {},     
 			rootJsonObject = {},
@@ -46,18 +46,21 @@ class Sunburst extends MagicCircle{
 		rootJsonObject.children = [];
 			
 		for(let categorie in crimesdata){
-			let categorieCrimes = crimesdata[categorie],
-				childrenArray = [];
-
-			for(let crime in categorieCrimes){
-				childrenObject.name = crime;
-				childrenObject.size = parseFloat(categorieCrimes[crime]);		
-				childrenArray.push(childrenObject);
-				childrenObject = {};
-			}
-			newChild = this.self.createNewNode(categorie, childrenArray);
-			rootJsonObject.children.push(newChild);              
-		};
+			if(crimesdata !== undefined){
+				let categorieCrimes = crimesdata[categorie],
+					childrenArray = [];
+				for(let crime in categorieCrimes){
+					if(categorieCrimes !== undefined){
+						childrenObject.name = crime;
+						childrenObject.size = parseFloat(categorieCrimes[crime]);		
+						childrenArray.push(childrenObject);
+						childrenObject = {};	
+					}					
+				}
+				newChild = this.self.createNewNode(categorie, childrenArray);
+				rootJsonObject.children.push(newChild);
+			}              
+		}
 		return rootJsonObject;
 	}
 
@@ -190,7 +193,7 @@ class Sunburst extends MagicCircle{
 
 		function getColorByCrime(d){
 			let crimename = d.data.name,				  
-				color = commonfunctions_namespace.getCrimeColor(crimename),
+				color = commonfunctionsNamespace.getCrimeColor(crimename),
 				defaultcolor = "rgb(6,6,6)";
 			if(color !== undefined){
 				return color;

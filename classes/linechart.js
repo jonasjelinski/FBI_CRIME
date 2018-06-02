@@ -1,8 +1,8 @@
 class LineChart extends MagicCircle{
 	constructor(){
 		super();
-		this.state = dynamics_namespace.currentState;
-		this.htmlelement = htmlel_namespace.LINE_DIAGRAM; 
+		this.state = dynamicsNamespace.currentState;
+		this.htmlelement = htmlelementsNamespace.LINE_DIAGRAM; 
 		this.htmlElementID = this.htmlelement.rootid;
 		this.rootElement = this.getRootElement();
 	}
@@ -19,11 +19,11 @@ class LineChart extends MagicCircle{
 	}
 	
 	createD3Data(){
-		let crimeTypesProperty = config_namespace.CONSTANTS.crimeTypesProperty,
-			crimeTypesViolence  = config_namespace.CONSTANTS.crimeTypesViolence,
+		let crimeTypesProperty = configNamespace.CONSTANTS.crimeTypesProperty,
+			crimeTypesViolence  = configNamespace.CONSTANTS.crimeTypesViolence,
 			allCrimes = crimeTypesProperty.concat(crimeTypesViolence),
-			maxYear = config_namespace.CONSTANTS.maxYear,
-			minYear = config_namespace.CONSTANTS.minYear,
+			maxYear = configNamespace.CONSTANTS.maxYear,
+			minYear = configNamespace.CONSTANTS.minYear,
 			d3Data = [];
 		
 		for(let i=0; i<allCrimes.length; i++){
@@ -37,7 +37,7 @@ class LineChart extends MagicCircle{
 			newObject.key = crimename;	
 			for(let year = minYear; year <=2012; year++){
 				let newValueObject = {},
-					numberOfCrimes = commonfunctions_namespace.getCrimerateByCrimeType(year, this.state, crimename, this.data);         
+					numberOfCrimes = commonfunctionsNamespace.getCrimerateByCrimeType(year, this.state, crimename, this.data);         
 				newValueObject.year = year;
 				newValueObject.crimerate = numberOfCrimes;
 				values.push(newValueObject);
@@ -62,8 +62,8 @@ class LineChart extends MagicCircle{
 			labelWidth = width/5,
 			labelHeight = labelWidth/5,			
 			rootElement,
-			maxYear = config_namespace.CONSTANTS.maxYear,
-			minYear = config_namespace.CONSTANTS.minYear,
+			maxYear = configNamespace.CONSTANTS.maxYear,
+			minYear = configNamespace.CONSTANTS.minYear,
 			minCrime = 0,
 			maxCrime = 2000,
 			mindate = new Date(minYear,0,1),
@@ -226,7 +226,7 @@ class LineChart extends MagicCircle{
 
 		function getColor(d){
 			let crime = d.key;
-			return commonfunctions_namespace.getCrimeColor(crime);
+			return commonfunctionsNamespace.getCrimeColor(crime);
 		}           
 
 		function zoomed() {                 

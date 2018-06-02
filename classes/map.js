@@ -2,12 +2,12 @@ class Map extends MagicCircle{
 
 	constructor(){
 		super();
-		this.htmlelement = htmlel_namespace.THE_MAP; 
+		this.htmlelement = htmlelementsNamespace.THE_MAP; 
 		this.htmlElementID = this.htmlelement.rootid;
 		this.rootElement = this.getRootElement();
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
-		this.mapData = config_namespace.MAP_JSON_OBJECT;
+		this.mapData = configNamespace.MAP_JSON_OBJECT;
 		this.startYear = 2012;
 	}
 
@@ -22,7 +22,7 @@ class Map extends MagicCircle{
 	//hier werden die Daten verarbeitet
 	createD3Data(){
 		let statesData;
-		if(this.mapData !== false){//wenn config_namespace.MAP_JSON_OBJECT noch kein JSON drin ist ist es false
+		if(this.mapData !== false){//wenn configNamespace.MAP_JSON_OBJECT noch kein JSON drin ist ist es false
 			statesData = topojson.feature(this.mapData, this.mapData.objects.states).features;
 		}
 		return statesData;

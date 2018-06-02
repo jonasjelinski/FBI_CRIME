@@ -1,25 +1,25 @@
-	var htmlel_namespace = htmlel_namespace || {};
+var htmlelementsNamespace = htmlelementsNamespace || {};
 
-htmlel_namespace.MAGIC_CIRCLE = { //Elternelement aller anderen HTML-Elemente
+htmlelementsNamespace.MAGIC_CIRCLE = { //Elternelement aller anderen HTML-Elemente
 	rootclassname: "magicCircle", //im html-Element class="magicCircle"
 	rootid: "magicCircle", //im html-Element id="magicCircle"
 	width:1000,
 	height:100,
 	type: "g"
-}
+};
 
-htmlel_namespace.SUN_BURST = {
-	parentElement: htmlel_namespace.MAGIC_CIRCLE,
+htmlelementsNamespace.SUN_BURST = {
+	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	rootclassname: "sunburst",
 	rootid: "sunburst",
 	width:500,
 	height:500,
 	type: "g",
 	fontColor: "black"
-}
+};
 
-htmlel_namespace.LINE_DIAGRAM = {
-	parentElement: htmlel_namespace.MAGIC_CIRCLE,
+htmlelementsNamespace.LINE_DIAGRAM = {
+	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	rootclassname: "linediagram",
 	rootid: "linediagram",
 	width:650,
@@ -27,8 +27,8 @@ htmlel_namespace.LINE_DIAGRAM = {
 	type: "g"
 };
 
-htmlel_namespace.THE_FORCE = {
-	parentElement: htmlel_namespace.MAGIC_CIRCLE,
+htmlelementsNamespace.THE_FORCE = {
+	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	rootclassname: "theforce",
 	rootid: "theforce",
 	width:3000,
@@ -36,8 +36,8 @@ htmlel_namespace.THE_FORCE = {
 	type: "g"
 };
 
-htmlel_namespace.THE_UNIVERSE = {
-	parentElement: htmlel_namespace.MAGIC_CIRCLE,
+htmlelementsNamespace.THE_UNIVERSE = {
+	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	rootclassname: "universe",
 	rootid: "universe",
 	width:3000,
@@ -45,8 +45,8 @@ htmlel_namespace.THE_UNIVERSE = {
 	type: "g"
 };
 
-htmlel_namespace.THE_MAP = {
-	parentElement: htmlel_namespace.MAGIC_CIRCLE,
+htmlelementsNamespace.THE_MAP = {
+	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	rootclassname: "map",
 	rootid: "map",
 	width: 3000,
@@ -54,8 +54,8 @@ htmlel_namespace.THE_MAP = {
 	type: "g"
 };
 
-htmlel_namespace.INFO_BOX = {
-	parentElement: htmlel_namespace.MAGIC_CIRCLE,
+htmlelementsNamespace.INFO_BOX = {
+	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	rootclassname: "infobox",
 	rootid: "infobox",
 	width: 1000,

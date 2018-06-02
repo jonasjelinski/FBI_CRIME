@@ -1,8 +1,8 @@
 class TheForce extends MagicCircle{
 	constructor(){
 		super();
-		this.state = dynamics_namespace.currentState;
-		this.htmlelement = htmlel_namespace.THE_FORCE; 
+		this.state = dynamicsNamespace.currentState;
+		this.htmlelement = htmlelementsNamespace.THE_FORCE; 
 		this.htmlElementID = this.htmlelement.rootid;
 		this.rootElement = this.getRootElement();
 		this.width = this.htmlelement.width;
@@ -54,8 +54,8 @@ class TheForce extends MagicCircle{
 	}
 
 	calculateStatesQuotient(statename){
-		let violentCrimesObject = commonfunctions_namespace.getViolentCrimes(this.year, statename, this.data);
-		let propertyCrimesObject = commonfunctions_namespace.getPropertyCrimes(this.year, statename, this.data);		
+		let violentCrimesObject = commonfunctionsNamespace.getViolentCrimes(this.year, statename, this.data);
+		let propertyCrimesObject = commonfunctionsNamespace.getPropertyCrimes(this.year, statename, this.data);		
 		let violentCrimes = this.calculateAverage(violentCrimesObject);
 		let propertyCrimes = this.calculateAverage(propertyCrimesObject);
 		return this.calculateQuotient(violentCrimes, propertyCrimes);

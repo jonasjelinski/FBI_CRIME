@@ -1,7 +1,7 @@
 class MagicCircle{
 	constructor (){
 		this.data = this.getData();
-		this.htmlelement = htmlel_namespace.MAGIC_CIRCLE;
+		this.htmlelement = htmlelementsNamespace.MAGIC_CIRCLE;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;               
 		this.htmlElementID = this.htmlelement.rootid;
@@ -11,11 +11,11 @@ class MagicCircle{
 	}
 	
 	getRootElement(){
-		return commonfunctions_namespace.getRootElement(this);      
+		return commonfunctionsNamespace.getRootElement(this);      
 	}
 	
 	getData (){
-		return config_namespace.JSON_OBJECT;  
+		return configNamespace.JSON_OBJECT;  
 	}
 
 	doChart (){
