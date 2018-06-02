@@ -29,4 +29,8 @@ class MagicCircle{
         .transition().duration(2000);
         
     }
+
+    killsHimself(){
+        this.rootElement.selectAll("*").remove();
+    }
 }

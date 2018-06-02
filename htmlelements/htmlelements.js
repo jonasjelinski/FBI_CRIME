@@ -3,8 +3,8 @@
 htmlel_namespace.MAGIC_CIRCLE = { //Elternelement aller anderen HTML-Elemente
 	rootclassname: "magicCircle", //im html-Element class="magicCircle"
 	rootid: "magicCircle", //im html-Element id="magicCircle"
-	//width:1000,
-	//height:100,
+	width:1000,
+	height:100,
 	type: "g"
 }
 
@@ -22,8 +22,8 @@ htmlel_namespace.LINE_DIAGRAM = {
 	parentElement: htmlel_namespace.MAGIC_CIRCLE,
 	rootclassname: "linediagram",
 	rootid: "linediagram",
-	//width:650,
-	//height:400,
+	width:650,
+	height:400,
 	type: "g"
 };
 
