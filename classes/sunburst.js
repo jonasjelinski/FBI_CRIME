@@ -23,7 +23,7 @@ class Sunburst extends MagicCircle{
 	}
 	
 	doChart () {
-		console.log("ein lama erzeugt einen sunburst", this);
+		console.log("ein lama erzeugt einen sunburst");
 		this.self.drawSunburst();
 	}
 
@@ -110,9 +110,9 @@ class Sunburst extends MagicCircle{
 		initArc();
 		initLabelArc();
 		structureParentNode();
-		setSunBurstDataAndEnterSettings();	
-		setLabelDataAndEnterSettings();
-		setLinesDataAndEnterSettings();	
+		setSunBurstDataAndDrawBehaviour();	
+		setLabelsDataAndDrawBehaviour();
+		setLinesDataAndDrawBehaviour();	
 
 		function prepareRootElement(){
 			rootElement = that.rootElement.attr("width", width).attr("height", height);
@@ -174,7 +174,7 @@ class Sunburst extends MagicCircle{
 			labelarc = arc;
 		}
 
-		function setSunBurstDataAndEnterSettings(){
+		function setSunBurstDataAndDrawBehaviour(){
 			sunburst.selectAll('g')
 				.data(parentNode.descendants())
 				.enter().append('g').attr("class", "node").append('path')			
@@ -184,7 +184,7 @@ class Sunburst extends MagicCircle{
 				.ease(d3.easeLinear)
 				.duration(durationTime)            
 				.attr("d", arc)
-				.style("stroke", "black ")
+				//.style("stroke", "black ")
 				.style("fill", function(d){ return getColorByCrime(d);});  
 		}
 
@@ -198,7 +198,7 @@ class Sunburst extends MagicCircle{
 			return defaultcolor;
 		}	
 
-		function setLabelDataAndEnterSettings(){
+		function setLabelsDataAndDrawBehaviour(){
 			labels.selectAll('g')				
 				.attr("class", "labelname")
 				.data(parentNode.descendants())
@@ -216,7 +216,7 @@ class Sunburst extends MagicCircle{
 				.text(function(d) { return d.parent ? d.data.name : "" }); 
 		}
 
-		function setLinesDataAndEnterSettings(){
+		function setLinesDataAndDrawBehaviour(){
 			lines.selectAll('g')
 				.data(parentNode.descendants())
 				.enter().append('line').attr("class", "line")
@@ -287,7 +287,6 @@ class Sunburst extends MagicCircle{
 
 		function computeLineX2(data, index){
 			if(data.data.name === "Crimes"){
-				console.log("return 0", data.data," i ",index );
 				return 0;
 			}
 			let centroid = labelarc.centroid(data),

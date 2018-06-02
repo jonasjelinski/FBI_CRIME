@@ -259,7 +259,7 @@ class Universe extends MagicCircle{
 		initNode();
 		initLabel();
 		initLink();
-		setForceNodesSettings();
+		setUniverseDataAndDrawBehaviour();
 		drawUniverse();
 		animateRotation();
 
@@ -286,7 +286,7 @@ class Universe extends MagicCircle{
 				.data(universe);
 		}
 
-		function setForceNodesSettings(){
+		function setUniverseDataAndDrawBehaviour(){
 			node.data(universe);
 			exitNode();			
 			enterNode();
