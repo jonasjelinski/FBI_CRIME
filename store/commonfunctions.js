@@ -189,8 +189,9 @@ commonfunctions_namespace.getSingleColor = function(multipiler){
 	let hueColor = multipiler * degree/fullCircle;
 	let saturation = 1;
 	let brightness  = 0.5;
-	let rgbColor = commonfunctions_namespace.hsvToRGB(hueColor, saturation, brightness);
-	return 'rgb(' + rgbColor[0] + ',' + rgbColor[1] + ',' + rgbColor[2] + ')'; 
+	let rgbColor = commonfunctions_namespace.HSVtoRGB(hueColor, saturation, brightness);
+	console.log(multipiler, rgbColor);
+	return 'rgb(' + rgbColor.r + ',' + rgbColor.g + ',' + rgbColor.b + ')'; 
 };
 
 //converts hsv to rgb values
@@ -210,6 +211,7 @@ commonfunctions_namespace.HSVtoRGB = function(h, s, v) {
 		p = v * (1 - s);
 		q = v * (1 - f * s);
 		t = v * (1 - (1 - f) * s);
+
 		switch (i % multipiler) {
 				case 0: r = v, g = t, b = p; break;
 				case 1: r = q, g = v, b = p; break;

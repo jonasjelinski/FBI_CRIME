@@ -145,7 +145,9 @@ class Universe extends MagicCircle{
 			radiusFactor = 0,
 			halfCircle = 180;
 		node.group = node.quotient > this.groupSplitter ? this.violenceGroup: this.propertyGroup;
-		node.color = node.group === this.violenceGroup ? "red": "blue";		
+		//node.color = node.group === this.violenceGroup ? "red": "blue";		
+		node.color = this.getRGBColor(factor);
+		console.log(node.color);
 		radiusFactor = node.group === this.violenceGroup ? factor : factor*2;
 		node.radius = this.standards.standardRadius*radiusFactor + this.standards.minRadius;
 		node.distanceToSun = this.standards.standardDistanceToSun/maxPlanets*planetNumber+2*lastRadius+this.standards.minDistanceToSun;
@@ -156,6 +158,15 @@ class Universe extends MagicCircle{
 		node.x = node.xSun + node.distanceToSun*Math.cos(node.startAngle);
 		node.y = node.ySun + node.distanceToSun*Math.sin(node.startAngle);
 		return node;
+	}
+
+	getRGBColor(factor){
+		let maxColor = 255,
+			minColor = 0,
+			red = maxColor - maxColor * factor,
+			green = minColor, 
+		 	blue = maxColor*factor;
+		return "rgb(" + red + "," + green + "," + blue+ ")";  
 	}
 
 	createId(statename){
