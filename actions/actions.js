@@ -19,3 +19,9 @@ action_namespace.actionPaintUniverse = function(){
 	'use strict';
 	components_namespace.universe.doChart();
 }
+
+
+action_namespace.actionDrawUniversePage = function(){
+	'use strict';
+	components_namespace.universe.doChart();
+}

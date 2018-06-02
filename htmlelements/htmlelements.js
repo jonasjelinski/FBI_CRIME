@@ -53,3 +53,12 @@ htmlel_namespace.THE_MAP = {
 	height: 3000,
 	type: "g"
 };
+
+htmlel_namespace.INFO_BOX = {
+	parentElement: htmlel_namespace.MAGIC_CIRCLE,
+	rootclassname: "infobox",
+	rootid: "infobox",
+	width: 1000,
+	height: 1000,
+	type: "svg"
+};

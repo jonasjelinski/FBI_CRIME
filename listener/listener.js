@@ -11,16 +11,12 @@ var listener_namespace = listener_namespace || {};
 //this is the document of the html page
 listener_namespace.doc = document;
 
-
 //this function creates new listeners
 listener_namespace.createListener = function (id, type, action) {
 	'use strict';
-
-    console.log(id);
     let listener=listener_namespace.doc.getElementById(id);
     listener.addEventListener(type, () => {
     action();});
-
     return listener;
 };
 
@@ -28,4 +24,4 @@ listener_namespace.createListener = function (id, type, action) {
 //and should draw a nice circle
 listener_namespace.startDrawingListener = listener_namespace.createListener("timeButton", "click", action_namespace.actionStartDrawing);
 
-listener_namespace.blub = listener_namespace.createListener("planetButton", "click", action_namespace.actionPaintUniverse);
+listener_namespace.drawUniverseListener = listener_namespace.createListener("planetButton", "click", action_namespace.actionDrawUniversePage);

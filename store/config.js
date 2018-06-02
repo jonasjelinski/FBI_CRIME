@@ -40,17 +40,25 @@ config_namespace.CONSTANTS = {
 	minYear : 2000
 };
 
+config_namespace.STATE_MACHINE = {	
+	MAP: "MAP",
+	LINE_CHART: "LINE_CHART",
+	FORCE: "FORCE",
+	UNIVERSE: "UNIVERSE",
+	STATES: [this.MAP, this.LINE_CHART, this.FORCE, this.UNIVERSE]
+};
+
 config_namespace.JSON_OBJECT = false;
 
 config_namespace.MAP_JSON_OBJECT = false;
 
 config_namespace.SCRIPT_PATHES = ["./libs/d3/d3.js","./libs/d3/d3.tip.js","./libs/topoJson/topojson.v1.min.js", "./store/config.js", "./store/dynamics.js",
 "./htmlelements/htmlelements.js","./store/commonfunctions.js", "./classes/lama.js",
-"./classes/linechart.js", "classes/magicCircle.js","./classes/force.js","./classes/universe.js","./classes/map.js",
+"./classes/linechart.js", "classes/magicCircle.js","./classes/force.js","./classes/universe.js","./classes/map.js","./classes/infoBox.js",
   "./components/components.js", "./actions/actions.js", "./listener/listener.js"];
 
 config_namespace.FIRST_SCRIPTS = ["./libs/d3/d3.js", "./libs/d3/d3.tip.js","./libs/topoJson/topojson.v1.min.js","./store/config.js",
 "./store/dynamics.js","./store/commonfunctions.js", "./htmlelements/htmlelements.js"];
 config_namespace.SECOND_SCRIPTS = ["./classes/lama.js", "./classes/magicCircle.js", "./classes/map.js",
-"./classes/sunburst.js", "./classes/linechart.js","./classes/force.js","./classes/universe.js",
-  "./components/components.js", "./actions/actions.js", "./listener/listener.js"];
+"./classes/sunburst.js", "./classes/linechart.js","./classes/force.js","./classes/universe.js","./classes/infoBox.js",
+"./components/components.js", "./actions/actions.js", "./listener/listener.js"];
