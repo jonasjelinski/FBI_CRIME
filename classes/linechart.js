@@ -14,7 +14,7 @@ class LineChart extends MagicCircle{
 	
 	drawLineChart(){
 		let data = this.createD3Data();
-		this.createCoordinateSystem(data);
+		this.createLineChart(data);
 	}
 	
 	createD3Data(){
@@ -53,7 +53,7 @@ class LineChart extends MagicCircle{
 	//sources:
 	//https://bl.ocks.org/EfratVil/92f894ac0ba265192411e73f633a3e2f
 	//https://bl.ocks.org/deristnochda/1ffe16ccf8bed2035ea5091ab9bb53fb
-	createCoordinateSystem(jsondata){
+	createLineChart(jsondata){
 		var data = JSON.parse(JSON.stringify(jsondata)),
 			that =this,
 			height = this.height,
@@ -77,6 +77,7 @@ class LineChart extends MagicCircle{
 			xAxis = d3.axisBottom(xRange), 
 			yAxis = d3.axisLeft(yRange),
 			deltaAxisY = chartHeight-margin.bottom,
+			durationTime = 2000,
 			zooming,
 			container,
 			coordinateSystem,
@@ -95,16 +96,16 @@ class LineChart extends MagicCircle{
 		initallGraphLines();	
 		initLabels();
 		initSingleLine();
-		setGraphLinesDataAndDrawBehaviour();
-		setLabelsDataAndDrawBehaviour();
-		setLabelText();
+		drawGraph();
+		drawLabels();
+		setLabelTextAndClickBehaviour();
 
 		function initZoomingBehaviour(){
 			zooming = d3.zoom()
 				.scaleExtent([1, Infinity])
 				.translateExtent([[0, 0], [width, height]])
 				.extent([[0, 0], [width, height]])
-				.on("zoom", zoomed);
+				.on("zoom", zoomCoordSystemAndLines);
 		}
 
 		function prepareRootElement(){
@@ -155,7 +156,7 @@ class LineChart extends MagicCircle{
 			return yRange(crimerate);
 		}			
 
-		function setGraphLinesDataAndDrawBehaviour(){
+		function drawGraph(){
 			let selectedGraphLines = rootElement.selectAll(".lines"),
 				visible =1;        
 			selectedGraphLines
@@ -186,31 +187,32 @@ class LineChart extends MagicCircle{
 
 		function initLabels(){
 			labels = rootElement            
-				.append('g')
+				.append("g")
 				.attr("width", labelWidth)
 				.attr("height", labelHeight)
-				.attr('class', 'labels')       
-				.attr('transform', 'translate(' + (width - 4*margin.right-labelWidth) + ',' + labelHeight + ')');
+				.attr("class", "labels")       
+				.attr("transform", "translate(" + (width - 4*margin.right-labelWidth) + "," + labelHeight + ")");
 		}
 
-		function setLabelsDataAndDrawBehaviour(){			
-			labels.selectAll('g')
+		function drawLabels(){			
+			labels.selectAll("g")
 				.data(data)
-				.enter().append('g').attr("class", "label"); 
+				.enter().append("g").attr("class", "label"); 
 		}
 
-		function setLabelText(){
-			labels.selectAll('g')
+		function setLabelTextAndClickBehaviour(){
+
+			labels.selectAll("g")
 				.attr("class", function(d){return d.key;})
 				.append("text")
 				.on("click", that.showOrHideLine)
 				.transition()
 				.ease(d3.easeLinear)
-				.duration(2000)               
+				.duration(durationTime)               
 				.attr("x", 0)
 				.attr("y", function(d,i){return i*labelHeight*1.5;})           
 				.attr("font-size", "50px")
-				.style('fill', function(d){return getColor(d)})
+				.style("fill", function(d){return getColor(d)})
 				.text(function(d) { return d.key; });
 		} 				
 	
@@ -228,11 +230,11 @@ class LineChart extends MagicCircle{
 			return commonfunctionsNamespace.getCrimeColor(crime);
 		}           
 
-		function zoomed() {                 
+		function zoomCoordSystemAndLines() {                 
 			let allLines = rootElement.selectAll(".lines")
 					.transition().duration(750)
 					.attr("transform", d3.event.transform),     
-				lines = d3.selectAll('.line').style("stroke-width", 2/d3.event.transform.k),             
+				lines = d3.selectAll(".line").style("stroke-width", 2/d3.event.transform.k),             
 				xCall = xCoordLine.transition().duration(750).call(xAxis.scale(d3.event.transform.rescaleX(xRange))),
 				yCall = yCoordLine.transition().duration(750).call(yAxis.scale(d3.event.transform.rescaleY(yRange)));                       
 		}

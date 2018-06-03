@@ -24,6 +24,10 @@ class Sunburst extends MagicCircle{
 	//converts the data so it is usable and then draws the sunburst	
 	doChart(){
 		console.log("ein lama erzeugt einen sunburst");
+		drawSunBurst();	
+	}
+
+	drawSunBurst(){
 		let data = this.createD3Data();
 		this.createSunburst(data); 
 	}
@@ -104,9 +108,9 @@ class Sunburst extends MagicCircle{
 		initArc();
 		initLabelArc();
 		structureParentNode();
-		setSunBurstDataAndDrawBehaviour();	
-		setLabelsDataAndDrawBehaviour();
-		setLinesDataAndDrawBehaviour();	
+		drawSlices();	
+		drawLabels();
+		drawLines();
 
 		//sets width and height of the rootElement
 		function prepareRootElement(){
@@ -152,8 +156,8 @@ class Sunburst extends MagicCircle{
 			partition = d3.partition().size([2 * Math.PI, radius]);
 		}
 
-		//create a hierarchy structure with the given data
-		//this hierarchy determines the slices size
+		//sets the parent node of the hierarchical data		
+		//d3.hierarchy(data[, children]) Constructs a root node from the specified hierarchical data.		
 		function initParentNode(){
 			parentNode = d3.hierarchy(data)
 				.sum(function (d) { 
@@ -162,7 +166,7 @@ class Sunburst extends MagicCircle{
 				});
 		}
 
-		//creates the parition with the hierarchy structure
+		//creates the partion with the hierarchy structure
 		//and the partition 
 		function structureParentNode(){
 			partition(parentNode);
@@ -185,7 +189,7 @@ class Sunburst extends MagicCircle{
 
 		//sets the data to the sunburst and how it should be drawn
 		//if new data is given to the sunburst
-		function setSunBurstDataAndDrawBehaviour(){
+		function drawSlices(){
 			sunburst.selectAll("g")
 				.data(parentNode.descendants())
 				.enter().append("g").attr("class", "node").append("path")			
@@ -212,7 +216,7 @@ class Sunburst extends MagicCircle{
 
 		//sets the data to the labels and how it should be drawn
 		//if new data is given to the labels
-		function setLabelsDataAndDrawBehaviour(){
+		function drawLabels(){
 			labels.selectAll("g")				
 				.attr("class", "labelname")
 				.data(parentNode.descendants())
@@ -232,7 +236,7 @@ class Sunburst extends MagicCircle{
 
 		//sets the data to the lines and how it should be drawn
 		//if new data is given to the lines
-		function setLinesDataAndDrawBehaviour(){
+		function drawLines(){
 			lines.selectAll("g")
 				.data(parentNode.descendants())
 				.enter().append("line").attr("class", "line")

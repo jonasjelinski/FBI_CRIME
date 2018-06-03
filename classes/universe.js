@@ -39,8 +39,8 @@ class Universe extends MagicCircle{
 
 	//converts the data so it is usable and then draws the Universe	
 	drawUniverseChart(){
-		let data = this.createD3Data();
-		this.drawUniverseNodes(data);
+		let percentageArray = this.createD3Data();
+		this.drawTheWholeUniverse(percentageArray);
 	}
 
 	//converts the data so it is usable for the universe
@@ -258,7 +258,7 @@ class Universe extends MagicCircle{
 
 	//draws the universe with the given data
 	//source: https://bl.ocks.org/mbostock/4062045
-	drawUniverseNodes(sortedQuotients){
+	drawTheWholeUniverse(sortedQuotients){
 		let that = this,		
 			universe = this.createUniverse(sortedQuotients),
 			width = this.width,
@@ -272,7 +272,7 @@ class Universe extends MagicCircle{
 		initNode();
 		initLabel();
 		initLink();
-		setUniverseDataAndDrawBehaviour();
+		setEnterAndExitBehaviour();
 		drawUniverse();
 		animateRotation();
 
@@ -308,7 +308,7 @@ class Universe extends MagicCircle{
 
 		//sets the data to the node, the labels and the lines and how it should be drawn
 		//if new data is given to the sunburst or if data is taken away
-		function setUniverseDataAndDrawBehaviour(){
+		function setEnterAndExitBehaviour(){
 			node.data(universe);
 			exitNode();			
 			enterNode();
