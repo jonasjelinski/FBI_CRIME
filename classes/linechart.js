@@ -101,7 +101,7 @@ class LineChart extends MagicCircle{
 	//https://bl.ocks.org/EfratVil/92f894ac0ba265192411e73f633a3e2f
 	//https://bl.ocks.org/deristnochda/1ffe16ccf8bed2035ea5091ab9bb53fb
 	createLineChart(crimeRateData){
-		var data = transferToCleanJavscriptObject(crimeRateData),		
+		var data = transferToCleanJavascriptObject(crimeRateData),		
 			that =this,
 			height = this.height,
 			width = this.width,
@@ -140,7 +140,7 @@ class LineChart extends MagicCircle{
 		initCoordinateSystem();
 		initXCoordLine();
 		initYCoordLine();
-		initallGraphLines();	
+		initAllGraphLines();	
 		initLabels();
 		initSingleLine();
 		drawGraph();
@@ -192,12 +192,13 @@ class LineChart extends MagicCircle{
 		}
 
 		//inits allGraphLines and sets width and height and position of allGraphLines
-		function initallGraphLines(){
+		function initAllGraphLines(){
 			allGraphLines = container.append("g").attr("class", "lines")
 				.attr("width", chartWidth)
 				.attr("height", chartHeight)                                                                
 				.style("fill", "white");
 		}	
+
 
 		//inits labels and sets width and height and position of allGraphLines
 		function initLabels(){
@@ -306,7 +307,7 @@ class LineChart extends MagicCircle{
 				yCall = yCoordLine.transition().duration(transitionZoomTime).call(yAxis.scale(d3.event.transform.rescaleY(yRange)));                       
 		}
 
-		function transferToCleanJavscriptObject(jsondata){
+		function transferToCleanJavascriptObject(jsondata){
 			return JSON.parse(JSON.stringify(jsondata));
 		}
 	}

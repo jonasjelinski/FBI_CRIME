@@ -29,8 +29,8 @@ class Sunburst extends MagicCircle{
 
 	//converts the data so it is usable and then draws the sunburst	
 	drawSunBurst(){
-		let data = this.createD3Data();
-		this.createSunburst(data); 
+		let hierarchyData = this.createHierarchyData();
+		this.createSunburst(hierarchyData); 
 	}
 
 	getRootElement(){
@@ -38,32 +38,45 @@ class Sunburst extends MagicCircle{
 	}
 
 	//converts the jsondata in usable data for the d3 functions
-	createD3Data(){
+	createHierarchyData(){
 		let crimedata = commonfunctionsNamespace.getCrimesAndDataByYearAndState(this.year, this.state, this.data),
-			crimesdata = crimedata.crimes,    
-			childrenObject = {},     
+			crimesdata = crimedata.crimes,			    
 			rootJsonObject = {},
 			newChild = {};
 		rootJsonObject.name = "Crimes";
 		rootJsonObject.children = [];
-			
+		rootJsonObject = this.createNodeStructure(crimesdata, rootJsonObject);
+		return rootJsonObject;
+	}
+
+	createNodeStructure(crimesdata, rootJsonObject){		
 		for(let categorie in crimesdata){
 			if(crimesdata !== undefined){
 				let categorieCrimes = crimesdata[categorie],
-					childrenArray = [];
-				for(let crime in categorieCrimes){
-					if(categorieCrimes !== undefined){
-						childrenObject.name = crime;
-						childrenObject.size = parseFloat(categorieCrimes[crime]);		
-						childrenArray.push(childrenObject);
-						childrenObject = {};	
-					}					
-				}
-				newChild = this.self.createNewNode(categorie, childrenArray);
+					childrenArray = this.createChildArray(categorieCrimes),					
+					newChild = this.self.createNewNode(categorie, childrenArray);
 				rootJsonObject.children.push(newChild);
 			}              
 		}
 		return rootJsonObject;
+	}
+
+	createChildArray(categorieCrimes){
+		let childrenArray = [];					
+		for(let crime in categorieCrimes){
+			if(categorieCrimes !== undefined){
+				let childrenObject = this.createChildObject(categorieCrimes, crime);
+				childrenArray.push(childrenObject);						
+			}					
+		}
+		return childrenArray;
+	}
+
+	createChildObject(categorieCrimes, crime){
+		let childrenObject = {};
+		childrenObject.name = crime;
+		childrenObject.size = parseFloat(categorieCrimes[crime]);
+		return childrenObject;
 	}
 
 	//creates a single node
@@ -77,8 +90,8 @@ class Sunburst extends MagicCircle{
 	//creates the sunburst with the given jsonData
 	//source: https://bl.ocks.org/denjn5/f059c1f78f9c39d922b1c208815d18af
 	//source: https://www.safaribooksonline.com/blog/2014/03/11/solving-d3-label-placement-constraint-relaxing/
-	createSunburst(jsondata){ 
-		let data = JSON.parse(JSON.stringify(jsondata)),     
+	createSunburst(hierarchyData){ 
+		let data = transferToCleanJavascriptObject(hierarchyData),     
 			height =  this.width,
 			width = this.height,
 			that = this,
@@ -108,7 +121,7 @@ class Sunburst extends MagicCircle{
 		initParentNode();
 		initArc();
 		initLabelArc();
-		structureParentNode();
+		transformHierarchyDataIntoSliceData();
 		drawSlices();	
 		drawLabels();
 		drawLines();
@@ -169,7 +182,7 @@ class Sunburst extends MagicCircle{
 
 		//creates the partion with the hierarchy structure
 		//and the partition 
-		function structureParentNode(){
+		function transformHierarchyDataIntoSliceData(){
 			partition(parentNode);
 		}
 
@@ -251,14 +264,6 @@ class Sunburst extends MagicCircle{
 				.attr("stroke-width", 1)
 				.attr("stroke", "black");		
 		}
-								
-		//calculates the textrotation
-		function computeTextRotation(data) {
-			let angle = (data.x0 + data.x1) / Math.PI * 90;
-			// Avoid upside-down labels
-			return (angle < 120 || angle > 270) ? angle : angle + 180;  // labels as rims
-			//return (angle < 180) ? angle - 90 : angle + 90;  // labels as spokes
-		}  
 
 		//calculates the textpositon x
 		function computeTextXPos(data, index){
@@ -289,7 +294,7 @@ class Sunburst extends MagicCircle{
 			return y;
 		}
 		
-		//asures labels don"t overlap
+		//asures labels dont overlap
 		function asureDistanceToLabels(y){	  
 			let minDistance = 40,
 				distance = Math.abs(lastLabelYPos-y);
@@ -338,8 +343,7 @@ class Sunburst extends MagicCircle{
 				return pos;
 			}
 			pos = labelarc.centroid(data);
-			return pos;                     
-					
+			return pos;                  
 		}   
 
 		//calculates the transition of the sunburst
@@ -351,6 +355,10 @@ class Sunburst extends MagicCircle{
 					.innerRadius(function (data) { return starPosition;})
 					.outerRadius(function (data) { return starPosition;});
 			return startArc;
+		}
+
+		function transferToCleanJavascriptObject(jsondata){
+			return JSON.parse(JSON.stringify(jsondata));
 		} 
 	}   
 

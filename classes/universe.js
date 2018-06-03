@@ -1,6 +1,6 @@
 //This class creates a UniverseChart with d3
 //it shows in which states the relation between violentCrimes
-// and  propertycrimes  v/p is bigger or smaller then 0.5
+// and  propertycrimes  quotitent = violentCrimes/propertycrimes is bigger or smaller then 0.5
 
 class Universe extends MagicCircle{
 	constructor(){
@@ -132,6 +132,9 @@ class Universe extends MagicCircle{
 		return newArray;
 	}
 
+	//calculates the percentage of a quotitent
+	//100% is the maximum quotient-value of all planets
+	//0% is the minimum quotient-value of all planets
 	calculatePercentage(stateObject, minValue, delta){
 		let oldQuotient = stateObject.quotient,
 			percentage = (oldQuotient-minValue)/delta;
