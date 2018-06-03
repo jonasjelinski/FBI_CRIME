@@ -24,7 +24,7 @@ class Sunburst extends MagicCircle{
 	//calls drawsunburst
 	doChart(){
 		console.log("ein lama erzeugt einen sunburst");
-		drawSunBurst();	
+		this.drawSunBurst();	
 	}
 
 	//converts the data so it is usable and then draws the sunburst	
@@ -38,7 +38,7 @@ class Sunburst extends MagicCircle{
 	}
 
 	//converts the jsondata in usable data for the d3 functions
-	createD3Data () {
+	createD3Data(){
 		let crimedata = commonfunctionsNamespace.getCrimesAndDataByYearAndState(this.year, this.state, this.data),
 			crimesdata = crimedata.crimes,    
 			childrenObject = {},     
