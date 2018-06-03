@@ -63,8 +63,7 @@ commonfunctionsNamespace.setMapJsonObject = function(){
 	}); 
 }
 
-commonfunctionsNamespace.setChartsCanBeBuild = function(trueOrFalse){
-	console.log("load js", configNamespace.MAP_JSON_OBJECT);
+commonfunctionsNamespace.setChartsCanBeBuild = function(trueOrFalse){	
 	dynamicsNamespace.chartsCanBeBuild = trueOrFalse;
 };
 

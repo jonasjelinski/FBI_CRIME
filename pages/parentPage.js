@@ -22,7 +22,6 @@ class ParentPage{
 	}
 
 	deletePage(){
-		this.mainChart.killsHimself();
-		this.infoBox.doChart();
+		this.mainChart.killsHimself();		
 	}
 }

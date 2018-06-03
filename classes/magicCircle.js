@@ -14,11 +14,11 @@ class MagicCircle{
 		return commonfunctionsNamespace.getRootElement(this);      
 	}
 	
-	getData (){
+	getData(){
 		return configNamespace.JSON_OBJECT;  
 	}
 
-	doChart (){
+	doChart(){
 		console.log("ein magischerKreis erzeugt sich selbst", this.rootElement);
 		this.drawCircle();   
 	}
@@ -46,8 +46,7 @@ class MagicCircle{
 				.attr("cy", ypos)
 				.attr("r",radius)
 				.transition().duration(durationTime);
-		}
-		
+		}		
 	}
 
 	killsHimself(){

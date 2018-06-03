@@ -40,7 +40,7 @@ class Map extends MagicCircle{
 		.offset(function(){return [10,10];})
 		.html(function(d) {	return createTextHtml(d);});*/
 		let g = this.rootElement.append(this.htmlElementType);
-	console.log("sd",statesData);
+	
 		setMaxMinCrime();
 		createPath();
 
