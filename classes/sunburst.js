@@ -21,12 +21,13 @@ class Sunburst extends MagicCircle{
 		return configNamespace.JSON_OBJECT;        
 	}
 	
-	//converts the data so it is usable and then draws the sunburst	
+	//calls drawsunburst
 	doChart(){
 		console.log("ein lama erzeugt einen sunburst");
 		drawSunBurst();	
 	}
 
+	//converts the data so it is usable and then draws the sunburst	
 	drawSunBurst(){
 		let data = this.createD3Data();
 		this.createSunburst(data); 
