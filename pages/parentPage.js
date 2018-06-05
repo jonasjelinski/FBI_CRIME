@@ -1,7 +1,9 @@
 class ParentPage{
 	constructor(){
-		this.infoBox = new InfoBox(),
+		this.infoBox = new InfoBox();
 		this.mainChart = new Universe();
+		this.width = htmlelementsNamespace.PARENT_PAGE.width;
+		this.height = htmlelementsNamespace.PARENT_PAGE.height;
 	}
 
 	drawPage(){
@@ -11,15 +13,7 @@ class ParentPage{
 	updatePage(){
 		this.mainChart.killsHimself();
 		this.drawPage();
-	}
-
-	showTextBox(){
-		this.infoBox().doChart();
-	}
-
-	closeTextBox(){
-		this.infoBox.killsHimself();
-	}
+	}	
 
 	deletePage(){
 		this.mainChart.killsHimself();		

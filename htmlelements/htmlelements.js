@@ -62,3 +62,47 @@ htmlelementsNamespace.INFO_BOX = {
 	height: 1000,
 	type: "svg"
 };
+
+htmlelementsNamespace.PARENT_PAGE = {
+	width: 2000,
+	height: 1000
+};
+
+htmlelementsNamespace.CRIME_CORRELATION_PAGE = {
+	rootclassname: "correlationPage",
+	rootid: "correlationPage",
+};
+
+htmlelementsNamespace.LINE_CHART_PAGE = {
+	rootclassname: "lineChartPage",
+	rootid: "lineChartPage",
+	dropDownClassName: "dropDown crimetypes linechart",
+	dropDownid: "dropDown crimetypes linechart",
+};
+
+htmlelementsNamespace.MAP_PAGE = {
+	rootclassname: "mapPage",
+	rootid: "mapPage",
+};
+
+htmlelementsNamespace.UNIVERSE_PAGE = {
+	rootclassname: "universePage",
+	rootid: "universePage",
+	timeLineClassName: "timeLine universe",
+	timeLineClassid: "timeLine universe",
+};
+
+htmlelementsNamespace.POPUP_PAGE = {
+	rootclassname: "popupPage",
+	rootid: "popupPage",
+	sunburstclassname: "popupPage sunburst",
+	sunburstid: "popupPage sunburst",	
+	textclassname: "popupPage text",
+	textid: "popupPage text",
+	treeClassName: "popupPage tree",
+	treeid: "popupPage tree",
+	deleteButtonName: "deleteButton popUp",
+	deleteButtonid: "deleteButton popUp",
+	width: 1000,
+	height: 500
+};

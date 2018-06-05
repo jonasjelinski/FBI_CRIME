@@ -21,7 +21,7 @@ class UniversePage extends ParentPage{
 
 	drawPage(){
 		super.drawPage();		
-		//this.drawDropDownMenu();
+		this.drawDropDownMenu();
 	}
 
 	drawDropDownMenu(){
