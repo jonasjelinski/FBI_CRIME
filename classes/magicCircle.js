@@ -49,6 +49,11 @@ class MagicCircle{
 		}		
 	}
 
+	updatesHimself(){
+		this.killsHimself();
+		this.doChart();	
+	}
+
 	killsHimself(){
 		this.rootElement.selectAll("*").remove();
 	}

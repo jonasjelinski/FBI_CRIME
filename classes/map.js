@@ -163,7 +163,5 @@ class Map extends MagicCircle{
 		}
 	}	
 }
-let map = new Map();
-//map.doChart();
 
 

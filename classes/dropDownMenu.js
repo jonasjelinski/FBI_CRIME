@@ -12,8 +12,7 @@ class DropDownMenu{
 		return commonfunctionsNamespace.getRootElement(this);      
 	}
 
-	doChart(){
-		console.log("this.rootElement ",this.rootElement);
+	doChart(){		
 		this.createDropDownMenu();
 	}
 
