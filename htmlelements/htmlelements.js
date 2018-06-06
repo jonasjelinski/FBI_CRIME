@@ -1,108 +1,63 @@
-var htmlelementsNamespace = htmlelementsNamespace || {};
+	var htmlel_namespace = htmlel_namespace || {};
 
-htmlelementsNamespace.MAGIC_CIRCLE = { //Elternelement aller anderen HTML-Elemente
+htmlel_namespace.MAGIC_CIRCLE = { //Elternelement aller anderen HTML-Elemente
 	rootclassname: "magicCircle", //im html-Element class="magicCircle"
 	rootid: "magicCircle", //im html-Element id="magicCircle"
-	width:1000,
-	height:100,
-	type: "g"
+	type: "g",
+	class: "class"
 };
 
-htmlelementsNamespace.SUN_BURST = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+htmlel_namespace.SUN_BURST = {
+	parentElement: htmlel_namespace.MAGIC_CIRCLE,
 	rootclassname: "sunburst",
 	rootid: "sunburst",
-	width:500,
-	height:500,
-	type: "g",
-	fontColor: "black"
-};
-
-htmlelementsNamespace.LINE_DIAGRAM = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
-	rootclassname: "linediagram",
-	rootid: "linediagram",
-	width:650,
+	width:400,
 	height:400,
 	type: "g"
 };
 
-htmlelementsNamespace.THE_FORCE = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+htmlel_namespace.LINE_DIAGRAM = {
+	parentElement: htmlel_namespace.MAGIC_CIRCLE,
+	rootclassname: "linediagram",
+	rootid: "linediagram",
+	width:600,
+	height:400,
+	type: "g"
+}
+
+htmlel_namespace.THE_FORCE = {
+	parentElement: htmlel_namespace.MAGIC_CIRCLE,
 	rootclassname: "theforce",
 	rootid: "theforce",
 	width:3000,
 	height:3000,
 	type: "g"
-};
+}
 
-htmlelementsNamespace.THE_UNIVERSE = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
-	rootclassname: "universe",
-	rootid: "universe",
-	width:3000,
-	height:3000,
-	type: "g"
-};
-
-htmlelementsNamespace.THE_MAP = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+htmlel_namespace.THE_MAP = {
+	parentElement: htmlel_namespace.MAGIC_CIRCLE,
 	rootclassname: "map",
 	rootid: "map",
-	width: 3000,
-	height: 3000,
+	width:960,
+	height:520,
 	type: "g"
-};
+}
 
-htmlelementsNamespace.INFO_BOX = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
-	rootclassname: "infobox",
-	rootid: "infobox",
-	width: 1000,
-	height: 1000,
-	type: "svg"
-};
+htmlel_namespace.TIME_LINE = {
+	parentElement: htmlel_namespace.MAGIC_CIRCLE,
+	rootclassname: "timeLine",
+	childElement: "play-button",
+	rootid: "timeLine",
+	width:360,
+	height:160,
+	type: "g",
+	margin: {top:15, right:15, bottom:15, left:15},
+	classSlider: "slider"
+}
 
-htmlelementsNamespace.PARENT_PAGE = {
-	width: 2000,
-	height: 1000
-};
-
-htmlelementsNamespace.CRIME_CORRELATION_PAGE = {
-	rootclassname: "correlationPage",
-	rootid: "correlationPage",
-};
-
-htmlelementsNamespace.LINE_CHART_PAGE = {
-	rootclassname: "lineChartPage",
-	rootid: "lineChartPage",
-	dropDownClassName: "dropDown crimetypes linechart",
-	dropDownid: "dropDown crimetypes linechart",
-};
-
-htmlelementsNamespace.MAP_PAGE = {
-	rootclassname: "mapPage",
-	rootid: "mapPage",
-};
-
-htmlelementsNamespace.UNIVERSE_PAGE = {
-	rootclassname: "universePage",
-	rootid: "universePage",
-	timeLineClassName: "timeLine universe",
-	timeLineClassid: "timeLine universe",
-};
-
-htmlelementsNamespace.POPUP_PAGE = {
-	rootclassname: "popupPage",
-	rootid: "popupPage",
-	sunburstclassname: "popupPage sunburst",
-	sunburstid: "popupPage sunburst",	
-	textclassname: "popupPage text",
-	textid: "popupPage text",
-	treeClassName: "popupPage tree",
-	treeid: "popupPage tree",
-	deleteButtonName: "deleteButton popUp",
-	deleteButtonid: "deleteButton popUp",
-	width: 1000,
-	height: 500
-};
+htmlel_namespace.DROP_DOWN = {
+	parentElement: htmlel_namespace.MAGIC_CIRCLE,
+	rootclassname: "dropDown",
+	rootid: "dropDown",
+	width:120
+}

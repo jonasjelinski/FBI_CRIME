@@ -1,30 +1,3 @@
-
-:root{
-  --background: #CACACB;;
-  --fonts: #3F3F42;
-  --buttons: #9C9C9C;
-  --buttonsHover: #7C7C7D;
-  --borders: #FFFFFF;
-  --violentCrime: rgb(214, 20, 0);
-  --propertyCrime : rgb(12, 67, 206);
-  --Burglary: rgb(0, 209, 114);
-  --Larcenytheft: rgb(0, 195, 195);
-  --Motorvehicletheft : rgb(7, 117, 201);
-  --Aggravatedassault : rgb(255, 113, 0);
-  --MurderManslaughter : rgb(255, 211, 85);
-  --Rape: rgb(255, 188, 0);
-  --Robbery: rgb(255, 154, 0);
-
-
-
-}
-
-
-body {
-    background-color: var(--background);
-  /*  font-family: 'Quattrocento Sans', sans-serif;*/
-}
-
 #myChart div {
     background-color: aliceblue;
     margin: 2px;
@@ -40,124 +13,208 @@ body {
     text-anchor: end;
 }
 
-h1{
-  margin: auto;
-  text-align: center;
-  color: var(--fonts);
-  height: 50px;
+/* Chris Part CSS */
+path.state {
+  fill: teal;
+  stroke: white;
+  -webkit-transition: fill 0.5s ease-out;
+  -moz-transition: fill 0.5s ease-out;
+  -o-transition: fill 0.5s ease-out;
+  -ms-transition: fill 0.5s ease-out;
+  transition: fill 0.5s ease-out;
+  /*cursor: -webkit-zoom-in; cursor: -moz-zoom-in;*/
+  /*cursor: -webkit-zoom-out; cursor: -moz-zoom-out;*/
 }
 
-.buttons button{
-  background-color: var(--buttons);
-  border: 1px solid var(--borders);
-  padding: 10px 24px;
-  color: var(--fonts);
+path.state:hover {
+  /*fill: black;*/
+  /*stroke: black;*/
+
+}
+
+.stateHover {
+background: rgba(0, 0, 0, 0.7);
+padding:8px;
+font-size:16px;
+color:white;
+letter-spacing:1px;
+}
+
+.d3-tip {
+  line-height: 1;
+  /*font-weight: bold;*/
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  -ms-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+}
+d3-tip:hover {
+
+}
+
+/* fill color states */
+.state.q0{fill:#FFFD6D}
+.state.q1{fill:#FDE563}
+.state.q2{fill:#FACD58}
+.state.q3{fill:#F8B54E}
+.state.q4{fill:#F69D43}
+.state.q5{fill:#F48539}
+.state.q6{fill:#F16C2F}
+.state.q7{fill:#EF5424}
+.state.q8{fill:#ED3C1A}
+.state.q9{fill:#EA2410}
+.state.q10{fill:#E80C05}
+
+/* fill color scala */
+.state.p0{background-color:#FFFD6D}
+.state.p1{background-color:#FDE563}
+.state.p2{background-color:#FACD58}
+.state.p3{background-color:#F8B54E}
+.state.p4{background-color:#F69D43}
+.state.p5{background-color:#F48539}
+.state.p6{background-color:#F16C2F}
+.state.p7{background-color:#EF5424}
+.state.p8{background-color:#ED3C1A}
+.state.p9{background-color:#EA2410}
+.state.p10{background-color:#E80C05}
+
+
+
+
+/* Here starts modal-css*/
+
+
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height:100vh; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 10px auto;/* 15% from the top and centered */
+  padding: 10px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  min-height:80vh;
+}
+
+.modalHeader{
+width:100%;
+height:30px;
+
+}
+
+.modalBody{
+
+width:100%;
+height:auto;
+
+}
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
   cursor: pointer;
-  float: left;
-  width: 25%;
-  z-index: 5;
 }
 
-.buttons button:not(:last-child){
-  border-right: none;
+.scala {
+width:20px;
+height: 20px;
+float: left;
+margin: 1px;
+text-align: center;
 }
 
-.buttons button:hover{
-  background-color: var(--buttonsHover);
+
+
+
+.drop-down-select {
+	
+
+border:1px solid #cacaca;
+
 }
 
-svg{
-  position: absolute;
+
+
+body {
+font-family:"avenir next", Arial, sans-serif;
+font-size: 12px;
+color: #696969;
 }
 
-#dochart{
-  height: 50px;
-  text-align: center;
+#play-button {
+background: #f08080;
+padding-right: 26px;
+border-radius: 3px;
+border: none;
+color: white;
+margin: 0;
+padding: 0 12px;
+width: 60px;
+cursor: pointer;
+height: 30px;
 }
 
-#map{
-  background-color: pink;
-  top: 124px;
-  left: 5%;
-  width: 90%;
-  height: 520px; /*angepasst an Chris Kartenformat*/
-  z-index: 0;
-  visibility: hidden;
+#play-button:hover {
+background-color: #696969;
 }
 
-#popup{
-  position: absolute;
-  left: 10%;
-  background-color: green;
-  top: 134px;
-  width: 80%;
-  height: 500px;
-  z-index:1;
-  visibility: hidden;
+.ticks {
+font-size: 10px;
 }
 
-.closeButton{
-  position: absolute;
-  top: 0%;
-  right: 0%;
+.track,
+.track-inset,
+.track-overlay {
+stroke-linecap: round;
 }
 
-#stateInformation{
-  background-color: var(--background);
-  position: absolute;
-  border: 1px solid red;
-  left: 5%;
-  top: 7.5%;
-  width: 45%;
-  height: 15%;
+.track {
+stroke: #000;
+stroke-opacity: 0.3;
+stroke-width: 10px;
 }
 
-#tree{
-  background-color: var(--background);
-  border: 1px solid red;
-  left: 5%;
-  bottom: 5%;
-  width: 45%;
-  height: 70%;
+.track-inset {
+stroke: #dcdcdc;
+stroke-width: 8px;
 }
 
-#sunburst{
-  background-color: var(--background);
-  border: 1px solid red;
-  right: 5%;
-  top: 10%;
-  width: 45%;
-  height: 85%;
+.track-overlay {
+pointer-events: stroke;
+stroke-width: 50px;
+stroke: transparent;
+cursor: pointer;
 }
 
-#universe{
-  background-color: yellow;
-  top: 124px;
-  left: 5%;
-  width: 90%;
-  height: 520px;
-  z-index: 0;
-  visibility: hidden;
-}
-
-#theforce{
-  position: absolute;
-  background-color: red;
-  top: 124px;
-  left: 5%;
-  width: 90%;
-  height: 520px;
-  z-index: 0;
-  visibility: hidden;
-}
-
-#linediagram{
-  position: absolute;
-  background-color: blue;
-  top: 124px;
-  left: 5%;
-  width: 90%;
-  height: 520px;
-  z-index: 0;
-  visibility: visible;
+.handle {
+fill: #fff;
+stroke: #000;
+stroke-opacity: 0.5;
+stroke-width: 1.25px;
 }
