@@ -4,33 +4,54 @@
     <meta charset="UTF-8">
     <title>Bob Ross Painting Elements</title>
     <link rel="stylesheet" href="./store/bob.css">
+    <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans" rel="stylesheet">
   <!--  <script src="./data/config.js"></script> -->
 </head>
 
 <body>
-    <h1>Bob Ross Paint  ing Elements</h1>
-    <div id="dochart" >Hier klicken um den Chart anzuzeigen!</div>
-    <svg id="myChart"></svg>
-    <svg id="magicCircle">hier sollte ein Kreis erscheinen</svg>
-    <svg id="sunburst">hier sollte ein Kreis erscheinen</svg>
-    <svg id="linediagram">hier sollte der Zeitverlauf erscheinen</svg>
-    <svg id="theforce">hier sollte der Zeitverlauf erscheinen</svg>
-
-    <!--Chris Part -->
-    <div id="vis">
-      <button id="play-button">Play</button>
-      <svg id="timeLine"><!--hier wird ein Zeitverlauf erscheinen--></svg>
+    <h1>Crime in the USA</h1>
+    <div class="buttons">
+      <button id="mapButton">Map</button>
+      <button id="timeButton">Zeitverlauf</button>
+      <button id="forceButton">Collapsible Force</button>
+      <button id="planetButton">Planeten</button>
     </div>
+    <div id= "dochart" >Raten der Verbrechen auf die USA verteilt</div>
+    <div id="map">hier sollte die Map erscheinen </div>
+    <div id="popup">
+      <h1>Staaten-Name</h1>
+      <button class="closeButton">X<button>
+      <p id="stateInformation">Infos über den Staat</p>
+      <svg id="tree">hier soll der collapsible Tree hin</svg>
+      <svg id="sunburst">hier sollte ein Kreis erscheinen</svg>
+    </div>
+<<<<<<< HEAD
+    <div id="linediagram">hier sollte der Zeitverlauf erscheinen</div>
+    <div id="theforce">
+      <h1>hier sollte der Zeitverlauf erscheinen</h1>
+      <button class="closeButton">X<button>
+    </div>
+    <div id="linediagram">
+      <h1>hier sollte das lineDiagramm erscheinen</h1>
+      <button class="closeButton">X<button>
+    </div>
+    <div id="universe">
+      <h1>hier sollte ein Sonnensystem erscheinen</h1>
+      <button class="closeButton">X<button>
 
-	<div id="vmp">
-	  <h1></h1>
-    <svg id="map"><!--hier wird eine Map erscheinen--></svg>
-    <status year="2000" crime="Burglary"></status>
-	</div>
+    </div>
+=======
+    <svg id="theforce">hier sollte der Zeitverlauf erscheinen</svg>
+    <svg id="linediagram">hier sollte das lineDiagramm erscheinen</svg>
+    <svg id="universe">hier sollte ein Sonnensystem erscheinen</svg>
+    <svg id="infobox">hier sollte eine Infobox erscheinen</svg>
+    <div id="universePage">hier sollte eine UniversumSeite</div>
+>>>>>>> 6fa8a8220220ea0acabe24ff8c46a7313b16353e
 
-  <div id="vdp">
-    <select id="dropDown"></select>
-  </div>
+
+<svg id="myChart"></svg>
+  <svg id="magicCircle">hier sollte ein Kreis erscheinen</svg>
+
     <!-- Scripts should be loaded when the dom model is done and thus are included at the bottom -->
     <!-- reasons: script error doesnt lead to blank page; receiving and parsing large scripts increases load time -->
     <!-- dom model is ready and modifiable -->
@@ -39,5 +60,7 @@
     <script src="./store/commonfunctions.js"></script>
     <script src="./store/startpage.js"></script>
 
+    <footer>
+    </footer>
 </body>
 </html>

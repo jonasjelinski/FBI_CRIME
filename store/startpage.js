@@ -25,17 +25,17 @@ startpage_namespace.prefixScript = function(url, onloadFunction) {
 //will not run until after the page is loaded
 
 startpage_namespace.loadFirstScripts = function(callback){
-	config_namespace.FIRST_SCRIPTS.forEach(function(script){
+	configNamespace.FIRST_SCRIPTS.forEach(function(script){
 		startpage_namespace.prefixScript(script);
 		console.log(script);
 	});
-	commonfunctions_namespace.setMapJsonObject();
-	commonfunctions_namespace.setJsonObject();	
+	commonfunctionsNamespace.setMapJsonObject();
+	commonfunctionsNamespace.setJsonObject();	
 	callback(null);
 }
 
 startpage_namespace.loadSecondScripts = function(){
-	config_namespace.SECOND_SCRIPTS.forEach(function(script){
+	configNamespace.SECOND_SCRIPTS.forEach(function(script){
 		startpage_namespace.prefixScript(script);
 		console.log(script);
 	});

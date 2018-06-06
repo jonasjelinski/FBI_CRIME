@@ -1,189 +1,169 @@
 class Map extends MagicCircle{
 
-
-
-	constructor(year=2000, crimeType="Burglary", moving=false){
-
+	constructor(){
 		super();
-		this.htmlelement = htmlel_namespace.THE_MAP;
+		this.htmlelement = htmlelementsNamespace.THE_MAP; 
 		this.htmlElementID = this.htmlelement.rootid;
 		this.rootElement = this.getRootElement();
 		this.width = this.htmlelement.width;
-        this.height = this.htmlelement.height;
-        this.mapData = config_namespace.MAP_JSON_OBJECT;
-				this.year=year;
-				this.crime=crimeType;
-				this.moving=moving;
-
-	}
-
-
-	getContextYear(){
-		return this.year;
-	}
-
-	getContextCrimeType(){
-		return this.crime;
-	}
-
-	getContextMoving(){
-		return this.moving;
+		this.height = this.htmlelement.height;
+		this.mapData = configNamespace.MAP_JSON_OBJECT;
+		this.startYear = 2012;
 	}
 
 	//das wird zum Zeichnen aufgerufen
 	doChart(){
 		let statesData = this.createD3Data();
-		let jsonObject = config_namespace.JSON_OBJECT;
-		if(statesData!=undefined){
+		if(statesData !== undefined){
 			this.doMap(statesData);
-		}
+		}	
 	}
 
-
-	createD3Data() {
-		let statesData = undefined;
-		if(this.mapData !== false){//wenn config_namespace.MAP_JSON_OBJECT noch kein JSON drin ist ist es false
+	//hier werden die Daten verarbeitet
+	createD3Data(){
+		let statesData;
+		if(this.mapData !== false){//wenn configNamespace.MAP_JSON_OBJECT noch kein JSON drin ist ist es false
 			statesData = topojson.feature(this.mapData, this.mapData.objects.states).features;
 		}
 		return statesData;
 	}
 
-
+	//hier wird die Karte gezeichnet
+	//du hat eine andere d3 Version verwendet, daher musst du den Code noch anpassen
 	doMap(statesData){
-	d3.select('.states').remove();
-	d3.select('#tipBox').remove();
+		let maxCrime=0,
+		minCrime=0,
+		crimes = this.data,
+		year = this.startYear;
 
-		var year = this.year;
-		var crimeType=this.crime;
-		var allStates=commonfunctions_namespace.getAllStates();
-		var counter=0;
+		/*let tip = d3.tip()
+		.offset(function(){return [10,10];})
+		.html(function(d) {	return createTextHtml(d);});*/
+		let g = this.rootElement.append(this.htmlElementType);
+	
+		setMaxMinCrime();
+		createPath();
 
-
-
-		var path = d3.geoPath(d3.geoAlbers());
-		var svg = this.rootElement.attr("width", this.width).attr("height", this.height);
-		var g = svg.append(this.htmlElementType).attr('class', 'states');
-		var getAllCrimesNumber = getAllCrimesState(allStates,year,crimeType,this.data);
-		var allCrimeValues = getAllCrimeValues(getAllCrimesNumber);
-		var maxCrime = Math.max.apply(null, allCrimeValues), minCrime = Math.min.apply(null, allCrimeValues);
-		var tip = doTip(getAllCrimesNumber);
-
-
-
-		prepareStatusSite(getAllCrimesNumber,crimeType,year);
-		colorizeMap(g,statesData,path,tip,getAllCrimesNumber,this.moving);
-
-
-		function prepareStatusSite(getAllCrimesNumber,crimeType,year){
-			d3.select("h1").html('<h1>'+getAllCrimesNumber[0].state+'</h1><div>'+crimeType+' '+getAllCrimesNumber[0].value+'</div> per 100.000 ');
-			d3.selectAll("status").remove();
-			d3.select("#vmp").append("status").attr("year",""+year).attr("crime", crimeType);
-		}
-		function colorizeMap(g,statesData,path,tip,getAllCrimesNumber,moving){
-
+		
+		function createPath(){
 			g.selectAll('path')
-					.data(statesData)
-					.enter().append('path')
-					.attr('d', path)
-					.attr('class', function(d) {
+			.data(statesData)
+			.enter().append('path')
+			//.attr('d', path)
+			.attr('class', 'state')
+			.attr('class', function(d) { return createStyleClass(d);})
+			.call(tip)
+			.on('mouseover', function(d){ 
+				let that = this;
+				showTip(d, that);
+			})
+			.on('mouseout', function(d){ 
+				let that = this;
+				hideTip(d, that);})
+			.on("click", function(d) {showStateDetails();});
+		}   
+		
 
-					var styleClass = 'state ';
-					var quantize = d3.scaleQuantize()
+		function setMaxMinCrime(){
+			let keyNames = Object.keys(crimes.years[year].states);
+			let testCrime=[];
+			for(let i=0;i<keyNames.length;i++){
+				testCrime[i]=parseInt(crimes.years[year].states[keyNames[i]].crimes.violentCrime.Rape);
+			}
+			maxCrime=Math.max.apply(null, testCrime);
+			minCrime=Math.min.apply(null, testCrime);
 
-										.domain([minCrime,maxCrime])
-										.range(d3.range(11).map(function(i) {
-										return "q" + i; }));
+		}
 
-										for(let i=0;i<getAllCrimesNumber.length;i++){
-											if(getAllCrimesNumber[i].state.toUpperCase()==d.properties.name.toUpperCase()){
-											styleClass+=quantize(parseInt(getAllCrimesNumber[i].value));
-											}
-										}
-										return styleClass;
+		function createTextHtml(d){
+			var html = '';
+			for(let i=0;i<keyNames.length;i++){
+				if(keyNames[i].toUpperCase()==d.properties.name.toUpperCase()){
+					html = '<div>'+keyNames[i]+'</div>';
+					d3.select("h1").html('<h1>'+keyNames[i]+'</h1><div>Rape: '+getCrime(i, year, crimes, keyNames)+'</div> per 100.000 ');
 
-									})
-									.call(tip)
-									//.on('mouseover', tip.show)
-									.on('mouseover', function(d){
+				}
+			};
+			return html;
+		}
+		
 
-										if(!moving){
-											tip.show(d);
-											d3.select(this).style("fill", "#ffe9c2").style("cursor", "pointer")
-										}else{
-											d3.select(this).style("cursor", "not-allowed");
-										}
-									})
+		function createStyleClass(d){
+			var styleClass = 'state ';
+			var keyNames = Object.keys(crimes.years[year].states);
+			var quantize = d3.scale.quantize()
+			.domain([minCrime,maxCrime])
+			.range(d3.range(11).map(function(i) {
+				return "q" + i; }));
 
-									.on('mouseout', function(d){
-									tip.hide(d)
-									d3.select(this).style("fill",
+			for(let i=0;i<keyNames.length;i++){
 
-									function(d){
-										return d.color;
-									}
-								)});
-							}
+				if(keyNames[i].toUpperCase()==d.properties.name.toUpperCase()){
+					styleClass+=quantize(parseInt(getCrime(i, year,crimes, keyNames)));
+		//  console.log(styleClass);
+			}
+		}
+		return styleClass;
+		}
 
-												function doTip(getAllCrimesNumber){
-													var tip = d3.tip()
+		function showTip(d, that){
+			tip.show(d);
+			d3.select(that).style("fill", "#ffe9c2").style("cursor", "pointer");
+		}
 
-													.offset(function() {
-													  return [10,10];
-													})
-													.html(function(d) {
+		function hideTip(d, that){
+			tip.hide(d)
+			d3.select(this).style("fill", function(d){return d.color;});
+		}
 
-													var html = '';
-													for(let i=0;i<getAllCrimesNumber.length;i++){
+		//Diese Funtkion ist schon in den commonfunctions hinterlegt		
+		function getCrime(index, year,crimes, keyNames){
 
-													  if(getAllCrimesNumber[i].state.toUpperCase()==d.properties.name.toUpperCase()){
+		  return crimes.years[year].states[keyNames[index]].crimes.violentCrime.Rape;
+		}
 
-													    html = '<div class="stateHover">'+getAllCrimesNumber[i].state+'</div>';
-													    d3.select("h1").html('<h1>'+getAllCrimesNumber[i].state+'</h1><div>'+crimeType+' '+getAllCrimesNumber[i].value+'</div> per 100.000 ');
-													  }
-													};
-													return html;
-													});
+		function zoom() {
+		  g.attr('transform', 'translate(' + d3.event.translate + ')scale(' + d3.event.scale + ')');
+		}
 
-													return tip;
-												}
+		function showStateDetails(){
+			let createPopUp = d3.select("body");
+			let createPopUpInner = createPopUp.append("div")
+			.attr("id", "myModal")
+			.attr("class", "modal");
 
-												function getAllCrimeValues(getAllCrimesNumber){
-													let allCrimeValues=[];
-
-													for(let i=0;i<getAllCrimesNumber.length;i++){
-														allCrimeValues.push(getAllCrimesNumber[i].value);
-													}
-													return allCrimeValues;
-												}
+			let modalPopUpContent=createPopUpInner.append("div")
+			.attr("class", "modal-content");
 
 
-												function getAllCrimesState(allStates,year,crimeType,data){
 
-													var getAllCrimesNumber=[];
+			modalPopUpContent.append("div")
+			.attr("class", "modalHeader")
+			.append("span")
+			.attr("class","close")
+			.text("x");
 
-													for(let i=0;i<allStates.length;i++){
+			modalPopUpContent.append("div")
+			.attr("class","modalBody")
+			.text("Hier kommt ein Sunburst hin");
 
-														let currentCrimeValue=commonfunctions_namespace.getCrimesAndDataByYearAndState(year, allStates[i], data);
+			var modal = document.getElementById('myModal');
+			var span = document.getElementsByClassName("close")[0];
+			modal.style.display = "block";
 
-														if(config_namespace.CONSTANTS.crimeCategories.Crimes.violentCrime.includes(crimeType)){
+			span.onclick = function() {
+				modal.style.display = "none";
+			}
 
-															let crimeValue=currentCrimeValue.crimes.violentCrime[crimeType];
-
-															var objectCrimesStatesNumber={state:allStates[i],value:parseInt(crimeValue)};
-															 getAllCrimesNumber.push(objectCrimesStatesNumber);
-
-														}
-														else if (config_namespace.CONSTANTS.crimeCategories.Crimes.propertyCrime.includes(crimeType)) {
-
-															let crimeValue=currentCrimeValue.crimes.propertyCrime[crimeType];
-
-															var	objectCrimesStatesNumber={state:allStates[i],value:parseInt(crimeValue)};
-															getAllCrimesNumber.push(objectCrimesStatesNumber);
-														}
-													}return getAllCrimesNumber;
-												}
-	}
-
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			}
+		}
+	}	
 }
 let map = new Map();
-map.doChart();
+//map.doChart();
+
+
