@@ -25,14 +25,14 @@ class StateMachine{
 	drawMapPage(){	
 		this.cleanOldPage();
 		this.activePage = this.mapPage;
-		console.log("drawMapPage", this.activePage);
+		//console.log("drawMapPage", this.activePage);
 		this.drawActivePage();
 	}
 
 	drawLineChartPage(){		
 		this.cleanOldPage();
 		this.activePage = this.lineChartPage;
-		console.log("drawLineChartPage", this.activePage, "this.lineChartPage", this.lineChartPage);
+		//console.log("drawLineChartPage", this.activePage, "this.lineChartPage", this.lineChartPage);
 		this.drawActivePage();
 
 	}
@@ -40,14 +40,14 @@ class StateMachine{
 	drawCrimeCorrelationPage(){
 		this.cleanOldPage();
 		this.activePage = this.crimeCorrelationPage;
-		console.log("drawCrimeCorrelationPage", this.activePage);
+		//console.log("drawCrimeCorrelationPage", this.activePage);
 		this.drawActivePage();
 	}
 
 	drawUniversePage(){
 		this.cleanOldPage();
 		this.activePage = this.universePage;
-		console.log("drawUniversePage", this.activePage);
+		//console.log("drawUniversePage", this.activePage);
 		this.drawActivePage();
 	}
 

@@ -10,7 +10,6 @@ startpage_namespace.loadError = function(oError) {
 	throw new URIError("The script " + oError.target.src + " didn't load correctly.");
 }
 
-
 //Async:False will hold the execution of rest code. Once you get response of ajax, only then, rest of the code will execute.
 startpage_namespace.prefixScript = function(url, onloadFunction) {
 	var newScript = document.createElement("script");
@@ -26,8 +25,7 @@ startpage_namespace.prefixScript = function(url, onloadFunction) {
 
 startpage_namespace.loadFirstScripts = function(callback){
 	configNamespace.FIRST_SCRIPTS.forEach(function(script){
-		startpage_namespace.prefixScript(script);
-		console.log(script);
+		startpage_namespace.prefixScript(script);		
 	});
 	commonfunctionsNamespace.setMapJsonObject();
 	commonfunctionsNamespace.setJsonObject();	
@@ -36,11 +34,9 @@ startpage_namespace.loadFirstScripts = function(callback){
 
 startpage_namespace.loadSecondScripts = function(){
 	configNamespace.SECOND_SCRIPTS.forEach(function(script){
-		startpage_namespace.prefixScript(script);
-		console.log(script);
-	});
+		startpage_namespace.prefixScript(script);		
+	});	
 }
-
 
 startpage_namespace.loadScripts = function(){
 	"use strict"; 
@@ -49,6 +45,7 @@ startpage_namespace.loadScripts = function(){
 	q.await(function(error) {
 		if (error) throw error;
 		startpage_namespace.loadSecondScripts();
+		console.log("scripts loaded");	
 	}); 
 }
 
