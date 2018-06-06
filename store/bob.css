@@ -55,6 +55,7 @@ h1{
   cursor: pointer;
   float: left;
   width: 25%;
+  z-index: 5;
 }
 
 .buttons button:not(:last-child){
@@ -81,7 +82,7 @@ svg{
   width: 90%;
   height: 520px; /*angepasst an Chris Kartenformat*/
   z-index: 0;
-  visibility: visible;
+  visibility: hidden;
 }
 
 #popup{
@@ -130,12 +131,33 @@ svg{
 }
 
 #universe{
-  position: absolute;
   background-color: yellow;
   top: 124px;
   left: 5%;
   width: 90%;
-  height: 520px; 
+  height: 520px;
+  z-index: 0;
+  visibility: hidden;
+}
+
+#theforce{
+  position: absolute;
+  background-color: red;
+  top: 124px;
+  left: 5%;
+  width: 90%;
+  height: 520px;
+  z-index: 0;
+  visibility: hidden;
+}
+
+#linediagram{
+  position: absolute;
+  background-color: blue;
+  top: 124px;
+  left: 5%;
+  width: 90%;
+  height: 520px;
   z-index: 0;
   visibility: visible;
 }
