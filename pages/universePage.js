@@ -3,7 +3,7 @@ class UniversePage extends ParentPage{
 		super();
 		this.rootElement = this.mainChart.rootElement;
 		this.mainChart = new Universe();
-		this.mainControll = new TimeLine();		
+		//this.mainControll = new TimeLine();		
 	}
 
 }

@@ -3,5 +3,6 @@ class LineChartPage extends ParentPage{
 		super();
 		this.infoBox = new InfoBox();
 		this.mainChart = new LineChart();
+		this.charts = [this.mainChart];
 	}
 }
