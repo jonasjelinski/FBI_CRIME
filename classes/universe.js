@@ -1,8 +1,12 @@
+//This class creates a UniverseChart with d3
+//it shows in which states the relation between violentCrimes
+// and  propertycrimes  quotitent = violentCrimes/propertycrimes is bigger or smaller then 0.5
+
 class Universe extends MagicCircle{
 	constructor(){
 		super();
-		this.state = dynamics_namespace.currentState;
-		this.htmlelement = htmlel_namespace.THE_UNIVERSE; 
+		this.state = dynamicsNamespace.currentState;
+		this.htmlelement = htmlelementsNamespace.THE_UNIVERSE; 
 		this.htmlElementID = this.htmlelement.rootid;
 		this.rootElement = this.getRootElement();
 		this.width = this.htmlelement.width;
@@ -27,43 +31,65 @@ class Universe extends MagicCircle{
 		}
 	}
 
+	//draws the universe
 	doChart(){
 		console.log("A lama creates the universe");
-		this.drawForceChart();
+		this.drawUniverseChart();
 	}
 
-	drawForceChart(){
-		let data = this.createD3Data();
-		this.drawForceNodes(data);
+	//converts the data so it is usable and then draws the Universe	
+	drawUniverseChart(){
+		let universeNodes = this.getUniverseNodes();
+		this.drawTheWholeUniverse(universeNodes);
 	}
 
-	createD3Data(){
-		let quotients = [],
-			sortedArray = [],
-			percentageAarray = [],
-			statesObject = this.data.years[this.year].states,
-			statesArray = Object.keys(statesObject);
+	//converts the data so it is usable for the universe
+	//receives the crimes of this.year and all states
+	//and creates an array in which states are ordered 
+	//by percentage according to the relation violentCrimes/propertyCrimes
+	//returns this ordered array 
+	getUniverseNodes(){
+		let statesObject = this.data.years[this.year].states,
+			allstates = Object.keys(statesObject),
+			quotientsPerStateArray = this.createViolentCrimeQuotientForEachState(allstates),
+			universeNodes = this.transformQuotientToNodeStructure(quotientsPerStateArray);	
+		return universeNodes;	 
+	}
+
+	transformQuotientToNodeStructure(quotientsPerStateArray){
+		let sortedQuotientsPerStateArray = this.sortArray(quotientsPerStateArray),
+			percentageArray = this.transformQuotientToPercentages(sortedQuotientsPerStateArray),
+			universeNodes = this.createUniverse(percentageArray);
+		return universeNodes;
+	}
+
+	createViolentCrimeQuotientForEachState(statesArray){
+		let quotientsPerState = [];
 		for(let i = 0; i < statesArray.length; i++){
 			let state = statesArray[i],
-				newQuotient = {},
-				q = this.calculateStatesQuotient(state);
-			newQuotient.state = state;
-			newQuotient.quotient = q;
-			quotients.push(newQuotient);
+				newQuotientObject = this.createQuotientPerStateObject(state);		
+			quotientsPerState.push(newQuotientObject);
 		}
-		sortedArray = this.sortArray(quotients);
-		percentageAarray = this.transformQuotientToPercentages(sortedArray);
-		return percentageAarray;	 
+		return quotientsPerState;
+	} 
+
+	createQuotientPerStateObject(state){
+		let newQuotient = {};			
+		newQuotient.state = state;
+		newQuotient.quotient = this.calculateStatesQuotient(state);
+		return newQuotient;	
 	}
 
+	//returns the quotient violentCrimes/propertyCrimes for a single state
 	calculateStatesQuotient(statename){
-		let violentCrimesObject = commonfunctions_namespace.getViolentCrimes(this.year, statename, this.data),
-			propertyCrimesObject = commonfunctions_namespace.getPropertyCrimes(this.year, statename, this.data),	
+		let violentCrimesObject = commonfunctionsNamespace.getViolentCrimes(this.year, statename, this.data),
+			propertyCrimesObject = commonfunctionsNamespace.getPropertyCrimes(this.year, statename, this.data),	
 			violentCrimes = this.calculateAverage(violentCrimesObject),
 			propertyCrimes = this.calculateAverage(propertyCrimesObject);
 		return this.calculateQuotient(violentCrimes, propertyCrimes);
 	}
 
+	//returns the average of a crimetype e.g. violentCrimes
 	calculateAverage(crimes){
 		let sum = 0,
 			keys = Object.keys(crimes),
@@ -74,11 +100,14 @@ class Universe extends MagicCircle{
 		return sum / size;
 	}	
 
+	//calculates the quotient of violentCrimes/propertyCrimes
 	calculateQuotient(violentCrimes, propertyCrimes){
 		let quotient = violentCrimes/propertyCrimes;
 		return quotient;
 	}
 
+	//sorts the array according to the quotients violentCrimes/propertyCrimes
+	//of the states in the array
 	sortArray(array){
 		let sortedArray = array.sort(function(state1,state2){
 			return state1.quotient - state2.quotient;
@@ -86,47 +115,79 @@ class Universe extends MagicCircle{
 		return sortedArray;
 	}
 
+	//transforms the floatnumber quotient= violentCrimes/propertyCrimes
+	//to percentage so that states are comparable
 	transformQuotientToPercentages(sortedArray){
 		let minValue = sortedArray[0].quotient,
 			maxValue = sortedArray[sortedArray.length-1].quotient,
 			delta = maxValue - minValue,
-			newArray = [];
+			newArray = [],
+			that = this;
 		sortedArray.forEach(function(stateObject){
-			let newQuotient = {},
-				oldQuotient = stateObject.quotient,
-				percentage = (oldQuotient-minValue)/delta;
+			let newQuotient = {};				
 			newQuotient.state = stateObject.state;
-			newQuotient.quotient = percentage;
+			newQuotient.quotient = that.calculatePercentage(stateObject, minValue, delta);
 			newArray.push(newQuotient);
-
 		});			
 		return newArray;
 	}
 
-	createUniverse(sortedQuotients){
-		let universe = [],
-			that = this,		
+	//calculates the percentage of a quotitent
+	//100% is the maximum quotient-value of all planets
+	//0% is the minimum quotient-value of all planets
+	calculatePercentage(stateObject, minValue, delta){
+		let oldQuotient = stateObject.quotient,
+			percentage = (oldQuotient-minValue)/delta;
+		return percentage;
+	}
+
+	//create a universe node object with the given array
+	//each universe consists of sunnodes and their childnodes planets
+	createUniverse(sortedQuotientsPerStateArray){
+		let universe = [],		
+			suns = this.createSuns(),
+			planets = this.createPlanets(sortedQuotientsPerStateArray);
+		universe = suns.concat(planets);
+		return universe;
+	}
+
+	//creates all planets
+	//each planet is an object with data for drawing
+	createPlanets(sortedQuotientsPerStateArray){
+		let planets = [],
+			that = this,
 			planetNumber = 1,
-			numberOfViolenceStates = this.getNumberOfViolencePlanets(sortedQuotients),
-			numberOfPropertyStates = sortedQuotients.length - numberOfViolenceStates,
-			lastRadius = 0;
-		universe = this.createSuns(universe);
-		sortedQuotients.forEach(function(stateObject){
-			let maxPlanets = stateObject.quotient > that.groupSplitter? numberOfViolenceStates : numberOfPropertyStates,
-				newNode = {};
-			newNode.id = that.createId(stateObject.state);
-			newNode.quotient = stateObject.quotient;
-			newNode = that.createPlanet(newNode, maxPlanets, planetNumber, lastRadius);
-			lastRadius = newNode.radius;
-			universe.push(newNode);
+			lastRadius = 0,
+			numberOfViolenceStates = this.getNumberOfViolencePlanets(sortedQuotientsPerStateArray),
+			numberOfPropertyStates = sortedQuotientsPerStateArray.length - numberOfViolenceStates;
+		sortedQuotientsPerStateArray.forEach(function(stateObject){
+			let maxPlanets = that.getMaxPlanets(stateObject, numberOfViolenceStates, numberOfPropertyStates),
+				newPlanet = that.createNewPlanet(stateObject, lastRadius, maxPlanets, planetNumber);			
+			planets.push(newPlanet);			
+			lastRadius = newPlanet.radius;			
 			planetNumber++;
 			if(planetNumber>maxPlanets){
 				planetNumber = 0;
 			}
 		});
-		return universe;
+		return planets;
+	}
+
+	//returns max number of planets
+	getMaxPlanets(stateObject, numberOfViolenceStates, numberOfPropertyStates){
+		return stateObject.quotient > this.groupSplitter? numberOfViolenceStates : numberOfPropertyStates;
+	}
+
+	//creates a new planet
+	createNewPlanet(stateObject, lastRadius, maxPlanets, planetNumber){
+		let newPlanet = {};
+		newPlanet.id = this.createId(stateObject.state);
+		newPlanet.quotient = stateObject.quotient;
+		newPlanet = this.createDrawingDataForPlanet(newPlanet, maxPlanets, planetNumber, lastRadius);
+		return newPlanet;			
 	}
 	
+	//returns how many planets have more violentCrimes then propertyCrimes
 	getNumberOfViolencePlanets(sortedQuotients){
 		let numberOfViolenceObjects = 0,
 			that =this;
@@ -138,14 +199,15 @@ class Universe extends MagicCircle{
 		return numberOfViolenceObjects;		
 	}
 
-	createPlanet(node, maxPlanets, planetNumber, lastRadius){
+	//appends the data to the node which are important for drawing the planet correct
+	createDrawingDataForPlanet(node, maxPlanets, planetNumber, lastRadius){
 		let factor = node.quotient,
 			speedFactor = (1/(factor+1)),	
 			fullCircle = 360,			
 			radiusFactor = 0,
 			halfCircle = 180;
-		node.group = node.quotient > this.groupSplitter ? this.violenceGroup: this.propertyGroup;
-		node.color = node.group === this.violenceGroup ? "red": "blue";		
+		node.group = node.quotient > this.groupSplitter ? this.violenceGroup: this.propertyGroup;			
+		node.color = this.getRGBColor(factor);
 		radiusFactor = node.group === this.violenceGroup ? factor : factor*2;
 		node.radius = this.standards.standardRadius*radiusFactor + this.standards.minRadius;
 		node.distanceToSun = this.standards.standardDistanceToSun/maxPlanets*planetNumber+2*lastRadius+this.standards.minDistanceToSun;
@@ -158,31 +220,30 @@ class Universe extends MagicCircle{
 		return node;
 	}
 
+	//returns a rgb color
+	//it get less red if factor is bigger
+	getRGBColor(factor){
+		let maxColor = 255,
+			minColor = 0,
+			red = maxColor - maxColor * factor,
+			green = minColor, 
+			blue = maxColor*factor;
+		return "rgb(" + red + "," + green + "," + blue+ ")";  
+	}
+
+	//creates an id for the node
+	//by mixing the letters of the statename
 	createId(statename){
 		let maxChars = 8,	
-			id =  statename.substring(0,maxChars);
+			id = statename.substring(0,maxChars);
 		return id;
 	}
 
-	createCenterNodes(newArray){
-		let quotientProp = 2,
-			quotientVio = 2,
-			distanceToSun = 0,
-			propertyNode = {},
-			violenceNode = {};
-		propertyNode.id = "Property";
-		propertyNode.group = this.propertyGroup;
-		propertyNode.quotient = quotientProp;		
-		violenceNode.id = "Violence";
-		violenceNode.group = this.violenceGroup;
-		violenceNode.quotient = quotientVio;
-		newArray.push(propertyNode, violenceNode);
-		return newArray;
-	}
-
-	createSuns(suns){
+	//creates two suns which are objects
+	createSuns(){
 		let propertyNode = {},
-			violenceNode = {};
+			violenceNode = {},
+			suns = [];
 		propertyNode.id = "Property";
 		violenceNode.id = "Violence";
 		propertyNode = this.createSun(propertyNode);
@@ -192,35 +253,50 @@ class Universe extends MagicCircle{
 		return suns;	
 	}
 
+	//creates a single suns which is an object
 	createSun(node){
-		let factor = 2;	
-		node.quotient = factor;
-		node.distanceToSun =0;
-		node.speed = 0;
-		node.startAngle = 0;
-		node.radius = this.standards.standardRadius*factor + this.standards.minRadius;
+		let factor = 2,
+			sun = node;	
+		sun.quotient = factor;
+		sun.distanceToSun =0;
+		sun.speed = 0;
+		sun.startAngle = 0;
+		sun.radius = this.standards.standardRadius*factor + this.standards.minRadius;
 		if(node.id === "Violence"){
-			node.group = this.violenceGroup;
-			node.color = "red";		
-			node.xSun = this.standards.violenceSunX;
-			node.ySun = this.standards.violenceSunY;
-			node.x = node.xSun;
-			node.y = node.ySun;
+			sun = this.createViolenceSun(sun);
 		}
 		else if(node.id === "Property"){
-			node.group = this.propertyGroup;
-			node.color = "blue";		
-			node.xSun = this.standards.propertySunX;
-			node.ySun = this.standards.propertySunY;
-			node.x = node.xSun;
-			node.y = node.ySun;
+			sun = this.createPropertySun(sun);
 		}
 		else{
-			console.log("couldnt create centernode: ", node);
+			console.log("couldnt create sun: ", sun);
 		}
-		return node;
+		return sun;
 	}	
 
+	//creates a sun for the violence
+	createViolenceSun(node){
+		node.group = this.violenceGroup;
+		node.color = "red";		
+		node.xSun = this.standards.violenceSunX;
+		node.ySun = this.standards.violenceSunY;
+		node.x = node.xSun;
+		node.y = node.ySun;
+		return node;
+	}
+
+	//creates a sun for the properties
+	createPropertySun(node){
+		node.group = this.propertyGroup;
+		node.color = "blue";		
+		node.xSun = this.standards.propertySunX;
+		node.ySun = this.standards.propertySunY;
+		node.x = node.xSun;
+		node.y = node.ySun;
+		return node;
+	}
+
+	//creates links which connect the planets with the sun
 	createLinks(sortedQuotients){		
 		let links = [],
 			that = this;
@@ -234,29 +310,60 @@ class Universe extends MagicCircle{
 		return links;
 	}
 
+	//draws the universe with the given data
 	//source: https://bl.ocks.org/mbostock/4062045
-	drawForceNodes(data){
-		let sortedQuotients = data,			
-			universe = this.createUniverse(sortedQuotients),
+	drawTheWholeUniverse(universeNodes){
+		let that = this,		
+			universe = universeNodes,
+
 			width = this.width,
 			height = this.height,
-			rootElement = this.rootElement.attr("width", width).attr("height", height),
+			rootElement,
+			node,
+			label,
+			link;
+
+		prepareRootNode();
+		initNode();
+		initLabel();
+		initLink();
+		setEnterAndExitBehaviour();
+		drawUniverse();
+		animateRotation();
+
+		//sets width and height of the rootElement
+		function prepareRootNode(){
+			rootElement = that.rootElement.attr("width", width).attr("height", height);
+		}
+
+		//sets width and height of the container for the nodes which are small circles
+		//and gives it the data
+		function initNode(){
 			node = rootElement.attr("class", "nodes")
 				.selectAll("circle")
-				.data(universe),
+				.data(universe);
+		}
+
+		//sets width and height of the container for the labels
+		//and gives it the data
+		function initLabel(){
 			label = rootElement.attr("class", "lables")
 				.selectAll(".lables")
-				.data(universe),
+				.data(universe);
+		}
+
+		//sets width and height of the container for the links
+		//and gives it the data
+		function initLink(){
 			link = rootElement      	 	
 				.attr("class", "links").attr("width",width).attr("height",height)
 				.selectAll("line")
 				.data(universe);
-		
-		setForceNodesSettings();
-		drawUniverse();
-		animateRotation();
+		}
 
-		function setForceNodesSettings(){
+		//sets the data to the node, the labels and the lines and how it should be drawn
+		//if new data is given to the sunburst or if data is taken away
+		function setEnterAndExitBehaviour(){
 			node.data(universe);
 			exitNode();			
 			enterNode();
@@ -301,6 +408,7 @@ class Universe extends MagicCircle{
 				.style("stroke", "black");
 		}
 
+		//draws the universe
 		function drawUniverse(){ 	  		
 			
 			node.attr("cx", function(d){return d.x;})      			
@@ -319,6 +427,8 @@ class Universe extends MagicCircle{
 				.attr("y2", function(d) { return d.y; });
 		}
 
+		//changes the font so labels get less visible
+		//if the label d is actived
 		function changeFont(d, that){
 			let n = d3.select(that).node(),
 				opacity = n.style.opacity,
@@ -329,6 +439,7 @@ class Universe extends MagicCircle{
 			d3.select(that).transition().duration(durationTime).style("opacity", opacity).style("font-size", fontSize);
 		}
 
+		//updates the positions of the planets 
 		//keine Transition sonst funktioniert Kreisbwegung nicht!
 		function updatePlanetPositions(angle){
 			node
@@ -336,6 +447,11 @@ class Universe extends MagicCircle{
 					calculateNextPlanetPosition(d,i, angle);
 					return d.x;	}) 	
 				.attr("cy", function(d){return d.y;});
+			
+		}		
+
+		//updates the positions of the labels
+		function updateLabelPositions(angle){
 			label
 				.attr("x",function(d, i){
 					calculateNextPlanetPosition(d,i, angle);
@@ -343,6 +459,15 @@ class Universe extends MagicCircle{
 				.attr("y", function(d){return d.y;});
 		}
 
+		//updates the positions of the planets and labels
+		function updatePositionsInUniverse(angle){
+			updatePlanetPositions(angle);
+			updateLabelPositions(angle);
+
+		}
+
+		//calculates the planetposition
+		//planets move in a circle, depending on the distance to their sun
 		function calculateNextPlanetPosition(d, i, angle){
 			let halfCircle = 180,        
 				newAngel = (d.startAngle/Math.PI*halfCircle+angle)*Math.PI/halfCircle;
@@ -352,12 +477,14 @@ class Universe extends MagicCircle{
 			return d;
 		}
 
+		//sets an timeinterval
+		//updates the planet positions on each tick
 		function animateRotation(){
 			let angle = 0,
 				delay = 100,
 				time = 100,	
-				t = d3.interval(function(elapsed) {				
-					updatePlanetPositions(angle);
+				t = d3.interval(function() {				
+					updatePositionsInUniverse(angle);
 					angle++; 				 			
 				}, delay, time);			
 		}	

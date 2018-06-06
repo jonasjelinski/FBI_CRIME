@@ -2,32 +2,31 @@ class Map extends MagicCircle{
 
 	constructor(){
 		super();
-		this.htmlelement = htmlel_namespace.THE_MAP; 
-        this.htmlElementID = this.htmlelement.rootid;
-        this.rootElement = this.getRootElement();
-        this.width = this.htmlelement.width;
-        this.height = this.htmlelement.height;
-        this.mapData = config_namespace.MAP_JSON_OBJECT;
-        this.startYear = 2012;
+		this.htmlelement = htmlelementsNamespace.THE_MAP; 
+		this.htmlElementID = this.htmlelement.rootid;
+		this.rootElement = this.getRootElement();
+		this.width = this.htmlelement.width;
+		this.height = this.htmlelement.height;
+		this.mapData = configNamespace.MAP_JSON_OBJECT;
+		this.startYear = 2012;
 	}
 
 	//das wird zum Zeichnen aufgerufen
 	doChart(){
 		let statesData = this.createD3Data();
-		if(statesData!=undefined){
+		if(statesData !== undefined){
 			this.doMap(statesData);
 		}	
 	}
 
 	//hier werden die Daten verarbeitet
 	createD3Data(){
-		let statesData = undefined;
-		if(this.mapData !== false){//wenn config_namespace.MAP_JSON_OBJECT noch kein JSON drin ist ist es false
+		let statesData;
+		if(this.mapData !== false){//wenn configNamespace.MAP_JSON_OBJECT noch kein JSON drin ist ist es false
 			statesData = topojson.feature(this.mapData, this.mapData.objects.states).features;
 		}
 		return statesData;
 	}
-
 
 	//hier wird die Karte gezeichnet
 	//du hat eine andere d3 Version verwendet, daher musst du den Code noch anpassen
@@ -41,7 +40,7 @@ class Map extends MagicCircle{
 		.offset(function(){return [10,10];})
 		.html(function(d) {	return createTextHtml(d);});*/
 		let g = this.rootElement.append(this.htmlElementType);
-	console.log("sd",statesData);
+	
 		setMaxMinCrime();
 		createPath();
 
@@ -51,19 +50,19 @@ class Map extends MagicCircle{
 			.data(statesData)
 			.enter().append('path')
 			//.attr('d', path)
-	    	.attr('class', 'state')
-	        .attr('class', function(d) { return createStyleClass(d);})
-	        .call(tip)
-	        .on('mouseover', function(d){ 
-	        	let that = this;
-	        	showTip(d, that);
-	        })
-	        .on('mouseout', function(d){ 
-	        	let that = this;
-	        	hideTip(d, that);})
-	        .on("click", function(d) {showStateDetails();});
+			.attr('class', 'state')
+			.attr('class', function(d) { return createStyleClass(d);})
+			.call(tip)
+			.on('mouseover', function(d){ 
+				let that = this;
+				showTip(d, that);
+			})
+			.on('mouseout', function(d){ 
+				let that = this;
+				hideTip(d, that);})
+			.on("click", function(d) {showStateDetails();});
 		}   
-        
+		
 
 		function setMaxMinCrime(){
 			let keyNames = Object.keys(crimes.years[year].states);
@@ -87,22 +86,22 @@ class Map extends MagicCircle{
 			};
 			return html;
 		}
-        
+		
 
-        function createStyleClass(d){
-        	var styleClass = 'state ';
-        	var keyNames = Object.keys(crimes.years[year].states);
-        	var quantize = d3.scale.quantize()
-        	.domain([minCrime,maxCrime])
-        	.range(d3.range(11).map(function(i) {
-        		return "q" + i; }));
+		function createStyleClass(d){
+			var styleClass = 'state ';
+			var keyNames = Object.keys(crimes.years[year].states);
+			var quantize = d3.scale.quantize()
+			.domain([minCrime,maxCrime])
+			.range(d3.range(11).map(function(i) {
+				return "q" + i; }));
 
-        	for(let i=0;i<keyNames.length;i++){
+			for(let i=0;i<keyNames.length;i++){
 
-        		if(keyNames[i].toUpperCase()==d.properties.name.toUpperCase()){
-        			styleClass+=quantize(parseInt(getCrime(i, year,crimes, keyNames)));
-        //  console.log(styleClass);
-		    }
+				if(keyNames[i].toUpperCase()==d.properties.name.toUpperCase()){
+					styleClass+=quantize(parseInt(getCrime(i, year,crimes, keyNames)));
+		//  console.log(styleClass);
+			}
 		}
 		return styleClass;
 		}

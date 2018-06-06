@@ -4,7 +4,7 @@ class Lama{
     }    
     
     getData () {
-      return config_namespace.JSON_OBJECT;        
+      return configNamespace.JSON_OBJECT;        
     }
     
     doChart () {

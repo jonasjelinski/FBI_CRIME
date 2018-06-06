@@ -1,10 +1,10 @@
-var commonfunctions_namespace = commonfunctions_namespace || {};
+var commonfunctionsNamespace = commonfunctionsNamespace || {};
 
-commonfunctions_namespace.loadCSV = function(){
+commonfunctionsNamespace.loadCSV = function(){
 	"use strict"
 	try{
 		let data; 
-		d3.csv(config_namespace.FILE_PATHES.csvpath, function(csvdata){
+		d3.csv(configNamespace.FILE_PATHES.csvpath, function(csvdata){
 			data = csvdata;
 		}
 		);
@@ -15,11 +15,11 @@ commonfunctions_namespace.loadCSV = function(){
 	} 
 };
 
-commonfunctions_namespace.loadJson = function(callback){
+commonfunctionsNamespace.loadJson = function(callback){
 	"use strict"
 	try{        
-				d3.json(config_namespace.FILE_PATHES.jsonpath, function(jsondata) {         
-														config_namespace.JSON_OBJECT = jsondata;
+				d3.json(configNamespace.FILE_PATHES.jsonpath, function(jsondata) {         
+														configNamespace.JSON_OBJECT = jsondata;
 														callback(null);                            
 													}                          
 										);    
@@ -30,10 +30,10 @@ commonfunctions_namespace.loadJson = function(callback){
 
 };
 
-commonfunctions_namespace.loadMapJsonObject = function(callback){
+commonfunctionsNamespace.loadMapJsonObject = function(callback){
 	try{        
-				d3.json(config_namespace.FILE_PATHES.mappath, function(jsondata) {         
-														config_namespace.MAP_JSON_OBJECT = jsondata;
+				d3.json(configNamespace.FILE_PATHES.mappath, function(jsondata) {         
+														configNamespace.MAP_JSON_OBJECT = jsondata;
 														callback(null);                            
 													}                          
 										);    
@@ -44,63 +44,62 @@ commonfunctions_namespace.loadMapJsonObject = function(callback){
 
 };
 
-commonfunctions_namespace.setJsonObject = function(){
+commonfunctionsNamespace.setJsonObject = function(){
 	"use strict"; 
 	var q=d3.queue();
-	q.defer(commonfunctions_namespace.loadJson);  
+	q.defer(commonfunctionsNamespace.loadJson);  
 	q.await(function(error) {
 		if (error) throw error;
-		commonfunctions_namespace.setChartsCanBeBuild(true);
+		commonfunctionsNamespace.setChartsCanBeBuild(true);
 	}); 
 };
 
-commonfunctions_namespace.setMapJsonObject = function(){
+commonfunctionsNamespace.setMapJsonObject = function(){
 	"use strict"; 
 	var q=d3.queue();
-	q.defer(commonfunctions_namespace.loadMapJsonObject);  
+	q.defer(commonfunctionsNamespace.loadMapJsonObject);  
 	q.await(function(error) {
 		if (error) throw error;	
 	}); 
 }
 
-commonfunctions_namespace.setChartsCanBeBuild = function(trueOrFalse){
-	console.log("load js", config_namespace.MAP_JSON_OBJECT);
-	dynamics_namespace.chartsCanBeBuild = trueOrFalse;
+commonfunctionsNamespace.setChartsCanBeBuild = function(trueOrFalse){	
+	dynamicsNamespace.chartsCanBeBuild = trueOrFalse;
 };
 
-commonfunctions_namespace.getJsonObject = function(){
-		return config_namespace.CONSTANTS.jsonObject;
+commonfunctionsNamespace.getJsonObject = function(){
+		return configNamespace.CONSTANTS.jsonObject;
 };
 
-commonfunctions_namespace.getRootElement = function(environment){
+commonfunctionsNamespace.getRootElement = function(environment){
 					rootElement = d3.selectAll("#"+environment.htmlElementID).attr("width",environment.width).attr("height",environment.height);
 					return rootElement;        
 };
 
-commonfunctions_namespace.getStatesAndDataByYear = function(year, jsondata){
+commonfunctionsNamespace.getStatesAndDataByYear = function(year, jsondata){
 	let yearAsString = year.toString();
 
 	return jsondata.years[yearAsString];
 };
 
-commonfunctions_namespace.getCrimesAndDataByYearAndState = function(year, statename, jsondata){
-	let statesData = commonfunctions_namespace.getStatesAndDataByYear(year, jsondata); 
+commonfunctionsNamespace.getCrimesAndDataByYearAndState = function(year, statename, jsondata){
+	let statesData = commonfunctionsNamespace.getStatesAndDataByYear(year, jsondata); 
 	let crimeData = statesData.states[statename];
 	//console.log("year ",year, " statesData ",statesData, " crimeData ", crimeData, "statename", statename, "type", typeof(statename)); 
 	return crimeData; 
 };
 
 //returns violent crimes object
-commonfunctions_namespace.getViolentCrimes = function(year, statename, jsondata){
-	let crimeData = commonfunctions_namespace.getCrimesAndDataByYearAndState(year, statename, jsondata);
+commonfunctionsNamespace.getViolentCrimes = function(year, statename, jsondata){
+	let crimeData = commonfunctionsNamespace.getCrimesAndDataByYearAndState(year, statename, jsondata);
 	let violentCrimes = crimeData.crimes.violentCrime;
  //console.log("getVC ", crimeData, " violentCrimes", violentCrimes);
 	return violentCrimes;
 };
 
 //returns property crimes object
-commonfunctions_namespace.getPropertyCrimes = function(year, statename, jsondata){
-	let crimeData = commonfunctions_namespace.getCrimesAndDataByYearAndState(year, statename, jsondata);
+commonfunctionsNamespace.getPropertyCrimes = function(year, statename, jsondata){
+	let crimeData = commonfunctionsNamespace.getCrimesAndDataByYearAndState(year, statename, jsondata);
 	//console.log(year, statename);
 	//console.log("gPC ",crimeData);
 	let propertyCrimes = crimeData.crimes.propertyCrime;
@@ -109,14 +108,14 @@ commonfunctions_namespace.getPropertyCrimes = function(year, statename, jsondata
 };
 
 //returns the crimerate per 100 0000 people
-commonfunctions_namespace.getCrimerateByCrimeType = function(year, statename, crime, jsondata){
-	let propertyCrimes = config_namespace.CONSTANTS.crimeTypesProperty;
-	let violentCrimes = config_namespace.CONSTANTS.crimeTypesViolence;
+commonfunctionsNamespace.getCrimerateByCrimeType = function(year, statename, crime, jsondata){
+	let propertyCrimes = configNamespace.CONSTANTS.crimeTypesProperty;
+	let violentCrimes = configNamespace.CONSTANTS.crimeTypesViolence;
 	let errorValue = 0;
 
 
 	if (propertyCrimes.includes(crime)){
-		let propCrimes = commonfunctions_namespace.getPropertyCrimes(year, statename, jsondata);
+		let propCrimes = commonfunctionsNamespace.getPropertyCrimes(year, statename, jsondata);
 		let crimeString = ''+crime+'';
 		
 		let crimerate = propCrimes[crimeString];
@@ -126,7 +125,7 @@ commonfunctions_namespace.getCrimerateByCrimeType = function(year, statename, cr
 	}
 
 	else if(violentCrimes.includes(crime)){
-		let vioCrimes = commonfunctions_namespace.getViolentCrimes(year, statename, jsondata);
+		let vioCrimes = commonfunctionsNamespace.getViolentCrimes(year, statename, jsondata);
 		let crimeString = ''+crime+'';
 		let crimerate = vioCrimes[crimeString];
 		return crimerate;
@@ -139,20 +138,20 @@ commonfunctions_namespace.getCrimerateByCrimeType = function(year, statename, cr
 }; 
 
 //returns an object
-commonfunctions_namespace.getAllCategories = function(){
-	let categories = config_namespace.CONSTANTS.crimecategories;
+commonfunctionsNamespace.getAllCategories = function(){
+	let categories = configNamespace.CONSTANTS.crimecategories;
 	return categories;
 };
 
 //returns an array
-commonfunctions_namespace.getAllStates = function(){
-	let states = config_namespace.CONSTANTS.states;
+commonfunctionsNamespace.getAllStates = function(){
+	let states = configNamespace.CONSTANTS.states;
 	return states;
 };
 
-commonfunctions_namespace.getAllYears = function(){
-	let maxYear = config_namespace.CONSTANTS.maxYear;
-	let minYear = config_namespace.CONSTANTS.minYear;
+commonfunctionsNamespace.getAllYears = function(){
+	let maxYear = configNamespace.CONSTANTS.maxYear;
+	let minYear = configNamespace.CONSTANTS.minYear;
 	let allYears = [];
 	for(let year= minYear; year <= maxYear; year++){
 		allYears.push(year);
@@ -160,11 +159,11 @@ commonfunctions_namespace.getAllYears = function(){
 	return allYears;
 };
 
-commonfunctions_namespace.getCrimeColor = function(crimename){
+commonfunctionsNamespace.getCrimeColor = function(crimename){
 	try{
 
 
-	let colorArray = config_namespace.CONSTANTS.crimeColors[crimename];
+	let colorArray = configNamespace.CONSTANTS.crimeColors[crimename];
 	
 	let r = colorArray[0];
 	let g = colorArray[1];
@@ -183,19 +182,20 @@ commonfunctions_namespace.getCrimeColor = function(crimename){
 //returns a rgb color depending on the paramter 'multipiler'
 // 0 is red, 100 is  green
 //source: https://stackoverflow.com/questions/17525215/calculate-color-values-from-green-to-red
-commonfunctions_namespace.getSingleColor = function(multipiler){
+commonfunctionsNamespace.getSingleColor = function(multipiler){
 	let degree = 1.2;
 	let fullCircle = 360;
 	let hueColor = multipiler * degree/fullCircle;
 	let saturation = 1;
 	let brightness  = 0.5;
-	let rgbColor = commonfunctions_namespace.hsvToRGB(hueColor, saturation, brightness);
-	return 'rgb(' + rgbColor[0] + ',' + rgbColor[1] + ',' + rgbColor[2] + ')'; 
+	let rgbColor = commonfunctionsNamespace.HSVtoRGB(hueColor, saturation, brightness);
+	console.log(multipiler, rgbColor);
+	return 'rgb(' + rgbColor.r + ',' + rgbColor.g + ',' + rgbColor.b + ')'; 
 };
 
 //converts hsv to rgb values
 //source: https://stackoverflow.com/questions/17242144/javascript-convert-hsb-hsv-color-to-rgb-accurately
-commonfunctions_namespace.HSVtoRGB = function(h, s, v) {
+commonfunctionsNamespace.HSVtoRGB = function(h, s, v) {
 		let r, g, b, i, f, p, q, t;
 		let maxLength = 1;
 		let multipiler = 6;
@@ -210,6 +210,7 @@ commonfunctions_namespace.HSVtoRGB = function(h, s, v) {
 		p = v * (1 - s);
 		q = v * (1 - f * s);
 		t = v * (1 - (1 - f) * s);
+
 		switch (i % multipiler) {
 				case 0: r = v, g = t, b = p; break;
 				case 1: r = q, g = v, b = p; break;

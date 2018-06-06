@@ -1,193 +1,314 @@
 class LineChart extends MagicCircle{
 	constructor(){
 		super();
-
-		this.state = dynamics_namespace.currentState;
-		this.htmlelement = htmlel_namespace.LINE_DIAGRAM; 
-        this.htmlElementID = this.htmlelement.rootid;
-        this.rootElement = this.getRootElement();
+		this.state = dynamicsNamespace.currentState;
+		this.htmlelement = htmlelementsNamespace.LINE_DIAGRAM; 
+		this.htmlElementID = this.htmlelement.rootid;
+		this.rootElement = this.getRootElement();
 	}
 	
+	//calls drawLineChart
 	doChart(){
-		 console.log("ein lama erzeugt einen linechart");		
-		 this.drawLineChart();
-		
-	}
-
-	drawLineChart(){
-	 let data = this.createD3Data();
-	 this.createCoordinateSystem(data);
+		console.log("ein lama erzeugt einen linechart");       
+		this.drawLineChart();		
 	}
 	
-	createD3Data(){
-		let crimeTypesProperty = config_namespace.CONSTANTS.crimeTypesProperty;
-		let crimeTypesViolence  = config_namespace.CONSTANTS.crimeTypesViolence;
-		let allCrimes = crimeTypesProperty.concat(crimeTypesViolence);
-		let maxYear = config_namespace.CONSTANTS.maxYear;
-		let minYear = config_namespace.CONSTANTS.minYear;
-		let d3Data = [];
-		
-		for(let i=0; i<allCrimes.length; i++){
-			let newObject = {};
-			let values = [];
-			let crimename = allCrimes[i];			
-			if(crimename === undefined){
-				console.log("crimename undefined");
+	//converts the this.data so it is usable and then draws the lineChart	
+	drawLineChart(){
+		let crimeRatesPerYearAndPerCrimeType = this.createCrimeRateData();
+		this.createLineChart(crimeRatesPerYearAndPerCrimeType);
+	}
+	
+	//converts the data so it is usable for the lineChart
+	//returns an array of objects
+	//each newCrimeObject has a crimetype e.g. burglary as its key
+	//each newCrimeObject contains newValueObjects
+	//newValueObjectes contains of years and number of crimes in each year
+	createCrimeRateData(){
+		let allCrimeTypes = this.getAllCrimeTypes(),		
+			crimeRatesPerYearAndPerCrimeType = this.getCrimesRatesForEachCrimeForEachYear(allCrimeTypes);
+		return crimeRatesPerYearAndPerCrimeType;
+	}
+
+	//rerurns all crimetyes e.g. burglary
+	getAllCrimeTypes(){
+		let crimeTypesProperty = configNamespace.CONSTANTS.crimeTypesProperty,
+			crimeTypesViolence = configNamespace.CONSTANTS.crimeTypesViolence,
+			allCrimeTypes = crimeTypesProperty.concat(crimeTypesViolence);
+		return allCrimeTypes;
+	}
+
+	//returns for alle received crimeTypes the year and the crimerate per year
+	getCrimesRatesForEachCrimeForEachYear(allCrimeTypes){
+		let crimeRatesPerYearAndPerCrimeType = [];
+		for(let i=0; i<allCrimeTypes.length; i++){			
+			let newCrimeRatePerCrimeAndCrimeTypeObject, 
+				crimeType = allCrimeTypes[i];           
+			if(this.wouldCreateUndefinedEntry(crimeType)){	
 				continue;
 			}
-			newObject.key = crimename;
-			
-
-			for(let year = minYear; year <=2012; year++){
-				let newValueObject = {};
-				let numberOfCrimes = commonfunctions_namespace.getCrimerateByCrimeType(year, this.state, crimename, this.data);			
-				newValueObject.year = year;
-				newValueObject.crimerate = numberOfCrimes;
-				values.push(newValueObject);
-				newValueObject = {};
-			}
-			newObject.values = values;
-			d3Data.push(newObject);
-			newObject = {};
-		}	
-
-		return d3Data;
+			newCrimeRatePerCrimeAndCrimeTypeObject = this.createNewCrimeRatePerCrimeAndCrimeTypeObject(crimeType);
+			crimeRatesPerYearAndPerCrimeType.push(newCrimeRatePerCrimeAndCrimeTypeObject);
+			newCrimeRatePerCrimeAndCrimeTypeObject = {};
+		}
+		return crimeRatesPerYearAndPerCrimeType;   
 	}
-		
+
+	//prevents undefined entries
+	wouldCreateUndefinedEntry(crimeType){
+		if(crimeType === undefined){				
+			return true;
+		}
+		return false;
+	}
+
+	//returns an object which consists crimetype as key and the values-array
+	//which contains the crimerates for each year in an object
+	createNewCrimeRatePerCrimeAndCrimeTypeObject(crimeType){
+		let newCrimeRatePerCrimeAndCrimeTypeObject = {},
+			values = [];
+		newCrimeRatePerCrimeAndCrimeTypeObject.key = crimeType;	
+		values = this.getCrimeRatesForEachYear(crimeType);		
+		newCrimeRatePerCrimeAndCrimeTypeObject.values = values;
+		return newCrimeRatePerCrimeAndCrimeTypeObject;
+	}
+
+	//returns an array which contains the crimerates for each year in an object
+	getCrimeRatesForEachYear(crimeType){
+		let crimesPerYear = [],
+			maxYear = configNamespace.CONSTANTS.maxYear,
+			minYear = configNamespace.CONSTANTS.minYear;
+		for(let year = minYear; year <= maxYear; year++){
+			let newcrimesPerYearObject = this.getCrimesPerYearObject(crimeType, year);			
+			crimesPerYear.push(newcrimesPerYearObject);
+			newcrimesPerYearObject = {};
+		}
+
+		return crimesPerYear;
+	}
+
+	//returns a single object which keys are year and crimerate
+	getCrimesPerYearObject(crimeType, year){
+		let crimesPerYearObject = {},
+			numberOfCrimes = commonfunctionsNamespace.getCrimerateByCrimeType(year, this.state, crimeType, this.data);         
+		crimesPerYearObject.year = year;
+		crimesPerYearObject.crimerate = numberOfCrimes;
+		return crimesPerYearObject;
+	}
+	
+	//creates the lineChart	with the given crimeRateData
 	//sources:
 	//https://bl.ocks.org/EfratVil/92f894ac0ba265192411e73f633a3e2f
 	//https://bl.ocks.org/deristnochda/1ffe16ccf8bed2035ea5091ab9bb53fb
-	createCoordinateSystem(jsondata){
-		let data = JSON.parse(JSON.stringify(jsondata));
-		let height = this.height;
-        let width = this.width;
-		let labelWidth = width/5;
-		let labelHeight = labelWidth/5;
-		let zooming = d3.zoom()
-		    .scaleExtent([1, Infinity])
-		    .translateExtent([[0, 0], [width, height]])
-		    .extent([[0, 0], [width, height]])
-		    .on("zoom", zoomed);
-		let rootElement = this.rootElement.attr("width", width).attr("height", height).call(zooming);;
-		let maxYear = config_namespace.CONSTANTS.maxYear;
-		let minYear = config_namespace.CONSTANTS.minYear;
-		let minCrime = 0;
-		let maxCrime = 2000;
-		var mindate = new Date(minYear,0,1),
-            maxdate = new Date(maxYear,0,31);
-		
-		let margin = {top: height/10, right: width/10, bottom: height/10, left: width/10};
-		let chartWidth = width - margin.left - margin.right;
-		let chartHeight = height - margin.top - margin.bottom;		
-		
-		var xRange = d3.scaleTime().domain([mindate, maxdate]).range([0,chartWidth ]); 
-		var yRange = d3.scaleLinear().domain([minCrime, maxCrime]).range([chartHeight, 0]);
-		
-		var xAxis = d3.axisBottom(xRange); 
-		var yAxis = d3.axisLeft(yRange);
-		var deltaAxisY = chartHeight-margin.bottom;			 
-						 
-	
-		var container = rootElement.append("svg").attr("class", "container")
-									.attr("width", chartWidth)
-									.attr("height", chartHeight)											
-									.attr("transform", "translate(" + margin.left + "," + 0 + ")");							
-		
-		var coordinateSystem = rootElement.append("g").attr("class", "coordinateSystem")
-											.attr("width", chartWidth)
-											.attr("height", chartHeight)											
-											.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-							
-		var xCoord = coordinateSystem.append("g").attr("class", "xAxis")
-										.attr("transform", "translate(0,"+(deltaAxisY)+")")																	
-										.call(xAxis);	
-
-		var yCoord = coordinateSystem.append("g").attr("class", "yAxis")
-										.attr("transform","translate(0,-"+margin.bottom+")")
-										.call(yAxis);
-
-		var simpleline = d3.line()
-					.x(function(d,i){						
-						let year = parseInt(d.year),
-						date = new Date(year,0,1);						
-						return xRange(date)})								 
-					.y(function(d,i){
-						let crimerate = parseInt(d.crimerate); 
-						return yRange(crimerate)});				
-							
-		var lines = container.append("g").attr("class", "lines")
-								.attr("width", chartWidth)
-								.attr("height", chartHeight)																
-								.style("fill", "white");
+	createLineChart(crimeRateData){
+		var data = transferToCleanJavascriptObject(crimeRateData),		
+			that =this,
+			height = this.height,
+			width = this.width,
+			labelWidth = width/5,
+			labelHeight = labelWidth/5,			
+			rootElement,
+			maxYear = configNamespace.CONSTANTS.maxYear,
+			minYear = configNamespace.CONSTANTS.minYear,
+			minCrime = 0,
+			maxCrime = 2000,
+			mindate = new Date(minYear,0,1),
+			maxdate = new Date(maxYear,0,31),			
+			margin = {top: height/10, right: width/10, bottom: height/10, left: width/10},
+			chartWidth = width - margin.left - margin.right,
+			chartHeight = height - margin.top - margin.bottom,
 			
-		var lineSelection = rootElement.selectAll(".lines");			
+			xRange = d3.scaleTime().domain([mindate, maxdate]).range([0,chartWidth ]), 
+			yRange = d3.scaleLinear().domain([minCrime, maxCrime]).range([chartHeight, 0]),
+			
+			xAxis = d3.axisBottom(xRange), 
+			yAxis = d3.axisLeft(yRange),
+			deltaAxisY = chartHeight-margin.bottom,
+			durationTime = 2000,
+			zooming,
+			container,
+			coordinateSystem,
+			xCoordLine,
+			yCoordLine,
+			allGraphLines,
+			singleLine,
+			labels;	
+			
+		initZoomingBehaviour();
+		prepareRootElement();	
+		initContainer();		
+		initCoordinateSystem();
+		initXCoordLine();
+		initYCoordLine();
+		initAllGraphLines();	
+		initLabels();
+		initSingleLine();
+		drawGraph();
+		drawLabels();
+		setLabelTextAndClickBehaviour();
 
-		lineSelection
-		.selectAll("line")
-		.data(data)
-		.enter()
-		.append("path")
-		.attr("class", "line")		
-		.attr("id", function(d){
-			return d.key;
-		})
-		.attr("d", function(d){
-			let sl = simpleline(d.values);			
-			return sl;
-		})			
-		.attr("stroke", function(d){
-			return getColor(d);
-		})
-		.attr("fill","none")
-		.attr("opacity", 1);
+		//calls the d3 zoom function to zoom the lineChart
+		function initZoomingBehaviour(){
+			zooming = d3.zoom()
+				.scaleExtent([1, Infinity])
+				.translateExtent([[0, 0], [width, height]])
+				.extent([[0, 0], [width, height]])
+				.on("zoom", zoomCoordSystemAndLines);
+		}
 
-		var labels = rootElement            
-        .append('g')
-        .attr("width", labelWidth)
-        .attr("height", labelHeight)
-        .attr('class', 'labels')       
-        .attr('transform', 'translate(' + (width - 4*margin.right-labelWidth) + ',' + labelHeight + ')');
+		//sets width and height of the rootElement
+		function prepareRootElement(){
+			rootElement = that.rootElement.attr("width", width).attr("height", height).call(zooming);	
+		}
 
-        labels.selectAll('g')
-            .data(data)
-            .enter().append('g').attr("class", "label");   
-               
-        labels.selectAll('g')
-        .attr("class", function(d){return d.key})
-        .append("text")
-        .on("click", showLine)
-        .transition()
-        .ease(d3.easeLinear)
-        .duration(2000)               
-        .attr("x", 0)
-        .attr("y", function(d,i){return i*labelHeight*1.5;})           
-        .attr("font-size", "50px")
-        .style('fill', function(d){return getColor(d)})
-        .text(function(d) { return d.key });
+		//inits container and sets width and height and position of the container
+		function initContainer(){
+			container = rootElement.append("svg").attr("class", "container")
+				.attr("width", chartWidth)
+				.attr("height", chartHeight)                                            
+				.attr("transform", "translate(" + margin.left + "," + 0 + ")");  
+		}	
 
-        function showLine(d){
-        	let crime = d.key;
-        	let id = "[id="+crime+"]";        
-        	let line = d3.select(id);
-        	let visible = parseInt(line.attr("opacity"));        	
-        	let newOpacity = visible ? 0 : 1;        	
-        	line.attr("opacity", newOpacity);        
-        }
+		//inits coordinateSystem and sets width and height and position of the coordindate system
+		function initCoordinateSystem(){
+			coordinateSystem = rootElement.append("g").attr("class", "coordinateSystem")
+				.attr("width", chartWidth)
+				.attr("height", chartHeight)                                            
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");				
+		} 
 
+		//inits xCoordLine and sets width and height and position of the xAxis
+		function initXCoordLine(){
+			xCoordLine = coordinateSystem.append("g").attr("class", "xAxis")
+				.attr("transform", "translate(0,"+(deltaAxisY)+")")                                                                 
+				.call(xAxis);
+		}
+
+		//inits yCoordLine and sets width and height and position of the yAxis
+		function initYCoordLine(){
+			yCoordLine = coordinateSystem.append("g").attr("class", "yAxis")
+				.attr("transform","translate(0,-"+margin.bottom+")")
+				.call(yAxis);
+		}
+
+		//inits allGraphLines and sets width and height and position of allGraphLines
+		function initAllGraphLines(){
+			allGraphLines = container.append("g").attr("class", "lines")
+				.attr("width", chartWidth)
+				.attr("height", chartHeight)                                                                
+				.style("fill", "white");
+		}	
+
+
+		//inits labels and sets width and height and position of allGraphLines
+		function initLabels(){
+			labels = rootElement            
+				.append("g")
+				.attr("width", labelWidth)
+				.attr("height", labelHeight)
+				.attr("class", "labels")       
+				.attr("transform", "translate(" + (width - 4*margin.right-labelWidth) + "," + labelHeight + ")");
+		}
+
+		//inits singleLine which is a d3.line function 
+		function initSingleLine(){
+			singleLine = d3.line()
+				.x(function(d){return getXPos(d);})                                
+				.y(function(d){return getYPos(d);});		
+		}		
+
+		//tranforms a string 'year' to a date which can be used on the x-Axis
+		function getXPos(d){
+			let year = parseInt(d.year),
+				date = new Date(year,0,1);                      
+			return xRange(date);		
+		}
+
+		//tranforms a string 'crimerate' to a number which can be used on the y-Axis
+		function getYPos(d){
+			let crimerate = parseInt(d.crimerate); 
+			return yRange(crimerate);
+		}			
+
+		//gives data to selectedGraphLines and draws new lines with new data on enter
+		function drawGraph(){
+			let selectedGraphLines = rootElement.selectAll(".lines"),
+				visible =1;        
+			selectedGraphLines
+				.selectAll("line")
+				.data(data)
+				.enter()
+				.append("path")
+				.attr("class", "line")      
+				.attr("id", function(d){
+					return d.key;
+				})
+				.attr("d", function(d){				
+					let line = singleLine(d.values);    
+					return line;
+				})          
+				.attr("stroke", function(d){
+					return getColor(d);
+				})
+				.attr("fill","none")
+				.attr("opacity", visible);
+		}	
+
+		//gives data to labels and draws new labels with new data on enter
+		function drawLabels(){			
+			labels.selectAll("g")
+				.data(data)
+				.enter().append("g").attr("class", "label"); 
+		}
+
+		//sets the tex of the labels and how they should behave if a lable is clicked
+		function setLabelTextAndClickBehaviour(){
+
+			labels.selectAll("g")
+				.attr("class", function(d){return d.key;})
+				.append("text")
+				.on("click", that.showOrHideLine)
+				.transition()
+				.ease(d3.easeLinear)
+				.duration(durationTime)               
+				.attr("x", 0)
+				.attr("y", function(d,i){return i*labelHeight*1.5;})           
+				.attr("font-size", "50px")
+				.style("fill", function(d){return getColor(d)})
+				.text(function(d) { return d.key; });
+		} 				
+		
+		//hides line if visible, shows line if it has been invisible before
+		function showOrHideLine(d){
+			let crime = d.key,
+				isHidden = 0,
+				isVisible = 1,
+				id = "[id="+crime+"]",        
+				line = d3.select(id),
+				visible = parseInt(line.attr("opacity")),           
+				newOpacity = visible === isVisible ? isHidden : isVisible;           
+			line.attr("opacity", newOpacity);        
+		}
+
+		//returns color according to crimeType
 		function getColor(d){
 			let crime = d.key;
-			return commonfunctions_namespace.getCrimeColor(crime);
-		}		 	
+			return commonfunctionsNamespace.getCrimeColor(crime);
+		}           
 
-		function zoomed() {					
-		    var allLines = rootElement.selectAll(".lines")
-		    	.transition().duration(750)
-		        .attr("transform", d3.event.transform);		
-		        console.log("Al". allLines);	
-		    var line = d3.selectAll('.line').style("stroke-width", 2/d3.event.transform.k);			    
-		    var xCall = xCoord.transition().duration(750).call(xAxis.scale(d3.event.transform.rescaleX(xRange)));
-		    var yCall = yCoord.transition().duration(750).call(yAxis.scale(d3.event.transform.rescaleY(yRange)));			  			
+		//zooms in and out of the chart
+		function zoomCoordSystemAndLines() { 
+			let transitionZoomTime = 750,                
+				allLines = rootElement.selectAll(".lines")
+					.transition().duration(transitionZoomTime)
+					.attr("transform", d3.event.transform),     
+				lines = d3.selectAll(".line").style("stroke-width", 2/d3.event.transform.k),             
+				xCall = xCoordLine.transition().duration(transitionZoomTime).call(xAxis.scale(d3.event.transform.rescaleX(xRange))),
+				yCall = yCoordLine.transition().duration(transitionZoomTime).call(yAxis.scale(d3.event.transform.rescaleY(yRange)));                       
 		}
-    }
-	
+
+		function transferToCleanJavascriptObject(jsondata){
+			return JSON.parse(JSON.stringify(jsondata));
+		}
+	}
 }

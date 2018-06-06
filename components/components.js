@@ -1,9 +1,11 @@
-var components_namespace = components_namespace || {};
+var componentsNamespace = componentsNamespace || {};
 
-components_namespace.lama = new Lama();
-components_namespace.magicCircle = new MagicCircle();  
-components_namespace.sunburst = new Sunburst();
-components_namespace.lineChart = new LineChart();
-components_namespace.force = new TheForce();
-components_namespace.universe = new Universe();
-components_namespace.map = new Map();
+componentsNamespace.lama = new Lama();
+componentsNamespace.magicCircle = new MagicCircle();  
+componentsNamespace.sunburst = new Sunburst();
+componentsNamespace.lineChart = new LineChart();
+componentsNamespace.force = new TheForce();
+componentsNamespace.universe = new Universe();
+componentsNamespace.map = new Map();
+componentsNamespace.infoBox = new InfoBox();
+componentsNamespace.stateMachine = new StateMachine();

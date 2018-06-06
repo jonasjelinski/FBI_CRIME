@@ -1,29 +1,29 @@
-var config_namespace = config_namespace || {};
+var configNamespace = configNamespace || {};
 
-config_namespace.CLICKLISTENER = {
-    dochart: "dochart"
+configNamespace.CLICKLISTENER = {
+	dochart: "dochart"
 };
 
-config_namespace.HTML_IDS = {
-    mychart: "myChart"
+configNamespace.HTML_IDS = {
+	mychart: "myChart"
 };
 
-config_namespace.HTML_TYPES = {
-    g: "g",
-    svg: "svg"
+configNamespace.HTML_TYPES = {
+	g: "g",
+	svg: "svg"
 };
 
-config_namespace.FILE_PATHES = {
+configNamespace.FILE_PATHES = {
 	csvpath: "./store/elements-by-episode.csv",
 	jsonpath: "./store/crimes.json",
 	mappath: "./store/states.json"
 };
 
-config_namespace.CONSTANTS = {
-	states : ['TEXAS'],
-	crimeCategories : {Crimes : { propertyCrime : ['Burglary', 'Larcenytheft', 'Motorvehicletheft'], violentCrime : ['Aggravatedassault', 'MurderManslaughter', 'Rape', 'Robbery']}},
-	crimeTypesProperty : ['Burglary', 'Larcenytheft', 'Motorvehicletheft'],
-	crimeTypesViolence : ['Aggravatedassault', 'MurderManslaughter', 'Rape', 'Robbery'],
+configNamespace.CONSTANTS = {
+	states : ["TEXAS"],
+	crimeCategories : {Crimes : { propertyCrime : ["Burglary", "Larcenytheft", "Motorvehicletheft"], violentCrime : ["Aggravatedassault", "MurderManslaughter", "Rape", "Robbery"]}},
+	crimeTypesProperty : ["Burglary", "Larcenytheft", "Motorvehicletheft"],
+	crimeTypesViolence : ["Aggravatedassault", "MurderManslaughter", "Rape", "Robbery"],
 	crimeColors :{
 		Crimes: [22,22,22],
 		violentCrime: [214, 20, 0],
@@ -40,17 +40,71 @@ config_namespace.CONSTANTS = {
 	minYear : 2000
 };
 
-config_namespace.JSON_OBJECT = false;
+configNamespace.STATE_MACHINE = {	
+	MAP: "MAP",
+	LINE_CHART: "LINE_CHART",
+	CRIME_CORRELATION: "CRIME_CORRELATION",
+	UNIVERSE: "UNIVERSE",
+	STATES: [this.MAP, this.LINE_CHART, this.CRIME_CORRELATION, this.UNIVERSE]
+};
 
-config_namespace.MAP_JSON_OBJECT = false;
+configNamespace.JSON_OBJECT = false;
 
-config_namespace.SCRIPT_PATHES = ["./libs/d3/d3.js","./libs/d3/d3.tip.js","./libs/topoJson/topojson.v1.min.js", "./store/config.js", "./store/dynamics.js",
-"./htmlelements/htmlelements.js","./store/commonfunctions.js", "./classes/lama.js",
-"./classes/linechart.js", "classes/magicCircle.js","./classes/force.js","./classes/universe.js","./classes/map.js",
-  "./components/components.js", "./actions/actions.js", "./listener/listener.js"];
+configNamespace.MAP_JSON_OBJECT = false;
 
-config_namespace.FIRST_SCRIPTS = ["./libs/d3/d3.js", "./libs/d3/d3.tip.js","./libs/topoJson/topojson.v1.min.js","./store/config.js",
-"./store/dynamics.js","./store/commonfunctions.js", "./htmlelements/htmlelements.js"];
-config_namespace.SECOND_SCRIPTS = ["./classes/lama.js", "./classes/magicCircle.js", "./classes/map.js",
-"./classes/sunburst.js", "./classes/linechart.js","./classes/force.js","./classes/universe.js",
-  "./components/components.js", "./actions/actions.js", "./listener/listener.js"];
+configNamespace.SCRIPT_PATHES = [
+	"./libs/d3/d3.js",
+	"./libs/d3/d3.tip.js",
+	"./libs/topoJson/topojson.v1.min.js", 
+	"./store/config.js", 
+	"./store/dynamics.js",
+	"./htmlelements/htmlelements.js",
+	"./store/commonfunctions.js", 
+	"./classes/lama.js",
+	"./classes/linechart.js", 
+	"classes/magicCircle.js",
+	"./classes/force.js",
+	"./classes/universe.js",
+	"./classes/map.js",
+	"./classes/infoBox.js", 
+	"./classes/crimeCorrelation.js",
+	"./classes/dropDownMenu.js",
+	"./pages/parentPage.js", 
+	"./pages/crimeCorrelationPage.js", 
+	"./pages/lineChartPage.js", 
+	"./pages/mapPage.js", 
+	"./pages/universePage.js",
+	"./logic/stateMachine.js",
+	"./components/components.js", 
+	"./actions/actions.js", 
+	"./listener/listener.js"];
+
+configNamespace.FIRST_SCRIPTS = [
+	"./libs/d3/d3.js", 
+	"./libs/d3/d3.tip.js",
+	"./libs/topoJson/topojson.v1.min.js",
+	"./store/config.js",
+	"./store/dynamics.js",
+	"./store/commonfunctions.js", 
+	"./htmlelements/htmlelements.js"];
+
+configNamespace.SECOND_SCRIPTS = [
+	"./classes/lama.js", 
+	"./classes/magicCircle.js", 
+	"./classes/map.js",
+	"./classes/sunburst.js", 
+	"./classes/linechart.js",
+	"./classes/force.js",
+	"./classes/universe.js",
+	"./classes/infoBox.js",
+	"./classes/crimeCorrelation.js",
+	"./pages/parentPage.js",  
+	"./pages/crimeCorrelationPage.js",
+	"./classes/dropDownMenu.js", 
+	"./pages/lineChartPage.js", 
+	"./pages/mapPage.js", 
+	"./pages/universePage.js",
+	"./logic/stateMachine.js",
+	"./components/components.js", 
+	"./actions/actions.js", 
+	"./listener/listener.js"];

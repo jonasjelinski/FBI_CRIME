@@ -1,6 +1,6 @@
-var dynamics_namespace = dynamics_namespace || {};
+var dynamicsNamespace = dynamicsNamespace || {};
 
-dynamics_namespace.currentCategory = config_namespace.CONSTANTS.crimeTypesProperty[0];
-dynamics_namespace.currentState = config_namespace.CONSTANTS.states[0];
-dynamics_namespace.currentYear = "2010";
-dynamics_namespace.chartsCanBeBuild = false;
+dynamicsNamespace.currentCategory = configNamespace.CONSTANTS.crimeTypesProperty[0];
+dynamicsNamespace.currentState = configNamespace.CONSTANTS.states[0];
+dynamicsNamespace.currentYear = "2010";
+dynamicsNamespace.chartsCanBeBuild = false;
