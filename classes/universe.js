@@ -8,7 +8,6 @@ class Universe extends MagicCircle{
 		this.state = dynamicsNamespace.currentState;
 		this.htmlelement = htmlelementsNamespace.THE_UNIVERSE; 
 		this.htmlElementID = this.htmlelement.htmlid;
-		this.page = this.getRootElement();
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
 		this.year = 2008;
@@ -334,7 +333,8 @@ class Universe extends MagicCircle{
 		//sets width and height of the container for the nodes which are small circles
 		//and gives it the data
 		function initNode(){
-			node = container.attr("class", "nodes")
+			node = container.append("g").attr("class", "nodes")
+				.attr("width",width).attr("height",height)
 				.selectAll("circle")
 				.data(universe);		
 		}
@@ -342,7 +342,8 @@ class Universe extends MagicCircle{
 		//sets width and height of the container for the labels
 		//and gives it the data
 		function initLabel(){
-			label = container.attr("class", "lables")
+			label = container.append("g").attr("class", "lables")
+				.attr("width",width).attr("height",height)
 				.selectAll(".lables")
 				.data(universe);
 		}
@@ -350,8 +351,8 @@ class Universe extends MagicCircle{
 		//sets width and height of the container for the links
 		//and gives it the data
 		function initLink(){
-			link = container      	 	
-				.attr("class", "links").attr("width",width).attr("height",height)
+			link = container.append("g").attr("class", "links")
+				.attr("width",width).attr("height",height)
 				.selectAll("line")
 				.data(universe);
 		}

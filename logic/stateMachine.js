@@ -3,7 +3,7 @@ class StateMachine{
 		this.activePage = undefined;
 		this.mapPage = new MapPage("mainPage");
 		this.lineChartPage = new LineChartPage("mainPage");
-		//this.crimeCorrelationPage = new CrimeCorrelationPage("mainPage");
+		this.crimeCorrelationPage = new CrimeCorrelationPage("mainPage");
 		this.universePage = new UniversePage("mainPage");		
 	}
 
@@ -24,39 +24,36 @@ class StateMachine{
 
 	drawMapPage(){	
 		this.cleanOldPage();
-		this.activePage = this.mapPage;
-		this.activePage.init();
+		this.activePage = this.mapPage;		
 		//console.log("drawMapPage", this.activePage);
-		this.drawActivePage();
+		//this.initAndDrawActivePage();
 	}
 
 	drawLineChartPage(){		
 		this.cleanOldPage();
-		this.activePage = this.lineChartPage;
-		this.activePage.init();
+		this.activePage = this.lineChartPage;		
 		//console.log("drawLineChartPage", this.activePage, "this.lineChartPage", this.lineChartPage);
-		this.drawActivePage();
+		this.initAndDrawActivePage();
 
 	}
 
 	drawCrimeCorrelationPage(){
 		this.cleanOldPage();
-		this.activePage = this.crimeCorrelationPage;
-		this.activePage.init();
+		this.activePage = this.crimeCorrelationPage;		
 		//console.log("drawCrimeCorrelationPage", this.activePage);
-		this.drawActivePage();
+		//this.initAndDrawActivePage();
 	}
 
 	drawUniversePage(){
 		this.cleanOldPage();
-		this.activePage = this.universePage;
-		this.activePage.init();
+		this.activePage = this.universePage;		
 		//console.log("drawUniversePage", this.activePage);
-		this.drawActivePage();
+		this.initAndDrawActivePage();
 	}
 
-	drawActivePage(){
+	initAndDrawActivePage(){
 		if(this.activePage !== undefined){
+			this.activePage.init();
 			this.activePage.drawPage();	
 		}
 	}

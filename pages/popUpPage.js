@@ -7,6 +7,13 @@ class PopUpPage extends ParentPage{
 		//this.closeButton = ????	
 	}
 
+	init(){
+		this.mainChart = new PopUp(this.pageId);
+		this.charts = [this.mainChart];
+		this.mainChart.appendThisCharToPage();
+		//this.charts = [this.mainChart]
+	}
+
 	drawPage(){
 		super();
 	}

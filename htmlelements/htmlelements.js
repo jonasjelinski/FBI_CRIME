@@ -8,6 +8,16 @@ htmlelementsNamespace.MAGIC_CIRCLE = { //Elternelement aller anderen HTML-Elemen
 	type: "svg"
 };
 
+htmlelementsNamespace.CRIME_CORRELATION = {
+	parentElement: htmlelementsNamespace.CRIME_CORRELATION,
+	htmlclassname: "crimecorrelation",
+	htmlid: "crimecorrelation",
+	width:500,
+	height:500,
+	type: "svg",
+	fontColor: "black"
+};
+
 htmlelementsNamespace.SUN_BURST = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	htmlclassname: "sunburst",

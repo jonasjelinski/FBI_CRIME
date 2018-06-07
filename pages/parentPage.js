@@ -6,7 +6,7 @@ class ParentPage{
 		//this.mainControll = new DropDownMenu();
 		this.width = htmlelementsNamespace.PARENT_PAGE.width;
 		this.height = htmlelementsNamespace.PARENT_PAGE.height;
-		this.charts = {};
+		this.charts = [];
 		this.controlls = [this.mainControll];
 	}
 
@@ -21,14 +21,17 @@ class ParentPage{
 	}
 
 	drawPage(){
+		console.log("drawPage", this.charts.length);
 		this.drawAllCharts();
 		this.drawAllControlls();		
 	}
 	
 	drawAllCharts(){
 		for(let i = 0; i < this.charts.length; i++ ){
+			console.log("drawPage 2");
 			let chart = this.charts[i];
 			if(!this.isNoChart(chart)){
+				console.log("drawPage 3");
 				chart.doChart();
 			}			
 		}

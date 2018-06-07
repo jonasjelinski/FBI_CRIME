@@ -1,5 +1,5 @@
 class LineChart extends MagicCircle{
-	constructor(pageId){
+	constructor(){
 		super();
 		this.state = dynamicsNamespace.currentState;
 		this.htmlelement = htmlelementsNamespace.LINE_DIAGRAM; 
@@ -298,7 +298,7 @@ class LineChart extends MagicCircle{
 		//zooms in and out of the chart
 		function zoomCoordSystemAndLines() { 
 			let transitionZoomTime = 750,                
-				allLines = rootElement.selectAll(".lines")
+				allLines = container.selectAll(".lines")
 					.transition().duration(transitionZoomTime)
 					.attr("transform", d3.event.transform),     
 				lines = d3.selectAll(".line").style("stroke-width", 2/d3.event.transform.k),             

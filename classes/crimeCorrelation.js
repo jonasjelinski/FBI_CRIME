@@ -2,7 +2,7 @@
 	constructor(){
 		super();
 		this.state = dynamicsNamespace.currentState;
-		this.htmlelement = htmlelementsNamespace.THE_FORCE; 
+		this.htmlelement = htmlelementsNamespace.CRIME_CORRELATION; 
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.page = this.getRootElement();
 		this.width = this.htmlelement.width;
