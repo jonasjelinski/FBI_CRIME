@@ -72,8 +72,14 @@ commonfunctionsNamespace.getJsonObject = function(){
 };
 
 commonfunctionsNamespace.getRootElement = function(environment){
-					rootElement = d3.selectAll("#"+environment.htmlElementID).attr("width",environment.width).attr("height",environment.height);
+					rootElement = d3.selectAll("#"+environment.pageId);
 					return rootElement;        
+};
+
+commonfunctionsNamespace.getPageById = function(pageId){
+					let id = "#"+ pageId,					
+					page = d3.selectAll(id);
+					return page;        
 };
 
 commonfunctionsNamespace.getStatesAndDataByYear = function(year, jsondata){

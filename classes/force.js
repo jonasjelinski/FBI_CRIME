@@ -3,8 +3,8 @@ class TheForce extends MagicCircle{
 		super();
 		this.state = dynamicsNamespace.currentState;
 		this.htmlelement = htmlelementsNamespace.THE_FORCE; 
-		this.htmlElementID = this.htmlelement.rootid;
-		this.rootElement = this.getRootElement();
+		this.htmlElementID = this.htmlelement.htmlid;
+		this.page = this.getRootElement();
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
 		this.year = 2008;
@@ -221,7 +221,7 @@ class TheForce extends MagicCircle{
 		console.log(links," ",nodes);
 		let width = this.width;
 		let height = this.height;
-		let rootElement = this.rootElement.attr("width", width).attr("height", height);
+		let rootElement = this.page.attr("width", width).attr("height", height);
 		let radius = 5;
 		let strokeWidth = 2;
 		let centerX = 0;

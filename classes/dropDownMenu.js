@@ -1,7 +1,7 @@
 class DropDownMenu{
 	constructor(rootElement, dropDownArray) {
-		this.rootID = "universePage"; 		
-		this.rootElement = rootElement;		
+		this.htmlid = "universePage"; 		
+		this.page = rootElement;		
 		this.selectedValue = dropDownArray[0];
 		this.dropDownArray = dropDownArray;
 		this.width = 100;

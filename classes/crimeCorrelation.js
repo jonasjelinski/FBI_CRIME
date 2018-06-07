@@ -1,10 +1,10 @@
-class CrimeCorrelation extends MagicCircle{
+	class CrimeCorrelation extends MagicCircle{
 	constructor(){
 		super();
 		this.state = dynamicsNamespace.currentState;
 		this.htmlelement = htmlelementsNamespace.THE_FORCE; 
-		this.htmlElementID = this.htmlelement.rootid;
-		this.rootElement = this.getRootElement();
+		this.htmlElementID = this.htmlelement.htmlid;
+		this.page = this.getRootElement();
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
 		this.year = 2008;
@@ -109,7 +109,7 @@ class CrimeCorrelation extends MagicCircle{
 		setNodeDataAndEnterAndExitSettings();
 
 		function prepareRootElement(){
-			rootElement = this.rootElement.attr("width", width).attr("height", height);
+			rootElement = this.page.attr("width", width).attr("height", height);
 		}
 
 		function initSimulation(){

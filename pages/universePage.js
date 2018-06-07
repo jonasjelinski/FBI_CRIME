@@ -1,9 +1,13 @@
 class UniversePage extends ParentPage{
-	constructor(){
+	constructor(pageId){
 		super();
-		this.rootElement = this.mainChart.rootElement;
-		this.mainChart = new Universe();
+		this.page = this.mainChart.rootElement;
+		this.mainChart = {};
 		//this.mainControll = new TimeLine();		
+	}
+
+	init(){
+		this.mainChart = new Universe(pageId);
 	}
 
 }

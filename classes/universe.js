@@ -7,8 +7,8 @@ class Universe extends MagicCircle{
 		super();
 		this.state = dynamicsNamespace.currentState;
 		this.htmlelement = htmlelementsNamespace.THE_UNIVERSE; 
-		this.htmlElementID = this.htmlelement.rootid;
-		this.rootElement = this.getRootElement();
+		this.htmlElementID = this.htmlelement.htmlid;
+		this.page = this.getRootElement();
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
 		this.year = 2008;
@@ -315,39 +315,34 @@ class Universe extends MagicCircle{
 	drawTheWholeUniverse(universeNodes){
 		let that = this,		
 			universe = universeNodes,
-
+			container = this.container,
 			width = this.width,
 			height = this.height,
 			rootElement,
 			node,
 			label,
-			link;
-
-		prepareRootNode();
+			link,
+			canvas;
+		
 		initNode();
 		initLabel();
 		initLink();
 		setEnterAndExitBehaviour();
 		drawUniverse();
 		animateRotation();
-
-		//sets width and height of the rootElement
-		function prepareRootNode(){
-			rootElement = that.rootElement.attr("width", width).attr("height", height);
-		}
-
+		
 		//sets width and height of the container for the nodes which are small circles
 		//and gives it the data
 		function initNode(){
-			node = rootElement.attr("class", "nodes")
+			node = container.attr("class", "nodes")
 				.selectAll("circle")
-				.data(universe);
+				.data(universe);		
 		}
 
 		//sets width and height of the container for the labels
 		//and gives it the data
 		function initLabel(){
-			label = rootElement.attr("class", "lables")
+			label = container.attr("class", "lables")
 				.selectAll(".lables")
 				.data(universe);
 		}
@@ -355,7 +350,7 @@ class Universe extends MagicCircle{
 		//sets width and height of the container for the links
 		//and gives it the data
 		function initLink(){
-			link = rootElement      	 	
+			link = container      	 	
 				.attr("class", "links").attr("width",width).attr("height",height)
 				.selectAll("line")
 				.data(universe);
@@ -421,7 +416,7 @@ class Universe extends MagicCircle{
 				.attr("y", function(d){return d.y;});
 
 			link
-				.attr("x1", function(d, i) {return d.xSun })
+				.attr("x1", function(d) {return d.xSun })
 				.attr("y1", function(d) { return d.ySun; })
 				.attr("x2", function(d) { return d.x; })
 				.attr("y2", function(d) { return d.y; });

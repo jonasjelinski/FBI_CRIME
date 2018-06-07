@@ -1,10 +1,9 @@
 class LineChart extends MagicCircle{
-	constructor(){
+	constructor(pageId){
 		super();
 		this.state = dynamicsNamespace.currentState;
 		this.htmlelement = htmlelementsNamespace.LINE_DIAGRAM; 
-		this.htmlElementID = this.htmlelement.rootid;
-		this.rootElement = this.getRootElement();
+		this.htmlElementID = this.htmlelement.htmlid;
 	}
 	
 	//calls drawLineChart
@@ -107,7 +106,7 @@ class LineChart extends MagicCircle{
 			width = this.width,
 			labelWidth = width/5,
 			labelHeight = labelWidth/5,			
-			rootElement,
+			container = this.container,
 			maxYear = configNamespace.CONSTANTS.maxYear,
 			minYear = configNamespace.CONSTANTS.minYear,
 			minCrime = 0,
@@ -126,7 +125,8 @@ class LineChart extends MagicCircle{
 			deltaAxisY = chartHeight-margin.bottom,
 			durationTime = 2000,
 			zooming,
-			container,
+			container = this.container,
+			canvas,
 			coordinateSystem,
 			xCoordLine,
 			yCoordLine,
@@ -135,7 +135,7 @@ class LineChart extends MagicCircle{
 			labels;	
 			
 		initZoomingBehaviour();
-		prepareRootElement();	
+		prepareContainer();	
 		initContainer();		
 		initCoordinateSystem();
 		initXCoordLine();
@@ -157,13 +157,13 @@ class LineChart extends MagicCircle{
 		}
 
 		//sets width and height of the rootElement
-		function prepareRootElement(){
-			rootElement = that.rootElement.attr("width", width).attr("height", height).call(zooming);	
-		}
+		function prepareContainer(){
+			container.call(zooming);
+		}	
 
-		//inits container and sets width and height and position of the container
+		//inits container and sets width and height and position of the canvas
 		function initContainer(){
-			container = rootElement.append("svg").attr("class", "container")
+			canvas = container.append("svg").attr("class", "canvas")
 				.attr("width", chartWidth)
 				.attr("height", chartHeight)                                            
 				.attr("transform", "translate(" + margin.left + "," + 0 + ")");  
@@ -171,7 +171,7 @@ class LineChart extends MagicCircle{
 
 		//inits coordinateSystem and sets width and height and position of the coordindate system
 		function initCoordinateSystem(){
-			coordinateSystem = rootElement.append("g").attr("class", "coordinateSystem")
+			coordinateSystem = container.append("g").attr("class", "coordinateSystem")
 				.attr("width", chartWidth)
 				.attr("height", chartHeight)                                            
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");				
@@ -193,16 +193,15 @@ class LineChart extends MagicCircle{
 
 		//inits allGraphLines and sets width and height and position of allGraphLines
 		function initAllGraphLines(){
-			allGraphLines = container.append("g").attr("class", "lines")
+			allGraphLines = canvas.append("g").attr("class", "lines")
 				.attr("width", chartWidth)
 				.attr("height", chartHeight)                                                                
 				.style("fill", "white");
-		}	
-
+		}
 
 		//inits labels and sets width and height and position of allGraphLines
 		function initLabels(){
-			labels = rootElement            
+			labels = container            
 				.append("g")
 				.attr("width", labelWidth)
 				.attr("height", labelHeight)
@@ -232,7 +231,7 @@ class LineChart extends MagicCircle{
 
 		//gives data to selectedGraphLines and draws new lines with new data on enter
 		function drawGraph(){
-			let selectedGraphLines = rootElement.selectAll(".lines"),
+			let selectedGraphLines = container.selectAll(".lines"),
 				visible =1;        
 			selectedGraphLines
 				.selectAll("line")

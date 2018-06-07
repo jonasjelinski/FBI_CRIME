@@ -1,16 +1,23 @@
 class ParentPage{
-	constructor(){
-		this.htmlElementID = htmlelementsNamespace.UNIVERSE_PAGE.rootid;			
-		this.mainChart = new Universe();
+	constructor(pageId){
+		this.pageId = "mainpage";
+		this.htmlElementID = htmlelementsNamespace.UNIVERSE_PAGE.htmlid;			
+		this.mainChart = {};
 		//this.mainControll = new DropDownMenu();
 		this.width = htmlelementsNamespace.PARENT_PAGE.width;
 		this.height = htmlelementsNamespace.PARENT_PAGE.height;
-		this.charts = [this.mainChart];
+		this.charts = {};
 		this.controlls = [this.mainControll];
 	}
 
 	getRootElement(){
 		return commonfunctionsNamespace.getRootElement(this);      
+	}
+
+	init(){
+		console.log("a");
+		this.mainChart = new Universe(pageId);
+		this.charts = [this.mainChart];	
 	}
 
 	drawPage(){

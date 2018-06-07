@@ -6,14 +6,14 @@ class Sunburst extends MagicCircle{
 		super();
 		this.self = this; 
 		this.htmlelement = htmlelementsNamespace.SUN_BURST; 
-		this.htmlElementID = this.htmlelement.rootid;
-		this.width = this.htmlelement.width;
+		this.htmlElementID = this.htmlelement.htmlid;
+		this.width = this.htmlelement.width;		
 		this.height = this.htmlelement.height;   
 		this.state = dynamicsNamespace.currentState;
 		this.year = dynamicsNamespace.currentYear;
 		this.categories = [];
 		this.crimes = [];	
-		this.rootElement = this.getRootElement();   
+		this.page = this.getRootElement();   
 	}    
 	
 	//returns the data which is necassray to build the sunburst	
@@ -22,13 +22,13 @@ class Sunburst extends MagicCircle{
 	}
 	
 	//calls drawsunburst
-	doChart(){
-		console.log("ein lama erzeugt einen sunburst");
+	doChart(){		
 		this.drawSunBurst();	
 	}
 
 	//converts the data so it is usable and then draws the sunburst	
 	drawSunBurst(){
+		console.log(this.page);
 		let hierarchyData = this.createHierarchyData();
 		this.createSunburst(hierarchyData); 
 	}
@@ -104,7 +104,7 @@ class Sunburst extends MagicCircle{
 			lineWidth = labelWidth,
 			lineHeight = labelHeight,
 			durationTime = 2000,      
-			rootElement,
+			container = this.container,
 			sunburst,
 			labels,
 			lines,
@@ -126,15 +126,10 @@ class Sunburst extends MagicCircle{
 		drawLabels();
 		drawLines();
 
-		//sets width and height of the rootElement
-		function prepareRootElement(){
-			rootElement = that.rootElement.attr("width", width).attr("height", height);
-		}
-
 		//appends a new htmlElement to the rootElement and sets his atrributes
 		//this is the container where the suburst will be drawn in
 		function initSunburst(){
-			sunburst = rootElement
+			sunburst = container
 				.append(that.htmlElementType)
 				.attr("width", width)
 				.attr("class", "sunburst")
@@ -144,7 +139,7 @@ class Sunburst extends MagicCircle{
 		//appends a new htmlElement to the rootElement and sets his atrributes
 		//this is the container where the labels will be drawn in
 		function initLabels(){
-			labels = rootElement            
+			labels = container            
 				.append("g")
 				.attr("width", labelWidth)
 				.attr("height", labelHeight)
@@ -156,7 +151,7 @@ class Sunburst extends MagicCircle{
 		//this is the container where the lines will be drawn in
 		//which connect the sunburst with the labels
 		function initLines(){
-			lines = rootElement
+			lines = container
 				.append(that.htmlElementType)
 				.attr("width", width)
 				.attr("height", height)

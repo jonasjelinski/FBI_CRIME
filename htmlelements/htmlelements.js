@@ -1,63 +1,63 @@
 var htmlelementsNamespace = htmlelementsNamespace || {};
 
 htmlelementsNamespace.MAGIC_CIRCLE = { //Elternelement aller anderen HTML-Elemente
-	rootclassname: "magicCircle", //im html-Element class="magicCircle"
-	rootid: "magicCircle", //im html-Element id="magicCircle"
+	htmlclassname: "magicCircle", //im html-Element class="magicCircle"
+	htmlid: "magicCircle", //im html-Element id="magicCircle"
 	width:1000,
-	height:100,
-	type: "g"
+	height:1000,
+	type: "svg"
 };
 
 htmlelementsNamespace.SUN_BURST = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
-	rootclassname: "sunburst",
-	rootid: "sunburst",
+	htmlclassname: "sunburst",
+	htmlid: "sunburst",
 	width:500,
 	height:500,
-	type: "g",
+	type: "svg",
 	fontColor: "black"
 };
 
 htmlelementsNamespace.LINE_DIAGRAM = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
-	rootclassname: "linediagram",
-	rootid: "linediagram",
+	htmlclassname: "linediagram",
+	htmlid: "linediagram",
 	width:650,
 	height:400,
-	type: "g"
+	type: "svg"
 };
 
 htmlelementsNamespace.THE_FORCE = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
-	rootclassname: "theforce",
-	rootid: "theforce",
+	htmlclassname: "theforce",
+	htmlid: "theforce",
 	width:3000,
 	height:3000,
-	type: "g"
+	type: "svg"
 };
 
 htmlelementsNamespace.THE_UNIVERSE = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
-	rootclassname: "universe",
-	rootid: "universe",
+	htmlclassname: "universe",
+	htmlid: "universe",
 	width:3000,
 	height:3000,
-	type: "g"
+	type: "svg"
 };
 
 htmlelementsNamespace.THE_MAP = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
-	rootclassname: "map",
-	rootid: "map",
+	htmlclassname: "map",
+	htmlid: "map",
 	width: 3000,
 	height: 3000,
-	type: "g"
+	type: "svg"
 };
 
 htmlelementsNamespace.INFO_BOX = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
-	rootclassname: "infobox",
-	rootid: "infobox",
+	htmlclassname: "infobox",
+	htmlid: "infobox",
 	width: 1000,
 	height: 1000,
 	type: "svg"
@@ -69,32 +69,32 @@ htmlelementsNamespace.PARENT_PAGE = {
 };
 
 htmlelementsNamespace.CRIME_CORRELATION_PAGE = {
-	rootclassname: "correlationPage",
-	rootid: "correlationPage",
+	htmlclassname: "correlationPage",
+	htmlid: "correlationPage",
 };
 
 htmlelementsNamespace.LINE_CHART_PAGE = {
-	rootclassname: "lineChartPage",
-	rootid: "lineChartPage",
+	htmlclassname: "lineChartPage",
+	htmlid: "lineChartPage",
 	dropDownClassName: "dropDown crimetypes linechart",
 	dropDownid: "dropDown crimetypes linechart",
 };
 
 htmlelementsNamespace.MAP_PAGE = {
-	rootclassname: "mapPage",
-	rootid: "mapPage",
+	htmlclassname: "mapPage",
+	htmlid: "mapPage",
 };
 
 htmlelementsNamespace.UNIVERSE_PAGE = {
-	rootclassname: "universePage",
-	rootid: "universePage",
+	htmlclassname: "universePage",
+	htmlid: "universePage",
 	timeLineClassName: "timeLine universe",
 	timeLineClassid: "timeLine universe",
 };
 
 htmlelementsNamespace.POPUP_PAGE = {
-	rootclassname: "popupPage",
-	rootid: "popupPage",
+	htmlclassname: "popupPage",
+	htmlid: "popupPage",
 	sunburstclassname: "popupPage sunburst",
 	sunburstid: "popupPage sunburst",	
 	textclassname: "popupPage text",

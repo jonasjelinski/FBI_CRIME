@@ -1,10 +1,10 @@
 class StateMachine{
 	constructor(){
 		this.activePage = undefined;
-		this.mapPage = new MapPage();
-		this.lineChartPage = new LineChartPage();
-		this.crimeCorrelationPage = new CrimeCorrelationPage();
-		this.universePage = new UniversePage();		
+		this.mapPage = new MapPage("mainPage");
+		this.lineChartPage = new LineChartPage("mainPage");
+		//this.crimeCorrelationPage = new CrimeCorrelationPage("mainPage");
+		this.universePage = new UniversePage("mainPage");		
 	}
 
 	switchState(state){
@@ -25,6 +25,7 @@ class StateMachine{
 	drawMapPage(){	
 		this.cleanOldPage();
 		this.activePage = this.mapPage;
+		this.activePage.init();
 		//console.log("drawMapPage", this.activePage);
 		this.drawActivePage();
 	}
@@ -32,6 +33,7 @@ class StateMachine{
 	drawLineChartPage(){		
 		this.cleanOldPage();
 		this.activePage = this.lineChartPage;
+		this.activePage.init();
 		//console.log("drawLineChartPage", this.activePage, "this.lineChartPage", this.lineChartPage);
 		this.drawActivePage();
 
@@ -40,6 +42,7 @@ class StateMachine{
 	drawCrimeCorrelationPage(){
 		this.cleanOldPage();
 		this.activePage = this.crimeCorrelationPage;
+		this.activePage.init();
 		//console.log("drawCrimeCorrelationPage", this.activePage);
 		this.drawActivePage();
 	}
@@ -47,6 +50,7 @@ class StateMachine{
 	drawUniversePage(){
 		this.cleanOldPage();
 		this.activePage = this.universePage;
+		this.activePage.init();
 		//console.log("drawUniversePage", this.activePage);
 		this.drawActivePage();
 	}

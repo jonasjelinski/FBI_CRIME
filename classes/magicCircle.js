@@ -1,17 +1,33 @@
 class MagicCircle{
-	constructor (){
+	constructor (pageId){
+		this.pageId = "mainpage"; 
+		this.page = this.getPage(); 
 		this.data = this.getData();
 		this.htmlelement = htmlelementsNamespace.MAGIC_CIRCLE;
-		this.width = this.htmlelement.width;
-		this.height = this.htmlelement.height;               
-		this.htmlElementID = this.htmlelement.rootid;
+		this.htmlElementID = this.htmlelement.htmlid;
+		this.htmlclassname = this.htmlelement.htmlclassname;
 		this.htmlElementType = this.htmlelement.type;
-		this.rootElement = this.getRootElement(); 
-		this.getRootElement = this.getRootElement.bind(this);
+		this.width = this.htmlelement.width;
+		this.height = this.htmlelement.height;
+		this.getRootElement = this.getRootElement.bind(this);      
+		this.container = {};		
 	}
 	
 	getRootElement(){
-		return commonfunctionsNamespace.getRootElement(this);      
+		return commonfunctionsNamespace.getRootElement(this);
+	}
+
+	getPage(){
+		return commonfunctionsNamespace.getPageById(this.pageId);      
+	}	
+	
+	appendThisCharToPage(){
+		let char = this.page.append(this.htmlElementType)
+			.attr("width", this.width)
+			.attr("width", this.width)
+			.attr("height",this.height)
+			.attr("id", this.htmlElementID);
+		this.container = char;
 	}
 	
 	getData(){
@@ -19,7 +35,7 @@ class MagicCircle{
 	}
 
 	doChart(){
-		console.log("ein magischerKreis erzeugt sich selbst", this.rootElement);
+		console.log("ein magischerKreis erzeugt sich selbst", this.page);
 		this.drawCircle();   
 	}
 
@@ -29,6 +45,7 @@ class MagicCircle{
 			durationTime = 2000,
 			radius = 20,
 			that = this,
+			container =this.container,
 			rootElement,
 			circle;
 
@@ -40,7 +57,7 @@ class MagicCircle{
 		}
 
 		function initCircle(){
-			circle = rootElement.append(that.htmlElementType)
+			circle = container
 				.append("circle")
 				.attr("cx", xpos)
 				.attr("cy", ypos)
@@ -55,6 +72,6 @@ class MagicCircle{
 	}
 
 	killsHimself(){
-		this.rootElement.selectAll("*").remove();
+		this.page.selectAll("*").remove();
 	}
 }

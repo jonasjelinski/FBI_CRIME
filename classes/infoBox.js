@@ -3,10 +3,10 @@ class InfoBox extends MagicCircle{
 	constructor(){
 		super();
 		this.htmlelement = htmlelementsNamespace.INFO_BOX; 
-		this.htmlElementID = this.htmlelement.rootid;
+		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
-		this.rootElement = this.getRootElement();
+		this.page = this.getRootElement();
 		this.htmlElementType = this.htmlelement.type; 
 	}
 

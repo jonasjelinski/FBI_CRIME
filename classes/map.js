@@ -3,8 +3,8 @@ class Map extends MagicCircle{
 	constructor(){
 		super();
 		this.htmlelement = htmlelementsNamespace.THE_MAP; 
-		this.htmlElementID = this.htmlelement.rootid;
-		this.rootElement = this.getRootElement();
+		this.htmlElementID = this.htmlelement.htmlid;
+		this.page = this.getRootElement();
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
 		this.mapData = configNamespace.MAP_JSON_OBJECT;
@@ -39,7 +39,7 @@ class Map extends MagicCircle{
 		/*let tip = d3.tip()
 		.offset(function(){return [10,10];})
 		.html(function(d) {	return createTextHtml(d);});*/
-		let g = this.rootElement.append(this.htmlElementType);
+		let g = this.page.append(this.htmlElementType);
 	
 		setMaxMinCrime();
 		createPath();
