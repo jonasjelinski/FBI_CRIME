@@ -216,9 +216,8 @@ class TheForce extends MagicCircle{
 	drawForceNodes(data){
 		let that = this;
 		let sortedQuotients = data;
-		let links = this.createLinks(sortedQuotients);
-		let nodes = this.createNodes(sortedQuotients);
-		console.log(links," ",nodes);
+		let links = this.createLinks(sortedQuotients);		
+		let nodes = this.createNodes(sortedQuotients);		
 		let width = this.width;
 		let height = this.height;
 		let rootElement = this.page.attr("width", width).attr("height", height);
@@ -235,14 +234,16 @@ class TheForce extends MagicCircle{
 		let sizeFactor = 5;
 		
 
-		let simulation = d3.forceSimulation()
+		/*let simulation = d3.forceSimulation()
 			.nodes(nodes)		   
 			.force("charge", d3.forceManyBody())
 			.force("center", d3.forceCenter(centerX, centerY))
 			.force("collision", d3.forceCollide().radius(radius))
 			.force("link", d3.forceLink().links(links).id(linkId).distance(linkDistance))
 			.on('tick', updatePos)
-		   //.on('end', animateRotation);
+		   //.on('end', animateRotation);*/
+		   console.log("links",links);
+		   console.log("nodes",nodes);
 
 		
 

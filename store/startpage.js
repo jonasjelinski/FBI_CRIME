@@ -2,7 +2,6 @@
 //source: https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement#defer_property 
 
 var startpage_namespace = startpage_namespace || {};
-var Script_Sources
 
 //async scripts 
 //needs to be loaded as soon the page is loaded
@@ -29,6 +28,7 @@ startpage_namespace.loadFirstScripts = function(callback){
 	});
 	commonfunctionsNamespace.setMapJsonObject();
 	commonfunctionsNamespace.setJsonObject();	
+	commonfunctionsNamespace.setCrimeCorrelationCSV();	
 	callback(null);
 }
 

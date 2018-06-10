@@ -1,13 +1,22 @@
 var commonfunctionsNamespace = commonfunctionsNamespace || {};
 
-commonfunctionsNamespace.loadCSV = function(){
+commonfunctionsNamespace.setCrimeCorrelationCSV= function(){
+	"use strict"; 
+	var q=d3.queue();
+	q.defer(commonfunctionsNamespace.loadCrimeCorrelationsCSV);  
+	q.await(function(error) {
+		if (error) throw error;
+		commonfunctionsNamespace.setChartsCanBeBuild(true);
+	}); 
+};
+
+commonfunctionsNamespace.loadCrimeCorrelationsCSV = function(){
 	"use strict"
 	try{
 		let data; 
-		d3.csv(configNamespace.FILE_PATHES.csvpath, function(csvdata){
-			data = csvdata;
-		}
-		);
+		d3.csv(configNamespace.FILE_PATHES.crimeCorrelations, function(csvdata){
+			configNamespace.CRIME_CORRELATIONS = csvdata;
+		});
 		return data;
 	}
 	catch(err){
@@ -18,11 +27,10 @@ commonfunctionsNamespace.loadCSV = function(){
 commonfunctionsNamespace.loadJson = function(callback){
 	"use strict"
 	try{        
-				d3.json(configNamespace.FILE_PATHES.jsonpath, function(jsondata) {         
-														configNamespace.JSON_OBJECT = jsondata;
-														callback(null);                            
-													}                          
-										);    
+		d3.json(configNamespace.FILE_PATHES.jsonpath, function(jsondata) {         
+			configNamespace.JSON_OBJECT = jsondata;
+			callback(null);                            
+		});    
 	}
 	catch(err){
 		console.log("couldn't load json "+err);   
@@ -32,16 +40,15 @@ commonfunctionsNamespace.loadJson = function(callback){
 
 commonfunctionsNamespace.loadMapJsonObject = function(callback){
 	try{        
-				d3.json(configNamespace.FILE_PATHES.mappath, function(jsondata) {         
-														configNamespace.MAP_JSON_OBJECT = jsondata;
-														callback(null);                            
-													}                          
-										);    
+		d3.json(configNamespace.FILE_PATHES.mappath, function(jsondata) {         
+				configNamespace.MAP_JSON_OBJECT = jsondata;
+				callback(null);                            
+			}                          
+		);    
 	}
 	catch(err){
 		console.log("couldn't load json "+err);   
 	}
-
 };
 
 commonfunctionsNamespace.setJsonObject = function(){

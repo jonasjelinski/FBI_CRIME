@@ -1,4 +1,4 @@
-	class CrimeCorrelation extends MagicCircle{
+class CrimeCorrelation extends MagicCircle{
 	constructor(){
 		super();
 		this.state = dynamicsNamespace.currentState;
@@ -22,84 +22,93 @@
 			propertySunX: this.width*this.propertyPos,
 			propertySunY: this.height/2 
 		};
+		this.nodesIndex = 0;
+		this.linksIndex = 1;
 	}
 
 	doChart(){
-		console.log("A lama uses the force");
+		console.log("A lama creates crime correlation");
 		this.drawForceChart();
 	}
 
 	drawForceChart(){
-		let data = this.createD3Data();
+		let data = this.getNodesAndLinks();		
 		this.drawCorrelation(data);
 	}
 
-	createD3Data(){
-		let quotients = [],
-			sortedArray = [],
-			percentageAarray = [],
-			statesObject = this.data.years[this.year].states,
-			statesArray = Object.keys(statesObject);
-		for(let i = 0; i < statesArray.length; i++){
-			let state = statesArray[i],
-				newQuotient = {},
-				q = this.calculateStatesQuotient(state);
-			newQuotient.state = state;
-			newQuotient.quotient = q;
-			quotients.push(newQuotient);
-		}
-		sortedArray = this.sortArray(quotients);
-		percentageAarray = this.transformQuotientToPercentages(sortedArray);
-		return percentageAarray;	 
-	}	
-
-	createNodes(sortedQuotients){
-		let newArray = [],
-			that = this;
-		newArray = this.createCenterNodes(newArray);
-		sortedQuotients.forEach(function(stateObject){
-			let newNode = {},
-				statename = stateObject.state;			
-			newNode.id = that.createId(statename);
-			newNode.quotient = stateObject.quotient;
-			newNode.group = stateObject.quotient > 0.5 ?  that.violenceGroup :  that.propertyGroup;
-			newArray.push(newNode);
-		});
-		return newArray;
+	getNodesAndLinks(){
+		let csvData = configNamespace.CRIME_CORRELATIONS, 
+			nodesAndLinks = this.createnNodesAndLinks(csvData);		
+		return nodesAndLinks;	
 	}
 
-	createLinks(sortedQuotients){		
-		let links = [],
-			that = this;
-		sortedQuotients.forEach(function(stateObject){
-			let newLink = {};
-			newLink.source = that.createId(stateObject.state);
-			newLink.target = stateObject.quotient > 0.5 ? "Violence" : "Property";
-			links.push(newLink);
-		});		
+	createnNodesAndLinks(data){		
+		let nodesAndLinks = [],
+			crimeNames = data.columns,
+			nodes = this.createNodes(crimeNames),
+			links = this.createLinks(data);	
+		nodesAndLinks[this.nodesIndex] = nodes;
+		nodesAndLinks[this.linksIndex] = links;						
+		return nodesAndLinks;
+	}	
+
+	createNodes(crimeNames){
+		let nodes = [];	
+
+		for(let i = 1; i < crimeNames.length; i++){
+			let crime = crimeNames[i],
+				newNode = {};			
+			newNode.id = crime;					
+			nodes.push(newNode);
+		}
+
+		return nodes;
+	}
+
+	createLinks(data){		
+		let crimeNames = data.columns,
+			links = [];			
+		for(let i = 0; i < data.length; i++){
+			let row = data[i],
+				source = row.CRIME,
+				crimes = Object.keys(row);				
+				for(let j = 0; j < crimes.length; j++){
+					let target = crimes[j]; 					
+					if(source !== target && target !== "CRIME"){
+						let link = {};
+						link.source = source;
+						link.target = target;
+						link.correlation = row[target];
+						links.push(link);						
+					}					
+				}	
+
+		}
 		return links;
 	}
 
 	//source: https://bl.ocks.org/mbostock/4062045
 	drawCorrelation(data){
 		let that = this,
-			sortedQuotients = data,
-			links = this.createLinks(sortedQuotients),
-			nodes = this.createNodes(sortedQuotients),	
+			nodesAndLinks = makeDeepCopyOfArray(data),			
+			nodes = nodesAndLinks[this.nodesIndex],
+			links = nodesAndLinks[this.linksIndex],	
+			width = this.width,
 			height = this.height,		
-			radius = 5,
-			strokeWidth = 2,
+			radius = width/100,
+			linkDistance = width/10,
+			strokeWidth = 4,
 			centerX = width/2,
 			centerY = height/2,
 			center = [centerX, centerY],
 			distance = width/30,		
 			draggedAlpha = 0.3,
 			dragendedAlpha = 0,
-			rootElement,
+			rootElement ,
 			simulation,
 			node,
 			link,
-			label;
+			label;				
 
 		prepareRootElement();		
 		initSimulation();
@@ -109,7 +118,7 @@
 		setNodeDataAndEnterAndExitSettings();
 
 		function prepareRootElement(){
-			rootElement = this.page.attr("width", width).attr("height", height);
+			rootElement = that.page.append("svg").attr("width", width).attr("height", height);
 		}
 
 		function initSimulation(){
@@ -118,30 +127,32 @@
 				.force("charge", d3.forceManyBody())
 				.force("center", d3.forceCenter(centerX, centerY))
 				.force("collision", d3.forceCollide().radius(radius))
-				.force("link", d3.forceLink().links(links).id(linkId).distance(linkDistance))
-				.on("tick", updatePos)
-				.on("start", startDragging)
-				.on("drag", dragNode)
-				.on("end", endDragging);
+				.force("link", d3.forceLink().links(links).id(linkId).distance(calculatelinkDistance))
+				.on("tick", updatePos);
+				
 		}
 
 		function initNodes(){
-			node = rootElement.attr("class", "nodes")
+			node = rootElement
+				.append("svg")
+				.attr("class", "nodes")
 				.selectAll("circle")
-				.data(nodes)
-				.attr("r", radius)
-				.attr("fill", fillCircle);
+				.data(nodes);			
+				
 		}
 
 		function initLinks(){
-			link = rootElement      	 	
+			link = rootElement 
+				.append("svg")     	 	
 				.attr("class", "links").attr("width",width).attr("height",height)
 				.selectAll("line")
 				.data(links);
 		}
 
 		function initLabels(){
-			label = rootElement.attr("class", "lables")
+			label = rootElement
+				.append("svg")
+				.attr("class", "lables")
 				.selectAll(".lables")
 				.data(nodes);
 		}
@@ -189,9 +200,15 @@
 		}
 
 		function enterNode(){
-			node = node.enter().append("circle")						
-				.attr("r", radius);
-				
+			node = node.enter()
+				.append("circle")						
+				.attr("r", radius)
+				.attr("fill", fillCircle)				
+				.call(d3.drag()				
+					.on("start", startDragging)
+					.on("drag", dragNode)
+					.on("end", endDragging)
+				);		
 		}
 
 		function enterLabel(){
@@ -202,22 +219,24 @@
 
 		function enterLink(){
 			link = link.enter().append("line")
-				.attr("stroke-width", strokeWidth)
+				.attr("stroke-width", calculateStrokeWidth)
 				.attr("fill", "black")
 				.style("stroke", "black");
 		}
 
-		function linkId(d){
+		function linkId(d){			
 			return d.id;
 		}
 
-		function linkDistance(d){
-			let factor = d.source.quotient+1,
-				sizeFactor = 5;
-			return distance*sizeFactor*factor; 
+		function calculateStrokeWidth(d){			
+			return strokeWidth*d.correlation;
 		}
 
-		function startDragging(d) {
+		function calculatelinkDistance(d){			
+			return linkDistance*d.correlation; 
+		}
+
+		function startDragging(d) {			
 			if (!d3.event.active) simulation.alphaTarget(draggedAlpha).restart();
 			d.fx = d.x;
 			d.fy = d.y;
@@ -232,6 +251,14 @@
 			if (!d3.event.active) simulation.alphaTarget(dragendedAlpha);
 			d.fx = null;
 			d.fy = null;
+		}
+
+		function makeDeepCopyOfArray(data){
+			return JSON.parse(JSON.stringify(data));
+		}
+
+		function fillCircle(d){			
+			return commonfunctionsNamespace.getCrimeColor(d.id);
 		}
 
 	}

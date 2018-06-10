@@ -11,5 +11,4 @@ class UniversePage extends ParentPage{
 		this.charts = [this.mainChart];
 		this.mainChart.appendThisCharToPage();
 	}
-
 }

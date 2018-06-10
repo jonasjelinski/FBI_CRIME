@@ -13,10 +13,10 @@ configNamespace.HTML_TYPES = {
 	svg: "svg"
 };
 
-configNamespace.FILE_PATHES = {
-	csvpath: "./store/elements-by-episode.csv",
+configNamespace.FILE_PATHES = {	
 	jsonpath: "./store/crimes.json",
-	mappath: "./store/states.json"
+	mappath: "./store/states.json",
+	crimeCorrelations : "./store/crimeCorrelations.csv",
 };
 
 configNamespace.CONSTANTS = {
@@ -51,6 +51,8 @@ configNamespace.STATE_MACHINE = {
 configNamespace.JSON_OBJECT = false;
 
 configNamespace.MAP_JSON_OBJECT = false;
+
+configNamespace.CRIME_CORRELATIONS = false;
 
 configNamespace.SCRIPT_PATHES = [
 	"./libs/d3/d3.js",

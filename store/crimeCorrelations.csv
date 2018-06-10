@@ -1,0 +1,8 @@
+CRIME,MurderManslaughter,Rape,Robbery,Aggravatedassault,Burglary,Larcenytheft,Motorvehicletheft
+MurderManslaughter,1,0.315,0.728,0.895,0.818,0.804,0.878
+Rape,0.315,1,-0.148,0.174,0.032,0.015,0.115
+Robbery,0.728,-0.148,1,0.853,0.845,0.843,0.851
+Aggravatedassault,0.895,0.174,0.853,1,0.876,0.897,0.932
+Burglary,0.818,0.032,0.845,0.876,1,0.975,0.905
+Larcenytheft,0.804,0.015,0.843,0.897,0.975,1,0.866
+Motorvehicletheft,0.878,0.115,0.851,0.932,0.905,0.866,1
