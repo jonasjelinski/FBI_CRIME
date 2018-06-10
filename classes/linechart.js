@@ -310,4 +310,17 @@ class LineChart extends MagicCircle{
 			return JSON.parse(JSON.stringify(jsondata));
 		}
 	}
+	
+	//hides line if visible, shows line if it has been invisible before
+	showOrHideLine(crimeType){
+		let crime = crimeType,
+			isHidden = 0,
+			isVisible = 1,
+			id = "[id="+crime+"]",        
+			line = d3.select(id),
+			visible = parseInt(line.attr("opacity")),          
+			newOpacity = visible === isVisible ? isHidden : isVisible;      
+		line.attr("opacity", newOpacity);       
+	}
+
 }

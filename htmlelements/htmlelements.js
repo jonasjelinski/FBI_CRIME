@@ -5,7 +5,7 @@ htmlelementsNamespace.MAGIC_CIRCLE = { //Elternelement aller anderen HTML-Elemen
 	htmlid: "magicCircle", //im html-Element id="magicCircle"
 	width:1000,
 	height:1000,
-	type: "svg"
+	type: "svg",
 };
 
 htmlelementsNamespace.CRIME_CORRELATION = {
@@ -15,7 +15,7 @@ htmlelementsNamespace.CRIME_CORRELATION = {
 	width:500,
 	height:500,
 	type: "svg",
-	fontColor: "black"
+	fontColor: "black",
 };
 
 htmlelementsNamespace.SUN_BURST = {
@@ -25,7 +25,7 @@ htmlelementsNamespace.SUN_BURST = {
 	width:500,
 	height:500,
 	type: "svg",
-	fontColor: "black"
+	fontColor: "black",
 };
 
 htmlelementsNamespace.LINE_DIAGRAM = {
@@ -34,7 +34,7 @@ htmlelementsNamespace.LINE_DIAGRAM = {
 	htmlid: "linediagram",
 	width:650,
 	height:400,
-	type: "svg"
+	type: "svg",
 };
 
 htmlelementsNamespace.THE_FORCE = {
@@ -43,7 +43,7 @@ htmlelementsNamespace.THE_FORCE = {
 	htmlid: "theforce",
 	width:3000,
 	height:3000,
-	type: "svg"
+	type: "svg",
 };
 
 htmlelementsNamespace.THE_UNIVERSE = {
@@ -52,7 +52,7 @@ htmlelementsNamespace.THE_UNIVERSE = {
 	htmlid: "universe",
 	width:3000,
 	height:3000,
-	type: "svg"
+	type: "svg",
 };
 
 htmlelementsNamespace.THE_MAP = {
@@ -61,7 +61,18 @@ htmlelementsNamespace.THE_MAP = {
 	htmlid: "map",
 	width: 3000,
 	height: 3000,
-	type: "svg"
+	type: "svg",
+};
+
+htmlelementsNamespace.DROP_DOWN = {
+	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+	htmlclassname: "dropDown",
+	htmlid: "dropDown",
+	width: 3000,
+	height: 3000,
+	type: "div",
+	selectedColor : "green",
+	unselectedColor : "gray", 
 };
 
 htmlelementsNamespace.INFO_BOX = {
@@ -70,12 +81,12 @@ htmlelementsNamespace.INFO_BOX = {
 	htmlid: "infobox",
 	width: 1000,
 	height: 1000,
-	type: "svg"
+	type: "svg",
 };
 
 htmlelementsNamespace.PARENT_PAGE = {
 	width: 2000,
-	height: 1000
+	height: 1000,
 };
 
 htmlelementsNamespace.CRIME_CORRELATION_PAGE = {
@@ -114,5 +125,5 @@ htmlelementsNamespace.POPUP_PAGE = {
 	deleteButtonName: "deleteButton popUp",
 	deleteButtonid: "deleteButton popUp",
 	width: 1000,
-	height: 500
+	height: 500,
 };

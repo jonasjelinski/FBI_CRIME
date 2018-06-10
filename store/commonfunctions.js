@@ -148,7 +148,12 @@ commonfunctionsNamespace.getCrimerateByCrimeType = function(year, statename, cri
 		console.log("given crime not in crimes crime: ",crime, "crimes propertyCrimes", propertyCrimes, "violentCrimes", violentCrimes);
 		return errorValue;
 	}
-}; 
+};
+
+commonfunctionsNamespace.getAllCrimeTypes = function(){
+	let crimeTypesArray = configNamespace.CONSTANTS.crimeTypesProperty.concat(configNamespace.CONSTANTS.crimeTypesViolence);
+	return crimeTypesArray;
+} 
 
 //returns an object
 commonfunctionsNamespace.getAllCategories = function(){

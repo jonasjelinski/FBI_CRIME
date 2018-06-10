@@ -1,16 +1,16 @@
-class DropDownMenu{
-	constructor(rootElement, dropDownArray) {
-		this.htmlid = "universePage"; 		
-		this.page = rootElement;		
+class DropDownMenu extends MagicCircle{
+	constructor(dropDownArray) {
+		super();
+		this.htmlelement = htmlelementsNamespace.DROP_DOWN;
+		this.htmlElementID = this.htmlelement.htmlid;
+		this.htmlElementType = this.htmlelement.type;		
 		this.selectedValue = dropDownArray[0];
 		this.dropDownArray = dropDownArray;
 		this.width = 100;
-		this.height = 100; 
-	}
-
-	getRootElement(){
-		return commonfunctionsNamespace.getRootElement(this);      
-	}
+		this.height = 100;
+		this.selectionEvent = "dropDownSelection";
+		this.eventTarget =  new EventTarget();
+	}	
 
 	doChart(){		
 		this.createDropDownMenu();
@@ -20,16 +20,20 @@ class DropDownMenu{
 	createDropDownMenu(){
 		let dropDownMenu, 
 			menu,
+			container = this.container,
 			dropDownOptions,
 			that = this;
 
+		initDropDownMenu();
+		initMenu();
+		initDropDownOptions();				
+
 		function initDropDownMenu(){
-			dropDownMenu = that.rootElement
+			dropDownMenu = container
 				.append("rect")
 				.attr("class","dropDownMenu")
 				.attr("width", that.width)
-				.attr("height", that.height)
-				
+				.attr("height", that.height);				
 		}
 
 		function initMenu(){
@@ -38,7 +42,7 @@ class DropDownMenu{
 				.attr("class","menu")
 				.attr("width", that.width)
 				.attr("height", that.height)
-				.on("change", setSelectedValue);			
+				.on("change", sendSelectedValue);			
 		}
 
 		function initDropDownOptions(){	
@@ -53,18 +57,14 @@ class DropDownMenu{
 				.attr("height", that.height);
 		}
 
-		function setSelectedValue(d){			
-			that.selectValue = d3.select("select").property("value");
-		}		
+		function sendSelectedValue(d){			
+			let value = d3.select("select").property("value");
+			sendEvent(value);			
+		}	
 
-		initDropDownMenu();
-		initMenu();
-		initDropDownOptions();
-		
+		function sendEvent(value){
+			let event = new CustomEvent(that.selectionEvent, {detail: {selection : value}});							
+			that.eventTarget.dispatchEvent(event);
+		}
 	}
-
-	getSelectedValue(){
-		return this.selectedValue;
-	}
-
 }

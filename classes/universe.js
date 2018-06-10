@@ -26,8 +26,8 @@ class Universe extends MagicCircle{
 			propertySunX: this.width*this.propertyPos,
 			propertySunY: this.height/2,
 			standardSpeed: 1,
-			minSpeed: 1
-		}
+			minSpeed: 1,
+		};
 	}
 
 	//draws the universe
@@ -329,7 +329,6 @@ class Universe extends MagicCircle{
 		setEnterAndExitBehaviour();
 		drawUniverse();
 		animateRotation();
-		
 		
 		//sets width and height of the container for the nodes which are small circles
 		//and gives it the data
