@@ -329,7 +329,7 @@ class Universe extends MagicCircle{
 		setEnterAndExitBehaviour();
 		drawUniverse();
 		animateRotation();
-		console.log(universeNodes);
+		
 		
 		//sets width and height of the container for the nodes which are small circles
 		//and gives it the data

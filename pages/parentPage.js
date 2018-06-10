@@ -15,23 +15,19 @@ class ParentPage{
 	}
 
 	init(){
-		console.log("a");
 		this.mainChart = new Universe(pageId);
 		this.charts = [this.mainChart];	
 	}
 
 	drawPage(){
-		console.log("drawPage", this.charts.length);
 		this.drawAllCharts();
 		this.drawAllControlls();		
 	}
 	
 	drawAllCharts(){
 		for(let i = 0; i < this.charts.length; i++ ){
-			console.log("drawPage 2");
 			let chart = this.charts[i];
 			if(!this.isNoChart(chart)){
-				console.log("drawPage 3");
 				chart.doChart();
 			}			
 		}

@@ -41,7 +41,7 @@ class StateMachine{
 		this.cleanOldPage();
 		this.activePage = this.crimeCorrelationPage;		
 		//console.log("drawCrimeCorrelationPage", this.activePage);
-		//this.initAndDrawActivePage();
+		this.initAndDrawActivePage();
 	}
 
 	drawUniversePage(){
