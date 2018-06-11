@@ -13,7 +13,7 @@ configNamespace.HTML_TYPES = {
 	svg: "svg"
 };
 
-configNamespace.FILE_PATHES = {	
+configNamespace.FILE_PATHES = {
 	jsonpath: "./store/crimes.json",
 	mappath: "./store/states.json",
 	crimeCorrelations : "./store/crimeCorrelations.csv",
@@ -40,7 +40,7 @@ configNamespace.CONSTANTS = {
 	minYear : 2000
 };
 
-configNamespace.STATE_MACHINE = {	
+configNamespace.STATE_MACHINE = {
 	MAP: "MAP",
 	LINE_CHART: "LINE_CHART",
 	CRIME_CORRELATION: "CRIME_CORRELATION",
@@ -57,60 +57,62 @@ configNamespace.CRIME_CORRELATIONS = false;
 configNamespace.SCRIPT_PATHES = [
 	"./libs/d3/d3.js",
 	"./libs/d3/d3.tip.js",
-	"./libs/topoJson/topojson.v1.min.js", 
-	"./store/config.js", 
+	"./libs/topoJson/topojson.v1.min.js",
+	"./store/config.js",
 	"./store/dynamics.js",
 	"./htmlelements/htmlelements.js",
-	"./store/commonfunctions.js", 
+	"./store/commonfunctions.js",
 	"./classes/lama.js",
-	"./classes/linechart.js", 
+	"./classes/linechart.js",
 	"classes/magicCircle.js",
 	"./classes/force.js",
 	"./classes/universe.js",
 	"./classes/map.js",
-	"./classes/infoBox.js", 
+	"./classes/timeLine.js",
+	"./classes/infoBox.js",
 	"./classes/crimeCorrelation.js",
 	"./classes/dropDownMenu.js",
 	"./classes/closeButton.js",
-	"./pages/parentPage.js", 
-	"./pages/crimeCorrelationPage.js", 
-	"./pages/lineChartPage.js", 
-	"./pages/mapPage.js", 
+	"./pages/parentPage.js",
+	"./pages/crimeCorrelationPage.js",
+	"./pages/lineChartPage.js",
+	"./pages/mapPage.js",
 	"./pages/universePage.js",
 	"./pages/popUpPage.js",
 	"./logic/stateMachine.js",
-	"./components/components.js", 
-	"./actions/actions.js", 
+	"./components/components.js",
+	"./actions/actions.js",
 	"./listener/listener.js"];
 
 configNamespace.FIRST_SCRIPTS = [
-	"./libs/d3/d3.js", 
+	"./libs/d3/d3.js",
 	"./libs/d3/d3.tip.js",
 	"./libs/topoJson/topojson.v1.min.js",
 	"./store/config.js",
 	"./store/dynamics.js",
-	"./store/commonfunctions.js", 
+	"./store/commonfunctions.js",
 	"./htmlelements/htmlelements.js"];
 
 configNamespace.SECOND_SCRIPTS = [
-	"./classes/lama.js", 
-	"./classes/magicCircle.js", 
+	"./classes/lama.js",
+	"./classes/magicCircle.js",
 	"./classes/map.js",
-	"./classes/sunburst.js", 
+	"./classes/timeLine.js",
+	"./classes/sunburst.js",
 	"./classes/linechart.js",
 	"./classes/force.js",
 	"./classes/universe.js",
 	"./classes/infoBox.js",
 	"./classes/crimeCorrelation.js",
 	"./classes/closeButton.js",
-	"./pages/parentPage.js",  
+	"./pages/parentPage.js",
 	"./pages/crimeCorrelationPage.js",
-	"./classes/dropDownMenu.js", 
-	"./pages/lineChartPage.js", 
-	"./pages/mapPage.js", 
+	"./classes/dropDownMenu.js",
+	"./pages/lineChartPage.js",
+	"./pages/mapPage.js",
 	"./pages/universePage.js",
 	"./pages/popUpPage.js",
 	"./logic/stateMachine.js",
-	"./components/components.js", 
-	"./actions/actions.js", 
+	"./components/components.js",
+	"./actions/actions.js",
 	"./listener/listener.js"];
