@@ -75,6 +75,18 @@ htmlelementsNamespace.DROP_DOWN = {
 	unselectedColor : "gray", 
 };
 
+htmlelementsNamespace.CLOSE_BUTTON = {
+	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+	htmlclassname: "closeButton",
+	htmlid: "closeButton",
+	width: 100,
+	height: 100,
+	type: "svg",
+	strokeColor : "black",
+	fillColor : "blue", 
+	strokeWidth :2,
+};
+
 htmlelementsNamespace.INFO_BOX = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	htmlclassname: "infobox",

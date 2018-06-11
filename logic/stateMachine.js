@@ -4,7 +4,8 @@ class StateMachine{
 		this.mapPage = new MapPage("mainPage");
 		this.lineChartPage = new LineChartPage("mainPage");
 		this.crimeCorrelationPage = new CrimeCorrelationPage("mainPage");
-		this.universePage = new UniversePage("mainPage");		
+		this.universePage = new UniversePage("mainPage");	
+		this.popupPage	 = new PopUpPage("popup");
 	}
 
 	switchState(state){
@@ -26,7 +27,7 @@ class StateMachine{
 		this.cleanOldPage();
 		this.activePage = this.mapPage;		
 		//console.log("drawMapPage", this.activePage);
-		//this.initAndDrawActivePage();
+		this.initAndDrawActivePage();
 	}
 
 	drawLineChartPage(){		

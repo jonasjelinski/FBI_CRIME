@@ -1,6 +1,6 @@
 class ParentPage{
-	constructor(pageId){
-		this.pageId = "mainpage";
+	constructor(pageId = "mainpage"){
+		this.pageId = pageId;
 		this.htmlElementID = htmlelementsNamespace.UNIVERSE_PAGE.htmlid;			
 		this.mainChart = {};
 		//this.mainControll = new DropDownMenu();

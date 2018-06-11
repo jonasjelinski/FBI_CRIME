@@ -112,8 +112,7 @@ class Sunburst extends MagicCircle{
 			parentNode,
 			arc,
 			labelarc;
-
-		prepareRootElement();
+		
 		initSunburst();
 		initLabels();
 		initLines();
