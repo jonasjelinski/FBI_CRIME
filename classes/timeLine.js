@@ -176,4 +176,3 @@ function handlerDragable(line,xAxis,g){
 
   }
 }
-
