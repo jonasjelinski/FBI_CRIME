@@ -185,3 +185,31 @@ class Map extends MagicCircle{
 
 }
 
+													var getAllCrimesNumber=[];
+
+													for(let i=0;i<allStates.length;i++){
+
+														let currentCrimeValue=commonfunctionsNamespace.getCrimesAndDataByYearAndState(year, allStates[i], data);
+
+														if(configNamespace.CONSTANTS.crimeCategories.Crimes.violentCrime.includes(crimeType)){
+
+															let crimeValue=currentCrimeValue.crimes.violentCrime[crimeType];
+
+															var objectCrimesStatesNumber={state:allStates[i],value:parseInt(crimeValue)};
+															 getAllCrimesNumber.push(objectCrimesStatesNumber);
+
+														}
+														else if (configNamespace.CONSTANTS.crimeCategories.Crimes.propertyCrime.includes(crimeType)) {
+
+															let crimeValue=currentCrimeValue.crimes.propertyCrime[crimeType];
+
+															var	objectCrimesStatesNumber={state:allStates[i],value:parseInt(crimeValue)};
+															getAllCrimesNumber.push(objectCrimesStatesNumber);
+														}
+													}return getAllCrimesNumber;
+												}
+	}
+
+}
+let map = new Map();
+map.doChart();
