@@ -161,3 +161,137 @@ svg{
   z-index: 0;
   visibility: visible;
 }
+
+#play-button {
+background: #f08080;
+padding-right: 26px;
+border-radius: 3px;
+border: none;
+color: white;
+margin: 0;
+padding: 0 12px;
+width: 60px;
+cursor: pointer;
+height: 30px;
+}
+
+#play-button:hover {
+background-color: #696969;
+}
+
+.ticks {
+font-size: 10px;
+}
+
+.track,
+.track-inset,
+.track-overlay {
+stroke-linecap: round;
+}
+
+.track {
+stroke: #000;
+stroke-opacity: 0.3;
+stroke-width: 10px;
+}
+
+.track-inset {
+stroke: #dcdcdc;
+stroke-width: 8px;
+}
+
+.track-overlay {
+pointer-events: stroke;
+stroke-width: 50px;
+stroke: transparent;
+cursor: pointer;
+}
+
+.handle {
+fill: #fff;
+stroke: #000;
+stroke-opacity: 0.5;
+stroke-width: 1.25px;
+}
+
+#myChart div {
+    background-color: aliceblue;
+    margin: 2px;
+}
+
+#myChart rect {
+    fill: steelblue;
+}
+
+#myChart text {
+    fill: white;
+    font: 10px sans-serif;
+    text-anchor: end;
+}
+
+path.state {
+  fill: teal;
+  stroke: white;
+  -webkit-transition: fill 0.5s ease-out;
+  -moz-transition: fill 0.5s ease-out;
+  -o-transition: fill 0.5s ease-out;
+  -ms-transition: fill 0.5s ease-out;
+  transition: fill 0.5s ease-out;
+  /*cursor: -webkit-zoom-in; cursor: -moz-zoom-in;*/
+  /*cursor: -webkit-zoom-out; cursor: -moz-zoom-out;*/
+}
+
+path.state:hover {
+  /*fill: black;*/
+  /*stroke: black;*/
+
+}
+
+.stateHover {
+background: rgba(0, 0, 0, 0.7);
+padding:8px;
+font-size:16px;
+color:white;
+letter-spacing:1px;
+}
+
+.d3-tip {
+  line-height: 1;
+  /*font-weight: bold;*/
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  -ms-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+}
+d3-tip:hover {
+
+}
+
+.state.q0{fill:#FFFD6D}
+.state.q1{fill:#FDE563}
+.state.q2{fill:#FACD58}
+.state.q3{fill:#F8B54E}
+.state.q4{fill:#F69D43}
+.state.q5{fill:#F48539}
+.state.q6{fill:#F16C2F}
+.state.q7{fill:#EF5424}
+.state.q8{fill:#ED3C1A}
+.state.q9{fill:#EA2410}
+.state.q10{fill:#E80C05}
+
+.state.p0{background-color:#FFFD6D}
+.state.p1{background-color:#FDE563}
+.state.p2{background-color:#FACD58}
+.state.p3{background-color:#F8B54E}
+.state.p4{background-color:#F69D43}
+.state.p5{background-color:#F48539}
+.state.p6{background-color:#F16C2F}
+.state.p7{background-color:#EF5424}
+.state.p8{background-color:#ED3C1A}
+.state.p9{background-color:#EA2410}
+.state.p10{background-color:#E80C05}
