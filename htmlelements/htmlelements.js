@@ -72,7 +72,7 @@ htmlelementsNamespace.DROP_DOWN = {
 	height: 3000,
 	type: "div",
 	selectedColor : "green",
-	unselectedColor : "gray", 
+	unselectedColor : "gray",
 };
 
 htmlelementsNamespace.CLOSE_BUTTON = {
@@ -83,7 +83,7 @@ htmlelementsNamespace.CLOSE_BUTTON = {
 	height: 100,
 	type: "svg",
 	strokeColor : "black",
-	fillColor : "blue", 
+	fillColor : "blue",
 	strokeWidth :2,
 };
 
@@ -129,7 +129,7 @@ htmlelementsNamespace.POPUP_PAGE = {
 	htmlclassname: "popupPage",
 	htmlid: "popupPage",
 	sunburstclassname: "popupPage sunburst",
-	sunburstid: "popupPage sunburst",	
+	sunburstid: "popupPage sunburst",
 	textclassname: "popupPage text",
 	textid: "popupPage text",
 	treeClassName: "popupPage tree",
@@ -138,4 +138,35 @@ htmlelementsNamespace.POPUP_PAGE = {
 	deleteButtonid: "deleteButton popUp",
 	width: 1000,
 	height: 500,
+};
+
+htmlelementsNamespace.THE_MAP = {
+	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+	rootclassname: "map",
+	rootid: "map",
+	width:960,
+	height:520,
+	type: "g"
+};
+
+htmlelementsNamespace.TIME_LINE = {
+	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+	rootclassname: "timeLine",
+	childElement: "play-button",
+	rootid: "timeLine",
+	width:360,
+	height:160,
+	type: "g",
+	margin: {top:15, right:15, bottom:15, left:15},
+	classSlider: "slider"
+};
+
+htmlelementsNamespace.TREE = {
+	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+	rootclassname: "tree",
+	rootid: "tree",
+	width:960,
+	height:520,
+	type: "g",
+	margin: {top:20, right:120, bottom:20, left:120}
 };
