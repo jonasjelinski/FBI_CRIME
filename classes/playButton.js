@@ -1,6 +1,6 @@
 class PlayButton extends MagicCircle{
-	constructor(){
-		super();
+	constructor(pageId){
+		super(pageId);
 		this.htmlelement = htmlelementsNamespace.PLAY_BUTTON;
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.htmlElementType = this.htmlelement.type;

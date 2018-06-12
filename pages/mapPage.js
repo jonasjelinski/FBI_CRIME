@@ -1,8 +1,6 @@
 class MapPage extends ParentPage{
-	constructor(){
-		super();
-		//this.mainChart = new Map();
-		//this.timeLine = new TimeLine();
+	constructor(pageId){
+		super(pageId);	
 	}
 
 	init(){		
@@ -18,12 +16,12 @@ class MapPage extends ParentPage{
 	}
 
 	initControlls(){
-		this.timeLine = new TimeLine();
+		this.timeLine = new TimeLine(this.pageId);
 		this.timeLine.appendThisCharToPage();
 		this.crimeTypes = commonfunctionsNamespace.getAllCrimeTypes();
-		this.dropDownMenu = new DropDownMenu(this.crimeTypes);
+		this.dropDownMenu = new DropDownMenu(this.pageId, this.crimeTypes);
 		this.dropDownMenu.appendThisCharToPage();
-		this.playButton = new PlayButton();		
+		this.playButton = new PlayButton(this.pageId);		
 		this.playButton.appendThisCharToPage();
 		this.controlls = [this.timeLine,this.dropDownMenu,this.playButton];
 	}
@@ -32,6 +30,7 @@ class MapPage extends ParentPage{
 		this.timeLine.eventTarget.addEventListener(this.timeLine.onUpdate, this.updateMapYearAndMoving.bind(this));
 		this.dropDownMenu.eventTarget.addEventListener(this.dropDownMenu.selectionEvent, this.updateCrimeType.bind(this), false);
 		this.playButton.eventTarget.addEventListener(this.playButton.onClick, this.playTimeLine.bind(this), false);
+		this.mainChart.eventTarget.addEventListener(this.playButton.onClick, this.showPopup.bind(this), false);
 	}
 
 	updateMapYearAndMoving(event){
@@ -57,5 +56,13 @@ class MapPage extends ParentPage{
 			this.timeLine.pauseTimeLine();
 		}
 		
+	}
+
+	showPopup(event){
+		let state = event.detail.state,
+			year = event.detail.year;
+		let popUpPage = new PopUpPage("popup", state, year);
+		popUpPage.init();
+		popUpPage.drawPage();		
 	}
 }

@@ -1,6 +1,6 @@
 class LineChart extends MagicCircle{
-	constructor(){
-		super();
+	constructor(pageId){
+		super(pageId);
 		this.state = dynamicsNamespace.currentState;
 		this.htmlelement = htmlelementsNamespace.LINE_DIAGRAM; 
 		this.htmlElementID = this.htmlelement.htmlid;

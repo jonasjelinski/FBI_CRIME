@@ -1,9 +1,9 @@
 class Tree extends MagicCircle{
 
-  constructor(year=2000,state="ALABAMA"){
-		super();
-		this.htmlelement = htmlelementsNamespace.TIME_LINE;
-		this.htmlElementID = this.htmlelement.rootid;
+  constructor(pageId, state = configNamespace.CONSTANTS.states[0], year = 2000){
+		super(pageId);
+		this.htmlelement = htmlelementsNamespace.TREE;
+		this.htmlElementID = this.htmlelement.htmlid;
 		this.rootElement = this.getRootElement();
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
@@ -31,12 +31,11 @@ drawTree(){
       height = this.height - this.htmlelement.margin.top - this.htmlelement.margin.bottom;
 
 
-  var svg = this.rootElement
+  var svg = this.container
       .attr("width", width + this.htmlelement.margin.right + this.htmlelement.margin.left)
       .attr("height", height + this.htmlelement.margin.top + this.htmlelement.margin.bottom)
       .append("g")
-      .attr("transform", "translate("
-            + this.htmlelement.margin.left + "," + this.htmlelement.margin.top + ")");
+      .attr("transform", "translate("+ this.htmlelement.margin.left + "," + this.htmlelement.margin.top + ")");
 
   var i = 0,
       duration = 750,

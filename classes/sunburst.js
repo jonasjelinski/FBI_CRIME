@@ -2,15 +2,15 @@
 //it shows the distribution between different crimecategories in a single state
 
 class Sunburst extends MagicCircle{
-	constructor(){
-		super();
+	constructor(pageId, state = configNamespace.CONSTANTS.states[0], year = 2008){
+		super(pageId);
 		this.self = this; 
 		this.htmlelement = htmlelementsNamespace.SUN_BURST; 
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;		
 		this.height = this.htmlelement.height;   
-		this.state = dynamicsNamespace.currentState;
-		this.year = dynamicsNamespace.currentYear;
+		this.state = state;
+		this.year = year;
 		this.categories = [];
 		this.crimes = [];	
 		this.page = this.getRootElement();   
@@ -23,12 +23,11 @@ class Sunburst extends MagicCircle{
 	
 	//calls drawsunburst
 	doChart(){		
-		this.drawSunBurst();	
+		this.drawSunBurst();
 	}
 
 	//converts the data so it is usable and then draws the sunburst	
 	drawSunBurst(){
-		console.log(this.page);
 		let hierarchyData = this.createHierarchyData();
 		this.createSunburst(hierarchyData); 
 	}
@@ -38,7 +37,7 @@ class Sunburst extends MagicCircle{
 	}
 
 	//converts the jsondata in usable data for the d3 functions
-	createHierarchyData(){
+	createHierarchyData(){		
 		let crimedata = commonfunctionsNamespace.getCrimesAndDataByYearAndState(this.year, this.state, this.data),
 			crimesdata = crimedata.crimes,			    
 			rootJsonObject = {},
@@ -131,8 +130,8 @@ class Sunburst extends MagicCircle{
 			sunburst = container
 				.append(that.htmlElementType)
 				.attr("width", width)
-				.attr("class", "sunburst")
-				.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+				.attr("height", height)
+				.attr("class", "sunburst");
 		}
 
 		//appends a new htmlElement to the rootElement and sets his atrributes
@@ -154,8 +153,7 @@ class Sunburst extends MagicCircle{
 				.append(that.htmlElementType)
 				.attr("width", width)
 				.attr("height", height)
-				.attr("class", "lines")
-				.attr("transform", "translate(" + lineWidth + "," + lineHeight + ")");
+				.attr("class", "lines");				
 		}
 
 		//sets the partition let
@@ -200,7 +198,8 @@ class Sunburst extends MagicCircle{
 		function drawSlices(){
 			sunburst.selectAll("g")
 				.data(parentNode.descendants())
-				.enter().append("g").attr("class", "node").append("path")			
+				.enter().append("g").attr("class", "node").append("path")
+				.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")			
 				.attr("display", function (d) { return d.depth ? null : "none"; })
 				.attr("d", computeTransition())  
 				.transition()
@@ -255,6 +254,7 @@ class Sunburst extends MagicCircle{
 				.attr("y1", function (d, i) {return computeTextYPos(d,i);}) 
 				.attr("x2", function (d, i) {return computeNodePosition(d,i)[0]})
 				.attr("y2", function (d, i) {return computeNodePosition(d,i)[1]})
+				.attr("transform", "translate(" + lineWidth + "," + lineHeight + ")")
 				.attr("stroke-width", 1)
 				.attr("stroke", "black");		
 		}

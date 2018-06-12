@@ -1,6 +1,6 @@
 class CrimeCorrelation extends MagicCircle{
-	constructor(){
-		super();
+	constructor(pageId){
+		super(pageId);
 		this.state = dynamicsNamespace.currentState;
 		this.htmlelement = htmlelementsNamespace.CRIME_CORRELATION; 
 		this.htmlElementID = this.htmlelement.htmlid;
@@ -12,16 +12,6 @@ class CrimeCorrelation extends MagicCircle{
 		this.propertyGroup = 1;
 		this.violencePos= 0.75;
 		this.propertyPos= 0.25;
-		this.standards = {
-			standardRadius: this.width/50,
-			minRadius: this.width/55,
-			standardDistanceToSun: this.width/10,
-			minDistanceToSun: this.with/10,
-			violenceSunX: this.width*this.violencePos,
-			violenceSunY: this.height/2,
-			propertySunX: this.width*this.propertyPos,
-			propertySunY: this.height/2 
-		};
 		this.nodesIndex = 0;
 		this.linksIndex = 1;
 	}
@@ -94,14 +84,15 @@ class CrimeCorrelation extends MagicCircle{
 			nodes = nodesAndLinks[this.nodesIndex],
 			links = nodesAndLinks[this.linksIndex],	
 			width = this.width,
-			height = this.height,		
-			radius = width/100,
-			linkDistance = width/10,
-			strokeWidth = 4,
+			height = this.height,
+			radius = width/50,
+			fontSize =	radius+"px",
+			linkDistance = width/2,
+			strokeWidth = width/100,
 			centerX = width/2,
 			centerY = height/2,
 			center = [centerX, centerY],
-			distance = width/30,		
+			distance = width/2,		
 			draggedAlpha = 0.3,
 			dragendedAlpha = 0,
 			rootElement = this.container,
@@ -209,7 +200,8 @@ class CrimeCorrelation extends MagicCircle{
 		function enterLabel(){
 			label = label.enter().append("text")
 				.text(function(d){return d.id;})
-				.attr("fill","green" );      			 
+				.attr("fill","green" )      			 
+				.style("font-size", fontSize);     			 
 		}
 
 		function enterLink(){

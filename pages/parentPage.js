@@ -7,7 +7,8 @@ class ParentPage{
 		this.width = htmlelementsNamespace.PARENT_PAGE.width;
 		this.height = htmlelementsNamespace.PARENT_PAGE.height;
 		this.charts = [];
-		this.controlls = [this.timeLine];
+		this.controlls = [];
+		this.page = commonfunctionsNamespace.getPageById(this.pageId);
 	}
 
 	getRootElement(){
@@ -20,6 +21,7 @@ class ParentPage{
 	}
 
 	drawPage(){
+		this.showPage();
 		this.drawAllCharts();
 		this.drawAllControlls();		
 	}
@@ -69,7 +71,8 @@ class ParentPage{
 	}	
 
 	deletePage(){
-		d3.select("#"+this.pageId).selectAll("*").remove();
+		this.page.selectAll("*").remove();
+		this.hidePage();
 	}
 
 	deleteAllElements(){
@@ -97,11 +100,11 @@ class ParentPage{
 	}
 
 	hidePage(){
-
+		this.page.style("visibility","hidden");
 	}
 
 	showPage(){
-
+		this.page.style("visibility","visible");
 	}
 	
 }

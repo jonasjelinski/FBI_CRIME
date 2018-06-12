@@ -1,5 +1,5 @@
 class LineChartPage extends ParentPage{
-	constructor(){
+	constructor(pageId){
 		super();
 		//this.infoBox = new InfoBox();		
 	}
@@ -18,7 +18,7 @@ class LineChartPage extends ParentPage{
 
 	initControlls(){
 		let dropDownArray = commonfunctionsNamespace.getAllCrimeTypes();
-		this.dropDownMenu = new DropDownMenu(dropDownArray);
+		this.dropDownMenu = new DropDownMenu(this.pageId, dropDownArray);
 		this.dropDownMenu.appendThisCharToPage();
 		this.controlls = [this.dropDownMenu];
 	}

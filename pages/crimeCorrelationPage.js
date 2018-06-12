@@ -1,5 +1,5 @@
 class CrimeCorrelationPage extends ParentPage{
-	constructor(){
+	constructor(pageId){
 		super();		
 		this.mainChart = new CrimeCorrelation();
 	}

@@ -12,8 +12,8 @@ htmlelementsNamespace.CRIME_CORRELATION = {
 	parentElement: htmlelementsNamespace.CRIME_CORRELATION,
 	htmlclassname: "crimecorrelation",
 	htmlid: "crimecorrelation",
-	width:500,
-	height:500,
+	width:3000,
+	height:3000,
 	type: "svg",
 	fontColor: "black",
 };
@@ -50,8 +50,8 @@ htmlelementsNamespace.THE_UNIVERSE = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	htmlclassname: "universe",
 	htmlid: "universeANDERN",
-	width:3000,
-	height:3000,
+	width:2000,
+	height:1000,
 	type: "svg",
 };
 
@@ -167,7 +167,7 @@ htmlelementsNamespace.TIME_LINE = {
 	height:160,
 	type: "g",
 	margin: {top:15, right:15, bottom:15, left:15},
-	classSlider: "slider"
+	classSlider: "slider",
 };
 
 htmlelementsNamespace.TREE = {

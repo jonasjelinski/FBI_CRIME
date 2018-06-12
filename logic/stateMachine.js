@@ -1,10 +1,10 @@
 class StateMachine{
 	constructor(){
 		this.activePage = undefined;
-		this.mapPage = new MapPage("mainPage");
-		this.lineChartPage = new LineChartPage("mainPage");
-		this.crimeCorrelationPage = new CrimeCorrelationPage("mainPage");
-		this.universePage = new UniversePage("mainPage");	
+		this.mapPage = new MapPage("mainpage");
+		this.lineChartPage = new LineChartPage("mainpage");
+		this.crimeCorrelationPage = new CrimeCorrelationPage("mainpage");
+		this.universePage = new UniversePage("mainpage");	
 		this.popupPage	 = new PopUpPage("popup");
 	}
 

@@ -1,6 +1,6 @@
 class MagicCircle{
-	constructor (pageId){
-		this.pageId = "mainpage"; 
+	constructor (pageId = "mainpage"){
+		this.pageId = pageId; 
 		this.page = this.getPage(); 
 		this.data = this.getData();
 		this.htmlelement = htmlelementsNamespace.MAGIC_CIRCLE;
@@ -22,7 +22,7 @@ class MagicCircle{
 	}	
 	
 	appendThisCharToPage(){
-		console.log("appned", this.htmlElementID);
+		console.log("appned", this.pageId);
 		this.container = this.page.append(this.htmlElementType)
 			.attr("width", this.width)
 			.attr("width", this.width)

@@ -1,9 +1,9 @@
 class Map extends MagicCircle{
 
 
-	constructor(year=2000, crimeType="Burglary", moving=false){
+	constructor(pageId, year=2000, crimeType="Burglary", moving=false){
 
-		super();
+		super(pageId);
 		this.htmlelement = htmlelementsNamespace.THE_MAP;
 		this.htmlElementID = this.htmlelement.htmlid;	
 		this.width = this.htmlelement.width;
@@ -12,6 +12,8 @@ class Map extends MagicCircle{
 		this.year=year;
 		this.crime=crimeType;
 		this.moving=moving;
+		this.onClick = "onClick";
+		this.eventTarget =  new EventTarget();
 	}
 
 
@@ -64,7 +66,8 @@ class Map extends MagicCircle{
 		var year = this.year;
 		var crimeType=this.crime;
 		var allStates=commonfunctionsNamespace.getAllStates();
-		var counter=0;
+		var counter=0,
+		that = this;
 
 
 
@@ -75,6 +78,7 @@ class Map extends MagicCircle{
 		var allCrimeValues = getAllCrimeValues(getAllCrimesNumber);
 		var maxCrime = Math.max.apply(null, allCrimeValues), minCrime = Math.min.apply(null, allCrimeValues);
 		var tip = doTip(getAllCrimesNumber);
+		
 
 
 
@@ -112,6 +116,7 @@ class Map extends MagicCircle{
 									})
 									.call(tip)
 									//.on('mouseover', tip.show)
+									.on("click", function(d,i){ sendClickEvent(i);})
 									.on('mouseover', function(d){
 
 										if(!moving){
@@ -131,6 +136,13 @@ class Map extends MagicCircle{
 									}
 								)});
 							}
+
+	function sendClickEvent(index){
+		let state = getAllCrimesNumber[index].state,
+			event = new CustomEvent(that.onClick, {detail:{state: state, year: year}});
+		that.eventTarget.dispatchEvent(event);
+
+	}
 
 												function doTip(getAllCrimesNumber){
 													var tip = d3.tip()

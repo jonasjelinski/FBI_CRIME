@@ -1,7 +1,7 @@
 class TimeLine extends MagicCircle{
 
-	constructor(){
-		super();
+	constructor(pageId){
+		super(pageId);
 		this.htmlelement = htmlelementsNamespace.TIME_LINE;
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.rootElement = this.getRootElement();

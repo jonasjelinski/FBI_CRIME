@@ -83,7 +83,7 @@ commonfunctionsNamespace.getRootElement = function(environment){
 					return rootElement;        
 };
 
-commonfunctionsNamespace.getPageById = function(pageId){
+commonfunctionsNamespace.getPageById = function(pageId){	
 					let id = "#"+ pageId,					
 					page = d3.selectAll(id);
 					return page;        

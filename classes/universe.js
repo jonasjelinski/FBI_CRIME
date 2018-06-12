@@ -3,7 +3,7 @@
 // and  propertycrimes  quotitent = violentCrimes/propertycrimes is bigger or smaller then 0.5
 
 class Universe extends MagicCircle{
-	constructor(){
+	constructor(pageId){
 		super();
 		this.state = dynamicsNamespace.currentState;
 		this.htmlelement = htmlelementsNamespace.THE_UNIVERSE; 
@@ -30,9 +30,9 @@ class Universe extends MagicCircle{
 		};		
 		this.animateRotation;
 		this.stopRotation;
-		this.isRotating = true;
+		this.isRotating = false;
 		this.rotationAngle = 0;
-		this.rotationTimer = 0;
+		this.rotationTimer = undefined;
 	}
 
 	//draws the universe
@@ -43,7 +43,14 @@ class Universe extends MagicCircle{
 
 	killsHimself(){
 		super.killsHimself();
-		this.rotationTimer.stop();
+		this.stopRotationTimer();
+		
+	}
+
+	stopRotationTimer(){
+		if(this.rotationTimer!==undefined){
+			this.rotationTimer.stop();
+		}
 	}
 
 	setYear(year){
@@ -352,10 +359,10 @@ class Universe extends MagicCircle{
 		
 		initNode();
 		initLabel();
-		initLink();
+		initLink();		
 		setEnterAndExitBehaviour();
 		drawUniverse();
-		animateRotation();
+		//animateRotation();
 		
 		//sets width and height of the container for the nodes which are small circles
 		//and gives it the data
@@ -383,7 +390,7 @@ class Universe extends MagicCircle{
 				.selectAll("line")
 				.data(universe);
 		}
-
+	
 		//sets the data to the node, the labels and the lines and how it should be drawn
 		//if new data is given to the sunburst or if data is taken away
 		function setEnterAndExitBehaviour(){
@@ -504,7 +511,8 @@ class Universe extends MagicCircle{
 		//updates the planet positions on each tick
 		function animateRotation(){
 			let delay = 100,
-				time = 100;	
+				time = 100;
+			that.rotationTimer = d3.interval	
 			that.rotationTimer = d3.interval(function() {							
 				updatePositionsInUniverse(that.rotationAngle);
 				that.rotationAngle++;					 			
@@ -514,8 +522,7 @@ class Universe extends MagicCircle{
 
 		function stopRotation(){
 			that.isRotating = false;			
-			that.rotationTimer.stop();
-			that.rotationTimer = undefined;			
+			that.rotationTimer.stop();		
 		}	
 	}  
 

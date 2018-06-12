@@ -70,20 +70,24 @@ svg{
   position: absolute;
 }
 
+/*
+
 #dochart{
   height: 50px;
   text-align: center;
 }
+
+/*
 
 #map{
   background-color: pink;
   top: 124px;
   left: 5%;
   width: 90%;
-  height: 520px; /*angepasst an Chris Kartenformat*/
+  height: 520px; //angepasst an Chris Kartenformat
   z-index: 0;
   visibility: hidden;
-}
+}*/
 
 #popup{
   position: absolute;
@@ -112,6 +116,7 @@ svg{
   height: 15%;
 }
 
+
 #tree{
   background-color: var(--background);
   border: 1px solid red;
@@ -130,6 +135,7 @@ svg{
   height: 85%;
 }
 
+/*
 #universe{
   background-color: yellow;
   top: 124px;
@@ -137,7 +143,7 @@ svg{
   width: 90%;
   height: 520px;
   z-index: 0;
-  visibility: visible;
+  visibility: hidden;
 }
 
 #theforce{
@@ -159,8 +165,9 @@ svg{
   width: 90%;
   height: 520px;
   z-index: 0;
-  visibility: visible;
+  visibility: hidden;
 }
+*/
 
 #play-button {
 background: #f08080;

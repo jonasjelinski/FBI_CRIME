@@ -1,6 +1,6 @@
 class CloseButton extends MagicCircle{
-	constructor(){
-		super();
+	constructor(pageId){
+		super(pageId);
 		this.state = dynamicsNamespace.currentState;
 		this.htmlelement = htmlelementsNamespace.CLOSE_BUTTON; 
 		this.htmlElementID = this.htmlelement.htmlid;
@@ -10,7 +10,7 @@ class CloseButton extends MagicCircle{
 		this.strokeColor = this.htmlelement.strokeColor;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
-		this.clickEvent = "click";
+		this.onClick = "onClick";
 		this.eventTarget =  new EventTarget();
 	}
 
@@ -84,8 +84,8 @@ class CloseButton extends MagicCircle{
 			container.on("click", sendOnClickEvent);
 		}
 
-		function sendOnClickEvent(){
-			let event = new Event(that.selectionEvent);							
+		function sendOnClickEvent(){			
+			let event = new Event(that.onClick);							
 			that.eventTarget.dispatchEvent(event);
 		}
 

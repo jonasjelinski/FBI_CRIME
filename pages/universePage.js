@@ -1,7 +1,6 @@
 class UniversePage extends ParentPage{
-	constructor(){
-		super();
-		this.page = this.mainChart.rootElement;
+	constructor(pageId){
+		super(pageId);		
 		this.mainChart = {};
 		//this.mainControll = new TimeLine();		
 	}
@@ -38,8 +37,7 @@ class UniversePage extends ParentPage{
 		this.mainChart.updatesHimself();
 	}
 
-	rotateUniverse(){
-		console.log("rotateorstop");		
+	rotateUniverse(){				
 		this.mainChart.rotateOrStop();	
 	}
 }
