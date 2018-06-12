@@ -6,8 +6,8 @@ class DropDownMenu extends MagicCircle{
 		this.htmlElementType = this.htmlelement.type;		
 		this.selectedValue = dropDownArray[0];
 		this.dropDownArray = dropDownArray;
-		this.width = 100;
-		this.height = 100;
+		this.width = this.htmlelement.width;
+		this.height = this.htmlelement.height;
 		this.selectionEvent = "dropDownSelection";
 		this.eventTarget =  new EventTarget();
 	}	

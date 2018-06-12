@@ -22,12 +22,12 @@ class MagicCircle{
 	}	
 	
 	appendThisCharToPage(){
-		let char = this.page.append(this.htmlElementType)
+		console.log("appned", this.htmlElementID);
+		this.container = this.page.append(this.htmlElementType)
 			.attr("width", this.width)
 			.attr("width", this.width)
 			.attr("height",this.height)
-			.attr("id", this.htmlElementID);
-		this.container = char;
+			.attr("id", this.htmlElementID);		
 	}
 	
 	getData(){
@@ -72,6 +72,6 @@ class MagicCircle{
 	}
 
 	killsHimself(){
-		this.page.selectAll("*").remove();
+		this.container.selectAll("*").remove();
 	}
 }

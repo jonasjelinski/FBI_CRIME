@@ -49,7 +49,7 @@ htmlelementsNamespace.THE_FORCE = {
 htmlelementsNamespace.THE_UNIVERSE = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	htmlclassname: "universe",
-	htmlid: "universe",
+	htmlid: "universeANDERN",
 	width:3000,
 	height:3000,
 	type: "svg",
@@ -68,8 +68,8 @@ htmlelementsNamespace.DROP_DOWN = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	htmlclassname: "dropDown",
 	htmlid: "dropDown",
-	width: 3000,
-	height: 3000,
+	width: 100,
+	height: 100,
 	type: "div",
 	selectedColor : "green",
 	unselectedColor : "gray",
@@ -85,6 +85,15 @@ htmlelementsNamespace.CLOSE_BUTTON = {
 	strokeColor : "black",
 	fillColor : "blue",
 	strokeWidth :2,
+};
+
+htmlelementsNamespace.PLAY_BUTTON = {
+	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+	htmlclassname: "playButton",
+	htmlid: "playButton",
+	width: 100,
+	height: 100,
+	type: "button",
 };
 
 htmlelementsNamespace.INFO_BOX = {
@@ -143,17 +152,17 @@ htmlelementsNamespace.POPUP_PAGE = {
 htmlelementsNamespace.THE_MAP = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	rootclassname: "map",
-	rootid: "map",
+	htmlid: "map",
 	width:960,
 	height:520,
-	type: "g"
+	type: "g",
 };
 
 htmlelementsNamespace.TIME_LINE = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	rootclassname: "timeLine",
 	childElement: "play-button",
-	rootid: "timeLine",
+	htmlid: "timeLine",
 	width:360,
 	height:160,
 	type: "g",
@@ -164,7 +173,7 @@ htmlelementsNamespace.TIME_LINE = {
 htmlelementsNamespace.TREE = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	rootclassname: "tree",
-	rootid: "tree",
+	htmlid: "tree",
 	width:960,
 	height:520,
 	type: "g",

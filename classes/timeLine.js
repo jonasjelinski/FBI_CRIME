@@ -3,11 +3,17 @@ class TimeLine extends MagicCircle{
 	constructor(){
 		super();
 		this.htmlelement = htmlelementsNamespace.TIME_LINE;
-		this.htmlElementID = this.htmlelement.rootid;
+		this.htmlElementID = this.htmlelement.htmlid;
 		this.rootElement = this.getRootElement();
 		this.width = this.htmlelement.width-this.htmlelement.margin.left - this.htmlelement.margin.right;
 		this.height = this.htmlelement.height-this.htmlelement.margin.top - this.htmlelement.margin.bottom;
 		this.yearData=commonfunctionsNamespace.getAllYears();
+    this.eventTarget = new EventTarget();
+    this.onUpdate = "onUpdate";
+    this.timer = 0;
+    this.moving = false;
+    this.update = undefined;
+    this.step = undefined;
 	}
 
 	doChart(){
@@ -16,51 +22,44 @@ class TimeLine extends MagicCircle{
 		}
 	}
 
+  isTimeLineMoving(){
+    return this.moving;
+  }
+
+   playTimeLine(){
+    console.log("playTimeLine", this.step);
+     this.timer = setInterval(this.step, 100);     
+        this.moving = true;             
+  }
+
+   pauseTimeLine(){
+      clearInterval(this.timer);       
+      this.moving = false;
+      this.update();       
+  }
+
 	doTimeLine(){
 		var
 			startDate = new Date(String(this.yearData[0])),
 			endDate = new Date(String(this.yearData[this.yearData.length-1])),
-			targetValue = htmlelementsNamespace.TIME_LINE.width,
-			playButton = d3.select("#"+htmlelementsNamespace.TIME_LINE.childElement),
+			targetValue = htmlelementsNamespace.TIME_LINE.width,			
 			xAxis = scaleTime(startDate, endDate, targetValue),
 			formatDateIntoYear=d3.timeFormat("%Y"),
-			currentValue=0,
-			moving = false,
-			timer = 0;
+			currentValue=0,		
+			timer = 0,
+      that = this;
+     
 
-      let svg = this.rootElement.attr("width", this.width + this.htmlelement.margin.left + this.htmlelement.margin.right).attr("height", this.height+ this.htmlelement.margin.top + this.htmlelement.margin.bottom),
+      let svg = this.container.attr("width", this.width + this.htmlelement.margin.left + this.htmlelement.margin.right).attr("height", this.height+ this.htmlelement.margin.top + this.htmlelement.margin.bottom),
       g = svg.append(this.htmlElementType).attr("class", "slider").attr("transform", "translate(" + this.htmlelement.margin.left + "," + this.height/5 + ")"),
       line = drawLine(g, xAxis),
       handle = drawHandler(g),
       label = drawLabel(g, startDate);
+      this.update = update;
+      this.step = step; 
 
-      drawYearOutput(g, xAxis);
-      handlerDragable(line, xAxis, g);
-      initButton();
-
-
-function initButton(){
-  playButton
-        .on("click", function() {
-
-        let button = d3.select(this);
-        if (button.text() == "Pause") {
-
-        clearInterval(timer);
-        button.text("Play");
-        moving = false;
-        update(xAxis.invert(currentValue));
-        return timer;
-        } else {
-
-        timer = setInterval(step, 100);
-        button.text("Pause");
-        moving = true;
-        return timer;
-        }
-      });
-}
-
+      drawYearOutput(g, xAxis);     
+      handlerDragable(line, xAxis, g); 
 
 
     function drawLabel(g,startDate){
@@ -80,7 +79,7 @@ function handlerDragable(line,xAxis,g){
       .on("start.interrupt", function () { g.interrupt(); })
       .on("start drag", function() {
                 currentValue = d3.event.x;
-                update(xAxis.invert(currentValue));
+                update();
               })
           );
 }
@@ -90,7 +89,6 @@ function handlerDragable(line,xAxis,g){
       let handle = g.insert("circle", ".track-overlay")
                 .attr("class", "handle")
                 .attr("r", 9);
-
                 return handle;
     }
 
@@ -123,14 +121,10 @@ function handlerDragable(line,xAxis,g){
         .text(function(d) { return formatDateIntoYear(d);});
     }
 
-    function update(h) {
-
-      // let statusCrime=document.querySelector("status").getAttribute("crime");
-      // let map = new Map(formatDateIntoYear(h),statusCrime,moving);
-      // map.doChart();
-
-
-
+    function update() {
+      let h = xAxis.invert(currentValue),
+      year = formatDateIntoYear(h);
+      sendYearAndMovingStatus(year,that.moving);
 
       handle.attr("cx", xAxis(h));
         label
@@ -139,18 +133,20 @@ function handlerDragable(line,xAxis,g){
 
     }
 
-    function step() {
+    function sendYearAndMovingStatus(year,moving){
+      let event = new CustomEvent(that.onUpdate, {detail:{ year: year, moving: moving}});      
+      that.eventTarget.dispatchEvent(event);
+    }
 
-            update(xAxis.invert(currentValue));
-            currentValue = currentValue + (targetValue/99);
-            if (currentValue > targetValue) {
-            moving = false;
-            update(xAxis.invert(currentValue));
-            currentValue = 0;
-            clearInterval(timer);
-            playButton.text("Play");
-              }
-            }
+    function step() {
+      update();
+      currentValue = currentValue + (targetValue/99);
+      if (currentValue > targetValue) {
+        this.moving = false;
+        update();
+        currentValue = 0;                     
+      }
+    }
 
     function scaleTime(startDate, endDate, targetValue){
 

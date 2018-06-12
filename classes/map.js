@@ -5,15 +5,13 @@ class Map extends MagicCircle{
 
 		super();
 		this.htmlelement = htmlelementsNamespace.THE_MAP;
-		this.htmlElementID = this.htmlelement.rootid;
-		this.rootElement = this.getRootElement();
+		this.htmlElementID = this.htmlelement.htmlid;	
 		this.width = this.htmlelement.width;
         this.height = this.htmlelement.height;
         this.mapData = configNamespace.MAP_JSON_OBJECT;
-				this.year=year;
-				this.crime=crimeType;
-				this.moving=moving;
-
+		this.year=year;
+		this.crime=crimeType;
+		this.moving=moving;
 	}
 
 
@@ -38,6 +36,17 @@ class Map extends MagicCircle{
 		}
 	}
 
+	setYear(year){
+		this.year = year;
+	}
+
+	setCrimeType(crimeType){
+		this.crime = crimeType;
+	}
+
+	setMoving(moving){
+		this.moving = moving;
+	}
 
 	createD3Data() {
 		let statesData = undefined;
@@ -60,7 +69,7 @@ class Map extends MagicCircle{
 
 
 		var path = d3.geoPath(d3.geoAlbers());
-		var svg = this.rootElement.attr("width", this.width).attr("height", this.height);
+		var svg = this.container;
 		var g = svg.append(this.htmlElementType).attr('class', 'states');
 		var getAllCrimesNumber = getAllCrimesState(allStates,year,crimeType,this.data);
 		var allCrimeValues = getAllCrimeValues(getAllCrimesNumber);

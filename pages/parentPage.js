@@ -3,11 +3,11 @@ class ParentPage{
 		this.pageId = pageId;
 		this.htmlElementID = htmlelementsNamespace.UNIVERSE_PAGE.htmlid;			
 		this.mainChart = {};
-		//this.mainControll = new DropDownMenu();
+		//this.timeLine = new DropDownMenu();
 		this.width = htmlelementsNamespace.PARENT_PAGE.width;
 		this.height = htmlelementsNamespace.PARENT_PAGE.height;
 		this.charts = [];
-		this.controlls = [this.mainControll];
+		this.controlls = [this.timeLine];
 	}
 
 	getRootElement(){
@@ -69,12 +69,13 @@ class ParentPage{
 	}	
 
 	deletePage(){
-		this.deleteAllElements();		
+		d3.select("#"+this.pageId).selectAll("*").remove();
 	}
 
 	deleteAllElements(){
 		this.deleteAllCharts();
 		this.deleteAllControlls();
+		console.log("deleteAllElements");
 	}
 
 	deleteAllCharts(){

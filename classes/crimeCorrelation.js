@@ -104,22 +104,17 @@ class CrimeCorrelation extends MagicCircle{
 			distance = width/30,		
 			draggedAlpha = 0.3,
 			dragendedAlpha = 0,
-			rootElement ,
+			rootElement = this.container,
 			simulation,
 			node,
 			link,
-			label;				
-
-		prepareRootElement();		
+			label;
+		
 		initSimulation();
 		initNodes();
 		initLinks();
 		initLabels();		
-		setNodeDataAndEnterAndExitSettings();
-
-		function prepareRootElement(){
-			rootElement = that.page.append("svg").attr("width", width).attr("height", height);
-		}
+		setNodeDataAndEnterAndExitSettings();		
 
 		function initSimulation(){
 			simulation = d3.forceSimulation()

@@ -10,7 +10,7 @@ class Universe extends MagicCircle{
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
-		this.year = 2008;
+		this.year = 2016;
 		this.violenceGroup = 0;
 		this.propertyGroup = 1;
 		this.violencePos= 0.75;
@@ -27,13 +27,38 @@ class Universe extends MagicCircle{
 			propertySunY: this.height/2,
 			standardSpeed: 1,
 			minSpeed: 1,
-		};
+		};		
+		this.animateRotation;
+		this.stopRotation;
+		this.isRotating = true;
+		this.rotationAngle = 0;
+		this.rotationTimer = 0;
 	}
 
 	//draws the universe
 	doChart(){
 		console.log("A lama creates the universe");
 		this.drawUniverseChart();
+	}
+
+	killsHimself(){
+		super.killsHimself();
+		this.rotationTimer.stop();
+	}
+
+	setYear(year){
+		this.year = year;
+	}
+
+	rotateOrStop(){
+		if(this.isRotating){
+			this.stopRotation();
+			console.log("stop", this.stopRotation);
+		}
+		else{
+			this.animateRotation();
+			console.log("start", this.animateRotation);
+		}
 	}
 
 	//converts the data so it is usable and then draws the Universe	
@@ -321,7 +346,9 @@ class Universe extends MagicCircle{
 			node,
 			label,
 			link,
-			canvas;
+			canvas;		
+		this.animateRotation = animateRotation;
+		this.stopRotation = stopRotation;
 		
 		initNode();
 		initLabel();
@@ -369,8 +396,8 @@ class Universe extends MagicCircle{
 			enterLabel();
 
 			link.data(universe);
-			exitLink();			
-			enterLink();
+			//exitLink();			
+			//enterLink();
 		}
 
 		function exitNode(){
@@ -476,13 +503,19 @@ class Universe extends MagicCircle{
 		//sets an timeinterval
 		//updates the planet positions on each tick
 		function animateRotation(){
-			let angle = 0,
-				delay = 100,
-				time = 100,	
-				t = d3.interval(function() {				
-					updatePositionsInUniverse(angle);
-					angle++; 				 			
-				}, delay, time);			
+			let delay = 100,
+				time = 100;	
+			that.rotationTimer = d3.interval(function() {							
+				updatePositionsInUniverse(that.rotationAngle);
+				that.rotationAngle++;					 			
+			}, delay, time);
+			that.isRotating = true;			
+		}
+
+		function stopRotation(){
+			that.isRotating = false;			
+			that.rotationTimer.stop();
+			that.rotationTimer = undefined;			
 		}	
 	}  
 
