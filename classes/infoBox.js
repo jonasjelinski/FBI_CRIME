@@ -1,40 +1,34 @@
 class InfoBox extends MagicCircle{
 
-	constructor(pageId){
+	constructor(pageId, infoText){
 		super(pageId);
 		this.htmlelement = htmlelementsNamespace.INFO_BOX; 
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
 		this.page = this.getRootElement();
-		this.htmlElementType = this.htmlelement.type; 
+		this.htmlElementType = this.htmlelement.type;
+		this.infoText = infoText; 
 	}
 
-	doChart(){
-		let text = this.getTextData();
-		this.drawInfoBox(text);
+	doChart(){		
+		this.drawInfoBox();
 	}
 
-	getTextData(){
-		return "das lama mag keine gurken";
-	}
-
-	drawInfoBox(text){		
+	drawInfoBox(){		
 		let root, 
 			textBox,
 			textLabels,
-			textArray = [text],
+			container = this.container,
+			textArray = [this.infoText],
 			that =this;
-		prepareRootElement();
+
 		prepareTextBox();	
 		appendText();
 
-		function prepareRootElement(){			
-			root = that.rootElement.attr("class","InfoBox").attr("width", that.width).attr("height", that.height);
-		}
 
 		function prepareTextBox(){					
-			textBox = root.append(that.htmlElementType)
+			textBox = container.append(that.htmlElementType)
 				.attr("class","textBox")
 				.attr("width", that.width)
 				.attr("height", that.height) 			

@@ -22,7 +22,6 @@ class MagicCircle{
 	}	
 	
 	appendThisCharToPage(){
-		console.log("appned", this.pageId);
 		this.container = this.page.append(this.htmlElementType)
 			.attr("width", this.width)
 			.attr("width", this.width)

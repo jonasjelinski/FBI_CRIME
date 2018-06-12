@@ -79,11 +79,11 @@ htmlelementsNamespace.CLOSE_BUTTON = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	htmlclassname: "closeButton",
 	htmlid: "closeButton",
-	width: 100,
-	height: 100,
+	width: 50,
+	height: 50,
 	type: "svg",
 	strokeColor : "black",
-	fillColor : "blue",
+	fillColor : "gray",
 	strokeWidth :2,
 };
 
@@ -143,6 +143,16 @@ htmlelementsNamespace.POPUP_PAGE = {
 	textid: "popupPage text",
 	treeClassName: "popupPage tree",
 	treeid: "popupPage tree",
+	deleteButtonName: "deleteButton popUp",
+	deleteButtonid: "deleteButton popUp",
+	width: 1000,
+	height: 500,
+};
+
+htmlelementsNamespace.INFO_PAGE = {
+	htmlclassname: "infoPage",
+	htmlid: "infoPage",	
+	textid: "popupPage text",	
 	deleteButtonName: "deleteButton popUp",
 	deleteButtonid: "deleteButton popUp",
 	width: 1000,

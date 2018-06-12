@@ -77,8 +77,7 @@ class ParentPage{
 
 	deleteAllElements(){
 		this.deleteAllCharts();
-		this.deleteAllControlls();
-		console.log("deleteAllElements");
+		this.deleteAllControlls();		
 	}
 
 	deleteAllCharts(){

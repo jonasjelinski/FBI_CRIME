@@ -23,3 +23,4 @@ listenerNamespace.drawUniverseListener = listenerNamespace.createListener("plane
 listenerNamespace.drawLineChartListener = listenerNamespace.createListener("timeButton", "click", actionNamespace.actionDrawLineChartPage);
 listenerNamespace.drawUniverseListener = listenerNamespace.createListener("forceButton", "click", actionNamespace.actionDrawCrimeCorrelationPage);
 listenerNamespace.drawUniverseListener = listenerNamespace.createListener("mapButton", "click", actionNamespace.actionDrawMapPage);
+listenerNamespace.drawUniverseListener = listenerNamespace.createListener("infoButton", "click", actionNamespace.actionDrawInfoPage);

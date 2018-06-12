@@ -6,6 +6,7 @@ class StateMachine{
 		this.crimeCorrelationPage = new CrimeCorrelationPage("mainpage");
 		this.universePage = new UniversePage("mainpage");	
 		this.popupPage	 = new PopUpPage("popup");
+		this.infoPage	 = new InfoPage("infopage");
 	}
 
 	switchState(state){
@@ -57,6 +58,12 @@ class StateMachine{
 			this.activePage.init();
 			this.activePage.drawPage();	
 		}
+	}
+
+	drawInfoPage(){
+		console.log("infopage");
+		this.infoPage.init();
+		this.infoPage.drawPage();
 	}
 
 	cleanOldPage(){

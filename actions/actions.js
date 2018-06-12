@@ -22,3 +22,8 @@ actionNamespace.actionDrawCrimeCorrelationPage = function(){
 	"use strict";
 	componentsNamespace.stateMachine.switchState(configNamespace.STATE_MACHINE.CRIME_CORRELATION);
 };
+
+actionNamespace.actionDrawInfoPage = function(){
+	"use strict";
+	componentsNamespace.stateMachine.drawInfoPage();
+};
