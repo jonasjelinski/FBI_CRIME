@@ -17,18 +17,36 @@ class LineChartPage extends ParentPage{
 	}
 
 	initControlls(){
-		let dropDownArray = commonfunctionsNamespace.getAllCrimeTypes();
-		this.dropDownMenu = new DropDownMenu(this.pageId, dropDownArray);
-		this.dropDownMenu.appendThisCharToPage();
-		this.controlls = [this.dropDownMenu];
+		this.initDropDownCrimes();
+		this.initDropDownStates();		
+		this.controlls = [this.dropDownMenuCrimes, this.dropDownMenuStates];
+	}
+
+	initDropDownCrimes(){
+		let crimeTypes = commonfunctionsNamespace.getAllCrimeTypes();
+		this.dropDownMenuCrimes = new DropDownMenu(this.pageId, crimeTypes);
+		this.dropDownMenuCrimes.appendThisCharToPage();
+	}
+
+	initDropDownStates(){
+		let states = configNamespace.CONSTANTS.states;
+		this.dropDownMenuStates = new DropDownMenu(this.pageId, states);
+		this.dropDownMenuStates.appendThisCharToPage();
 	}
 
 	addListeners(){
-		this.dropDownMenu.eventTarget.addEventListener(this.dropDownMenu.selectionEvent, this.updateChartLines.bind(this), false);
+		this.dropDownMenuCrimes.eventTarget.addEventListener(this.dropDownMenuCrimes.selectionEvent, this.updateChartCrimeType.bind(this), false);
+		this.dropDownMenuStates.eventTarget.addEventListener(this.dropDownMenuStates.selectionEvent, this.updateChartState.bind(this), false);
 	}
 
-	updateChartLines(event){				
+	updateChartCrimeType(event){				
 		let crimeType = event.detail.selection;
 		this.mainChart.showOrHideLine(crimeType);
+	}
+
+	updateChartState(event){
+		let state = event.detail.selection;
+		this.mainChart.setState(state);
+		this.mainChart.updatesHimself();
 	}
 }	

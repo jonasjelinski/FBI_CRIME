@@ -2,7 +2,6 @@
 
 var actionNamespace = actionNamespace || {};
 
-
 actionNamespace.actionDrawUniversePage = function(){
 	"use strict";
 	componentsNamespace.stateMachine.switchState(configNamespace.STATE_MACHINE.UNIVERSE);

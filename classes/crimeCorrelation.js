@@ -1,7 +1,6 @@
 class CrimeCorrelation extends MagicCircle{
 	constructor(pageId){
-		super(pageId);
-		this.state = dynamicsNamespace.currentState;
+		super(pageId);		
 		this.htmlelement = htmlelementsNamespace.CRIME_CORRELATION; 
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.page = this.getRootElement();
@@ -59,22 +58,45 @@ class CrimeCorrelation extends MagicCircle{
 		let crimeNames = data.columns,
 			links = [];			
 		for(let i = 0; i < data.length; i++){
-			let row = data[i],
-				source = row.CRIME,
-				crimes = Object.keys(row);				
-				for(let j = 0; j < crimes.length; j++){
-					let target = crimes[j]; 					
-					if(source !== target && target !== "CRIME"){
-						let link = {};
-						link.source = source;
-						link.target = target;
-						link.correlation = row[target];
-						links.push(link);						
-					}					
-				}	
-
-		}
+			let row = data[i];
+			links = links.concat(this.createLinksForEachRow(row));
+		}	
 		return links;
+	}
+
+	createLinksForEachRow(row){
+		let source = row.CRIME,
+			crimes = Object.keys(row),
+			links = this.createLinkForEachCrime(row, source, crimes);				
+		return links;	
+	}
+
+	createLinkForEachCrime(row, source, crimes){
+		let links = [];
+		for(let j = 0; j < crimes.length; j++){
+			let target = crimes[j]; 					
+			if(this.sourceIsNotTheSameAsTarget(source, target) && this.targetIsACrimeType(target) ){
+				let link = this.createLinkBetweenTargetAndSource(row, target, source);				
+				links.push(link);						
+			}					
+		}		
+		return links;
+	}
+
+	sourceIsNotTheSameAsTarget(source, target){
+		return source !== target;
+	}
+
+	targetIsACrimeType(target){
+		return target !== "CRIME";
+	}
+
+	createLinkBetweenTargetAndSource(row, target, source){
+		let link = {};
+		link.source = source;
+		link.target = target;
+		link.correlation = row[target];
+		return link;
 	}
 
 	//source: https://bl.ocks.org/mbostock/4062045
@@ -114,8 +136,7 @@ class CrimeCorrelation extends MagicCircle{
 				.force("center", d3.forceCenter(centerX, centerY))
 				.force("collision", d3.forceCollide().radius(radius))
 				.force("link", d3.forceLink().links(links).id(linkId).distance(calculatelinkDistance))
-				.on("tick", updatePos);
-				
+				.on("tick", updatePos);				
 		}
 
 		function initNodes(){

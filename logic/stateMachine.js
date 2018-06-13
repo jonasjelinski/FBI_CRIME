@@ -60,8 +60,7 @@ class StateMachine{
 		}
 	}
 
-	drawInfoPage(){
-		console.log("infopage");
+	drawInfoPage(){		
 		this.infoPage.init();
 		this.infoPage.drawPage();
 	}

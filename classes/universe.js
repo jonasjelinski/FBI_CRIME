@@ -4,13 +4,12 @@
 
 class Universe extends MagicCircle{
 	constructor(pageId){
-		super();
-		this.state = dynamicsNamespace.currentState;
+		super();		
 		this.htmlelement = htmlelementsNamespace.THE_UNIVERSE; 
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
-		this.year = 2016;
+		this.year = configNamespace.CONSTANTS.minYear;
 		this.violenceGroup = 0;
 		this.propertyGroup = 1;
 		this.violencePos= 0.75;
@@ -512,7 +511,6 @@ class Universe extends MagicCircle{
 		function animateRotation(){
 			let delay = 100,
 				time = 100;
-			that.rotationTimer = d3.interval	
 			that.rotationTimer = d3.interval(function() {							
 				updatePositionsInUniverse(that.rotationAngle);
 				that.rotationAngle++;					 			

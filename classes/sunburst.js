@@ -40,8 +40,7 @@ class Sunburst extends MagicCircle{
 	createHierarchyData(){		
 		let crimedata = commonfunctionsNamespace.getCrimesAndDataByYearAndState(this.year, this.state, this.data),
 			crimesdata = crimedata.crimes,			    
-			rootJsonObject = {},
-			newChild = {};
+			rootJsonObject = {};
 		rootJsonObject.name = "Crimes";
 		rootJsonObject.children = [];
 		rootJsonObject = this.createNodeStructure(crimesdata, rootJsonObject);
@@ -91,11 +90,11 @@ class Sunburst extends MagicCircle{
 	//source: https://www.safaribooksonline.com/blog/2014/03/11/solving-d3-label-placement-constraint-relaxing/
 	createSunburst(hierarchyData){ 
 		let data = transferToCleanJavascriptObject(hierarchyData),     
-			height =  this.width,
+			height = this.width,
 			width = this.height,
 			that = this,
-			widthGrafic = width*0.5,
-			heightGrafic = height*0.5,
+			widthGrafic = width/2,
+			heightGrafic = height/2,
 			radius = Math.min(widthGrafic, heightGrafic) / 2,
 			labelWidth = width/2,
 			labelHeight = labelWidth,			

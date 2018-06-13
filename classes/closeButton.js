@@ -1,7 +1,6 @@
 class CloseButton extends MagicCircle{
 	constructor(pageId){
-		super(pageId);
-		this.state = dynamicsNamespace.currentState;
+		super(pageId);		
 		this.htmlelement = htmlelementsNamespace.CLOSE_BUTTON; 
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.strokeColor = this.htmlelement.strokeColor;

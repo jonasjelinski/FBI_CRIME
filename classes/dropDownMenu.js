@@ -22,7 +22,10 @@ class DropDownMenu extends MagicCircle{
 			menu,
 			container = this.container,
 			dropDownOptions,
-			that = this;
+			that = this,
+			max = 10,
+			random =Math.floor((Math.random() * max) + 1),
+			selectId = this.dropDownArray[0]+random;
 
 		initDropDownMenu();
 		initMenu();
@@ -39,6 +42,7 @@ class DropDownMenu extends MagicCircle{
 		function initMenu(){
 			menu = dropDownMenu
 				.append("select")
+				.attr("id", selectId)
 				.attr("class","menu")
 				.attr("width", that.width)
 				.attr("height", that.height)
@@ -57,8 +61,8 @@ class DropDownMenu extends MagicCircle{
 				.attr("height", that.height);
 		}
 
-		function sendSelectedValue(d){			
-			let value = d3.select("select").property("value");
+		function sendSelectedValue(){			
+			let value = d3.select("#"+selectId).property("value");
 			sendEvent(value);			
 		}	
 

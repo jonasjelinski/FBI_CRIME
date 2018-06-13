@@ -64,6 +64,28 @@ htmlelementsNamespace.THE_MAP = {
 	type: "svg",
 };
 
+htmlelementsNamespace.TIME_LINE = {
+	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+	rootclassname: "timeLine",
+	childElement: "play-button",
+	htmlid: "timeLine",
+	width:360,
+	height:160,
+	type: "g",
+	margin: {top:15, right:15, bottom:15, left:15},
+	classSlider: "slider",
+};
+
+htmlelementsNamespace.TREE = {
+	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+	rootclassname: "tree",
+	htmlid: "tree",
+	width:960,
+	height:520,
+	type: "g",
+	margin: {top:20, right:120, bottom:20, left:120}
+};
+
 htmlelementsNamespace.DROP_DOWN = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	htmlclassname: "dropDown",
@@ -159,33 +181,3 @@ htmlelementsNamespace.INFO_PAGE = {
 	height: 500,
 };
 
-htmlelementsNamespace.THE_MAP = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
-	rootclassname: "map",
-	htmlid: "map",
-	width:960,
-	height:520,
-	type: "g",
-};
-
-htmlelementsNamespace.TIME_LINE = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
-	rootclassname: "timeLine",
-	childElement: "play-button",
-	htmlid: "timeLine",
-	width:360,
-	height:160,
-	type: "g",
-	margin: {top:15, right:15, bottom:15, left:15},
-	classSlider: "slider",
-};
-
-htmlelementsNamespace.TREE = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
-	rootclassname: "tree",
-	htmlid: "tree",
-	width:960,
-	height:520,
-	type: "g",
-	margin: {top:20, right:120, bottom:20, left:120}
-};

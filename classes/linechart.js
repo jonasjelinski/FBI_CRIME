@@ -1,7 +1,7 @@
 class LineChart extends MagicCircle{
-	constructor(pageId){
+	constructor(pageId, state = configNamespace.CONSTANTS.states[0]){
 		super(pageId);
-		this.state = dynamicsNamespace.currentState;
+		this.state = state;
 		this.htmlelement = htmlelementsNamespace.LINE_DIAGRAM; 
 		this.htmlElementID = this.htmlelement.htmlid;
 	}
@@ -10,6 +10,10 @@ class LineChart extends MagicCircle{
 	doChart(){
 		console.log("ein lama erzeugt einen linechart");       
 		this.drawLineChart();		
+	}
+
+	setState(state){
+		this.state = state;
 	}
 	
 	//converts the this.data so it is usable and then draws the lineChart	

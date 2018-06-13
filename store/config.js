@@ -1,16 +1,16 @@
 var configNamespace = configNamespace || {};
 
 configNamespace.CLICKLISTENER = {
-	dochart: "dochart"
+	dochart: "dochart",
 };
 
 configNamespace.HTML_IDS = {
-	mychart: "myChart"
+	mychart: "myChart",
 };
 
 configNamespace.HTML_TYPES = {
 	g: "g",
-	svg: "svg"
+	svg: "svg",
 };
 
 configNamespace.FILE_PATHES = {
@@ -21,7 +21,12 @@ configNamespace.FILE_PATHES = {
 
 configNamespace.CONSTANTS = {
 	states : ['ALABAMA','ALASKA','ARIZONA','ARKANSAS','CALIFORNIA','COLORADO','CONNECTICUT','DELAWARE','COLUMBIA','FLORIDA','GEORGIA','HAWAII','IDAHO','ILLINOIS','INDIANA','IOWA','KANSAS','KENTUCKY','LOUISIANA','MAINE','MARYLAND','MASSACHUSETTS','MICHIGAN','MINNESOTA','MISSISSIPPI','MISSOURI','MONTANA','NEBRASKA','NEVADA','NEW HAMPSHIRE','NEW JERSEY','NEW MEXICO','NEW YORK','NORTH CAROLINA','NORTH DAKOTA','OHIO','OKLAHOMA','OREGON','PENNSYLVANIA','PUERTO RICO','RHODE ISLAND','SOUTH CAROLINA','SOUTH DAKOTA','TENNESSEE','TEXAS','UTAH','VERMONT','VIRGINIA','WASHINGTON','WEST VIRGINIA','WISCONSIN','WYOMING'],
-	crimeCategories : {Crimes : { propertyCrime : ["Burglary", "Larcenytheft", "Motorvehicletheft"], violentCrime : ["Aggravatedassault", "MurderManslaughter", "Rape", "Robbery"]}},
+	crimeCategories : {
+		Crimes : { 
+			propertyCrime : ["Burglary", "Larcenytheft", "Motorvehicletheft"], 
+			violentCrime : ["Aggravatedassault", "MurderManslaughter", "Rape", "Robbery"],
+		},
+	},
 	crimeTypesProperty : ["Burglary", "Larcenytheft", "Motorvehicletheft"],
 	crimeTypesViolence : ["Aggravatedassault", "MurderManslaughter", "Rape", "Robbery"],
 	crimeColors :{
@@ -37,7 +42,7 @@ configNamespace.CONSTANTS = {
 		Robbery: [255, 154, 0],
 	},
 	maxYear : 2016,
-	minYear : 2000
+	minYear : 2000,
 };
 
 configNamespace.STATE_MACHINE = {
@@ -45,7 +50,7 @@ configNamespace.STATE_MACHINE = {
 	LINE_CHART: "LINE_CHART",
 	CRIME_CORRELATION: "CRIME_CORRELATION",
 	UNIVERSE: "UNIVERSE",
-	STATES: [this.MAP, this.LINE_CHART, this.CRIME_CORRELATION, this.UNIVERSE]
+	STATES: [this.MAP, this.LINE_CHART, this.CRIME_CORRELATION, this.UNIVERSE],
 };
 
 configNamespace.JSON_OBJECT = false;
@@ -58,14 +63,11 @@ configNamespace.SCRIPT_PATHES = [
 	"./libs/d3/d3.js",
 	"./libs/d3/d3.tip.js",
 	"./libs/topoJson/topojson.v1.min.js",
-	"./store/config.js",
-	"./store/dynamics.js",
+	"./store/config.js",	
 	"./htmlelements/htmlelements.js",
-	"./store/commonfunctions.js",
-	"./classes/lama.js",
+	"./store/commonfunctions.js",	
 	"./classes/linechart.js",
-	"classes/magicCircle.js",
-	"./classes/force.js",
+	"classes/magicCircle.js",	
 	"./classes/universe.js",
 	"./classes/map.js",
 	"./classes/timeLine.js",
@@ -85,26 +87,25 @@ configNamespace.SCRIPT_PATHES = [
 	"./logic/stateMachine.js",
 	"./components/components.js",
 	"./actions/actions.js",
-	"./listener/listener.js"];
+	"./listener/listener.js",
+];
 
 configNamespace.FIRST_SCRIPTS = [
 	"./libs/d3/d3.js",
 	"./libs/d3/d3.tip.js",
 	"./libs/topoJson/topojson.v1.min.js",
 	"./store/config.js",
-	"./store/dynamics.js",
 	"./store/commonfunctions.js",
-	"./htmlelements/htmlelements.js"];
+	"./htmlelements/htmlelements.js",
+];
 
 configNamespace.SECOND_SCRIPTS = [
-	"./classes/lama.js",
 	"./classes/magicCircle.js",
 	"./classes/map.js",
 	"./classes/timeLine.js",
 	"./classes/tree.js",
 	"./classes/sunburst.js",
-	"./classes/linechart.js",
-	"./classes/force.js",
+	"./classes/linechart.js",	
 	"./classes/universe.js",
 	"./classes/infoBox.js",
 	"./classes/crimeCorrelation.js",
@@ -121,4 +122,5 @@ configNamespace.SECOND_SCRIPTS = [
 	"./logic/stateMachine.js",
 	"./components/components.js",
 	"./actions/actions.js",
-	"./listener/listener.js"];
+	"./listener/listener.js",
+];
