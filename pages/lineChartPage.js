@@ -1,7 +1,6 @@
 class LineChartPage extends ParentPage{
 	constructor(pageId){
-		super();
-		//this.infoBox = new InfoBox();		
+		super(pageId);
 	}
 
 	init(){

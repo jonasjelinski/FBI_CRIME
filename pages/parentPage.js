@@ -3,7 +3,6 @@ class ParentPage{
 		this.pageId = pageId;
 		this.htmlElementID = htmlelementsNamespace.UNIVERSE_PAGE.htmlid;			
 		this.mainChart = {};
-		//this.timeLine = new DropDownMenu();
 		this.width = htmlelementsNamespace.PARENT_PAGE.width;
 		this.height = htmlelementsNamespace.PARENT_PAGE.height;
 		this.charts = [];

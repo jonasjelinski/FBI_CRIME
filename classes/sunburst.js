@@ -2,7 +2,7 @@
 //it shows the distribution between different crimecategories in a single state
 
 class Sunburst extends MagicCircle{
-	constructor(pageId, state = configNamespace.CONSTANTS.states[0], year = 2008){
+	constructor(pageId, state = configNamespace.CONSTANTS.states[0], year = configNamespace.CONSTANTS.minYear){
 		super(pageId);
 		this.self = this; 
 		this.htmlelement = htmlelementsNamespace.SUN_BURST; 

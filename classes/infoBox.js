@@ -26,7 +26,6 @@ class InfoBox extends MagicCircle{
 		prepareTextBox();	
 		appendText();
 
-
 		function prepareTextBox(){					
 			textBox = container.append(that.htmlElementType)
 				.attr("class","textBox")
