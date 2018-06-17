@@ -5,7 +5,7 @@
 
 class Universe extends MagicCircle{
 	constructor(pageId){
-		super();		
+		super(pageId);		
 		this.htmlelement = htmlelementsNamespace.THE_UNIVERSE; 
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
@@ -256,9 +256,9 @@ class Universe extends MagicCircle{
 	getRGBColor(factor){
 		let maxColor = 255,
 			minColor = 0,
-			red = maxColor - maxColor * factor,
+			red = maxColor * factor,
 			green = minColor, 
-			blue = maxColor*factor;
+			blue = maxColor- maxColor * factor;
 		return "rgb(" + red + "," + green + "," + blue+ ")";  
 	}
 
