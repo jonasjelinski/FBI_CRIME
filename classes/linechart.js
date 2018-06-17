@@ -109,6 +109,7 @@ class LineChart extends MagicCircle{
 	//sources:
 	//https://bl.ocks.org/EfratVil/92f894ac0ba265192411e73f633a3e2f
 	//https://bl.ocks.org/deristnochda/1ffe16ccf8bed2035ea5091ab9bb53fb
+	//https://bl.ocks.org/d3noob/23e42c8f67210ac6c678db2cd07a747e
 	createLineChart(crimeRateData){
 		var data = transferToCleanJavascriptObject(crimeRateData),		
 			that =this,
@@ -126,7 +127,10 @@ class LineChart extends MagicCircle{
 			margin = {top: height/10, right: width/10, bottom: height/10, left: width/10},
 			chartWidth = width - margin.left - margin.right,
 			chartHeight = height - margin.top - margin.bottom,
-			
+			axisDateLabelX = width/2,
+			axisDateLabelY = height - margin.bottom-margin.bottom,			
+			axisNumberLabelX = - chartWidth/2,			
+			axisNumberLabelY = + margin.left,			
 			xRange = d3.scaleTime().domain([mindate, maxdate]).range([0,chartWidth ]), 
 			yRange = d3.scaleLinear().domain([minCrime, maxCrime]).range([chartHeight, 0]),
 			
@@ -154,8 +158,10 @@ class LineChart extends MagicCircle{
 		initLabels();
 		initSingleLine();
 		drawGraph();
-		drawLabels();
+		drawLabels();		
 		setLabelTextAndClickBehaviour();
+		appendDateLabel();
+		appendNumberLabel();
 
 		//calls the d3 zoom function to zoom the lineChart
 		function initZoomingBehaviour(){
@@ -318,6 +324,23 @@ class LineChart extends MagicCircle{
 
 		function transferToCleanJavascriptObject(jsondata){
 			return JSON.parse(JSON.stringify(jsondata));
+		}
+
+		function appendDateLabel(){
+			container.append("text")
+				.attr("x", axisDateLabelX)        
+				.attr("y", axisDateLabelY)        
+				.style("text-anchor", "middle")
+				.text("Date");
+		}
+
+		function appendNumberLabel(){
+			container.append("text")
+				.attr("transform", "rotate(-90)")
+				.attr("x", axisNumberLabelX)        
+				.attr("y", axisNumberLabelY)              
+				.style("text-anchor", "middle")
+				.text("Number of crimes per 100 000 inhabits");
 		}
 	}
 	
