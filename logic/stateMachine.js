@@ -1,3 +1,6 @@
+//the StateMachine handles the pages of the website
+//each state shows a different page, e.g. MapPage
+
 class StateMachine{
 	constructor(){
 		this.activePage = undefined;
@@ -26,15 +29,13 @@ class StateMachine{
 
 	drawMapPage(){	
 		this.cleanOldPage();
-		this.activePage = this.mapPage;		
-		//console.log("drawMapPage", this.activePage);
+		this.activePage = this.mapPage;	
 		this.initAndDrawActivePage();
 	}
 
 	drawLineChartPage(){		
 		this.cleanOldPage();
-		this.activePage = this.lineChartPage;		
-		//console.log("drawLineChartPage", this.activePage, "this.lineChartPage", this.lineChartPage);
+		this.activePage = this.lineChartPage;
 		this.initAndDrawActivePage();
 
 	}
@@ -42,14 +43,13 @@ class StateMachine{
 	drawCrimeCorrelationPage(){
 		this.cleanOldPage();
 		this.activePage = this.crimeCorrelationPage;		
-		//console.log("drawCrimeCorrelationPage", this.activePage);
 		this.initAndDrawActivePage();
 	}
 
 	drawUniversePage(){
 		this.cleanOldPage();
-		this.activePage = this.universePage;		
-		//console.log("drawUniversePage", this.activePage);
+		this.activePage = this.universePage;
+		
 		this.initAndDrawActivePage();
 	}
 

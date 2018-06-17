@@ -1,3 +1,6 @@
+//this page shows the correlations of different crimetypes
+//by appending a CrimeCorrelation-chart to the page
+//it has no controlls
 class CrimeCorrelationPage extends ParentPage{
 	constructor(pageId){
 		super(pageId);		

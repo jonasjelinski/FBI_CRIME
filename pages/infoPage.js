@@ -1,3 +1,7 @@
+//this page shows an infoText
+//by appending a InfoBox-chart to the page
+//it has a CloseButton as controll which deletes this page
+
 class InfoPage extends ParentPage{
 	constructor(pageId = "infopage", infoText = "Das Pferd mag keine Gurken"){
 		super(pageId);

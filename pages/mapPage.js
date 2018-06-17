@@ -1,3 +1,12 @@
+//this page shows an intercative Map of the USA
+//representing the crimerate for each state as color
+//by appending a Map-chart to the page
+//it has a TimeLine, a DropDownMenu and PlayButton as controlls
+//trough the TimeLine the user can select which year he wants to see
+//trough the DropDownMenu the user can switch between different crimeTypes
+//if the PlayButton is clicked the TimeLine is running forward in time 
+//it can be stopped again through the PlayButton
+
 class MapPage extends ParentPage{
 	constructor(pageId){
 		super(pageId);	

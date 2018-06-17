@@ -1,3 +1,10 @@
+//this page shows the relation of propertycrimes and violentcrimes in states
+//by appending a Universe-chart to the page
+//it has a TimeLine and PlayButton as controlls
+//trough the TimeLine the user can select which year he wants to see
+//trough the PlayButton the user can controll if the planets of the Universe
+//shell move or not
+
 class UniversePage extends ParentPage{
 	constructor(pageId){
 		super(pageId);		

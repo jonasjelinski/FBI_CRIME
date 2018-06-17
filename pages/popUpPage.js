@@ -1,3 +1,9 @@
+//this page shows an poup
+//containing a Sunburst and a Tree
+//to show the details of the crimerate of a specific state during a specific year 
+//it has a CloseButton as controlls
+//to close the page
+
 class PopUpPage extends ParentPage{
 	constructor(pageId = "popup", state = configNamespace.CONSTANTS.states[0], year = 2000){
 		super(pageId);

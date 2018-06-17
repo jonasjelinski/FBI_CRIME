@@ -1,3 +1,7 @@
+//htmlelementsNamespace contains all details of the charts and pages
+//each object (e.g. htmlelementsNamespace.MAGIC_CIRCLE) 
+//is used in a class of classes or pages
+
 var htmlelementsNamespace = htmlelementsNamespace || {};
 
 htmlelementsNamespace.MAGIC_CIRCLE = { //Elternelement aller anderen HTML-Elemente

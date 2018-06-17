@@ -1,3 +1,6 @@
+//This page is the parentPage for all other pages
+//it contains nearly all functions the child-pages need
+
 class ParentPage{
 	constructor(pageId = "mainpage"){
 		this.pageId = pageId;
@@ -10,21 +13,21 @@ class ParentPage{
 		this.page = commonfunctionsNamespace.getPageById(this.pageId);
 	}
 
-	getRootElement(){
-		return commonfunctionsNamespace.getRootElement(this);      
-	}
-
+	//inits the page
+	//adds a new chart to the array charts
 	init(){
 		this.mainChart = new Universe(pageId);
 		this.charts = [this.mainChart];	
 	}
 
+	//draws the page
 	drawPage(){
 		this.showPage();
 		this.drawAllCharts();
 		this.drawAllControlls();		
 	}
 	
+	//creates and draws all charts in array charts
 	drawAllCharts(){
 		for(let i = 0; i < this.charts.length; i++ ){
 			let chart = this.charts[i];
@@ -34,6 +37,7 @@ class ParentPage{
 		}
 	}
 
+	//checks if chart is null or undefined
 	isNoChart(chart){
 		if(this.isNullOrUndefined(chart)){
 			return true;
@@ -48,59 +52,35 @@ class ParentPage{
 		return false;
 	}
 
+	//creates and draws all charts in array controlls
 	drawAllControlls(){
 		for(let i = 0; i < this.controlls.length; i++ ){
 			let controll = this.controlls[i];
-			if(!this.isNoControll(controll)){
+			if(!this.isNoChart(controll)){
 				controll.doChart();
 			}			
 		}
 	}
 
-	isNoControll(controll){
-		if(this.isNullOrUndefined(controll)){
-			return true;
-		}		
-		return false;			
-	}
-
+	//deletes the page and draws it again
 	updatePage(){
 		this.deletePage();
 		this.drawPage();
 	}	
 
+	//removes all elements appended to this.page
+	//and hides it
 	deletePage(){
 		this.page.selectAll("*").remove();
 		this.hidePage();
 	}
 
-	deleteAllElements(){
-		this.deleteAllCharts();
-		this.deleteAllControlls();		
-	}
-
-	deleteAllCharts(){
-		for(let i = 0; i < this.charts.length; i++ ){
-			let chart = this.charts[i];
-			if(!this.isNoChart(chart)){
-				chart.killsHimself();
-			}			
-		}
-	}
-
-	deleteAllControlls(){
-		for(let i = 0; i < this.controlls.length; i++ ){
-			let controll = this.controlls[i];
-			if(!this.isNoControll(controll)){
-				controll.killsHimself();
-			}			
-		}
-	}
-
+	//hides page by changing the style attribute visiblity
 	hidePage(){
 		this.page.style("visibility","hidden");
 	}
 
+	//shows page by changing the style attribute visiblity
 	showPage(){
 		this.page.style("visibility","visible");
 	}
