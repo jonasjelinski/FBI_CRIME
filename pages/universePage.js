@@ -4,11 +4,15 @@
 //trough the TimeLine the user can select which year he wants to see
 //trough the PlayButton the user can controll if the planets of the Universe
 //shell move or not
+//it also contains a ColorLegend to explain the meaning of the planets
 
 class UniversePage extends ParentPage{
 	constructor(pageId){
 		super(pageId);		
-		this.mainChart = {};		
+		this.mainChart = {};
+		this.ColorLegendTitle = "Ratio: ViolentCrimes/Propertycrimes"; 		
+		this.ColorLegendStartLabel = "Propertycrimes"; 		
+		this.ColorLegendEndLabel = "ViolentCrimes"; 		
 	}
 
 	init(){
@@ -20,8 +24,10 @@ class UniversePage extends ParentPage{
 
 	initCharts(){
 		this.mainChart = new Universe(this.pageId);
-		this.charts = [this.mainChart];
+		this.colorLegend = new ColorLegend(this.pageId, this.ColorLegendTitle, this.ColorLegendStartLabel, this.ColorLegendEndLabel);
+		this.charts = [this.mainChart, this.colorLegend ];
 		this.mainChart.appendThisCharToPage();
+		this.colorLegend.appendThisCharToPage();
 	}
 
 	initControlls(){
