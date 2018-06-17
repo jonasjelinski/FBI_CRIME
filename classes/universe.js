@@ -1,6 +1,7 @@
 //This class creates a UniverseChart with d3
-//it shows in which states the relation between violentCrimes
-// and  propertycrimes  quotitent = violentCrimes/propertycrimes is bigger or smaller then 0.5
+//it shows in which states the relation between violentCrimes and propertycrimes  
+//quotient = violentCrimes/propertycrimes 
+//is bigger or smaller then 0.5
 
 class Universe extends MagicCircle{
 	constructor(pageId){

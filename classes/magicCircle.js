@@ -1,3 +1,11 @@
+//parentclass of all other classes
+//this class is only used to act as a parentclass
+//it receives the pageId as a parameter
+//with this pageId it gets the page-DOM-Element 
+//and appends a container to it
+//in this container all other d3-graphics are drawn for this class
+//all functions and class-variables are for the child-classes
+ 
 class MagicCircle{
 	constructor (pageId = "mainpage"){
 		this.pageId = pageId; 
@@ -13,14 +21,19 @@ class MagicCircle{
 		this.container = {};		
 	}
 	
+	//returns a rootElement where charts are appended	
 	getRootElement(){
 		return commonfunctionsNamespace.getRootElement(this);
 	}
 
+	//returns the page-DOM-Element
 	getPage(){
 		return commonfunctionsNamespace.getPageById(this.pageId);      
 	}	
 	
+	//appends a container to the page
+	//all charts are drawn into this container
+	//standard function which is used by all instances of the childclass
 	appendThisCharToPage(){
 		this.container = this.page.append(this.htmlElementType)
 			.attr("width", this.width)
@@ -29,15 +42,21 @@ class MagicCircle{
 			.attr("id", this.htmlElementID);		
 	}
 	
+	//returns the data which is used to draw the charts
 	getData(){
 		return configNamespace.JSON_OBJECT;  
 	}
 
+	//creates the chart
+	//standard function which is used by all instances of the childclass
 	doChart(){
 		console.log("ein magischerKreis erzeugt sich selbst", this.page);
 		this.drawCircle();   
 	}
 
+	//draws a small circle into the container
+	//example function for the parent class
+	//to understand it's structure	
 	drawCircle(){
 		let xpos=30, 
 			ypos=20,
@@ -45,16 +64,9 @@ class MagicCircle{
 			radius = 20,
 			that = this,
 			container =this.container,
-			rootElement,
 			circle;
 
-		prepareRootElement();
-		initCircle();
-
-		function prepareRootElement(){
-			rootElement = that.rootElement.append(that.htmlElementType).attr("width",that.width).attr("height",that.height);
-		}
-
+		initCircle();	
 		function initCircle(){
 			circle = container
 				.append("circle")
@@ -65,11 +77,14 @@ class MagicCircle{
 		}		
 	}
 
+	//all elements which are drawn into the container a removed
+	//and then created and drawn again
 	updatesHimself(){
 		this.killsHimself();
 		this.doChart();	
 	}
 
+	//all elements which are drawn into the container a removed
 	killsHimself(){
 		this.container.selectAll("*").remove();
 	}

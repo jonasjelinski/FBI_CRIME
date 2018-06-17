@@ -1,3 +1,9 @@
+//creates a line chart
+//the linechart shows the crimerates over the time
+//for a special state, for each crime
+//lines can be hidden or set visible
+//chart can be zoomed
+
 class LineChart extends MagicCircle{
 	constructor(pageId, state = configNamespace.CONSTANTS.states[0]){
 		super(pageId);

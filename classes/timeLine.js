@@ -7,7 +7,6 @@ class TimeLine extends MagicCircle{
 		super(pageId);
 		this.htmlelement = htmlelementsNamespace.TIME_LINE;
 		this.htmlElementID = this.htmlelement.htmlid;
-		this.rootElement = this.getRootElement();
 		this.width = this.htmlelement.width-this.htmlelement.margin.left - this.htmlelement.margin.right;
 		this.height = this.htmlelement.height-this.htmlelement.margin.top - this.htmlelement.margin.bottom;
 		this.yearData=commonfunctionsNamespace.getAllYears();
