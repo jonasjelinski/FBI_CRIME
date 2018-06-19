@@ -1,12 +1,13 @@
-class InfoBox extends MagicCircle{
+//creates an InfoxBox
+//the InfoBox shows the parameter infoText as a "text"
 
+class InfoBox extends MagicCircle{
 	constructor(pageId, infoText){
 		super(pageId);
 		this.htmlelement = htmlelementsNamespace.INFO_BOX; 
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
-		this.page = this.getRootElement();
 		this.htmlElementType = this.htmlelement.type;
 		this.infoText = infoText; 
 	}
@@ -15,6 +16,7 @@ class InfoBox extends MagicCircle{
 		this.drawInfoBox();
 	}
 
+	//draws the InfoxBox
 	drawInfoBox(){		
 		let root, 
 			textBox,
@@ -23,10 +25,12 @@ class InfoBox extends MagicCircle{
 			textArray = [this.infoText],
 			that =this;
 
-		prepareTextBox();	
+		initTextBox();	
 		appendText();
 
-		function prepareTextBox(){					
+		//appends a new element to container 
+		//and gives it the data textArray
+		function initTextBox(){					
 			textBox = container.append(that.htmlElementType)
 				.attr("class","textBox")
 				.attr("width", that.width)
@@ -34,7 +38,8 @@ class InfoBox extends MagicCircle{
 				.data(textArray)	            
 				.append("text");	                  		
 		}		
-			
+		
+		//appends the text of infoText as text-element	
 		function appendText(){
 			textLabels = textBox
 				.attr("x", that.width/2)

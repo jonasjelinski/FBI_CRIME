@@ -1,3 +1,11 @@
+//this page shows a lineChart
+//showing the crimerates over years for different crimes and states 
+//by appending a LineChart-chart to the page
+//it has a two DropDownMenus as controlls
+//in dropDownMenuCrimes the user can select between different crimetypes
+//to show or hide the line of the crimetype
+//in dropDownMenuStates the user can switch between different states like Alaska
+
 class LineChartPage extends ParentPage{
 	constructor(pageId){
 		super(pageId);

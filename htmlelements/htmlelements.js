@@ -1,3 +1,7 @@
+//htmlelementsNamespace contains all details of the charts and pages
+//each object (e.g. htmlelementsNamespace.MAGIC_CIRCLE) 
+//is used in a class of classes or pages
+
 var htmlelementsNamespace = htmlelementsNamespace || {};
 
 htmlelementsNamespace.MAGIC_CIRCLE = { //Elternelement aller anderen HTML-Elemente
@@ -49,10 +53,36 @@ htmlelementsNamespace.THE_FORCE = {
 htmlelementsNamespace.THE_UNIVERSE = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	htmlclassname: "universe",
-	htmlid: "universeANDERN",
+	htmlid: "universe",
 	width:2000,
 	height:1000,
 	type: "svg",
+};
+
+htmlelementsNamespace.COLOR_LEGEND = {
+	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+	htmlclassname: "colorlegend",
+	htmlid: "colorlegend",
+	width:2000,
+	height:1000,
+	type: "svg",	
+	sliceNumbers: 50,
+	sliceHeight: 100,
+	sliceWidth: 10,
+	sliceY: 20,
+	sliceX: 10,
+	sliceClass: "legendslice",
+	sliceType: "g",
+	titleY: 100,
+	titleX: 50,
+	titleSize: "20px",
+	titleClass: "legendtitle",
+	titleType: "g",
+	labelY: 220,
+	labelX: 10,
+	labeSize: "20px",
+	labelClass: "legendlabel",
+	labelType: "g",
 };
 
 htmlelementsNamespace.THE_MAP = {

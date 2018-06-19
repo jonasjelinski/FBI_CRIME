@@ -1,10 +1,11 @@
 //This class creates a UniverseChart with d3
-//it shows in which states the relation between violentCrimes
-// and  propertycrimes  quotitent = violentCrimes/propertycrimes is bigger or smaller then 0.5
+//it shows in which states the relation between violentCrimes and propertycrimes  
+//quotient = violentCrimes/propertycrimes 
+//is bigger or smaller then 0.5
 
 class Universe extends MagicCircle{
 	constructor(pageId){
-		super();		
+		super(pageId);		
 		this.htmlelement = htmlelementsNamespace.THE_UNIVERSE; 
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
@@ -255,9 +256,9 @@ class Universe extends MagicCircle{
 	getRGBColor(factor){
 		let maxColor = 255,
 			minColor = 0,
-			red = maxColor - maxColor * factor,
+			red = maxColor * factor,
 			green = minColor, 
-			blue = maxColor*factor;
+			blue = maxColor- maxColor * factor;
 		return "rgb(" + red + "," + green + "," + blue+ ")";  
 	}
 

@@ -12,8 +12,7 @@ class Sunburst extends MagicCircle{
 		this.state = state;
 		this.year = year;
 		this.categories = [];
-		this.crimes = [];	
-		this.page = this.getRootElement();   
+		this.crimes = [];		 
 	}    
 	
 	//returns the data which is necassray to build the sunburst	
@@ -32,11 +31,10 @@ class Sunburst extends MagicCircle{
 		this.createSunburst(hierarchyData); 
 	}
 
-	getRootElement(){
-		return commonfunctionsNamespace.getRootElement(this);      
-	}
-
 	//converts the jsondata in usable data for the d3 functions
+	//returns a object which consists of a name and an array "children"
+	//children consist again of name and an array "children"
+	//containing the crimetypes and the the crimerates
 	createHierarchyData(){		
 		let crimedata = commonfunctionsNamespace.getCrimesAndDataByYearAndState(this.year, this.state, this.data),
 			crimesdata = crimedata.crimes,			    
@@ -47,6 +45,9 @@ class Sunburst extends MagicCircle{
 		return rootJsonObject;
 	}
 
+	//creates new nodes which are pushed into the array "children"
+	//of the rootJsonObject
+	//returns the rootJsonObject  
 	createNodeStructure(crimesdata, rootJsonObject){		
 		for(let categorie in crimesdata){
 			if(crimesdata !== undefined){
@@ -59,6 +60,7 @@ class Sunburst extends MagicCircle{
 		return rootJsonObject;
 	}
 
+	//returns a childrenArray, containing the childrenObjects/nodes
 	createChildArray(categorieCrimes){
 		let childrenArray = [];					
 		for(let crime in categorieCrimes){
@@ -70,6 +72,7 @@ class Sunburst extends MagicCircle{
 		return childrenArray;
 	}
 
+	//creates an object which contains the name of the crime and the crimerate as size
 	createChildObject(categorieCrimes, crime){
 		let childrenObject = {};
 		childrenObject.name = crime;

@@ -1,3 +1,7 @@
+//creates a simple button
+//which contains of a filled circle
+//and a simple cross
+
 class CloseButton extends MagicCircle{
 	constructor(pageId){
 		super(pageId);		
@@ -18,6 +22,7 @@ class CloseButton extends MagicCircle{
 	}
 
 	//source: https://bl.ocks.org/Lulkafe/95a63ddea80d4d02cc4ab8bedd48dfd8
+	//draws this button
 	drawCloseButton(){		
 		let container = this.container,
 			radius = this.width/2,
@@ -25,13 +30,14 @@ class CloseButton extends MagicCircle{
 			x = this.width/2,
 			y = this.height/2,
 			that = this,
-			data = ["defaultValue"];
+			data = ["defaultValue"];//needed to d3 will create a chart
 
 		initCircle();		
 		initCross();			
 		rotateButton();
 		addOnClickEvent();
 
+		//draws a circle
 		function initCircle(){
 			container
 				.selectAll("circle")
@@ -46,6 +52,7 @@ class CloseButton extends MagicCircle{
 				.style("fill", that.fillColor);
 		}
 
+		//drasw a cross
 		function initCross(){
 			container
 				.selectAll("line.buttonLine1")						
@@ -79,10 +86,12 @@ class CloseButton extends MagicCircle{
 			container.attr("transform", "rotate (45," + x + "," + y + ")");
 		}
 
+		//determines clickEvent of the container
 		function addOnClickEvent(){
 			container.on("click", sendOnClickEvent);
 		}
 
+		//dispatches the event of the type that.onClick
 		function sendOnClickEvent(){			
 			let event = new Event(that.onClick);							
 			that.eventTarget.dispatchEvent(event);

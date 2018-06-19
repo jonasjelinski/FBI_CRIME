@@ -1,4 +1,4 @@
-//this file includes all actions, which the listener call
+//this file includes all actions, which the listeners in listener.js call
 
 var actionNamespace = actionNamespace || {};
 

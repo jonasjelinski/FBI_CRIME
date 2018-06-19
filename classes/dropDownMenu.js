@@ -1,3 +1,6 @@
+//creates a dropdown menu 
+//the dropDownArray contains the values which are shown as options in the menu
+
 class DropDownMenu extends MagicCircle{
 	constructor(pageId, dropDownArray) {
 		super(pageId);
@@ -16,6 +19,9 @@ class DropDownMenu extends MagicCircle{
 		this.createDropDownMenu();
 	}
 
+	//creates a dropdown-menu
+	//which contains of a select and options
+	//which are drawn into a rect
 	//source: http://bl.ocks.org/jfreels/6734823
 	createDropDownMenu(){
 		let dropDownMenu, 
@@ -31,6 +37,7 @@ class DropDownMenu extends MagicCircle{
 		initMenu();
 		initDropDownOptions();				
 
+		//appends a rect to container 
 		function initDropDownMenu(){
 			dropDownMenu = container
 				.append("rect")
@@ -39,6 +46,9 @@ class DropDownMenu extends MagicCircle{
 				.attr("height", that.height);				
 		}
 
+		//appends a select to container
+		//detemines the behaviour if something is selected
+		//from the dropDownMenu 
 		function initMenu(){
 			menu = dropDownMenu
 				.append("select")
@@ -49,8 +59,9 @@ class DropDownMenu extends MagicCircle{
 				.on("change", sendSelectedValue);			
 		}
 
-		function initDropDownOptions(){	
-			
+		//appends options to menu 
+		//for each entry in the dropDownArray
+		function initDropDownOptions(){				
 			dropDownOptions = menu
 				.selectAll("option")
 				.data(that.dropDownArray)
@@ -61,11 +72,13 @@ class DropDownMenu extends MagicCircle{
 				.attr("height", that.height);
 		}
 
+		//sends an event which contains the value of the selected select
 		function sendSelectedValue(){			
 			let value = d3.select("#"+selectId).property("value");
 			sendEvent(value);			
 		}	
 
+		//dispatches a new CustomEvent containing value as value of property selection
 		function sendEvent(value){
 			let event = new CustomEvent(that.selectionEvent, {detail: {selection : value}});							
 			that.eventTarget.dispatchEvent(event);
