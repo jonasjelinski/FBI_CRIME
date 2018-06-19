@@ -278,7 +278,7 @@ letter-spacing:1px;
 d3-tip:hover {
 
 }
-
+/*Staatenfarben in der Map für landanzeige*/
 .state.q0{fill:#FFFD6D}
 .state.q1{fill:#FDE563}
 .state.q2{fill:#FACD58}
@@ -290,7 +290,7 @@ d3-tip:hover {
 .state.q8{fill:#ED3C1A}
 .state.q9{fill:#EA2410}
 .state.q10{fill:#E80C05}
-
+/*Staatenfarben in der Map für skala*/
 .state.p0{background-color:#FFFD6D}
 .state.p1{background-color:#FDE563}
 .state.p2{background-color:#FACD58}
