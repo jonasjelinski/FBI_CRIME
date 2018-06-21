@@ -1,5 +1,5 @@
 //htmlelementsNamespace contains all details of the charts and pages
-//each object (e.g. htmlelementsNamespace.MAGIC_CIRCLE) 
+//each object (e.g. htmlelementsNamespace.MAGIC_CIRCLE)
 //is used in a class of classes or pages
 
 var htmlelementsNamespace = htmlelementsNamespace || {};
@@ -16,8 +16,8 @@ htmlelementsNamespace.CRIME_CORRELATION = {
 	parentElement: htmlelementsNamespace.CRIME_CORRELATION,
 	htmlclassname: "crimecorrelation",
 	htmlid: "crimecorrelation",
-	width:3000,
-	height:3000,
+	width:1000,
+	height:1000,
 	type: "svg",
 	fontColor: "black",
 };
@@ -54,8 +54,8 @@ htmlelementsNamespace.THE_UNIVERSE = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	htmlclassname: "universe",
 	htmlid: "universe",
-	width:2000,
-	height:1000,
+	width:1200,
+	height:500,
 	type: "svg",
 };
 
@@ -65,22 +65,22 @@ htmlelementsNamespace.COLOR_LEGEND = {
 	htmlid: "colorlegend",
 	width:2000,
 	height:1000,
-	type: "svg",	
+	type: "svg",
 	sliceNumbers: 50,
-	sliceHeight: 100,
+	sliceHeight: 10,
 	sliceWidth: 10,
 	sliceY: 20,
 	sliceX: 10,
 	sliceClass: "legendslice",
 	sliceType: "g",
-	titleY: 100,
-	titleX: 50,
-	titleSize: "20px",
+	titleY: 35,
+	titleX: 150,
+	titleSize: "15px",
 	titleClass: "legendtitle",
 	titleType: "g",
-	labelY: 220,
-	labelX: 10,
-	labeSize: "20px",
+	labelY: 35,
+	labelX: 9,
+	labeSize: "10px",
 	labelClass: "legendlabel",
 	labelType: "g",
 };
@@ -110,10 +110,10 @@ htmlelementsNamespace.TREE = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	rootclassname: "tree",
 	htmlid: "tree",
-	width:960,
-	height:520,
+	width:300,
+	height:380,
 	type: "g",
-	margin: {top:20, right:120, bottom:20, left:120}
+	margin: {top:20, bottom:20, left: 100, right: 100},
 };
 
 htmlelementsNamespace.DROP_DOWN = {
@@ -131,8 +131,8 @@ htmlelementsNamespace.CLOSE_BUTTON = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	htmlclassname: "closeButton",
 	htmlid: "closeButton",
-	width: 50,
-	height: 50,
+	width: 15,
+	height: 15,
 	type: "svg",
 	strokeColor : "black",
 	fillColor : "gray",
@@ -203,11 +203,10 @@ htmlelementsNamespace.POPUP_PAGE = {
 
 htmlelementsNamespace.INFO_PAGE = {
 	htmlclassname: "infoPage",
-	htmlid: "infoPage",	
-	textid: "popupPage text",	
+	htmlid: "infoPage",
+	textid: "popupPage text",
 	deleteButtonName: "deleteButton popUp",
 	deleteButtonid: "deleteButton popUp",
 	width: 1000,
 	height: 500,
 };
-
