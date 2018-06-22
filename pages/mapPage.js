@@ -9,7 +9,8 @@
 
 class MapPage extends ParentPage{
 	constructor(pageId){
-		super(pageId);	
+		super(pageId);
+		this.dropDownIdMap = "map";	
 	}
 
 	init(){		
@@ -28,7 +29,7 @@ class MapPage extends ParentPage{
 		this.timeLine = new TimeLine(this.pageId);
 		this.timeLine.appendThisCharToPage();
 		this.crimeTypes = commonfunctionsNamespace.getAllCrimeTypes();
-		this.dropDownMenu = new DropDownMenu(this.pageId, this.crimeTypes);
+		this.dropDownMenu = new DropDownMenu(this.pageId, this.crimeTypes, this.dropDownIdMap);
 		this.dropDownMenu.appendThisCharToPage();
 		this.playButton = new PlayButton(this.pageId);		
 		this.playButton.appendThisCharToPage();

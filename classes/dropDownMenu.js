@@ -2,10 +2,10 @@
 //the dropDownArray contains the values which are shown as options in the menu
 
 class DropDownMenu extends MagicCircle{
-	constructor(pageId, dropDownArray) {
+	constructor(pageId, dropDownArray, id) {
 		super(pageId);
 		this.htmlelement = htmlelementsNamespace.DROP_DOWN;
-		this.htmlElementID = this.htmlelement.htmlid;
+		this.htmlElementID = this.htmlelement.htmlid+" "+id;
 		this.htmlElementType = this.htmlelement.type;		
 		this.selectedValue = dropDownArray[0];
 		this.dropDownArray = dropDownArray;

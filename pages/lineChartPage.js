@@ -9,6 +9,8 @@
 class LineChartPage extends ParentPage{
 	constructor(pageId){
 		super(pageId);
+		this.dropDownIdCrimes = "crimes";
+		this.dropDownIdStates = "states";
 	}
 
 	init(){
@@ -31,13 +33,13 @@ class LineChartPage extends ParentPage{
 
 	initDropDownCrimes(){
 		let crimeTypes = commonfunctionsNamespace.getAllCrimeTypes();
-		this.dropDownMenuCrimes = new DropDownMenu(this.pageId, crimeTypes);
+		this.dropDownMenuCrimes = new DropDownMenu(this.pageId, crimeTypes, this.dropDownIdCrimes);
 		this.dropDownMenuCrimes.appendThisCharToPage();
 	}
 
 	initDropDownStates(){
 		let states = configNamespace.CONSTANTS.states;
-		this.dropDownMenuStates = new DropDownMenu(this.pageId, states);
+		this.dropDownMenuStates = new DropDownMenu(this.pageId, states, this.dropDownIdStates);
 		this.dropDownMenuStates.appendThisCharToPage();
 	}
 
