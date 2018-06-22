@@ -146,8 +146,8 @@ class CrimeCorrelation extends MagicCircle{
 			correlationLabel;
 		
 		initSimulation();
-		initLinks();
-		initNodes();		
+		initNodes();
+		initLinks();				
 		initLabels();		
 		setNodeDataAndEnterAndExitSettings();	
 
@@ -163,6 +163,11 @@ class CrimeCorrelation extends MagicCircle{
 				.force("collision", d3.forceCollide().radius(radius))
 				.force("link", d3.forceLink().links(links).id(linkId).distance(calculatelinkDistance))
 				.on("tick", updatePos);				
+		}
+
+		//returns the link id
+		function linkId(d){			
+			return d.id;
 		}
 
 		//creates circles with data nodes
@@ -200,7 +205,7 @@ class CrimeCorrelation extends MagicCircle{
 		}
 
 		//determines the updatebehaviour of circles, links and labels
-		function updatePos(){ 	  		
+		function updatePos(){	  		
 			
 			node.attr("cx", function(d) {return d.x; })      			
 				.attr("cy", function(d) {return d.y; }); 
@@ -298,7 +303,7 @@ class CrimeCorrelation extends MagicCircle{
 		}
 
 		function getCorrLabelId(d){
-			return "id"+d.index;
+			return "corrid"+d.index;
 		}
 
 		//creates a link if there is new data
@@ -313,11 +318,6 @@ class CrimeCorrelation extends MagicCircle{
 				.on("mouseover", showLabel)
 				.on("mouseout", function(d){hideLabel(d, this)});			
 		}		
-
-		//returns the link id
-		function linkId(d){			
-			return d.id;
-		}
 
 		//returns stroke-width depending on the correlation
 		function calculateStrokeWidth(d){			

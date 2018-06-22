@@ -65,6 +65,12 @@ configNamespace.CRIME_CORRELATION = {
 	lowCorrelationColor: "rgb(0,0,0)",
 };
 
+configNamespace.DROP_DOWN_IDS = {
+	dropDownIdCrimes :"crimes",
+	dropDownIdStates : "states",
+	dropDownIdMap : "map",
+};
+
 configNamespace.JSON_OBJECT = false;
 
 configNamespace.MAP_JSON_OBJECT = false;

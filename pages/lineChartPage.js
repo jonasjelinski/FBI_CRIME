@@ -9,8 +9,8 @@
 class LineChartPage extends ParentPage{
 	constructor(pageId){
 		super(pageId);
-		this.dropDownIdCrimes = "crimes";
-		this.dropDownIdStates = "states";
+		 this.dropDownIdCrimes = configNamespace.DROP_DOWN_IDS.dropDownIdCrimes;
+		 this.dropDownIdStates = configNamespace.DROP_DOWN_IDS.dropDownIdStates;
 	}
 
 	init(){
