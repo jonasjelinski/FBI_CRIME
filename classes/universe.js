@@ -59,12 +59,10 @@ class Universe extends MagicCircle{
 
 	rotateOrStop(){
 		if(this.isRotating){
-			this.stopRotation();
-			console.log("stop", this.stopRotation);
+			this.stopRotation();			
 		}
 		else{
-			this.animateRotation();
-			console.log("start", this.animateRotation);
+			this.animateRotation();			
 		}
 	}
 

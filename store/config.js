@@ -53,6 +53,18 @@ configNamespace.STATE_MACHINE = {
 	STATES: [this.MAP, this.LINE_CHART, this.CRIME_CORRELATION, this.UNIVERSE],
 };
 
+configNamespace.CRIME_CORRELATION = {
+	high: [0.5,1],
+	moderate:[0.5, 0.3],
+	weak:[0.3, 0.1],
+	none: [0.1,0],
+	highCorrelationRed : 255,
+	highCorrelationGreen : 255,
+	highCorrelationBlue : 255,
+	highCorrelationColor : "rgb(255,255,255)",
+	lowCorrelationColor: "rgb(0,0,0)",
+};
+
 configNamespace.JSON_OBJECT = false;
 
 configNamespace.MAP_JSON_OBJECT = false;

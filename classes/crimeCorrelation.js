@@ -142,11 +142,12 @@ class CrimeCorrelation extends MagicCircle{
 			simulation,
 			node,
 			link,
-			label;
+			label,
+			correlationLabel;
 		
 		initSimulation();
-		initNodes();
 		initLinks();
+		initNodes();		
 		initLabels();		
 		setNodeDataAndEnterAndExitSettings();	
 
@@ -179,7 +180,8 @@ class CrimeCorrelation extends MagicCircle{
 				.append("svg")     	 	
 				.attr("class", "links").attr("width",width).attr("height",height)
 				.selectAll("line")
-				.data(links);
+				.data(links)
+
 		}
 
 		//creates labels with data nodes
@@ -189,6 +191,12 @@ class CrimeCorrelation extends MagicCircle{
 				.attr("class", "lables")
 				.selectAll(".lables")
 				.data(nodes);
+
+			correlationLabel = rootElement
+				.append("svg")
+				.attr("class", "correlationLabel")
+				.selectAll(".correlationLabel")
+				.data(links);		
 		}
 
 		//determines the updatebehaviour of circles, links and labels
@@ -203,9 +211,20 @@ class CrimeCorrelation extends MagicCircle{
 				.attr("x2", function(d) { return d.target.x; })
 				.attr("y2", function(d) { return d.target.y; });
 
+			correlationLabel
+				.attr("x", function(d, i) { return calculatePoint(i,d.source.x, d.source.y, d.target.x, d.target.y)[0]; })
+    			.attr("y", function(d, i) { return calculatePoint(i,d.source.x, d.source.y, d.target.x, d.target.y)[1]; });				
+				
 			label
 				.attr("x", function(d) {return d.x; })    		
 				.attr("y", function(d) {return d.y; });
+		}
+
+		function calculatePoint(i,x1,y1,x2,y2){
+			let middleX = (x1+x2)/2,
+				middleY = (y1+y2)/2,
+				middlePoint = [middleX, middleY];			
+			return middlePoint;
 		}
 
 		//determines how nodes, label and circle 
@@ -218,6 +237,10 @@ class CrimeCorrelation extends MagicCircle{
 			label.data(nodes);
 			exitLabel();			
 			enterLabel();
+
+			correlationLabel.data(links);
+			exitCorrelationLabel();
+			enterCorrelationLabel();
 
 			link.data(links);
 			exitLink();			
@@ -232,6 +255,10 @@ class CrimeCorrelation extends MagicCircle{
 		//removes unnecessary labels
 		function exitLabel(){
 			label.exit().remove();
+		}
+
+		function exitCorrelationLabel(){
+			correlationLabel.exit().remove();
 		}
 
 		//removes unnecessary links
@@ -251,15 +278,7 @@ class CrimeCorrelation extends MagicCircle{
 					.on("drag", dragNode)
 					.on("end", endDragging)
 				);		
-		}
-
-		//creates a link if there is new data
-		function enterLink(){
-			link = link.enter().append("line")
-				.attr("stroke-width", calculateStrokeWidth)
-				.attr("fill", "black")
-				.style("stroke", "black");
-		}
+		}		
 
 		//creates a label if there is new data
 		function enterLabel(){
@@ -268,6 +287,32 @@ class CrimeCorrelation extends MagicCircle{
 				.attr("fill","green" )      			 
 				.style("font-size", fontSize);     			 
 		}
+
+		function enterCorrelationLabel(){
+			correlationLabel = correlationLabel.enter().append("text")
+				.attr("id", getCorrLabelId)
+				.text(function(d){return "correlation "+ d.correlation;})
+				.attr("fill","black" )      			 
+				.style("font-size", fontSize)
+				.style("opacity", "0");     
+		}
+
+		function getCorrLabelId(d){
+			return "id"+d.index;
+		}
+
+		//creates a link if there is new data
+		function enterLink(){
+			link = link.enter().append("line")
+				.attr("stroke-width", calculateStrokeWidth)
+				.attr("id", getCorrLabelId)
+				.style("stroke", function(d){
+					let correlationAbs = Math.abs(d.correlation);					
+					return getRGBColor(correlationAbs);
+				})
+				.on("mouseover", showLabel)
+				.on("mouseout", function(d){hideLabel(d, this)});			
+		}		
 
 		//returns the link id
 		function linkId(d){			
@@ -279,9 +324,23 @@ class CrimeCorrelation extends MagicCircle{
 			return strokeWidth*d.correlation;
 		}
 
+		//returns a rgb color
+		//it get less red if factor is bigger
+		function getRGBColor(factor){
+			let red = configNamespace.CRIME_CORRELATION.highCorrelationRed * factor,
+				green = configNamespace.CRIME_CORRELATION.highCorrelationGreen * factor, 
+				blue = configNamespace.CRIME_CORRELATION.highCorrelationBlue * factor;
+			return "rgb(" + red + "," + green + "," + blue+ ")";  
+		}		
+
 		//returns linkDistance depending on the correlation
-		function calculatelinkDistance(d){			
+		function calculatelinkDistance(d){						
 			return linkDistance*d.correlation; 
+		}
+
+		//returns color depending on crimetype
+		function fillCircle(d){			
+			return commonfunctionsNamespace.getCrimeColor(d.id);
 		}
 
 		//calculates draggingbehaviour
@@ -304,10 +363,34 @@ class CrimeCorrelation extends MagicCircle{
 			d.fy = null;
 		}
 
-		//returns color depending on crimetype
-		function fillCircle(d){			
-			return commonfunctionsNamespace.getCrimeColor(d.id);
+		function showLabel(event){		
+			let link = d3.select(this).node(),
+				linkId = link.getAttribute("id"),				
+				id = "[id="+linkId+"]",        
+				corrlabel = d3.selectAll(".correlationLabel").selectAll(id);								
+			corrlabel.style("opacity", "1");
+			changeLineColor(this);		
 		}
+
+		function changeLineColor(that){
+			d3.select(that).transition().style("stroke", "yellow");			
+		}
+
+		function hideLabel(d, that){
+			let link = d3.select(that).node(),
+				linkId = link.getAttribute("id"),
+				id = "[id="+linkId+"]",        
+				corrlabel = d3.selectAll(".correlationLabel").selectAll(id);								
+			corrlabel.style("opacity", "0");
+			restLineColor(that);		
+		}
+
+		function restLineColor(that){
+			d3.select(that).transition().style("stroke", function(d){
+				let correlationAbs = Math.abs(d.correlation);					
+				return getRGBColor(correlationAbs);
+			});
+		}	
 
 		//transform data into a readable json object
 		function makeDeepCopyOfArray(data){
