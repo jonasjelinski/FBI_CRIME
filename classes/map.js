@@ -56,14 +56,23 @@ class Map extends MagicCircle{
 			maxCrime = Math.max.apply(null, allCrimeValues), minCrime = Math.min.apply(null, allCrimeValues),
 			tip = doTip(getAllCrimesNumber);
 
-		prepareStatusSite(getAllCrimesNumber,crimeType,year);
+		prepareStatusSite(getAllCrimesNumber,crimeType,year,0);
 		colorizeMap(g,statesData,path,tip,getAllCrimesNumber,this.moving);
 
-		function prepareStatusSite(getAllCrimesNumber,crimeType,year){
-			d3.select("h1").html('<h1>'+getAllCrimesNumber[0].state+'</h1><div>'+crimeType+' '+getAllCrimesNumber[0].value+'</div> per 100.000 ');
-			d3.selectAll("status").remove();
-			d3.select("#vmp").append("status").attr("year",""+year).attr("crime", crimeType);
+		function prepareStatusSite(getAllCrimesNumber,crimeType,year,i){
+			d3.select(".crimeInfo").remove();
+			d3.select(".stateInfo").remove();
+			d3.select("#mainpage").append("h1").attr("class","stateInfo").text(getAllCrimesNumber[i].state);
+			d3.select("#mainpage").append("h2").attr("class","crimeInfo").text(crimeType+': '+getAllCrimesNumber[i].value+' victims per 100.000 inhabitants');
 		}
+
+		function prepareStatusPopup(stateName){
+			d3.select("#map").style("pointer-events", "none");
+			d3.select(".stateInfo").remove();
+			d3.select("#popup").append("h1").attr("class","stateInfo").text(stateName);
+		}
+
+
 
 		function colorizeMap(g,statesData,path,tip,getAllCrimesNumber,moving){
 			g.selectAll("path")
@@ -86,7 +95,10 @@ class Map extends MagicCircle{
 					return styleClass;
 				})
 				.call(tip)
-				.on("click", function(d,i){ sendClickEvent(i);})
+				.on("click", function(d){
+					prepareStatusPopup(d.properties.name);
+					sendClickEvent(d.properties.name.toUpperCase());
+				})
 				.on('mouseover', function(d){
 					if(!moving){
 						tip.show(d);
@@ -105,9 +117,8 @@ class Map extends MagicCircle{
 				});
 		}
 
-		function sendClickEvent(index){
-			let state = getAllCrimesNumber[index].state,
-				event = new CustomEvent(that.onClick, {detail:{state: state, year: year}});
+		function sendClickEvent(state){
+			let event = new CustomEvent(that.onClick, {detail:{state: state, year: year}});
 			that.eventTarget.dispatchEvent(event);
 		}
 
@@ -121,7 +132,7 @@ class Map extends MagicCircle{
 					for(let i=0;i<getAllCrimesNumber.length;i++){
 						if(getAllCrimesNumber[i].state.toUpperCase()==d.properties.name.toUpperCase()){
 							html = '<div class="stateHover">'+getAllCrimesNumber[i].state+'</div>';
-							d3.select("h1").html('<h1>'+getAllCrimesNumber[i].state+'</h1><div>'+crimeType+' '+getAllCrimesNumber[i].value+'</div> per 100.000 ');
+							prepareStatusSite(getAllCrimesNumber,crimeType,year,i);
 						}
 					}
 					return html;

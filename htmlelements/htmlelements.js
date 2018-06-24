@@ -89,8 +89,8 @@ htmlelementsNamespace.THE_MAP = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	htmlclassname: "map",
 	htmlid: "map",
-	width: 3000,
-	height: 3000,
+	width: 0,
+	height: 0,
 	type: "svg",
 };
 
@@ -102,7 +102,7 @@ htmlelementsNamespace.TIME_LINE = {
 	width:360,
 	height:160,
 	type: "g",
-	margin: {top:15, right:15, bottom:15, left:15},
+	margin: {top:15, right:20, bottom:0, left:20},
 	classSlider: "slider",
 };
 
@@ -113,7 +113,7 @@ htmlelementsNamespace.TREE = {
 	width:300,
 	height:380,
 	type: "g",
-	margin: {top:20, bottom:20, left: 100, right: 100},
+	margin: {top:20, bottom:20, left: 140, right: 140},
 };
 
 htmlelementsNamespace.DROP_DOWN = {

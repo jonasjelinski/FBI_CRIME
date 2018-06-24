@@ -1,92 +1,60 @@
 class Tree extends MagicCircle{
 
-  constructor(pageId, state = configNamespace.CONSTANTS.states[0], year = 2000){
+	constructor(pageId, state = configNamespace.CONSTANTS.states[0], year = 2000){
 		super(pageId);
 		this.htmlelement = htmlelementsNamespace.TREE;
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.rootElement = this.getRootElement();
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
-    this.year=year;
-    this.state=state;
+		this.year=year;
+		this.state=state;
 	}
 
-  //returns the data which is necassray to build the sunburst
-getData(){
-  return configNamespace.JSON_OBJECT;
-}
+	getData(){
+		return configNamespace.JSON_OBJECT;
+	}
 
-//calls drawsunburst
-doChart(){
-  this.drawTree();
-}
+	doChart(){
+		this.drawTree();
+	}
 
-//converts the data so it is usable and then draws the sunburst
-drawTree(){
-  let hierarchyData = this.createHierarchyData();
+	drawTree(){
 
+		let hierarchyData = this.createHierarchyData(),
+			width = this.width - this.htmlelement.margin.left - this.htmlelement.margin.right,
+			height = this.height - this.htmlelement.margin.top - this.htmlelement.margin.bottom,
+			svg = this.container.attr("width", width + this.htmlelement.margin.right + this.htmlelement.margin.left).attr("height", height + this.htmlelement.margin.top + this.htmlelement.margin.bottom).append("g").attr("transform", "translate("+this.htmlelement.margin.left + "," + this.htmlelement.margin.top+ ")"),
+			increaseNode = 0,
+			duration = 750,
+			root = d3.hierarchy(hierarchyData[0].children[0], function(d) { return d.children; }),
+			path=0,
+			treemap = d3.tree().size([height, width]);
 
-  var margin = {top: 20, right: 90, bottom: 30, left: 90},
-      width = this.width - this.htmlelement.margin.left - this.htmlelement.margin.right,
-      height = this.height - this.htmlelement.margin.top - this.htmlelement.margin.bottom;
+		root.x0 = height / 2;
+		root.y0 = 0;
+		root.children.forEach(collapse);
 
+		update(root);
 
-  var svg = this.container
-      .attr("width", width + this.htmlelement.margin.right + this.htmlelement.margin.left)
-      .attr("height", height + this.htmlelement.margin.top + this.htmlelement.margin.bottom)
-      .append("g")
-      .attr("transform", "translate("+ this.htmlelement.margin.left + "," + this.htmlelement.margin.top + ")");
+		// Collapse the node and all it's children
+		function collapse(d) {
+			if(d.children) {
+				d._children = d.children
+				d._children.forEach(collapse)
+				d.children = null
+			}
+		}
 
-  var i = 0,
-      duration = 750,
-      root,
-      path;
+		function update(source) {
+			let treeData = treemap(root),
+				nodes = treeData.descendants(),
+				links = treeData.descendants().slice(1),
+				node = svg.selectAll('g.node').data(nodes, function(d) {return d.id || (d.id = ++increaseNode); });
 
-  // declares a tree layout and assigns the size
-  var treemap = d3.tree().size([height, width]);
+        nodes.forEach(function(d){ d.y = d.depth * 180});
 
-  // Assigns parent, children, height, depth
-  root = d3.hierarchy(hierarchyData[0].children[0], function(d) { return d.children; });
-  root.x0 = height / 2;
-  root.y0 = 0;
-
-  root.children.forEach(collapse);
-
-  update(root);
-
-  // Collapse the node and all it's children
-  function collapse(d) {
-    if(d.children) {
-      d._children = d.children
-      d._children.forEach(collapse)
-      d.children = null
-    }
-  }
-
-  function update(source) {
-
-  var treeData = treemap(root);
-  var nodes = treeData.descendants(),
-      links = treeData.descendants().slice(1);
-
-      nodes.forEach(function(d){ d.y = d.depth * 180});
-
-      var node = svg.selectAll('g.node')
-      .data(nodes, function(d) {return d.id || (d.id = ++i); });
-
-      var nodeEnter = node.enter().append('g')
-      .attr('class', 'node')
-      .attr("transform", function(d) {
-        return "translate(" + source.y0 + "," + source.x0 + ")";
-    })
-    .on('click', click);
-
-    nodeEnter.append('circle')
-    .attr('class', 'node')
-    .attr('r', 1e-6)
-    .style("fill", function(d) {
-      return d._children ? "lightsteelblue" : "#fff";
-    });
+        nodeEnter=nodeEnter();
 
     nodeEnter.append('text')
     .attr("dy", ".35em")
@@ -170,12 +138,29 @@ drawTree(){
 
   function diagonal(s, d) {
 
-    path = `M ${s.y} ${s.x}
+  var  path = `M ${s.y} ${s.x}
             C ${(s.y + d.y) / 2} ${s.x},
               ${(s.y + d.y) / 2} ${d.x},
               ${d.y} ${d.x}`
 
     return path
+  }
+
+  function nodeEnter(){
+    var nodeEnter = node.enter().append('g')
+    .attr('class', 'node')
+    .attr("transform", function(d) {
+      return "translate(" + source.y0 + "," + source.x0 + ")";
+  })
+  .on('click', click);
+
+  nodeEnter.append('circle')
+  .attr('class', 'node')
+  .attr('r', 1e-6)
+  .style("fill", function(d) {
+    return d._children ? "lightsteelblue" : "#fff";
+  });
+  return nodeEnter;
   }
 
 
@@ -190,6 +175,26 @@ drawTree(){
     update(d);
   }
 }
+function expand(d){
+     var children = (d.children)?d.children:d._children;
+     if (d._children) {
+         d.children = d._children;
+         d._children = null;
+     }
+     if(children){
+       children.forEach(expand);
+     }
+
+}
+
+function expandAll(){
+     expand(root);
+     update(root);
+}
+
+update(root);
+
+expandAll();
 
 
 

@@ -71,6 +71,7 @@ class ParentPage{
 	//removes all elements appended to this.page
 	//and hides it
 	deletePage(){
+		d3.select("#map").style("pointer-events", "visible");
 		this.page.selectAll("*").remove();
 		this.hidePage();
 	}
