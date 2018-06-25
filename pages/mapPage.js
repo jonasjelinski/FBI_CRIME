@@ -4,7 +4,7 @@
 //it has a TimeLine, a DropDownMenu and PlayButton as controlls
 //trough the TimeLine the user can select which year he wants to see
 //trough the DropDownMenu the user can switch between different crimeTypes
-//if the PlayButton is clicked the TimeLine is running forward in time 
+//if the PlayButton is clicked the TimeLine is running forward in time
 //it can be stopped again through the PlayButton
 
 class MapPage extends ParentPage{
@@ -13,14 +13,14 @@ class MapPage extends ParentPage{
 		this.dropDownIdMap = configNamespace.DROP_DOWN_IDS.dropDownIdMap ;
 	}
 
-	init(){		
+	init(){
 		this.initCharts();
 		this.initControlls();
 		this.addEventListeners();
 	}
 
 	initCharts(){
-		this.mainChart = new Map();		
+		this.mainChart = new Map();
 		this.mainChart.appendThisCharToPage();
 		this.charts = [this.mainChart];
 	}
@@ -31,7 +31,7 @@ class MapPage extends ParentPage{
 		this.crimeTypes = commonfunctionsNamespace.getAllCrimeTypes();
 		this.dropDownMenu = new DropDownMenu(this.pageId, this.crimeTypes, this.dropDownIdMap);
 		this.dropDownMenu.appendThisCharToPage();
-		this.playButton = new PlayButton(this.pageId);		
+		this.playButton = new PlayButton(this.pageId);
 		this.playButton.appendThisCharToPage();
 		this.controlls = [this.timeLine,this.dropDownMenu,this.playButton];
 	}
@@ -60,12 +60,14 @@ class MapPage extends ParentPage{
 
 	playTimeLine(){
 		if(this.timeLine.isTimeLineMoving() === false){
+			d3.select("#map").style("pointer-events", "none");
 			this.timeLine.playTimeLine();
 		}
 		else{
+			d3.select("#map").style("pointer-events", "visible");
 			this.timeLine.pauseTimeLine();
 		}
-		
+
 	}
 
 	showPopup(event){
@@ -73,6 +75,6 @@ class MapPage extends ParentPage{
 			year = event.detail.year;
 		let popUpPage = new PopUpPage("popup", state, year);
 		popUpPage.init();
-		popUpPage.drawPage();		
+		popUpPage.drawPage();
 	}
 }
