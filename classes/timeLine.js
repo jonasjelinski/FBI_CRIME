@@ -53,7 +53,7 @@ class TimeLine extends MagicCircle{
 			currentValue=this.currentValue,
 			timer = this.timer,
 			that = this,
-			svg = d3.select("#mainpage").append("svg").attr("width", this.width + this.htmlelement.margin.left + this.htmlelement.margin.right).attr("height", this.height+ this.htmlelement.margin.top + this.htmlelement.margin.bottom),
+			svg = this.container.append("svg").attr("width", this.width + this.htmlelement.margin.left + this.htmlelement.margin.right).attr("height", this.height+ this.htmlelement.margin.top + this.htmlelement.margin.bottom),
 			g = svg.append("g").attr("class", "slider").attr("transform", "translate(" + this.htmlelement.margin.left + "," + 50 + ")"),
 			line = drawLine(g, xAxis),
 			handle = drawHandler(g),
