@@ -183,7 +183,7 @@ class CrimeCorrelation extends MagicCircle{
 		function initLinks(){
 			link = rootElement 
 				.append("svg")     	 	
-				.attr("class", "links").attr("width",width).attr("height",height)
+				.attr("class", "links")
 				.selectAll("line")
 				.data(links)
 
