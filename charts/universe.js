@@ -33,6 +33,8 @@ class Universe extends MagicCircle{
 		this.isRotating = false;
 		this.rotationAngle = 0;
 		this.rotationTimer = undefined;
+		this.labelColor = this.htmlelement.labelColor;
+		this.labelSize = this.htmlelement.labelSize;
 	}
 
 	//draws the universe
@@ -424,9 +426,9 @@ class Universe extends MagicCircle{
 		function enterLabel(){
 			label = label.enter().append("text")
 				.text(function(d){return d.id;})
-				.attr("fill","green" )
+				.attr("fill", that.labelColor )
 				.style("opacity", "0.5")
-				.style("font-size", "20px")			
+				.style("font-size", that.labelSize)			
 				.on("mouseover", function(d){changeFont(d, this);});
 		}		
 

@@ -36,8 +36,8 @@ htmlelementsNamespace.LINE_DIAGRAM = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	htmlclassname: "linediagram",
 	htmlid: "linediagram",
-	width:1000,
-	height:1000,
+	width:500,
+	height:500,
 	type: "svg",
 };
 
@@ -57,6 +57,18 @@ htmlelementsNamespace.THE_UNIVERSE = {
 	width:1200,
 	height:500,
 	type: "svg",
+	labelColor: "pink",
+	labelSize : "10px",
+};
+
+htmlelementsNamespace.BUBBLE_MENU = {
+	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+	htmlclassname: "bubblemenu",
+	htmlid: "bubblemenu",
+	width:100,
+	height:100,
+	type: "svg",
+	unselectedColor: "gray",
 };
 
 htmlelementsNamespace.COLOR_LEGEND = {
