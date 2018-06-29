@@ -274,23 +274,14 @@ stroke-width: 1.25px;
 }
 
 
-path.state {
-  fill: teal;
-  stroke: white;
-  -webkit-transition: fill 0.5s ease-out;
-  -moz-transition: fill 0.5s ease-out;
-  -o-transition: fill 0.5s ease-out;
-  -ms-transition: fill 0.5s ease-out;
-  transition: fill 0.5s ease-out;
-  /*cursor: -webkit-zoom-in; cursor: -moz-zoom-in;*/
-  /*cursor: -webkit-zoom-out; cursor: -moz-zoom-out;*/
-}
+
 
 path.state:hover {
   /*fill: black;*/
   /*stroke: black;*/
 
 }
+
 
 .stateHover {
 background: rgba(0, 0, 0, 0.7);
@@ -361,4 +352,17 @@ d3-tip:hover {
   position: absolute;
   bottom: 1%;
   left: 1%;
+}
+
+
+path.state {
+  fill: teal;
+  stroke: white;
+  -webkit-transition: fill 0.5s ease-out;
+  -moz-transition: fill 0.5s ease-out;
+  -o-transition: fill 0.5s ease-out;
+  -ms-transition: fill 0.5s ease-out;
+  transition: fill 0.5s ease-out;
+  /*cursor: -webkit-zoom-in; cursor: -moz-zoom-in;*/
+  /*cursor: -webkit-zoom-out; cursor: -moz-zoom-out;*/
 }
