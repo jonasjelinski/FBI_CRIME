@@ -1,6 +1,6 @@
 //this page shows an poup
 //containing a Sunburst and a Tree
-//to show the details of the crimerate of a specific state during a specific year 
+//to show the details of the crimerate of a specific state during a specific year
 //it has a CloseButton as controlls
 //to close the page
 
@@ -10,14 +10,15 @@ class PopUpPage extends ParentPage{
 		this.pageId = pageId;
 		this.htmlelement = htmlelementsNamespace.POPUP_PAGE;
 		this.htmlElementID = this.htmlelement.htmlid;
-		this.state = state;	
-		this.year = year;		
+		this.state = state;
+		this.year = year;
+		this.eventTarget =new EventTarget();
 	}
 
 	init(){
 		this.initCharts();
 		this.initControlls();
-		this.addEventListeners();		
+		this.addEventListeners();
 	}
 
 	initCharts(){
@@ -25,7 +26,7 @@ class PopUpPage extends ParentPage{
 		this.mainChart.appendThisCharToPage();
 		this.treeChart = new Tree(this.pageId, this.state, this.year);
 		this.treeChart.appendThisCharToPage();
-		this.charts = [this.mainChart, this.treeChart];	
+		this.charts = [this.mainChart, this.treeChart];
 	}
 
 	initControlls(){
@@ -38,7 +39,15 @@ class PopUpPage extends ParentPage{
 		this.closeButton.eventTarget.addEventListener(this.closeButton.onClick, this.closePage.bind(this), false);
 	}
 
-	closePage(){		
+	closePage(){
+		this.dispatchCloseEvent();
 		super.deletePage();
 	}
+
+	dispatchCloseEvent(){
+		let event = new Event("closeButton");
+		this.eventTarget.dispatchEvent(event);
+	}
+
+
 }

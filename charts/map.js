@@ -33,6 +33,17 @@ class Map extends MagicCircle{
 		this.moving = moving;
 	}
 
+	mapNotClickable()
+	{
+		d3.select("#map").style("pointer-events", "none");
+
+	}
+
+	mapClickable(){
+		d3.select("#map").style("pointer-events", "visible");
+
+	}
+
 	createD3Data() {
 		let statesData;
 		if(this.mapData !== false){
@@ -71,6 +82,8 @@ class Map extends MagicCircle{
 			d3.select(".stateInfo").remove();
 			d3.select("#popup").append("h1").attr("class","stateInfo").text(stateName);
 		}
+
+
 
 
 

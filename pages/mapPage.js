@@ -60,11 +60,12 @@ class MapPage extends ParentPage{
 
 	playTimeLine(){
 		if(this.timeLine.isTimeLineMoving() === false){
-			d3.select("#map").style("pointer-events", "none");
+			this.mainChart.mapNotClickable();
 			this.timeLine.playTimeLine();
 		}
 		else{
-			d3.select("#map").style("pointer-events", "visible");
+			this.mainChart.mapClickable();
+
 			this.timeLine.pauseTimeLine();
 		}
 
@@ -74,7 +75,12 @@ class MapPage extends ParentPage{
 		let state = event.detail.state,
 			year = event.detail.year;
 		let popUpPage = new PopUpPage("popup", state, year);
+		popUpPage.eventTarget.addEventListener("closeButton" ,this.onPopUpClosed.bind(this), false);
 		popUpPage.init();
 		popUpPage.drawPage();
+	}
+
+	onPopUpClosed(){
+		this.mainChart.mapClickable();
 	}
 }
