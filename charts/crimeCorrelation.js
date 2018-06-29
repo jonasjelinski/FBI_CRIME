@@ -146,8 +146,8 @@ class CrimeCorrelation extends MagicCircle{
 			correlationLabel;
 		
 		initSimulation();
-		initNodes();
-		initLinks();				
+		initLinks();
+		initNodes();						
 		initLabels();		
 		setNodeDataAndEnterAndExitSettings();	
 

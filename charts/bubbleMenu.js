@@ -1,18 +1,18 @@
 class BubbleMenu extends MagicCircle{
 	constructor(pageId, categories, id){
-		this.pageId = pageId;
-		this.htmlelement = htmlelementsNamespace.MAGIC_CIRCLE;
+		super(pageId);
+		this.htmlelement = htmlelementsNamespace.BUBBLE_MENU;
 		this.htmlElementID = this.htmlelement.htmlid + " "+id;
 		this.htmlclassname = this.htmlelement.htmlclassname;
 		this.htmlElementType = this.htmlelement.type;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
 		this.categories = categories;
-		this.unselectedColor = unselectedColor;
+		this.unselectedColor = this.htmlelement.unselectedColor;
 	}
 
 	doChart(){
-		drawBubbleMenu();
+		this.drawBubbleMenu();
 	}
 
 	drawBubbleMenu(){
@@ -23,22 +23,28 @@ class BubbleMenu extends MagicCircle{
 			that = this,
 			max = 10,
 			random =Math.floor((Math.random() * max) + 1),
-			selectId = this.dropDownArray[0]+random;
+			selectId = this.categories[0]+random;
 
+		console.log(container);	
 		initDropDownMenu();
-		initMenu();
-		initDropDownOptions();				
+		setEnterAndExitBehaviour();			
 
 		//appends a rect to container 
 		function initDropDownMenu(){
 			dropDownMenu = container
 				.selectAll("cirle")
-				.data(that.categories)
-				.append("circle")
+				.data(that.categories);
+							
+		}
+
+		function setEnterAndExitBehaviour(){
+			dropDownMenu.exit().remove();
+			dropDownMenu.enter().append("circle")
 				.attr("class","bubble")
 				.attr("width", that.width)
 				.attr("height", that.height)
-				.on("click", handleBubbleClick);				
+				.style("fill", getColor)
+				.on("click", handleBubbleClick);
 		}
 
 		function handleBubbleClick() {
@@ -49,16 +55,16 @@ class BubbleMenu extends MagicCircle{
 		function changeColor(bubble) {
 			let currentColor = bubble.style("fill");
 			if(currentColor === that.unselectedColor){
-				bubble.style("fill") = getColor(d);
+				//bubble.style("fill") = getColor(d);
 			}
 			else{
-				bubble.style("fill") = that.unselectedColor;
+				//bubble.style("fill") = that.unselectedColor;
 			}
 		}
 
 		//returns color according to crimeType
 		function getColor(d){
-			let crime = d.key;
+			let crime = d;
 			return commonfunctionsNamespace.getCrimeColor(crime);
 		}  
 
