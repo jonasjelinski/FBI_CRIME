@@ -36,8 +36,8 @@ htmlelementsNamespace.LINE_DIAGRAM = {
 	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
 	htmlclassname: "linediagram",
 	htmlid: "linediagram",
-	width:650,
-	height:400,
+	width:1000,
+	height:1000,
 	type: "svg",
 };
 

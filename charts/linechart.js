@@ -10,6 +10,8 @@ class LineChart extends MagicCircle{
 		this.state = state;
 		this.htmlelement = htmlelementsNamespace.LINE_DIAGRAM; 
 		this.htmlElementID = this.htmlelement.htmlid;
+		this.width = this.htmlelement.width;
+		this.height = this.htmlelement.height;
 	}
 	
 	//calls drawLineChart
