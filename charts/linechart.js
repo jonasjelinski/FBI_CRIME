@@ -342,6 +342,18 @@ class LineChart extends MagicCircle{
 				.style("text-anchor", "middle")
 				.text("Number of crimes per 100 000 inhabits");
 		}
+	}
+
+	//hides line if visible, shows line if it has been invisible before
+	showOrHideLine(crimeType){
+		let crime = crimeType,
+			isHidden = 0,
+			isVisible = 1,
+			id = "[id="+crime+"]",        
+			line = d3.select(id),
+			visible = parseInt(line.attr("opacity")),           
+			newOpacity = visible === isVisible ? isHidden : isVisible;           
+		line.attr("opacity", newOpacity);        
 	}	
 
 }
