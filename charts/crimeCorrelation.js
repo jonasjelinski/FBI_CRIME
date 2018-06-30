@@ -142,14 +142,16 @@ class CrimeCorrelation extends MagicCircle{
 			dragendedAlpha = 0,
 			rootElement = this.container,
 			simulation,
+			zoomContainer,
 			node,
 			link,
 			label,
 			correlationLabel;
 		
 		initSimulation();
+		initZoomContainer();	
 		initLinks();
-		initNodes();						
+		initNodes();							
 		initLabels();		
 		setNodeDataAndEnterAndExitSettings();	
 
@@ -172,18 +174,35 @@ class CrimeCorrelation extends MagicCircle{
 			return d.id;
 		}
 
+		function initZoomContainer(){
+			zoomContainer =  rootElement
+				.append("svg")
+				.attr("class", "zoomContainer")
+				.call(d3.zoom()
+					.on("zoom", function () {
+						console.log("zooming");
+    			zoomContainer.attr("transform", d3.event.transform);
+ 				}))
+		}
+
 		//creates circles with data nodes
 		function initNodes(){
-			node = rootElement
+			node = zoomContainer
 				.append("svg")
 				.attr("class", "nodes")
 				.selectAll("circle")
 				.data(nodes);				
 		}
 
+		function initZoomingBehaviour(){
+			
+			
+
+		}
+
 		//creates lines with data links
 		function initLinks(){
-			link = rootElement 
+			link = zoomContainer 
 				.append("svg")     	 	
 				.attr("class", "links")
 				.selectAll("line")
@@ -193,13 +212,13 @@ class CrimeCorrelation extends MagicCircle{
 
 		//creates labels with data nodes
 		function initLabels(){
-			label = rootElement
+			label = zoomContainer
 				.append("svg")
 				.attr("class", "lables")
 				.selectAll(".lables")
 				.data(nodes);
 
-			correlationLabel = rootElement
+			correlationLabel = zoomContainer
 				.append("svg")
 				.attr("class", "correlationLabel")
 				.selectAll(".correlationLabel")
@@ -286,7 +305,8 @@ class CrimeCorrelation extends MagicCircle{
 					.on("end", endDragging)
 				)
 				.on("mouseover", ingoreNotConnectedLLinks)
-				.on("mouseout", resetConnectedLinksColor);		
+				.on("mouseout", resetConnectedLinksColor);
+			
 		}		
 
 		//creates a label if there is new data

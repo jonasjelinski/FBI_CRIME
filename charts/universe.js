@@ -349,7 +349,7 @@ class Universe extends MagicCircle{
 			container = this.container,
 			width = this.width,
 			height = this.height,
-			rootElement,
+			zoomContainer,
 			node,
 			label,
 			link,
@@ -357,17 +357,31 @@ class Universe extends MagicCircle{
 		this.animateRotation = animateRotation;
 		this.stopRotation = stopRotation;
 		
+		initZoomContainer();
 		initNode();
 		initLabel();
 		initLink();		
 		setEnterAndExitBehaviour();
 		drawUniverse();
 		//animateRotation();
+
+
+		function initZoomContainer(){
+			zoomContainer =  container
+				.append("svg")
+				.attr("class", "zoomContainer")
+				.call(d3.zoom()
+					.on("zoom", function () {
+						console.log("zooming");
+    			zoomContainer.attr("transform", d3.event.transform);
+ 				}))
+		}
+
 		
 		//sets width and height of the container for the nodes which are small circles
 		//and gives it the data
 		function initNode(){
-			node = container.append("g").attr("class", "nodes")
+			node = zoomContainer.append("g").attr("class", "nodes")
 				.attr("width",width).attr("height",height)
 				.selectAll("circle")
 				.data(universe);		
@@ -376,7 +390,7 @@ class Universe extends MagicCircle{
 		//sets width and height of the container for the labels
 		//and gives it the data
 		function initLabel(){
-			label = container.append("g").attr("class", "lables")
+			label = zoomContainer.append("g").attr("class", "lables")
 				.attr("width",width).attr("height",height)
 				.selectAll(".lables")
 				.data(universe);
@@ -385,7 +399,7 @@ class Universe extends MagicCircle{
 		//sets width and height of the container for the links
 		//and gives it the data
 		function initLink(){
-			link = container.append("g").attr("class", "links")
+			link = zoomContainer.append("g").attr("class", "links")
 				.attr("width",width).attr("height",height)
 				.selectAll("line")
 				.data(universe);
