@@ -16,38 +16,47 @@ class BubbleMenu extends MagicCircle{
 	}
 
 	drawBubbleMenu(){
-		let dropDownMenu, 
-			menu,
+		let bubbles, 
 			container = this.container,
-			dropDownOptions,
 			that = this,
+			diameter = this.width/ this.categories.length,
+			radius = diameter/2,
+			x = this.width/2,
+			yStart = radius,
 			max = 10,
 			random =Math.floor((Math.random() * max) + 1),
 			selectId = this.categories[0]+random;
 
-		console.log(container);	
 		initDropDownMenu();
 		setEnterAndExitBehaviour();			
 
 		//appends a rect to container 
 		function initDropDownMenu(){
-			dropDownMenu = container
-				.selectAll("cirle")
+			bubbles = container
+				.selectAll("circle")
 				.data(that.categories);
 							
 		}
 
 		function setEnterAndExitBehaviour(){
-			dropDownMenu.exit().remove();
-			dropDownMenu.enter().append("circle")
+			bubbles.exit().remove();
+			bubbles.enter().append("circle")
 				.attr("class","bubble")
-				.attr("width", that.width)
-				.attr("height", that.height)
+				.attr("cx", x)
+				.attr("cy", function(d,i){
+					return calculateYPos(i);
+				})
+				.attr("r", radius)
 				.style("fill", getColor)
 				.on("click", handleBubbleClick);
 		}
 
+		function calculateYPos(i){
+			return yStart+(diameter)*i;
+		}
+
 		function handleBubbleClick() {
+			console.log("click");
 			let bubble = d3.select(this);
 			changeColor(bubble);
 		}
@@ -58,7 +67,8 @@ class BubbleMenu extends MagicCircle{
 				//bubble.style("fill") = getColor(d);
 			}
 			else{
-				//bubble.style("fill") = that.unselectedColor;
+				console.log(currentColor);
+				bubble.style()
 			}
 		}
 
