@@ -39,11 +39,11 @@ class UniversePage extends ParentPage{
 	}
 
 	addEventListeners(){
-		this.timeLine.eventTarget.addEventListener(this.timeLine.onUpdate, this.updateMapYear.bind(this));		
+		this.timeLine.eventTarget.addEventListener(this.timeLine.onUpdate, this.updateUniverseYear.bind(this));		
 		this.playButton.eventTarget.addEventListener(this.playButton.onClick, this.rotateUniverse.bind(this), false);
 	}
 
-	updateMapYear(event){
+	updateUniverseYear(event){
 		let year = event.detail.year;			
 		this.mainChart.setYear(year);		
 		this.mainChart.updatesHimself();
