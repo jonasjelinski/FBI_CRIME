@@ -146,7 +146,8 @@ class CrimeCorrelation extends MagicCircle{
 			node,
 			link,
 			label,
-			correlationLabel;
+			correlationLabel, 
+			transitionZoomTime = 2000;
 		
 		initSimulation();
 		initZoomContainer();	
@@ -175,7 +176,7 @@ class CrimeCorrelation extends MagicCircle{
 		}
 
 		function initZoomContainer(){
-			zoomContainer =  rootElement
+			zoomContainer =  rootElement				
 				.append("svg")
 				.attr("class", "zoomContainer")
 				.call(d3.zoom()

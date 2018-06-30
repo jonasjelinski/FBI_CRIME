@@ -349,13 +349,15 @@ class Universe extends MagicCircle{
 			container = this.container,
 			width = this.width,
 			height = this.height,
+			durationTime = 1000,
 			zoomContainer,
 			node,
 			label,
 			link,
 			canvas;		
 		this.animateRotation = animateRotation;
-		this.stopRotation = stopRotation;
+		this.stopRotation = stopRotation,
+
 		
 		initZoomContainer();
 		initNode();
@@ -455,8 +457,14 @@ class Universe extends MagicCircle{
 		//draws the universe
 		function drawUniverse(){ 	  		
 			
-			node.attr("cx", function(d){return d.x;})      			
-				.attr("cy", function(d){return d.y;})			
+			node	
+				.attr("cx", function(d){return d.x;})      			
+				.attr("cy", function(d){return d.y;})
+				.attr("r", function(d){return 0;})
+				.attr("fill", function(d){return "black";})
+				.transition()
+				.ease(d3.easeLinear)
+				.duration(durationTime)  			
 				.attr("r", function(d){return d.radius;})
 				.attr("fill", function(d){return d.color;}); 
 

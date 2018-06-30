@@ -139,7 +139,7 @@ class LineChart extends MagicCircle{
 			xAxis = d3.axisBottom(xRange), 
 			yAxis = d3.axisLeft(yRange),
 			deltaAxisY = chartHeight-margin.bottom,
-			durationTime = 2000,
+			durationTime = 1000,
 			zooming,
 			container = this.container,
 			canvas,
@@ -250,16 +250,20 @@ class LineChart extends MagicCircle{
 		//gives data to selectedGraphLines and draws new lines with new data on enter
 		function drawGraph(){
 			let selectedGraphLines = container.selectAll(".lines"),
+				invisible = 0,
 				visible =1;        
 			selectedGraphLines
 				.selectAll("line")
 				.data(data)
 				.enter()
-				.append("path")
+				.append("path")				
 				.attr("class", "line")      
 				.attr("id", function(d){
 					return d.key;
 				})
+				.transition()
+				.ease(d3.easeLinear)
+				.duration(durationTime)  
 				.attr("d", function(d){				
 					let line = singleLine(d.values);    
 					return line;
@@ -268,6 +272,10 @@ class LineChart extends MagicCircle{
 					return getColor(d);
 				})
 				.attr("fill","none")
+				.attr("opacity", invisible)
+				.transition()
+				.ease(d3.easeLinear)
+				.duration(durationTime)  
 				.attr("opacity", visible);
 		}	
 
