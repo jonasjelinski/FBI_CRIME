@@ -30,6 +30,7 @@ htmlelementsNamespace.SUN_BURST = {
 	height:500,
 	type: "svg",
 	fontColor: "black",
+	fontSize:"20px",
 };
 
 htmlelementsNamespace.LINE_DIAGRAM = {
@@ -68,7 +69,8 @@ htmlelementsNamespace.BUBBLE_MENU = {
 	width:100,
 	height:100,
 	type: "svg",
-	unselectedColor: "gray",
+	unselectedColor: "rgb(128, 128, 128)",
+	fontSize : "10px"
 };
 
 htmlelementsNamespace.COLOR_LEGEND = {

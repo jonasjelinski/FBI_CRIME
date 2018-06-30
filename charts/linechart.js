@@ -160,7 +160,7 @@ class LineChart extends MagicCircle{
 		initLabels();
 		initSingleLine();
 		drawGraph();
-		drawLabels();		
+		//drawLabels();		
 		setLabelTextAndClickBehaviour();
 		appendDateLabel();
 		appendNumberLabel();

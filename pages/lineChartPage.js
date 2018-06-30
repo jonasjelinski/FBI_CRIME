@@ -26,9 +26,16 @@ class LineChartPage extends ParentPage{
 	}
 
 	initControlls(){
+		this.initBubbleMenu();
 		this.initDropDownCrimes();
 		this.initDropDownStates();		
-		this.controlls = [this.dropDownMenuCrimes, this.dropDownMenuStates];
+		this.controlls = [this.bubbleMenu, this.dropDownMenuStates];
+	}
+
+	initBubbleMenu(){
+		let crimeTypes = commonfunctionsNamespace.getAllCrimeTypes();
+		this.bubbleMenu = new BubbleMenu(this.pageId,crimeTypes, "bubblecrimes");
+		this.bubbleMenu.appendThisCharToPage();
 	}
 
 	initDropDownCrimes(){
@@ -46,6 +53,7 @@ class LineChartPage extends ParentPage{
 	addListeners(){
 		this.dropDownMenuCrimes.eventTarget.addEventListener(this.dropDownMenuCrimes.selectionEvent, this.updateChartCrimeType.bind(this), false);
 		this.dropDownMenuStates.eventTarget.addEventListener(this.dropDownMenuStates.selectionEvent, this.updateChartState.bind(this), false);
+		this.bubbleMenu.eventTarget.addEventListener(this.bubbleMenu.selectionEvent, this.updateChartCrimeType.bind(this), false);
 	}
 
 	updateChartCrimeType(event){				

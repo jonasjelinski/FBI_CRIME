@@ -12,7 +12,8 @@ class Sunburst extends MagicCircle{
 		this.state = state;
 		this.year = year;
 		this.categories = [];
-		this.crimes = [];		 
+		this.crimes = [];
+		this.fontSize = this.htmlelement.fontSize;		 
 	}    
 	
 	//returns the data which is necassray to build the sunburst	
@@ -100,12 +101,15 @@ class Sunburst extends MagicCircle{
 			heightGrafic = height/2,
 			radius = Math.min(widthGrafic, heightGrafic) / 2,
 			labelWidth = width/2,
-			labelHeight = labelWidth,			
+			labelHeight = labelWidth,
+			fontSize = this.fontSize,			
 			lastLabelYPos = 0,
 			lineWidth = labelWidth,
 			lineHeight = labelHeight,
 			durationTime = 2000,      
 			container = this.container,
+			visible = 1,
+			invisible = 0,
 			sunburst,
 			labels,
 			lines,
@@ -208,7 +212,6 @@ class Sunburst extends MagicCircle{
 				.ease(d3.easeLinear)
 				.duration(durationTime)            
 				.attr("d", arc)
-				//.style("stroke", "black ")
 				.style("fill", function(d){ return getColorByCrime(d);});  
 		}
 
@@ -231,6 +234,8 @@ class Sunburst extends MagicCircle{
 				.data(parentNode.descendants())
 				.enter()
 				.append("g").attr("class", "label")
+				.attr("id", function(d){return getId("label", d);})
+				.attr("opacity", invisible)
 				.append("text")
 				.transition()
 				.ease(d3.easeLinear)
@@ -238,9 +243,10 @@ class Sunburst extends MagicCircle{
 				.attr("x", function (d, i) { return computeTextXPos(d,i); })
 				.attr("y",  function (d, i) { return computeTextYPos(d,i); }) 
 				.attr("text-anchor", function(d,i){return computeTextAnchor(d,i);})
-				.attr("font-size", "10px")
+				.attr("font-size", fontSize)
 				.style("fill", "blue")
-				.text(function(d) { return d.parent ? d.data.name : "" }); 
+				.text(function(d) { return d.parent ? d.data.name : "" })
+				.style("fill", function(d){ return getColorByCrime(d);});   
 		}
 
 		//sets the data to the lines and how it should be drawn
@@ -248,7 +254,11 @@ class Sunburst extends MagicCircle{
 		function drawLines(){
 			lines.selectAll("g")
 				.data(parentNode.descendants())
-				.enter().append("line").attr("class", "line")
+				.enter()
+				.append("line")
+				.attr("class", "line")
+				.attr("id", function(d){return getId("line", d);})
+				.attr("opacity", invisible)
 				.transition()
 				.ease(d3.easeLinear)
 				.duration(2000)  
@@ -310,6 +320,12 @@ class Sunburst extends MagicCircle{
 			return (x > 0) ? "start" : "end";
 		}
 
+		//returns an id, so label, line can be selected to show or hide
+		function getId(type, d){
+			let crime = d.parent ? d.data.name : "";
+			return type + crime;
+		}
+
 		//calculates the second x position of a line
 		function computeLineX2(data, index){
 			if(data.data.name === "Crimes"){
@@ -356,7 +372,25 @@ class Sunburst extends MagicCircle{
 		function transferToCleanJavascriptObject(jsondata){
 			return JSON.parse(JSON.stringify(jsondata));
 		} 
-	}   
+	}
+
+	showOrHideLinesAndLabels(crime){
+		let labelId = "label"+crime,
+			lineId = "line"+crime,        
+			label = d3.select("#"+labelId),
+			line = d3.select("#"+lineId);
+			this.showOrHide(label);
+			this.showOrHide(line);
+	} 
+
+	//hides line if visible, shows line if it has been invisible before
+	showOrHide(selection){
+		let isHidden = 0,
+			isVisible = 1,
+			visible = parseInt(selection.attr("opacity")),           
+			newOpacity = visible === isVisible ? isHidden : isVisible;           
+		selection.attr("opacity", newOpacity);        
+	}	  
 
 }
 

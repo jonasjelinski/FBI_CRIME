@@ -22,26 +22,53 @@ class PopUpPage extends ParentPage{
 	}
 
 	initCharts(){
-		this.mainChart = new Sunburst(this.pageId, this.state, this.year);
-		this.mainChart.appendThisCharToPage();
-		this.treeChart = new Tree(this.pageId, this.state, this.year);
-		this.treeChart.appendThisCharToPage();
+		this.initSuburst();
+		this.initTree();		
 		this.charts = [this.mainChart, this.treeChart];
 	}
 
+	initSuburst(){
+		this.mainChart = new Sunburst(this.pageId, this.state, this.year);
+		this.mainChart.appendThisCharToPage();
+	}
+
+	initTree(){
+		this.treeChart = new Tree(this.pageId, this.state, this.year);
+		this.treeChart.appendThisCharToPage();
+	}
+
 	initControlls(){
+		this.initCoseButton();
+		this.initBubbleMenu();
+		this.controlls = [this.closeButton, this.bubbleMenu];
+	}
+
+	initCoseButton(){
 		this.closeButton = new CloseButton(this.pageId);
 		this.closeButton.appendThisCharToPage();
-		this.controlls = [this.closeButton];
+	}
+
+	initBubbleMenu(){
+		let crimeTypes = commonfunctionsNamespace.getAllCrimeTypes(),
+			categories = ["violentCrime", "propertyCrime"],
+			selections = crimeTypes.concat(categories);
+		this.bubbleMenu = new BubbleMenu(this.pageId,selections, "bubblecrimes");
+		this.bubbleMenu.appendThisCharToPage();
 	}
 
 	addEventListeners(){
 		this.closeButton.eventTarget.addEventListener(this.closeButton.onClick, this.closePage.bind(this), false);
+		this.bubbleMenu.eventTarget.addEventListener(this.bubbleMenu.selectionEvent, this.updateChartCrimeType.bind(this), false);
 	}
 
 	closePage(){
 		this.dispatchCloseEvent();
 		super.deletePage();
+	}
+
+	updateChartCrimeType(event){
+		let crimeType = event.detail.selection;
+		this.mainChart.showOrHideLinesAndLabels(crimeType);
 	}
 
 	dispatchCloseEvent(){
