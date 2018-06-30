@@ -5,11 +5,12 @@ class CrimeCorrelationPage extends ParentPage{
 	constructor(pageId){
 		super(pageId);		
 		this.mainChart = new CrimeCorrelation();
-		this.ColorLegendTitle = "Correlation between Crime Types";
-		this.ColorLegendStartLabel = "No Correlation";
-		this.ColorLegendEndLabel = "High Correlation";
-		this.startColor = configNamespace.CRIME_CORRELATION.lowCorrelationColor;
-		this.endColor = configNamespace.CRIME_CORRELATION.highCorrelationColor;
+		this.htmlElement = htmlelementsNamespace.CRIME_CORRELATION_PAGE;
+		this.ColorLegendTitle = this.htmlElement.colorLegendTitle;
+		this.ColorLegendStartLabel = this.htmlElement.colorLegendStartLabel;
+		this.ColorLegendEndLabel = this.htmlElement.colorLegendEndLabel;
+		this.startColor = this.htmlElement.startColor;
+		this.endColor = this.htmlElement.endColor;
 	}
 
 	init(){

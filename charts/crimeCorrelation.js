@@ -16,6 +16,8 @@ class CrimeCorrelation extends MagicCircle{
 		this.propertyPos= 0.25;
 		this.nodesIndex = 0;
 		this.linksIndex = 1;
+		this.ignoreLinkColor = this.htmlelement.ignoreLinkColor;
+		this.highlightLinkColor = this.htmlelement.highlightLinkColor;
 	}
 
 	doChart(){
@@ -282,7 +284,9 @@ class CrimeCorrelation extends MagicCircle{
 					.on("start", startDragging)
 					.on("drag", dragNode)
 					.on("end", endDragging)
-				);		
+				)
+				.on("mouseover", ingoreNotConnectedLLinks)
+				.on("mouseout", resetConnectedLinksColor);		
 		}		
 
 		//creates a label if there is new data
@@ -310,13 +314,14 @@ class CrimeCorrelation extends MagicCircle{
 		function enterLink(){
 			link = link.enter().append("line")
 				.attr("stroke-width", calculateStrokeWidth)
+				.attr("class", "link")
 				.attr("id", getCorrLabelId)
-				.style("stroke", function(d){
-					let correlationAbs = Math.abs(d.correlation);					
-					return getRGBColor(correlationAbs);
-				})
-				.on("mouseover", showLabel)
-				.on("mouseout", function(d){hideLabel(d, this)});			
+				.attr("source", getSource)
+				.attr("target", getLabel)
+				.attr("resetColor", getRGBColor)
+				.style("stroke",  getRGBColor)
+				.on("mouseover", showLabelAndChangeLineColor)
+				.on("mouseout", function(d){hideLabelAndColor(d, this)});			
 		}		
 
 		//returns stroke-width depending on the correlation
@@ -324,12 +329,22 @@ class CrimeCorrelation extends MagicCircle{
 			return strokeWidth*d.correlation;
 		}
 
+		//
+		function getSource(d){
+			return d.source.id;
+		}
+
+		function getLabel(d){
+			return d.target.id;
+		}
+
 		//returns a rgb color
 		//it get less red if factor is bigger
-		function getRGBColor(factor){
-			let red = configNamespace.CRIME_CORRELATION.highCorrelationRed * factor,
+		function getRGBColor(d){
+			let factor = Math.abs(d.correlation),
+				red = configNamespace.CRIME_CORRELATION.highCorrelationRed * factor,
 				green = configNamespace.CRIME_CORRELATION.highCorrelationGreen * factor, 
-				blue = configNamespace.CRIME_CORRELATION.highCorrelationBlue * factor;
+				blue = configNamespace.CRIME_CORRELATION.lowCorrelationBlue - configNamespace.CRIME_CORRELATION.lowCorrelationBlue* factor;
 			return "rgb(" + red + "," + green + "," + blue+ ")";  
 		}		
 
@@ -344,10 +359,10 @@ class CrimeCorrelation extends MagicCircle{
 		}
 
 		//calculates draggingbehaviour
-		function startDragging(d) {			
+		function startDragging(d) {					
 			if (!d3.event.active) simulation.alphaTarget(draggedAlpha).restart();
 			d.fx = d.x;
-			d.fy = d.y;
+			d.fy = d.y;			
 		}
 
 		//calculates draggingbehaviour
@@ -357,38 +372,77 @@ class CrimeCorrelation extends MagicCircle{
 		}
 
 		//calculates draggingbehaviour
-		function endDragging(d) {
+		function endDragging(d){
 			if (!d3.event.active) simulation.alphaTarget(dragendedAlpha);
 			d.fx = null;
 			d.fy = null;
 		}
 
-		function showLabel(event){		
-			let link = d3.select(this).node(),
+		function ingoreNotConnectedLLinks(d){
+			let source = d.id;
+			changeLinksColorBySource(source, false);		
+		}
+
+		function changeLinksColorBySource(source, reset){
+			let filter = "[source='"+source+"']",
+				linksWithThisSource = d3.selectAll(".link").filter(function(d){
+					return d.source.id !== source && d.target.id !==source; 
+				});
+				if(reset){
+					resetLinksColor(linksWithThisSource);
+				}
+				else{
+					changeLinksColor(linksWithThisSource);
+				}				
+						
+		}
+
+		function resetLinksColor(links){
+			links.style("stroke",getRGBColor);
+		}
+
+		function changeLinksColor(links){
+			links.style("stroke", that.ignoreLinkColor);
+		}
+
+		function resetConnectedLinksColor(d){
+			let source = d.id;					
+			changeLinksColorBySource(source, true);
+		}
+
+		function showLabelAndChangeLineColor(event){		
+			showLabel(this);
+			changeLineColor(this);		
+		}
+
+		function showLabel(that){
+			let link = d3.select(that).node(),
 				linkId = link.getAttribute("id"),				
 				id = "[id="+linkId+"]",        
 				corrlabel = d3.selectAll(".correlationLabel").selectAll(id);								
 			corrlabel.style("opacity", "1");
-			changeLineColor(this);		
 		}
 
 		function changeLineColor(that){
-			d3.select(that).transition().style("stroke", "yellow");			
+			d3.select(that).transition().style("stroke", that.highlightLinkColor);			
 		}
 
-		function hideLabel(d, that){
+		function hideLabelAndColor(d, that){
+			hideLabel(that);
+			restLineColor(that);		
+		}
+
+		function hideLabel(that){
 			let link = d3.select(that).node(),
 				linkId = link.getAttribute("id"),
 				id = "[id="+linkId+"]",        
 				corrlabel = d3.selectAll(".correlationLabel").selectAll(id);								
 			corrlabel.style("opacity", "0");
-			restLineColor(that);		
 		}
 
 		function restLineColor(that){
 			d3.select(that).transition().style("stroke", function(d){
-				let correlationAbs = Math.abs(d.correlation);					
-				return getRGBColor(correlationAbs);
+				return getRGBColor(d);
 			});
 		}	
 

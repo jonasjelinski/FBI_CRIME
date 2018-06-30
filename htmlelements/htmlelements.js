@@ -20,6 +20,8 @@ htmlelementsNamespace.CRIME_CORRELATION = {
 	height:1000,
 	type: "svg",
 	fontColor: "black",
+	highlightLinkColor: "yellow",
+	ignoreLinkColor: "gray",
 };
 
 htmlelementsNamespace.SUN_BURST = {
@@ -179,6 +181,11 @@ htmlelementsNamespace.PARENT_PAGE = {
 htmlelementsNamespace.CRIME_CORRELATION_PAGE = {
 	htmlclassname: "correlationPage",
 	htmlid: "correlationPage",
+	startColor: configNamespace.CRIME_CORRELATION.lowCorrelationColor,
+	endColor: configNamespace.CRIME_CORRELATION.highCorrelationColor,
+	colorLegendTitle: "Correlation between Crime Types",
+	colorLegendStartLabel: "No Correlation",
+	colorLegendEndLabel: "High Correlation",
 };
 
 htmlelementsNamespace.LINE_CHART_PAGE = {

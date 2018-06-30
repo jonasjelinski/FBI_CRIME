@@ -59,10 +59,13 @@ configNamespace.CRIME_CORRELATION = {
 	weak:[0.3, 0.1],
 	none: [0.1,0],
 	highCorrelationRed : 255,
-	highCorrelationGreen : 255,
-	highCorrelationBlue : 255,
-	highCorrelationColor : "rgb(255,255,255)",
-	lowCorrelationColor: "rgb(0,0,0)",
+	highCorrelationGreen : 1,
+	highCorrelationBlue : 1,
+	highCorrelationColor : "rgb(255,1,1)",
+	lowCorrelationRed : 1,
+	lowCorrelationGreen : 1,
+	lowCorrelationBlue : 255,
+	lowCorrelationColor: "rgb(1,1,255)",
 };
 
 configNamespace.DROP_DOWN_IDS = {
