@@ -73,8 +73,8 @@ class MapPage extends ParentPage{
 
 	showPopup(event){
 		let state = event.detail.state,
-			year = event.detail.year;
-		let popUpPage = new PopUpPage("popup", state, year);
+			year = event.detail.year,
+			popUpPage = new PopUpPage("popup", state, year);
 		popUpPage.eventTarget.addEventListener("closeButton" ,this.onPopUpClosed.bind(this), false);
 		popUpPage.init();
 		popUpPage.drawPage();

@@ -217,7 +217,7 @@ class LineChart extends MagicCircle{
 				.style("fill", "white");
 		}
 
-		//inits labels and sets width and height and position of allGraphLines
+		//inits labels and sets width and height and position of labels
 		function initLabels(){
 			labels = container            
 				.append("g")

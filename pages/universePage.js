@@ -18,8 +18,7 @@ class UniversePage extends ParentPage{
 	init(){
 		this.initCharts();
 		this.initControlls();
-		this.addEventListeners();
-		
+		this.addEventListeners();		
 	}
 
 	initCharts(){

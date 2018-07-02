@@ -1,7 +1,9 @@
 //this page shows an poup
 //containing a Sunburst and a Tree
 //to show the details of the crimerate of a specific state during a specific year
-//it has a CloseButton as controlls
+//it has a CloseButton and a bubbleMenu as controlls
+//with the closeButton the user can close this page
+//with the BubbleMenu the user can show details of the Sunburst
 //to close the page
 
 class PopUpPage extends ParentPage{

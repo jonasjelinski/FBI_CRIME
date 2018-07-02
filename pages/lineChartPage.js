@@ -1,16 +1,16 @@
 //this page shows a lineChart
 //showing the crimerates over years for different crimes and states 
 //by appending a LineChart-chart to the page
-//it has a two DropDownMenus as controlls
-//in dropDownMenuCrimes the user can select between different crimetypes
+//it has a DropDownMenu and a BubbleMenu as controlls
+//in bubbleMenu the user can select between different crimetypes
 //to show or hide the line of the crimetype
 //in dropDownMenuStates the user can switch between different states like Alaska
 
 class LineChartPage extends ParentPage{
 	constructor(pageId){
 		super(pageId);
-		 this.dropDownIdCrimes = configNamespace.DROP_DOWN_IDS.dropDownIdCrimes;
-		 this.dropDownIdStates = configNamespace.DROP_DOWN_IDS.dropDownIdStates;
+		this.dropDownIdCrimes = configNamespace.DROP_DOWN_IDS.dropDownIdCrimes;
+		this.dropDownIdStates = configNamespace.DROP_DOWN_IDS.dropDownIdStates;
 	}
 
 	init(){
