@@ -30,10 +30,7 @@ scriptLoader = (function(){
 	function loadFirstScripts(callback){
 		scripts_namespace.FIRST_SCRIPTS.forEach(function(script){
 			prefixScript(script);		
-		});
-		commonfunctionsNamespace.setMapJsonObject();
-		commonfunctionsNamespace.setJsonObject();	
-		commonfunctionsNamespace.setCrimeCorrelationCSV();	
+		});		
 		callback(null);
 	}
 
@@ -49,11 +46,27 @@ scriptLoader = (function(){
 		q.await(function(error) {
 			if (error) throw error;
 			loadSecondScripts();
-			console.log("scripts loaded");	
+			loadObjectsAfterWaitingForScripts();
+						
 		});
 	}
 
+	function loadObjectsAfterWaitingForScripts(){
+		let waitingTime = 250;
+		setTimeout(function () {
+			loadDataObjects();
+			console.log("scripts loaded");	
+		}, waitingTime);
+	}
+
+	function loadDataObjects(){
+		commonfunctionsNamespace.setMapJsonObject();
+		commonfunctionsNamespace.setJsonObject();	
+		commonfunctionsNamespace.setCrimeCorrelationCSV();	
+	}
+
 	that.loadScripts = loadScripts;
+	that.loadDataObjects = loadDataObjects;
 	return that;
 }());
 
