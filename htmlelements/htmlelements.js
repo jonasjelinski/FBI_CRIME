@@ -1,10 +1,10 @@
 //htmlelementsNamespace contains all details of the charts and pages
-//each object (e.g. htmlelementsNamespace.MAGIC_CIRCLE)
+//each object (e.g. htmlelementsNamespace.magicCircle)
 //is used in a class of classes or pages
 
 var htmlelementsNamespace = htmlelementsNamespace || {};
 
-htmlelementsNamespace.MAGIC_CIRCLE = { //Elternelement aller anderen HTML-Elemente
+htmlelementsNamespace.magicCircle = { //Elternelement aller anderen HTML-Elemente
 	htmlclassname: "magicCircle", //im html-Element class="magicCircle"
 	htmlid: "magicCircle", //im html-Element id="magicCircle"
 	width:1000,
@@ -12,8 +12,8 @@ htmlelementsNamespace.MAGIC_CIRCLE = { //Elternelement aller anderen HTML-Elemen
 	type: "svg",
 };
 
-htmlelementsNamespace.CRIME_CORRELATION = {
-	parentElement: htmlelementsNamespace.CRIME_CORRELATION,
+htmlelementsNamespace.crimeCorrelation = {
+	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "crimecorrelation",
 	htmlid: "crimecorrelation",
 	width:1000,
@@ -24,8 +24,8 @@ htmlelementsNamespace.CRIME_CORRELATION = {
 	ignoreLinkColor: "gray",
 };
 
-htmlelementsNamespace.SUN_BURST = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+htmlelementsNamespace.sunBurst = {
+	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "sunburst",
 	htmlid: "sunburst",
 	width:500,
@@ -35,8 +35,8 @@ htmlelementsNamespace.SUN_BURST = {
 	fontSize:"20px",
 };
 
-htmlelementsNamespace.LINE_DIAGRAM = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+htmlelementsNamespace.lineDiagramm = {
+	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "linediagram",
 	htmlid: "linediagram",
 	width:500,
@@ -44,17 +44,8 @@ htmlelementsNamespace.LINE_DIAGRAM = {
 	type: "svg",
 };
 
-htmlelementsNamespace.THE_FORCE = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
-	htmlclassname: "theforce",
-	htmlid: "theforce",
-	width:3000,
-	height:3000,
-	type: "svg",
-};
-
-htmlelementsNamespace.THE_UNIVERSE = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+htmlelementsNamespace.theUniverse = {
+	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "universe",
 	htmlid: "universe",
 	width:1200,
@@ -64,19 +55,19 @@ htmlelementsNamespace.THE_UNIVERSE = {
 	labelSize : "10px",
 };
 
-htmlelementsNamespace.BUBBLE_MENU = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+htmlelementsNamespace.bubbleMenu = {
+	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "bubblemenu",
 	htmlid: "bubblemenu",
 	width:100,
 	height:100,
 	type: "svg",
 	unselectedColor: "rgb(128, 128, 128)",
-	fontSize : "10px"
+	fontSize : "10px",
 };
 
-htmlelementsNamespace.COLOR_LEGEND = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+htmlelementsNamespace.colorLegend = {
+	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "colorlegend",
 	htmlid: "colorlegend",
 	width:2000,
@@ -101,8 +92,8 @@ htmlelementsNamespace.COLOR_LEGEND = {
 	labelType: "g",
 };
 
-htmlelementsNamespace.THE_MAP = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+htmlelementsNamespace.theMap = {
+	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "map",
 	htmlid: "map",
 	width: 0,
@@ -110,8 +101,8 @@ htmlelementsNamespace.THE_MAP = {
 	type: "svg",
 };
 
-htmlelementsNamespace.TIME_LINE = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+htmlelementsNamespace.timeLine = {
+	parentElement: htmlelementsNamespace.magicCircle,
 	rootclassname: "timeLine",
 	childElement: "play-button",
 	htmlid: "timeLine",
@@ -122,8 +113,8 @@ htmlelementsNamespace.TIME_LINE = {
 	classSlider: "slider",
 };
 
-htmlelementsNamespace.TREE = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+htmlelementsNamespace.tree = {
+	parentElement: htmlelementsNamespace.magicCircle,
 	rootclassname: "tree",
 	htmlid: "tree",
 	width:300,
@@ -132,8 +123,8 @@ htmlelementsNamespace.TREE = {
 	margin: {top:20, bottom:20, left: 140, right: 140},
 };
 
-htmlelementsNamespace.DROP_DOWN = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+htmlelementsNamespace.dropDown = {
+	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "dropDown",
 	htmlid: "dropDown",
 	width: 100,
@@ -143,8 +134,8 @@ htmlelementsNamespace.DROP_DOWN = {
 	unselectedColor : "gray",
 };
 
-htmlelementsNamespace.CLOSE_BUTTON = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+htmlelementsNamespace.closeButton = {
+	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "closeButton",
 	htmlid: "closeButton",
 	width: 15,
@@ -155,8 +146,8 @@ htmlelementsNamespace.CLOSE_BUTTON = {
 	strokeWidth :2,
 };
 
-htmlelementsNamespace.PLAY_BUTTON = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+htmlelementsNamespace.playButton = {
+	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "playButton",
 	htmlid: "playButton",
 	width: 100,
@@ -164,8 +155,8 @@ htmlelementsNamespace.PLAY_BUTTON = {
 	type: "button",
 };
 
-htmlelementsNamespace.INFO_BOX = {
-	parentElement: htmlelementsNamespace.MAGIC_CIRCLE,
+htmlelementsNamespace.infoBox = {
+	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "infobox",
 	htmlid: "infobox",
 	width: 1000,
@@ -178,7 +169,7 @@ htmlelementsNamespace.PARENT_PAGE = {
 	height: 1000,
 };
 
-htmlelementsNamespace.CRIME_CORRELATION_PAGE = {
+htmlelementsNamespace.crimeCorrelationPage = {
 	htmlclassname: "correlationPage",
 	htmlid: "correlationPage",
 	startColor: configNamespace.CRIME_CORRELATION.lowCorrelationColor,
@@ -188,26 +179,26 @@ htmlelementsNamespace.CRIME_CORRELATION_PAGE = {
 	colorLegendEndLabel: "High Correlation",
 };
 
-htmlelementsNamespace.LINE_CHART_PAGE = {
+htmlelementsNamespace.lineChartPage = {
 	htmlclassname: "lineChartPage",
 	htmlid: "lineChartPage",
 	dropDownClassName: "dropDown crimetypes linechart",
 	dropDownid: "dropDown crimetypes linechart",
 };
 
-htmlelementsNamespace.MAP_PAGE = {
+htmlelementsNamespace.mapPage = {
 	htmlclassname: "mapPage",
 	htmlid: "mapPage",
 };
 
-htmlelementsNamespace.UNIVERSE_PAGE = {
+htmlelementsNamespace.universePage = {
 	htmlclassname: "universePage",
 	htmlid: "universePage",
 	timeLineClassName: "timeLine universe",
 	timeLineClassid: "timeLine universe",
 };
 
-htmlelementsNamespace.POPUP_PAGE = {
+htmlelementsNamespace.popupPage = {
 	htmlclassname: "popupPage",
 	htmlid: "popupPage",
 	sunburstclassname: "popupPage sunburst",
@@ -222,7 +213,7 @@ htmlelementsNamespace.POPUP_PAGE = {
 	height: 500,
 };
 
-htmlelementsNamespace.INFO_PAGE = {
+htmlelementsNamespace.infoPage = {
 	htmlclassname: "infoPage",
 	htmlid: "infoPage",
 	textid: "popupPage text",

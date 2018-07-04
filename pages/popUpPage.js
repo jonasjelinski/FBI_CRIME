@@ -7,10 +7,10 @@
 //to close the page
 
 class PopUpPage extends ParentPage{
-	constructor(pageId = "popup", state = configNamespace.CONSTANTS.states[0], year = 2000){
+	constructor(pageId = "popup", state = configNamespace.STATES_AND_CRIMES.states[0], year = 2000){
 		super(pageId);
 		this.pageId = pageId;
-		this.htmlelement = htmlelementsNamespace.POPUP_PAGE;
+		this.htmlelement = htmlelementsNamespace.popupPage;
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.state = state;
 		this.year = year;
@@ -77,6 +77,4 @@ class PopUpPage extends ParentPage{
 		let event = new Event("closeButton");
 		this.eventTarget.dispatchEvent(event);
 	}
-
-
 }

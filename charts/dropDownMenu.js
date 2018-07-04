@@ -4,7 +4,7 @@
 class DropDownMenu extends MagicCircle{
 	constructor(pageId, dropDownArray, id) {
 		super(pageId);
-		this.htmlelement = htmlelementsNamespace.DROP_DOWN;
+		this.htmlelement = htmlelementsNamespace.dropDown;
 		this.htmlElementID = this.htmlelement.htmlid+" "+id;
 		this.htmlElementType = this.htmlelement.type;		
 		this.selectedValue = dropDownArray[0];

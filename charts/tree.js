@@ -1,8 +1,8 @@
 class Tree extends MagicCircle{
 
-	constructor(pageId, state = configNamespace.CONSTANTS.states[0], year = 2000){
+	constructor(pageId, state = configNamespace.STATES_AND_CRIMES.states[0], year = 2000){
 		super(pageId);
-		this.htmlelement = htmlelementsNamespace.TREE;
+		this.htmlelement = htmlelementsNamespace.tree;
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.rootElement = this.getRootElement();
 		this.width = this.htmlelement.width;

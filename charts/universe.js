@@ -6,11 +6,11 @@
 class Universe extends MagicCircle{
 	constructor(pageId){
 		super(pageId);		
-		this.htmlelement = htmlelementsNamespace.THE_UNIVERSE; 
+		this.htmlelement = htmlelementsNamespace.theUniverse; 
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
-		this.year = configNamespace.CONSTANTS.minYear;
+		this.year = configNamespace.STATES_AND_CRIMES.minYear;
 		this.violenceGroup = 0;
 		this.propertyGroup = 1;
 		this.violencePos= 0.75;

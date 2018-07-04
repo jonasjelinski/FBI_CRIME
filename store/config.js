@@ -1,25 +1,12 @@
 var configNamespace = configNamespace || {};
 
-configNamespace.CLICKLISTENER = {
-	dochart: "dochart",
-};
-
-configNamespace.HTML_IDS = {
-	mychart: "myChart",
-};
-
-configNamespace.HTML_TYPES = {
-	g: "g",
-	svg: "svg",
-};
-
 configNamespace.FILE_PATHES = {
 	jsonpath: "./store/crimes.json",
 	mappath: "./store/states.json",
 	crimeCorrelations : "./store/crimeCorrelations.csv",
 };
 
-configNamespace.CONSTANTS = {
+configNamespace.STATES_AND_CRIMES = {
 	states : ['ALABAMA','ALASKA','ARIZONA','ARKANSAS','CALIFORNIA','COLORADO','CONNECTICUT','DELAWARE','COLUMBIA','FLORIDA','GEORGIA','HAWAII','IDAHO','ILLINOIS','INDIANA','IOWA','KANSAS','KENTUCKY','LOUISIANA','MAINE','MARYLAND','MASSACHUSETTS','MICHIGAN','MINNESOTA','MISSISSIPPI','MISSOURI','MONTANA','NEBRASKA','NEVADA','NEW HAMPSHIRE','NEW JERSEY','NEW MEXICO','NEW YORK','NORTH CAROLINA','NORTH DAKOTA','OHIO','OKLAHOMA','OREGON','PENNSYLVANIA','PUERTO RICO','RHODE ISLAND','SOUTH CAROLINA','SOUTH DAKOTA','TENNESSEE','TEXAS','UTAH','VERMONT','VIRGINIA','WASHINGTON','WEST VIRGINIA','WISCONSIN','WYOMING'],
 	crimeCategories : {
 		Crimes : { 

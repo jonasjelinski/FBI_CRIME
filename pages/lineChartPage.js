@@ -9,6 +9,7 @@
 class LineChartPage extends ParentPage{
 	constructor(pageId){
 		super(pageId);
+		this.htmlElement = htmlelementsNamespace.lineChartPage;
 		this.dropDownIdCrimes = configNamespace.DROP_DOWN_IDS.dropDownIdCrimes;
 		this.dropDownIdStates = configNamespace.DROP_DOWN_IDS.dropDownIdStates;
 	}
@@ -45,7 +46,7 @@ class LineChartPage extends ParentPage{
 	}
 
 	initDropDownStates(){
-		let states = configNamespace.CONSTANTS.states;
+		let states = configNamespace.STATES_AND_CRIMES.states;
 		this.dropDownMenuStates = new DropDownMenu(this.pageId, states, this.dropDownIdStates);
 		this.dropDownMenuStates.appendThisCharToPage();
 	}

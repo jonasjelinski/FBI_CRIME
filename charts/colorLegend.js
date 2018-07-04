@@ -1,15 +1,13 @@
-/*Class ColorLegend*/
-/*ParentClass MagicCircle*/
-/*creates a legend which contains colors
-* with the colorvalues from startColor to endColor
-* a title and
-* two labels which describe the highest and the lowest value  
-*/
+//This class
+//creates a legend which contains colors
+//with the colorvalues from startColor to endColor
+//a title and
+//two labels which describe the highest and the lowest value  
 
 class ColorLegend extends MagicCircle{
 	constructor(pageId = "mainpage", title = "ColorLegend", startLabel= "0", endLabel= "1", startColor = "rgb(0,0,255)", endColor ="rgb(255,0,0)", startValue = 0, endValue = 1){
 		super(pageId);
-		this.htmlelement = htmlelementsNamespace.COLOR_LEGEND; 
+		this.htmlelement = htmlelementsNamespace.colorLegend; 
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;

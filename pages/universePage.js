@@ -9,10 +9,10 @@
 class UniversePage extends ParentPage{
 	constructor(pageId){
 		super(pageId);		
-		this.mainChart = {};
+		this.htmlElement = htmlelementsNamespace.universePage;
 		this.ColorLegendTitle = "Ratio: ViolentCrimes/Propertycrimes"; 		
 		this.ColorLegendStartLabel = "Propertycrimes"; 		
-		this.ColorLegendEndLabel = "ViolentCrimes"; 		
+		this.ColorLegendEndLabel = "ViolentCrimes";	
 	}
 
 	init(){

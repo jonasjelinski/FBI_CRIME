@@ -5,7 +5,7 @@
 class CrimeCorrelation extends MagicCircle{
 	constructor(pageId){
 		super(pageId);		
-		this.htmlelement = htmlelementsNamespace.CRIME_CORRELATION; 
+		this.htmlelement = htmlelementsNamespace.crimeCorrelation; 
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;

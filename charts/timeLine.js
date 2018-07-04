@@ -5,7 +5,7 @@ class TimeLine extends MagicCircle{
 
 	constructor(pageId){
 		super(pageId);
-		this.htmlelement = htmlelementsNamespace.TIME_LINE;
+		this.htmlelement = htmlelementsNamespace.timeLine;
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width-this.htmlelement.margin.left - this.htmlelement.margin.right;
 		this.height = this.htmlelement.height-this.htmlelement.margin.top - this.htmlelement.margin.bottom;

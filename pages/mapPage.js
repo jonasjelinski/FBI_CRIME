@@ -10,6 +10,7 @@
 class MapPage extends ParentPage{
 	constructor(pageId){
 		super(pageId);
+		this.htmlElement = htmlelementsNamespace.mapPage;
 		this.dropDownIdMap = configNamespace.DROP_DOWN_IDS.dropDownIdMap ;
 	}
 

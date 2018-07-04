@@ -1,7 +1,7 @@
 class Map extends MagicCircle{
 	constructor(pageId, year=2000, crimeType="Burglary", moving=false){
 		super(pageId);
-		this.htmlelement = htmlelementsNamespace.THE_MAP;
+		this.htmlelement = htmlelementsNamespace.theMap;
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
@@ -165,12 +165,12 @@ class Map extends MagicCircle{
 			var getAllCrimesNumber=[];
 			for(let i=0;i<allStates.length;i++){
 				let currentCrimeValue=commonfunctionsNamespace.getCrimesAndDataByYearAndState(year, allStates[i], data);
-				if(configNamespace.CONSTANTS.crimeCategories.Crimes.violentCrime.includes(crimeType)){
+				if(configNamespace.STATES_AND_CRIMES.crimeCategories.Crimes.violentCrime.includes(crimeType)){
 					let crimeValue=currentCrimeValue.crimes.violentCrime[crimeType];
 					var objectCrimesStatesNumber={state:allStates[i],value:parseInt(crimeValue)};
 					getAllCrimesNumber.push(objectCrimesStatesNumber);
 				}
-				else if (configNamespace.CONSTANTS.crimeCategories.Crimes.propertyCrime.includes(crimeType)) {
+				else if (configNamespace.STATES_AND_CRIMES.crimeCategories.Crimes.propertyCrime.includes(crimeType)) {
 					let crimeValue=currentCrimeValue.crimes.propertyCrime[crimeType];
 					var	objectCrimesStatesNumber={state:allStates[i],value:parseInt(crimeValue)};
 					getAllCrimesNumber.push(objectCrimesStatesNumber);

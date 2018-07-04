@@ -6,7 +6,7 @@
 class BubbleMenu extends MagicCircle{
 	constructor(pageId, categories, id){
 		super(pageId);
-		this.htmlelement = htmlelementsNamespace.BUBBLE_MENU;
+		this.htmlelement = htmlelementsNamespace.bubbleMenu;
 		this.htmlElementID = this.htmlelement.htmlid + " "+id;
 		this.htmlclassname = this.htmlelement.htmlclassname;
 		this.htmlElementType = this.htmlelement.type;

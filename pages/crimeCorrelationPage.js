@@ -5,7 +5,7 @@ class CrimeCorrelationPage extends ParentPage{
 	constructor(pageId){
 		super(pageId);		
 		this.mainChart = new CrimeCorrelation();
-		this.htmlElement = htmlelementsNamespace.CRIME_CORRELATION_PAGE;
+		this.htmlElement = htmlelementsNamespace.crimeCorrelationPage;
 		this.ColorLegendTitle = this.htmlElement.colorLegendTitle;
 		this.ColorLegendStartLabel = this.htmlElement.colorLegendStartLabel;
 		this.ColorLegendEndLabel = this.htmlElement.colorLegendEndLabel;

@@ -4,7 +4,7 @@
 class ParentPage{
 	constructor(pageId = "mainpage"){
 		this.pageId = pageId;
-		this.htmlElementID = htmlelementsNamespace.UNIVERSE_PAGE.htmlid;
+		this.htmlElementID = htmlelementsNamespace.universePage.htmlid;
 		this.mainChart = {};
 		this.width = htmlelementsNamespace.PARENT_PAGE.width;
 		this.height = htmlelementsNamespace.PARENT_PAGE.height;

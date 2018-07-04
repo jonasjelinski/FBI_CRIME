@@ -5,10 +5,10 @@
 //chart can be zoomed
 
 class LineChart extends MagicCircle{
-	constructor(pageId, state = configNamespace.CONSTANTS.states[0]){
+	constructor(pageId, state = configNamespace.STATES_AND_CRIMES.states[0]){
 		super(pageId);
 		this.state = state;
-		this.htmlelement = htmlelementsNamespace.LINE_DIAGRAM; 
+		this.htmlelement = htmlelementsNamespace.lineDiagramm; 
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
@@ -43,8 +43,8 @@ class LineChart extends MagicCircle{
 
 	//rerurns all crimetyes e.g. burglary
 	getAllCrimeTypes(){
-		let crimeTypesProperty = configNamespace.CONSTANTS.crimeTypesProperty,
-			crimeTypesViolence = configNamespace.CONSTANTS.crimeTypesViolence,
+		let crimeTypesProperty = configNamespace.STATES_AND_CRIMES.crimeTypesProperty,
+			crimeTypesViolence = configNamespace.STATES_AND_CRIMES.crimeTypesViolence,
 			allCrimeTypes = crimeTypesProperty.concat(crimeTypesViolence);
 		return allCrimeTypes;
 	}
@@ -87,8 +87,8 @@ class LineChart extends MagicCircle{
 	//returns an array which contains the crimerates for each year in an object
 	getCrimeRatesForEachYear(crimeType){
 		let crimesPerYear = [],
-			maxYear = configNamespace.CONSTANTS.maxYear,
-			minYear = configNamespace.CONSTANTS.minYear;
+			maxYear = configNamespace.STATES_AND_CRIMES.maxYear,
+			minYear = configNamespace.STATES_AND_CRIMES.minYear;
 		for(let year = minYear; year <= maxYear; year++){
 			let newcrimesPerYearObject = this.getCrimesPerYearObject(crimeType, year);			
 			crimesPerYear.push(newcrimesPerYearObject);
@@ -120,8 +120,8 @@ class LineChart extends MagicCircle{
 			labelWidth = width/5,
 			labelHeight = labelWidth/5,			
 			container = this.container,
-			maxYear = configNamespace.CONSTANTS.maxYear,
-			minYear = configNamespace.CONSTANTS.minYear,
+			maxYear = configNamespace.STATES_AND_CRIMES.maxYear,
+			minYear = configNamespace.STATES_AND_CRIMES.minYear,
 			minCrime = 0,
 			maxCrime = 2000,
 			mindate = new Date(minYear,0,1),
