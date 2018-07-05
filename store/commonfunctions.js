@@ -74,7 +74,7 @@ commonfunctionsNamespace.setMapJsonObject = function(){
 
 commonfunctionsNamespace.getJsonObject = function(){
 	"use strict";
-	return configNamespace.CONSTANTS.jsonObject;
+	return configNamespace.STATES_AND_CRIMES.jsonObject;
 };
 
 commonfunctionsNamespace.getRootElement = function(environment){
@@ -122,8 +122,8 @@ commonfunctionsNamespace.getPropertyCrimes = function(year, statename, jsondata)
 //returns the crimerate per 100 0000 people
 commonfunctionsNamespace.getCrimerateByCrimeType = function(year, statename, crime, jsondata){
 	"use strict";
-	let propertyCrimes = configNamespace.CONSTANTS.crimeTypesProperty,
-		violentCrimes = configNamespace.CONSTANTS.crimeTypesViolence,
+	let propertyCrimes = configNamespace.STATES_AND_CRIMES.crimeTypesProperty,
+		violentCrimes = configNamespace.STATES_AND_CRIMES.crimeTypesViolence,
 		errorValue = 0;
 
 	if (propertyCrimes.includes(crime)){
@@ -144,28 +144,28 @@ commonfunctionsNamespace.getCrimerateByCrimeType = function(year, statename, cri
 
 commonfunctionsNamespace.getAllCrimeTypes = function(){
 	"use strict";
-	let crimeTypesArray = configNamespace.CONSTANTS.crimeTypesProperty.concat(configNamespace.CONSTANTS.crimeTypesViolence);
+	let crimeTypesArray = configNamespace.STATES_AND_CRIMES.crimeTypesProperty.concat(configNamespace.STATES_AND_CRIMES.crimeTypesViolence);
 	return crimeTypesArray;
 };
 
 //returns an object
 commonfunctionsNamespace.getAllCategories = function(){
 	"use strict";
-	let categories = configNamespace.CONSTANTS.crimecategories;
+	let categories = configNamespace.STATES_AND_CRIMES.crimecategories;
 	return categories;
 };
 
 //returns an array
 commonfunctionsNamespace.getAllStates = function(){
 	"use strict";
-	let states = configNamespace.CONSTANTS.states;
+	let states = configNamespace.STATES_AND_CRIMES.states;
 	return states;
 };
 
 commonfunctionsNamespace.getAllYears = function(){
 	"use strict";
-	let maxYear = configNamespace.CONSTANTS.maxYear,
-		minYear = configNamespace.CONSTANTS.minYear,
+	let maxYear = configNamespace.STATES_AND_CRIMES.maxYear,
+		minYear = configNamespace.STATES_AND_CRIMES.minYear,
 		allYears = [];
 	for(let year= minYear; year <= maxYear; year++){
 		allYears.push(year);
@@ -175,7 +175,7 @@ commonfunctionsNamespace.getAllYears = function(){
 
 commonfunctionsNamespace.getCrimeColor = function(crimename){
 	"use strict";	
-	let colorArray = configNamespace.CONSTANTS.crimeColors[crimename],	
+	let colorArray = configNamespace.STATES_AND_CRIMES.crimeColors[crimename],	
 		r = colorArray[0],
 		g = colorArray[1],
 		b = colorArray[2],  

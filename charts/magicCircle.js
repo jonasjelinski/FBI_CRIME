@@ -11,7 +11,7 @@ class MagicCircle{
 		this.pageId = pageId; 
 		this.page = this.getPage(); 
 		this.data = this.getData();
-		this.htmlelement = htmlelementsNamespace.MAGIC_CIRCLE;
+		this.htmlelement = htmlelementsNamespace.magicCircle;
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.htmlclassname = this.htmlelement.htmlclassname;
 		this.htmlElementType = this.htmlelement.type;

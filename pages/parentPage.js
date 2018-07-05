@@ -4,7 +4,7 @@
 class ParentPage{
 	constructor(pageId = "mainpage"){
 		this.pageId = pageId;
-		this.htmlElementID = htmlelementsNamespace.UNIVERSE_PAGE.htmlid;			
+		this.htmlElementID = htmlelementsNamespace.universePage.htmlid;
 		this.mainChart = {};
 		this.width = htmlelementsNamespace.PARENT_PAGE.width;
 		this.height = htmlelementsNamespace.PARENT_PAGE.height;
@@ -17,23 +17,23 @@ class ParentPage{
 	//adds a new chart to the array charts
 	init(){
 		this.mainChart = new Universe(pageId);
-		this.charts = [this.mainChart];	
+		this.charts = [this.mainChart];
 	}
 
 	//draws the page
 	drawPage(){
 		this.showPage();
 		this.drawAllCharts();
-		this.drawAllControlls();		
+		this.drawAllControlls();
 	}
-	
+
 	//creates and draws all charts in array charts
 	drawAllCharts(){
 		for(let i = 0; i < this.charts.length; i++ ){
 			let chart = this.charts[i];
 			if(!this.isNoChart(chart)){
 				chart.doChart();
-			}			
+			}
 		}
 	}
 
@@ -41,14 +41,14 @@ class ParentPage{
 	isNoChart(chart){
 		if(this.isNullOrUndefined(chart)){
 			return true;
-		}		
-		return false;	
+		}
+		return false;
 	}
 
 	isNullOrUndefined(element){
 		if(element === undefined || element === null){
 			return true;
-		}		
+		}
 		return false;
 	}
 
@@ -58,7 +58,7 @@ class ParentPage{
 			let controll = this.controlls[i];
 			if(!this.isNoChart(controll)){
 				controll.doChart();
-			}			
+			}
 		}
 	}
 
@@ -66,11 +66,12 @@ class ParentPage{
 	updatePage(){
 		this.deletePage();
 		this.drawPage();
-	}	
+	}
 
 	//removes all elements appended to this.page
 	//and hides it
 	deletePage(){
+	
 		this.page.selectAll("*").remove();
 		this.hidePage();
 	}
@@ -84,5 +85,5 @@ class ParentPage{
 	showPage(){
 		this.page.style("visibility","visible");
 	}
-	
+
 }

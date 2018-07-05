@@ -6,7 +6,7 @@ class InfoPage extends ParentPage{
 	constructor(pageId = "infopage", infoText = "Das Pferd mag keine Gurken"){
 		super(pageId);
 		this.pageId = pageId;
-		this.htmlelement = htmlelementsNamespace.INFO_PAGE;
+		this.htmlelement = htmlelementsNamespace.infoPage;
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.infoText = infoText;		
 	}

@@ -5,7 +5,7 @@ class TimeLine extends MagicCircle{
 
 	constructor(pageId){
 		super(pageId);
-		this.htmlelement = htmlelementsNamespace.TIME_LINE;
+		this.htmlelement = htmlelementsNamespace.timeLine;
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width-this.htmlelement.margin.left - this.htmlelement.margin.right;
 		this.height = this.htmlelement.height-this.htmlelement.margin.top - this.htmlelement.margin.bottom;
@@ -47,17 +47,18 @@ class TimeLine extends MagicCircle{
 	doTimeLine(){
 		let startDate = this.startDate,
 			endDate = this.endDate,
-			targetValue = htmlelementsNamespace.TIME_LINE.width,
+			targetValue = this.width,
 			xAxis = scaleTime(startDate, endDate, targetValue),
 			formatDateIntoYear=d3.timeFormat("%Y"),
 			currentValue=this.currentValue,
 			timer = this.timer,
 			that = this,
-			svg = this.container.attr("width", this.width + this.htmlelement.margin.left + this.htmlelement.margin.right).attr("height", this.height+ this.htmlelement.margin.top + this.htmlelement.margin.bottom),
-			g = svg.append(this.htmlElementType).attr("class", "slider").attr("transform", "translate(" + this.htmlelement.margin.left + "," + this.height/5 + ")"),
+			svg = this.container.append("svg").attr("width", this.width + this.htmlelement.margin.left + this.htmlelement.margin.right).attr("height", this.height+ this.htmlelement.margin.top + this.htmlelement.margin.bottom),
+			g = svg.append("g").attr("class", "slider").attr("transform", "translate(" + this.htmlelement.margin.left + "," + 50 + ")"),
 			line = drawLine(g, xAxis),
 			handle = drawHandler(g),
 			label = drawLabel(g, startDate);
+			
 		this.update = update;
 		this.step = step;
 

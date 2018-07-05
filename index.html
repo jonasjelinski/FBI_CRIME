@@ -19,10 +19,10 @@
     <div id= "dochart" >Raten der Verbrechen auf die USA verteilt</div>
 
     <div id="popup">
-      <h1>Staaten-Name</h1>
     </div>
 
-    <div id="mainpage"></div>
+    <div id="mainpage">
+    </div>
     <div id="infopage"></div>
     <button id="infoButton">i</button>
 
@@ -31,12 +31,11 @@
     <!-- reasons: script error doesnt lead to blank page; receiving and parsing large scripts increases load time -->
     <!-- dom model is ready and modifiable -->
     <script src="./libs/d3/d3.js"></script>
-    <script src="./store/config.js"></script>
-    <script src="./store/commonfunctions.js"></script>
-    <script src="./store/startpage.js"></script>
-    <script>startpage_namespace.loadScripts();</script>
-
-
+    <script src="./scripts/scripts.js"></script>
+    <!--<script src="./store/config.js"></script>
+    <script src="./store/commonfunctions.js"></script>-->    
+    <script src="./scripts/scriptLoader.js"></script>
+    <script>scriptLoader.loadScripts();</script>
     <footer>
     </footer>
 </body>

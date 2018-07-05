@@ -1,25 +1,12 @@
 var configNamespace = configNamespace || {};
 
-configNamespace.CLICKLISTENER = {
-	dochart: "dochart",
-};
-
-configNamespace.HTML_IDS = {
-	mychart: "myChart",
-};
-
-configNamespace.HTML_TYPES = {
-	g: "g",
-	svg: "svg",
-};
-
 configNamespace.FILE_PATHES = {
 	jsonpath: "./store/crimes.json",
 	mappath: "./store/states.json",
 	crimeCorrelations : "./store/crimeCorrelations.csv",
 };
 
-configNamespace.CONSTANTS = {
+configNamespace.STATES_AND_CRIMES = {
 	states : ['ALABAMA','ALASKA','ARIZONA','ARKANSAS','CALIFORNIA','COLORADO','CONNECTICUT','DELAWARE','COLUMBIA','FLORIDA','GEORGIA','HAWAII','IDAHO','ILLINOIS','INDIANA','IOWA','KANSAS','KENTUCKY','LOUISIANA','MAINE','MARYLAND','MASSACHUSETTS','MICHIGAN','MINNESOTA','MISSISSIPPI','MISSOURI','MONTANA','NEBRASKA','NEVADA','NEW HAMPSHIRE','NEW JERSEY','NEW MEXICO','NEW YORK','NORTH CAROLINA','NORTH DAKOTA','OHIO','OKLAHOMA','OREGON','PENNSYLVANIA','PUERTO RICO','RHODE ISLAND','SOUTH CAROLINA','SOUTH DAKOTA','TENNESSEE','TEXAS','UTAH','VERMONT','VIRGINIA','WASHINGTON','WEST VIRGINIA','WISCONSIN','WYOMING'],
 	crimeCategories : {
 		Crimes : { 
@@ -53,76 +40,30 @@ configNamespace.STATE_MACHINE = {
 	STATES: [this.MAP, this.LINE_CHART, this.CRIME_CORRELATION, this.UNIVERSE],
 };
 
+configNamespace.CRIME_CORRELATION = {
+	high: [0.5,1],
+	moderate:[0.5, 0.3],
+	weak:[0.3, 0.1],
+	none: [0.1,0],
+	highCorrelationRed : 255,
+	highCorrelationGreen : 1,
+	highCorrelationBlue : 1,
+	highCorrelationColor : "rgb(255,1,1)",
+	lowCorrelationRed : 1,
+	lowCorrelationGreen : 1,
+	lowCorrelationBlue : 255,
+	lowCorrelationColor: "rgb(1,1,255)",
+};
+
+configNamespace.DROP_DOWN_IDS = {
+	dropDownIdCrimes :"crimes",
+	dropDownIdStates : "states",
+	dropDownIdMap : "map",
+};
+
 configNamespace.JSON_OBJECT = false;
 
 configNamespace.MAP_JSON_OBJECT = false;
 
 configNamespace.CRIME_CORRELATIONS = false;
 
-configNamespace.SCRIPT_PATHES = [
-	"./libs/d3/d3.js",
-	"./libs/d3/d3.tip.js",
-	"./libs/topoJson/topojson.v1.min.js",
-	"./store/config.js",	
-	"./htmlelements/htmlelements.js",
-	"./store/commonfunctions.js",	
-	"./classes/linechart.js",
-	"classes/magicCircle.js",	
-	"./classes/universe.js",
-	"./classes/map.js",
-	"./classes/timeLine.js",
-	"./classes/colorLegend.js",
-	"./classes/tree.js",
-	"./classes/infoBox.js",
-	"./classes/crimeCorrelation.js",
-	"./classes/dropDownMenu.js",
-	"./classes/closeButton.js",
-	"./classes/playButton.js",
-	"./pages/parentPage.js",
-	"./pages/crimeCorrelationPage.js",
-	"./pages/lineChartPage.js",
-	"./pages/mapPage.js",
-	"./pages/universePage.js",
-	"./pages/popUpPage.js",
-	"./pages/infoPage.js",
-	"./logic/stateMachine.js",
-	"./components/components.js",
-	"./actions/actions.js",
-	"./listener/listener.js",
-];
-
-configNamespace.FIRST_SCRIPTS = [
-	"./libs/d3/d3.js",
-	"./libs/d3/d3.tip.js",
-	"./libs/topoJson/topojson.v1.min.js",
-	"./store/config.js",
-	"./store/commonfunctions.js",
-	"./htmlelements/htmlelements.js",
-];
-
-configNamespace.SECOND_SCRIPTS = [
-	"./classes/magicCircle.js",
-	"./classes/map.js",
-	"./classes/timeLine.js",
-	"./classes/colorLegend.js",
-	"./classes/tree.js",
-	"./classes/sunburst.js",
-	"./classes/linechart.js",	
-	"./classes/universe.js",
-	"./classes/infoBox.js",
-	"./classes/crimeCorrelation.js",
-	"./classes/closeButton.js",
-	"./classes/playButton.js",
-	"./pages/parentPage.js",
-	"./pages/crimeCorrelationPage.js",
-	"./classes/dropDownMenu.js",
-	"./pages/lineChartPage.js",
-	"./pages/mapPage.js",
-	"./pages/universePage.js",
-	"./pages/popUpPage.js",
-	"./pages/infoPage.js",
-	"./logic/stateMachine.js",
-	"./components/components.js",
-	"./actions/actions.js",
-	"./listener/listener.js",
-];

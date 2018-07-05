@@ -5,12 +5,19 @@ class CrimeCorrelationPage extends ParentPage{
 	constructor(pageId){
 		super(pageId);		
 		this.mainChart = new CrimeCorrelation();
+		this.htmlElement = htmlelementsNamespace.crimeCorrelationPage;
+		this.ColorLegendTitle = this.htmlElement.colorLegendTitle;
+		this.ColorLegendStartLabel = this.htmlElement.colorLegendStartLabel;
+		this.ColorLegendEndLabel = this.htmlElement.colorLegendEndLabel;
+		this.startColor = this.htmlElement.startColor;
+		this.endColor = this.htmlElement.endColor;
 	}
 
 	init(){
 		this.mainChart = new CrimeCorrelation(this.pageId);
-		this.charts = [this.mainChart];
-		this.mainChart.appendThisCharToPage();
-		this.charts = [this.mainChart]
+		this.colorLegend = new ColorLegend(this.pageId, this.ColorLegendTitle, this.ColorLegendStartLabel, this.ColorLegendEndLabel, this.startColor, this.endColor);
+		this.charts = [this.mainChart, this.colorLegend];
+		this.mainChart.appendThisCharToPage();	
+		this.colorLegend.appendThisCharToPage();	
 	}
 }

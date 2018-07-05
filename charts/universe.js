@@ -6,11 +6,11 @@
 class Universe extends MagicCircle{
 	constructor(pageId){
 		super(pageId);		
-		this.htmlelement = htmlelementsNamespace.THE_UNIVERSE; 
+		this.htmlelement = htmlelementsNamespace.theUniverse; 
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
-		this.year = configNamespace.CONSTANTS.minYear;
+		this.year = configNamespace.STATES_AND_CRIMES.minYear;
 		this.violenceGroup = 0;
 		this.propertyGroup = 1;
 		this.violencePos= 0.75;
@@ -33,6 +33,8 @@ class Universe extends MagicCircle{
 		this.isRotating = false;
 		this.rotationAngle = 0;
 		this.rotationTimer = undefined;
+		this.labelColor = this.htmlelement.labelColor;
+		this.labelSize = this.htmlelement.labelSize;
 	}
 
 	//draws the universe
@@ -59,12 +61,10 @@ class Universe extends MagicCircle{
 
 	rotateOrStop(){
 		if(this.isRotating){
-			this.stopRotation();
-			console.log("stop", this.stopRotation);
+			this.stopRotation();			
 		}
 		else{
-			this.animateRotation();
-			console.log("start", this.animateRotation);
+			this.animateRotation();			
 		}
 	}
 
@@ -349,25 +349,41 @@ class Universe extends MagicCircle{
 			container = this.container,
 			width = this.width,
 			height = this.height,
-			rootElement,
+			durationTime = 1000,
+			zoomContainer,
 			node,
 			label,
 			link,
 			canvas;		
 		this.animateRotation = animateRotation;
-		this.stopRotation = stopRotation;
+		this.stopRotation = stopRotation,
+
 		
+		initZoomContainer();
 		initNode();
 		initLabel();
 		initLink();		
 		setEnterAndExitBehaviour();
 		drawUniverse();
 		//animateRotation();
+
+
+		function initZoomContainer(){
+			zoomContainer =  container
+				.append("svg")
+				.attr("class", "zoomContainer")
+				.call(d3.zoom()
+					.on("zoom", function () {
+						console.log("zooming");
+    			zoomContainer.attr("transform", d3.event.transform);
+ 				}))
+		}
+
 		
 		//sets width and height of the container for the nodes which are small circles
 		//and gives it the data
 		function initNode(){
-			node = container.append("g").attr("class", "nodes")
+			node = zoomContainer.append("g").attr("class", "nodes")
 				.attr("width",width).attr("height",height)
 				.selectAll("circle")
 				.data(universe);		
@@ -376,7 +392,7 @@ class Universe extends MagicCircle{
 		//sets width and height of the container for the labels
 		//and gives it the data
 		function initLabel(){
-			label = container.append("g").attr("class", "lables")
+			label = zoomContainer.append("g").attr("class", "lables")
 				.attr("width",width).attr("height",height)
 				.selectAll(".lables")
 				.data(universe);
@@ -385,7 +401,7 @@ class Universe extends MagicCircle{
 		//sets width and height of the container for the links
 		//and gives it the data
 		function initLink(){
-			link = container.append("g").attr("class", "links")
+			link = zoomContainer.append("g").attr("class", "links")
 				.attr("width",width).attr("height",height)
 				.selectAll("line")
 				.data(universe);
@@ -426,9 +442,9 @@ class Universe extends MagicCircle{
 		function enterLabel(){
 			label = label.enter().append("text")
 				.text(function(d){return d.id;})
-				.attr("fill","green" )
+				.attr("fill", that.labelColor )
 				.style("opacity", "0.5")
-				.style("font-size", "20px")			
+				.style("font-size", that.labelSize)			
 				.on("mouseover", function(d){changeFont(d, this);});
 		}		
 
@@ -441,8 +457,14 @@ class Universe extends MagicCircle{
 		//draws the universe
 		function drawUniverse(){ 	  		
 			
-			node.attr("cx", function(d){return d.x;})      			
-				.attr("cy", function(d){return d.y;})			
+			node	
+				.attr("cx", function(d){return d.x;})      			
+				.attr("cy", function(d){return d.y;})
+				.attr("r", function(d){return 0;})
+				.attr("fill", function(d){return "black";})
+				.transition()
+				.ease(d3.easeLinear)
+				.duration(durationTime)  			
 				.attr("r", function(d){return d.radius;})
 				.attr("fill", function(d){return d.color;}); 
 

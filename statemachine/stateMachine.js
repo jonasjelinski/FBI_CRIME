@@ -8,7 +8,6 @@ class StateMachine{
 		this.lineChartPage = new LineChartPage("mainpage");
 		this.crimeCorrelationPage = new CrimeCorrelationPage("mainpage");
 		this.universePage = new UniversePage("mainpage");	
-		this.popupPage	 = new PopUpPage("popup");
 		this.infoPage	 = new InfoPage("infopage");
 	}
 

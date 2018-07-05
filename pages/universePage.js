@@ -9,17 +9,16 @@
 class UniversePage extends ParentPage{
 	constructor(pageId){
 		super(pageId);		
-		this.mainChart = {};
+		this.htmlElement = htmlelementsNamespace.universePage;
 		this.ColorLegendTitle = "Ratio: ViolentCrimes/Propertycrimes"; 		
 		this.ColorLegendStartLabel = "Propertycrimes"; 		
-		this.ColorLegendEndLabel = "ViolentCrimes"; 		
+		this.ColorLegendEndLabel = "ViolentCrimes";	
 	}
 
 	init(){
 		this.initCharts();
 		this.initControlls();
-		this.addEventListeners();
-		
+		this.addEventListeners();		
 	}
 
 	initCharts(){
@@ -39,11 +38,11 @@ class UniversePage extends ParentPage{
 	}
 
 	addEventListeners(){
-		this.timeLine.eventTarget.addEventListener(this.timeLine.onUpdate, this.updateMapYear.bind(this));		
+		this.timeLine.eventTarget.addEventListener(this.timeLine.onUpdate, this.updateUniverseYear.bind(this));		
 		this.playButton.eventTarget.addEventListener(this.playButton.onClick, this.rotateUniverse.bind(this), false);
 	}
 
-	updateMapYear(event){
+	updateUniverseYear(event){
 		let year = event.detail.year;			
 		this.mainChart.setYear(year);		
 		this.mainChart.updatesHimself();

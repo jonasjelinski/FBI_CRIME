@@ -5,11 +5,13 @@
 //chart can be zoomed
 
 class LineChart extends MagicCircle{
-	constructor(pageId, state = configNamespace.CONSTANTS.states[0]){
+	constructor(pageId, state = configNamespace.STATES_AND_CRIMES.states[0]){
 		super(pageId);
 		this.state = state;
-		this.htmlelement = htmlelementsNamespace.LINE_DIAGRAM; 
+		this.htmlelement = htmlelementsNamespace.lineDiagramm; 
 		this.htmlElementID = this.htmlelement.htmlid;
+		this.width = this.htmlelement.width;
+		this.height = this.htmlelement.height;
 	}
 	
 	//calls drawLineChart
@@ -41,8 +43,8 @@ class LineChart extends MagicCircle{
 
 	//rerurns all crimetyes e.g. burglary
 	getAllCrimeTypes(){
-		let crimeTypesProperty = configNamespace.CONSTANTS.crimeTypesProperty,
-			crimeTypesViolence = configNamespace.CONSTANTS.crimeTypesViolence,
+		let crimeTypesProperty = configNamespace.STATES_AND_CRIMES.crimeTypesProperty,
+			crimeTypesViolence = configNamespace.STATES_AND_CRIMES.crimeTypesViolence,
 			allCrimeTypes = crimeTypesProperty.concat(crimeTypesViolence);
 		return allCrimeTypes;
 	}
@@ -85,8 +87,8 @@ class LineChart extends MagicCircle{
 	//returns an array which contains the crimerates for each year in an object
 	getCrimeRatesForEachYear(crimeType){
 		let crimesPerYear = [],
-			maxYear = configNamespace.CONSTANTS.maxYear,
-			minYear = configNamespace.CONSTANTS.minYear;
+			maxYear = configNamespace.STATES_AND_CRIMES.maxYear,
+			minYear = configNamespace.STATES_AND_CRIMES.minYear;
 		for(let year = minYear; year <= maxYear; year++){
 			let newcrimesPerYearObject = this.getCrimesPerYearObject(crimeType, year);			
 			crimesPerYear.push(newcrimesPerYearObject);
@@ -118,8 +120,8 @@ class LineChart extends MagicCircle{
 			labelWidth = width/5,
 			labelHeight = labelWidth/5,			
 			container = this.container,
-			maxYear = configNamespace.CONSTANTS.maxYear,
-			minYear = configNamespace.CONSTANTS.minYear,
+			maxYear = configNamespace.STATES_AND_CRIMES.maxYear,
+			minYear = configNamespace.STATES_AND_CRIMES.minYear,
 			minCrime = 0,
 			maxCrime = 2000,
 			mindate = new Date(minYear,0,1),
@@ -137,7 +139,7 @@ class LineChart extends MagicCircle{
 			xAxis = d3.axisBottom(xRange), 
 			yAxis = d3.axisLeft(yRange),
 			deltaAxisY = chartHeight-margin.bottom,
-			durationTime = 2000,
+			durationTime = 1000,
 			zooming,
 			container = this.container,
 			canvas,
@@ -158,7 +160,7 @@ class LineChart extends MagicCircle{
 		initLabels();
 		initSingleLine();
 		drawGraph();
-		drawLabels();		
+		//drawLabels();		
 		setLabelTextAndClickBehaviour();
 		appendDateLabel();
 		appendNumberLabel();
@@ -215,7 +217,7 @@ class LineChart extends MagicCircle{
 				.style("fill", "white");
 		}
 
-		//inits labels and sets width and height and position of allGraphLines
+		//inits labels and sets width and height and position of labels
 		function initLabels(){
 			labels = container            
 				.append("g")
@@ -248,16 +250,20 @@ class LineChart extends MagicCircle{
 		//gives data to selectedGraphLines and draws new lines with new data on enter
 		function drawGraph(){
 			let selectedGraphLines = container.selectAll(".lines"),
+				invisible = 0,
 				visible =1;        
 			selectedGraphLines
 				.selectAll("line")
 				.data(data)
 				.enter()
-				.append("path")
+				.append("path")				
 				.attr("class", "line")      
 				.attr("id", function(d){
 					return d.key;
 				})
+				.transition()
+				.ease(d3.easeLinear)
+				.duration(durationTime)  
 				.attr("d", function(d){				
 					let line = singleLine(d.values);    
 					return line;
@@ -266,6 +272,10 @@ class LineChart extends MagicCircle{
 					return getColor(d);
 				})
 				.attr("fill","none")
+				.attr("opacity", invisible)
+				.transition()
+				.ease(d3.easeLinear)
+				.duration(durationTime)  
 				.attr("opacity", visible);
 		}	
 
@@ -343,7 +353,7 @@ class LineChart extends MagicCircle{
 				.text("Number of crimes per 100 000 inhabits");
 		}
 	}
-	
+
 	//hides line if visible, shows line if it has been invisible before
 	showOrHideLine(crimeType){
 		let crime = crimeType,
@@ -351,9 +361,9 @@ class LineChart extends MagicCircle{
 			isVisible = 1,
 			id = "[id="+crime+"]",        
 			line = d3.select(id),
-			visible = parseInt(line.attr("opacity")),          
-			newOpacity = visible === isVisible ? isHidden : isVisible;      
-		line.attr("opacity", newOpacity);       
-	}
+			visible = parseInt(line.attr("opacity")),           
+			newOpacity = visible === isVisible ? isHidden : isVisible;           
+		line.attr("opacity", newOpacity);        
+	}	
 
 }

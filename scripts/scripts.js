@@ -1,0 +1,73 @@
+//loads the js files in the correct order
+//source: https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement#defer_property 
+
+var scripts_namespace = scripts_namespace || {};
+
+scripts_namespace.SCRIPT_PATHES = [
+	"./libs/d3/d3.js",
+	"./libs/d3/d3.tip.js",
+	"./libs/topoJson/topojson.v1.min.js",
+	"./store/config.js",	
+	"./htmlelements/htmlelements.js",
+	"./store/commonfunctions.js",	
+	"./charts/linechart.js",
+	"charts/magicCircle.js",	
+	"./charts/universe.js",
+	"./charts/map.js",
+	"./charts/timeLine.js",
+	"./charts/colorLegend.js",
+	"./charts/tree.js",
+	"./charts/infoBox.js",
+	"./charts/crimeCorrelation.js",
+	"./charts/dropDownMenu.js",
+	"./charts/closeButton.js",
+	"./charts/playButton.js",
+	"./pages/parentPage.js",
+	"./pages/crimeCorrelationPage.js",
+	"./pages/lineChartPage.js",
+	"./pages/mapPage.js",
+	"./pages/universePage.js",
+	"./pages/popUpPage.js",
+	"./pages/infoPage.js",
+	"./statemachine/stateMachine.js",
+	"./statemachine/components.js",
+	"./statemachine/actions.js",
+	"./statemachine/listener.js",
+];
+
+scripts_namespace.FIRST_SCRIPTS = [
+	"./libs/d3/d3.js",
+	"./libs/d3/d3.tip.js",
+	"./libs/topoJson/topojson.v1.min.js",
+	"./store/config.js",
+	"./store/commonfunctions.js",
+	"./htmlelements/htmlelements.js",
+];
+
+scripts_namespace.SECOND_SCRIPTS = [
+	"./charts/magicCircle.js",
+	"./charts/map.js",
+	"./charts/timeLine.js",
+	"./charts/colorLegend.js",
+	"./charts/tree.js",
+	"./charts/sunburst.js",
+	"./charts/linechart.js",	
+	"./charts/universe.js",
+	"./charts/bubbleMenu.js",
+	"./charts/infoBox.js",
+	"./charts/crimeCorrelation.js",
+	"./charts/closeButton.js",
+	"./charts/playButton.js",
+	"./pages/parentPage.js",
+	"./pages/crimeCorrelationPage.js",
+	"./charts/dropDownMenu.js",
+	"./pages/lineChartPage.js",
+	"./pages/mapPage.js",
+	"./pages/universePage.js",
+	"./pages/popUpPage.js",
+	"./pages/infoPage.js",
+	"./statemachine/stateMachine.js",
+	"./statemachine/components.js",
+	"./statemachine/actions.js",
+	"./statemachine/listener.js",
+];
