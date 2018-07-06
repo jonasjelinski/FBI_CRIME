@@ -8,18 +8,27 @@ class StateMachine{
 		this.lineChartPage = new LineChartPage("mainpage");
 		this.crimeCorrelationPage = new CrimeCorrelationPage("mainpage");
 		this.universePage = new UniversePage("mainpage");	
-		this.infoPage	 = new InfoPage("infopage");
+		this.infoPage = new InfoPage("infopage");
+		this.infoText = "";
 	}
 
 	switchState(state){
+		this.currentState = state;
 		switch(state){
-		case configNamespace.STATE_MACHINE.MAP: this.drawMapPage();
+		case configNamespace.STATE_MACHINE.MAP: 
+			this.drawMapPage();
+			this.infoText = "Hier kommt die Map Info";
 			break;
-		case configNamespace.STATE_MACHINE.LINE_CHART:this.drawLineChartPage();
+		case configNamespace.STATE_MACHINE.LINE_CHART:
+			this.drawLineChartPage();
+			this.infoText = "Hier kommt die lineChartPage Info";
 			break;
-		case configNamespace.STATE_MACHINE.CRIME_CORRELATION:this.drawCrimeCorrelationPage();
+		case configNamespace.STATE_MACHINE.CRIME_CORRELATION:
+			this.drawCrimeCorrelationPage();
+			this.infoText = "Hier kommt die Korrelation Info";
 			break;
 		case configNamespace.STATE_MACHINE.UNIVERSE:this.drawUniversePage();
+			this.infoText = "Hier kommt die Universe Info";
 			break;
 		default:
 			break;
@@ -59,9 +68,18 @@ class StateMachine{
 		}
 	}
 
-	drawInfoPage(){		
+	drawInfoPage(){	
+		this.infoPage.setInfoText(this.infoText);
 		this.infoPage.init();
 		this.infoPage.drawPage();
+	}
+
+	drawInfoBox(){
+		
+	}
+
+	drawShortInfoText(){
+
 	}
 
 	cleanOldPage(){

@@ -37,4 +37,8 @@ class InfoPage extends ParentPage{
 	closePage(){		
 		super.deletePage();
 	}
+
+	setInfoText(text){
+		this.infoText = text;
+	}
 }
