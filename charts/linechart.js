@@ -12,6 +12,10 @@ class LineChart extends MagicCircle{
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
+		this.xAxisLabelX = this.htmlelement.xAxisLabelX;
+		this.xAxisLabelY = this.htmlelement.xAxisLabelY;
+		this.yAxisLabelX = this.htmlelement.yAxisLabelX;
+		this.yAxisLabelY = this.htmlelement.yAxisLabelY;
 	}
 	
 	//calls drawLineChart
@@ -123,16 +127,16 @@ class LineChart extends MagicCircle{
 			maxYear = configNamespace.STATES_AND_CRIMES.maxYear,
 			minYear = configNamespace.STATES_AND_CRIMES.minYear,
 			minCrime = 0,
-			maxCrime = 2000,
+			maxCrime = 4000,
 			mindate = new Date(minYear,0,1),
 			maxdate = new Date(maxYear,0,31),			
-			margin = {top: height/10, right: width/10, bottom: height/10, left: width/10},
+			margin = {top: height/8, right: width/10, bottom: height/10, left: width/10},
 			chartWidth = width - margin.left - margin.right,
 			chartHeight = height - margin.top - margin.bottom,
-			axisDateLabelX = width/2,
-			axisDateLabelY = height - margin.bottom-margin.bottom,			
-			axisNumberLabelX = - chartWidth/2,			
-			axisNumberLabelY = + margin.left,			
+			axisDateLabelX = width/2 + this.xAxisLabelX,
+			axisDateLabelY = height - margin.bottom-margin.bottom + this.xAxisLabelY,			
+			axisNumberLabelX = - chartWidth/2 + this.yAxisLabelX,			
+			axisNumberLabelY = + margin.left + this.yAxisLabelY,			
 			xRange = d3.scaleTime().domain([mindate, maxdate]).range([0,chartWidth ]), 
 			yRange = d3.scaleLinear().domain([minCrime, maxCrime]).range([chartHeight, 0]),
 			

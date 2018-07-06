@@ -18,8 +18,12 @@ htmlelementsNamespace.crimeCorrelation = {
 	htmlid: "crimecorrelation",
 	width:1000,
 	height:1000,
+	margin: {x: 500, y: -100},
 	type: "svg",
-	fontColor: "black",
+	nodeFontColor : "red",
+	nodeFontSize : "20px",
+	correlationFontColor : "black",
+	correlationFontSize : "10px",
 	highlightLinkColor: "yellow",
 	ignoreLinkColor: "gray",
 };
@@ -42,6 +46,10 @@ htmlelementsNamespace.lineDiagramm = {
 	width:650,
 	height:600,
 	type: "svg",
+	xAxisLabelX : 0,
+	xAxisLabelY : 0,
+	yAxisLabelX : 0,
+	yAxisLabelY : 0,
 };
 
 htmlelementsNamespace.theUniverse = {

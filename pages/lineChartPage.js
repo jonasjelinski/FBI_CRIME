@@ -10,8 +10,8 @@ class LineChartPage extends ParentPage{
 	constructor(pageId){
 		super(pageId);
 		this.htmlElement = htmlelementsNamespace.lineChartPage;
-		this.dropDownIdStates = "TimeLine"
-		this.bubbleMenuId = "TimeLine";
+		this.dropDownIdStates = "LineChart"
+		this.bubbleMenuId = "LineChart";
 	}
 
 	init(){
@@ -45,13 +45,22 @@ class LineChartPage extends ParentPage{
 	}
 
 	addListeners(){
-		this.dropDownMenuStates.eventTarget.addEventListener(this.dropDownMenuStates.selectionEvent, this.updateChartState.bind(this), false);
+		this.dropDownMenuStates.eventTarget.addEventListener(this.dropDownMenuStates.selectionEvent, this.handleDropDown.bind(this), false);
 		this.bubbleMenu.eventTarget.addEventListener(this.bubbleMenu.selectionEvent, this.updateChartCrimeType.bind(this), false);
 	}
 
 	updateChartCrimeType(event){				
 		let crimeType = event.detail.selection;
 		this.mainChart.showOrHideLine(crimeType);
+	}
+
+	handleDropDown(event){
+		this.resetBubbleMenu();
+		this.updateChartState(event);
+	}
+
+	resetBubbleMenu(){
+		this.bubbleMenu.updatesHimself();
 	}
 
 	updateChartState(event){

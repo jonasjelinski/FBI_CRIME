@@ -9,7 +9,7 @@ class CrimeCorrelation extends MagicCircle{
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
-		this.year = 2008;
+		this.margin = this.htmlelement.margin;
 		this.violenceGroup = 0;
 		this.propertyGroup = 1;
 		this.violencePos= 0.75;
@@ -18,6 +18,10 @@ class CrimeCorrelation extends MagicCircle{
 		this.linksIndex = 1;
 		this.ignoreLinkColor = this.htmlelement.ignoreLinkColor;
 		this.highlightLinkColor = this.htmlelement.highlightLinkColor;
+		this.nodeFontColor = this.htmlelement.nodeFontColor;
+		this.nodeFontSize = this.htmlelement.nodeFontSize;
+		this.correlationFontColor = this.htmlelement.correlationFontColor;
+		this.correlationFontSize = this.htmlelement.correlationFontSize;
 	}
 
 	doChart(){
@@ -134,8 +138,8 @@ class CrimeCorrelation extends MagicCircle{
 			fontSize =	radius+"px",
 			linkDistance = width/2,
 			strokeWidth = width/100,
-			centerX = width/2,
-			centerY = height/2,
+			centerX = width/2+this.margin.x,
+			centerY = height/2+this.margin.y,
 			center = [centerX, centerY],
 			distance = width/2,		
 			draggedAlpha = 0.3,
@@ -314,16 +318,16 @@ class CrimeCorrelation extends MagicCircle{
 		function enterLabel(){
 			label = label.enter().append("text")
 				.text(function(d){return d.id;})
-				.attr("fill","green" )      			 
-				.style("font-size", fontSize);     			 
+				.attr("fill",that.nodeFontColor )      			 
+				.style("font-size", that.nodeFontSize);     			 
 		}
 
 		function enterCorrelationLabel(){
 			correlationLabel = correlationLabel.enter().append("text")
 				.attr("id", getCorrLabelId)
 				.text(function(d){return "correlation "+ d.correlation;})
-				.attr("fill","black" )      			 
-				.style("font-size", fontSize)
+				.attr("fill",that.correlationFontColor )      			 
+				.style("font-size", that.correlationFontSize)
 				.style("opacity", "0");     
 		}
 
@@ -444,8 +448,8 @@ class CrimeCorrelation extends MagicCircle{
 			corrlabel.style("opacity", "1");
 		}
 
-		function changeLineColor(that){
-			d3.select(that).transition().style("stroke", that.highlightLinkColor);			
+		function changeLineColor(selection){
+			d3.select(selection).transition().style("stroke", that.highlightLinkColor);			
 		}
 
 		function hideLabelAndColor(d, that){
