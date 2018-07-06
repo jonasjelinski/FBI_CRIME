@@ -3,10 +3,10 @@
 //and a simple cross
 
 class CloseButton extends MagicCircle{
-	constructor(pageId){
+	constructor(pageId, chartId){
 		super(pageId);		
 		this.htmlelement = htmlelementsNamespace.closeButton; 
-		this.htmlElementID = this.htmlelement.htmlid;
+		this.htmlElementID = this.htmlelement.htmlid+chartId;
 		this.strokeColor = this.htmlelement.strokeColor;
 		this.fillColor = this.htmlelement.fillColor;
 		this.strokeWidth = this.htmlelement.strokeWidth;

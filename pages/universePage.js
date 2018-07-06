@@ -4,15 +4,18 @@
 //trough the TimeLine the user can select which year he wants to see
 //trough the PlayButton the user can controll if the planets of the Universe
 //shell move or not
-//it also contains a ColorLegend to explain the meaning of the planets
+//it also contains a colorLegend to explain the meaning of the planets
 
 class UniversePage extends ParentPage{
 	constructor(pageId){
 		super(pageId);		
 		this.htmlElement = htmlelementsNamespace.universePage;
-		this.ColorLegendTitle = "Ratio: ViolentCrimes/Propertycrimes"; 		
-		this.ColorLegendStartLabel = "Propertycrimes"; 		
-		this.ColorLegendEndLabel = "ViolentCrimes";	
+		this.colorLegendTitle = "Ratio: ViolentCrimes/Propertycrimes"; 		
+		this.colorLegendStartLabel = "Propertycrimes"; 		
+		this.colorLegendEndLabel = "ViolentCrimes";	
+		this.timeLineId = "Universe";
+		this.playButtonId = "Universe";
+		this.colorLegendId = "Universe";
 	}
 
 	init(){
@@ -23,16 +26,16 @@ class UniversePage extends ParentPage{
 
 	initCharts(){
 		this.mainChart = new Universe(this.pageId);
-		this.colorLegend = new ColorLegend(this.pageId, this.ColorLegendTitle, this.ColorLegendStartLabel, this.ColorLegendEndLabel);
+		this.colorLegend = new ColorLegend(this.colorLegendId, this.pageId, this.colorLegendTitle, this.colorLegendStartLabel, this.colorLegendEndLabel);
 		this.charts = [this.mainChart, this.colorLegend ];
 		this.mainChart.appendThisCharToPage();
 		this.colorLegend.appendThisCharToPage();
 	}
 
 	initControlls(){
-		this.timeLine = new TimeLine();
+		this.timeLine = new TimeLine(this.pageId, this.timeLineId);
 		this.timeLine.appendThisCharToPage();		
-		this.playButton = new PlayButton();		
+		this.playButton = new PlayButton(this.pageId, this.playButtonId);		
 		this.playButton.appendThisCharToPage();
 		this.controlls = [this.timeLine,this.playButton];
 	}

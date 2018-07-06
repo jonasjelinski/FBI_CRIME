@@ -15,6 +15,8 @@ class PopUpPage extends ParentPage{
 		this.state = state;
 		this.year = year;
 		this.eventTarget =new EventTarget();
+		this.bubbleMenuId = "PopUp";
+		this.closeButtonId = "PopUp";
 	}
 
 	init(){
@@ -46,7 +48,7 @@ class PopUpPage extends ParentPage{
 	}
 
 	initCoseButton(){
-		this.closeButton = new CloseButton(this.pageId);
+		this.closeButton = new CloseButton(this.pageId, this.closeButtonId);
 		this.closeButton.appendThisCharToPage();
 	}
 
@@ -54,7 +56,7 @@ class PopUpPage extends ParentPage{
 		let crimeTypes = commonfunctionsNamespace.getAllCrimeTypes(),
 			categories = ["violentCrime", "propertyCrime"],
 			selections = crimeTypes.concat(categories);
-		this.bubbleMenu = new BubbleMenu(this.pageId,selections, "bubblecrimes");
+		this.bubbleMenu = new BubbleMenu(this.pageId,selections, this.bubbleMenuId);
 		this.bubbleMenu.appendThisCharToPage();
 	}
 

@@ -2,10 +2,10 @@
 //which is used to play and stop something
 
 class PlayButton extends MagicCircle{
-	constructor(pageId){
+	constructor(pageId, chartId){
 		super(pageId);
 		this.htmlelement = htmlelementsNamespace.playButton;
-		this.htmlElementID = this.htmlelement.htmlid;
+		this.htmlElementID = this.htmlelement.htmlid+chartId;
 		this.htmlElementType = this.htmlelement.type;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;

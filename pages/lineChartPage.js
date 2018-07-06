@@ -10,8 +10,8 @@ class LineChartPage extends ParentPage{
 	constructor(pageId){
 		super(pageId);
 		this.htmlElement = htmlelementsNamespace.lineChartPage;
-		this.dropDownIdCrimes = configNamespace.DROP_DOWN_IDS.dropDownIdCrimes;
-		this.dropDownIdStates = configNamespace.DROP_DOWN_IDS.dropDownIdStates;
+		this.dropDownIdStates = "TimeLine"
+		this.bubbleMenuId = "TimeLine";
 	}
 
 	init(){
@@ -28,21 +28,14 @@ class LineChartPage extends ParentPage{
 
 	initControlls(){
 		this.initBubbleMenu();
-		this.initDropDownCrimes();
 		this.initDropDownStates();		
 		this.controlls = [this.bubbleMenu, this.dropDownMenuStates];
 	}
 
 	initBubbleMenu(){
 		let crimeTypes = commonfunctionsNamespace.getAllCrimeTypes();
-		this.bubbleMenu = new BubbleMenu(this.pageId,crimeTypes, "bubblecrimes");
+		this.bubbleMenu = new BubbleMenu(this.pageId,crimeTypes, this.bubbleMenuId);
 		this.bubbleMenu.appendThisCharToPage();
-	}
-
-	initDropDownCrimes(){
-		let crimeTypes = commonfunctionsNamespace.getAllCrimeTypes();
-		this.dropDownMenuCrimes = new DropDownMenu(this.pageId, crimeTypes, this.dropDownIdCrimes);
-		this.dropDownMenuCrimes.appendThisCharToPage();
 	}
 
 	initDropDownStates(){
@@ -52,7 +45,6 @@ class LineChartPage extends ParentPage{
 	}
 
 	addListeners(){
-		this.dropDownMenuCrimes.eventTarget.addEventListener(this.dropDownMenuCrimes.selectionEvent, this.updateChartCrimeType.bind(this), false);
 		this.dropDownMenuStates.eventTarget.addEventListener(this.dropDownMenuStates.selectionEvent, this.updateChartState.bind(this), false);
 		this.bubbleMenu.eventTarget.addEventListener(this.bubbleMenu.selectionEvent, this.updateChartCrimeType.bind(this), false);
 	}

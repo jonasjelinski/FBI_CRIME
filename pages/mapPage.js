@@ -11,7 +11,9 @@ class MapPage extends ParentPage{
 	constructor(pageId){
 		super(pageId);
 		this.htmlElement = htmlelementsNamespace.mapPage;
-		this.dropDownIdMap = configNamespace.DROP_DOWN_IDS.dropDownIdMap ;
+		this.dropDownIdMap = "Map";
+		this.timeLineId = "Map";
+		this.playButtonId = "Map";
 	}
 
 	init(){
@@ -27,12 +29,12 @@ class MapPage extends ParentPage{
 	}
 
 	initControlls(){
-		this.timeLine = new TimeLine(this.pageId);
+		this.timeLine = new TimeLine(this.pageId, this.timeLineId);
 		this.timeLine.appendThisCharToPage();
 		this.crimeTypes = commonfunctionsNamespace.getAllCrimeTypes();
 		this.dropDownMenu = new DropDownMenu(this.pageId, this.crimeTypes, this.dropDownIdMap);
 		this.dropDownMenu.appendThisCharToPage();
-		this.playButton = new PlayButton(this.pageId);
+		this.playButton = new PlayButton(this.pageId, this.playButtonId);
 		this.playButton.appendThisCharToPage();
 		this.controlls = [this.timeLine,this.dropDownMenu,this.playButton];
 	}

@@ -5,10 +5,10 @@
 //two labels which describe the highest and the lowest value  
 
 class ColorLegend extends MagicCircle{
-	constructor(pageId = "mainpage", title = "ColorLegend", startLabel= "0", endLabel= "1", startColor = "rgb(0,0,255)", endColor ="rgb(255,0,0)", startValue = 0, endValue = 1){
+	constructor(chartId, pageId = "mainpage", title = "ColorLegend", startLabel= "0", endLabel= "1", startColor = "rgb(0,0,255)", endColor ="rgb(255,0,0)", startValue = 0, endValue = 1){
 		super(pageId);
 		this.htmlelement = htmlelementsNamespace.colorLegend; 
-		this.htmlElementID = this.htmlelement.htmlid;
+		this.htmlElementID = this.htmlelement.htmlid+chartId;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
 		this.title = title;

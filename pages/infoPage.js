@@ -6,6 +6,7 @@ class InfoPage extends ParentPage{
 	constructor(pageId = "infopage", infoText = "Das Pferd mag keine Gurken"){
 		super(pageId);
 		this.pageId = pageId;
+		this.closeButtonId = "InfoPage";
 		this.htmlelement = htmlelementsNamespace.infoPage;
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.infoText = infoText;		
@@ -24,7 +25,7 @@ class InfoPage extends ParentPage{
 	}
 
 	initControlls(){
-		this.closeButton = new CloseButton(this.pageId);
+		this.closeButton = new CloseButton(this.pageId, this.closeButtonId);
 		this.closeButton.appendThisCharToPage();
 		this.controlls = [this.closeButton];
 	}

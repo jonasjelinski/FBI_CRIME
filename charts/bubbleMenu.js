@@ -4,10 +4,10 @@
 //and an event with the value of the bubble atteched to it is dispatched
 
 class BubbleMenu extends MagicCircle{
-	constructor(pageId, categories, id){
+	constructor(pageId, categories, chartId){
 		super(pageId);
 		this.htmlelement = htmlelementsNamespace.bubbleMenu;
-		this.htmlElementID = this.htmlelement.htmlid + " "+id;
+		this.htmlElementID = this.htmlelement.htmlid + chartId;
 		this.htmlclassname = this.htmlelement.htmlclassname;
 		this.htmlElementType = this.htmlelement.type;
 		this.width = this.htmlelement.width;

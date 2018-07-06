@@ -3,10 +3,10 @@
 
 class TimeLine extends MagicCircle{
 
-	constructor(pageId){
+	constructor(pageId, chartId){
 		super(pageId);
 		this.htmlelement = htmlelementsNamespace.timeLine;
-		this.htmlElementID = this.htmlelement.htmlid;
+		this.htmlElementID = this.htmlelement.htmlid+chartId;
 		this.width = this.htmlelement.width-this.htmlelement.margin.left - this.htmlelement.margin.right;
 		this.height = this.htmlelement.height-this.htmlelement.margin.top - this.htmlelement.margin.bottom;
 		this.yearData=commonfunctionsNamespace.getAllYears();
