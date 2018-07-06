@@ -366,6 +366,8 @@ function lastNode(treeDataState){
 return treeData;
 }
 
-
+setYear(year){
+  this.year = year;
+}
 
 }

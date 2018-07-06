@@ -17,6 +17,7 @@ class PopUpPage extends ParentPage{
 		this.eventTarget =new EventTarget();
 		this.bubbleMenuId = "PopUp";
 		this.closeButtonId = "PopUp";
+		this.dropDownId = "PopUp";
 	}
 
 	init(){
@@ -44,7 +45,8 @@ class PopUpPage extends ParentPage{
 	initControlls(){
 		this.initCoseButton();
 		this.initBubbleMenu();
-		this.controlls = [this.closeButton, this.bubbleMenu];
+		this.initDropDownMenu();
+		this.controlls = [this.closeButton, this.bubbleMenu, this.dropDownMenu];
 	}
 
 	initCoseButton(){
@@ -60,9 +62,16 @@ class PopUpPage extends ParentPage{
 		this.bubbleMenu.appendThisCharToPage();
 	}
 
+	initDropDownMenu(){
+		let years = commonfunctionsNamespace.getAllYears;
+		this.dropDownMenu = new DropDownMenu(this.pageId, years, this.dropDownId);
+		this.dropDownMenu.appendThisCharToPage();
+	}
+
 	addEventListeners(){
 		this.closeButton.eventTarget.addEventListener(this.closeButton.onClick, this.closePage.bind(this), false);
 		this.bubbleMenu.eventTarget.addEventListener(this.bubbleMenu.selectionEvent, this.updateChartCrimeType.bind(this), false);
+		this.dropDownMenu.eventTarget.addEventListener(this.dropDownMenu.selectionEvent, this.updateYear.bind(this), false);
 	}
 
 	closePage(){
@@ -78,5 +87,14 @@ class PopUpPage extends ParentPage{
 	dispatchCloseEvent(){
 		let event = new Event("closeButton");
 		this.eventTarget.dispatchEvent(event);
+	}
+
+	updateYear(event){
+		let year = event.detail.selection;
+		this.mainChart.setYear(year);
+		this.treeChart.setYear(year);
+		this.mainChart.updatesHimself();
+		this.treeChart.updatesHimself();
+
 	}
 }

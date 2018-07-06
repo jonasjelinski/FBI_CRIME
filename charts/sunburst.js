@@ -404,6 +404,10 @@ class Sunburst extends MagicCircle{
 			visible = parseInt(selection.attr("opacity")),           
 			newOpacity = visible === isVisible ? isHidden : isVisible;           
 		selection.attr("opacity", newOpacity);        
+	}
+
+	setYear(year){
+		this.year = year;
 	}	  
 
 }
