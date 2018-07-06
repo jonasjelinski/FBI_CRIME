@@ -4,7 +4,7 @@
 class InfoBox extends MagicCircle{
 	constructor(pageId, infoText){
 		super(pageId);
-		this.htmlelement = htmlelementsNamespace.INFO_BOX; 
+		this.htmlelement = htmlelementsNamespace.infoBox; 
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
