@@ -18,8 +18,10 @@ class CrimeCorrelation extends MagicCircle{
 		this.linksIndex = 1;
 		this.ignoreLinkColor = this.htmlelement.ignoreLinkColor;
 		this.highlightLinkColor = this.htmlelement.highlightLinkColor;
-		this.nodeFontColor = this.htmlelement.nodeFontColor;
-		this.nodeFontSize = this.htmlelement.nodeFontSize;
+		this.labelFontColor = this.htmlelement.labelFontColor;
+		this.labelFontSize = this.htmlelement.labelFontSize;
+		this.labelPositionX = this.htmlelement.labelPositionX;
+		this.labelPositionY = this.htmlelement.labelPositionY;
 		this.correlationFontColor = this.htmlelement.correlationFontColor;
 		this.correlationFontSize = this.htmlelement.correlationFontSize;
 	}
@@ -247,8 +249,8 @@ class CrimeCorrelation extends MagicCircle{
     			.attr("y", function(d, i) { return calculatePoint(i,d.source.x, d.source.y, d.target.x, d.target.y)[1]; });				
 				
 			label
-				.attr("x", function(d) {return d.x; })    		
-				.attr("y", function(d) {return d.y; });
+				.attr("x", function(d) {return d.x +that.labelPositionX; })    		
+				.attr("y", function(d) {return d.y +that.labelPositionY; });
 		}
 
 		function calculatePoint(i,x1,y1,x2,y2){
@@ -318,8 +320,8 @@ class CrimeCorrelation extends MagicCircle{
 		function enterLabel(){
 			label = label.enter().append("text")
 				.text(function(d){return d.id;})
-				.attr("fill",that.nodeFontColor )      			 
-				.style("font-size", that.nodeFontSize);     			 
+				.attr("fill",that.labelFontColor )      			 
+				.style("font-size", that.labelFontSize);     			 
 		}
 
 		function enterCorrelationLabel(){
