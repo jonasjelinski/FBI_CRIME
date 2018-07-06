@@ -9,8 +9,8 @@ configNamespace.FILE_PATHES = {
 configNamespace.STATES_AND_CRIMES = {
 	states : ['ALABAMA','ALASKA','ARIZONA','ARKANSAS','CALIFORNIA','COLORADO','CONNECTICUT','DELAWARE','COLUMBIA','FLORIDA','GEORGIA','HAWAII','IDAHO','ILLINOIS','INDIANA','IOWA','KANSAS','KENTUCKY','LOUISIANA','MAINE','MARYLAND','MASSACHUSETTS','MICHIGAN','MINNESOTA','MISSISSIPPI','MISSOURI','MONTANA','NEBRASKA','NEVADA','NEW HAMPSHIRE','NEW JERSEY','NEW MEXICO','NEW YORK','NORTH CAROLINA','NORTH DAKOTA','OHIO','OKLAHOMA','OREGON','PENNSYLVANIA','PUERTO RICO','RHODE ISLAND','SOUTH CAROLINA','SOUTH DAKOTA','TENNESSEE','TEXAS','UTAH','VERMONT','VIRGINIA','WASHINGTON','WEST VIRGINIA','WISCONSIN','WYOMING'],
 	crimeCategories : {
-		Crimes : { 
-			propertyCrime : ["Burglary", "Larcenytheft", "Motorvehicletheft"], 
+		Crimes : {
+			propertyCrime : ["Burglary", "Larcenytheft", "Motorvehicletheft"],
 			violentCrime : ["Aggravatedassault", "MurderManslaughter", "Rape", "Robbery"],
 		},
 	},
@@ -66,4 +66,3 @@ configNamespace.JSON_OBJECT = false;
 configNamespace.MAP_JSON_OBJECT = false;
 
 configNamespace.CRIME_CORRELATIONS = false;
-

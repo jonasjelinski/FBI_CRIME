@@ -39,8 +39,8 @@ htmlelementsNamespace.lineDiagramm = {
 	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "linediagram",
 	htmlid: "linediagram",
-	width:500,
-	height:500,
+	width:650,
+	height:600,
 	type: "svg",
 };
 
@@ -51,7 +51,7 @@ htmlelementsNamespace.theUniverse = {
 	width:1200,
 	height:500,
 	type: "svg",
-	labelColor: "pink",
+	labelColor: "black",
 	labelSize : "10px",
 };
 
@@ -70,8 +70,8 @@ htmlelementsNamespace.colorLegend = {
 	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "colorlegend",
 	htmlid: "colorlegend",
-	width:2000,
-	height:1000,
+	width:500,
+	height:100,
 	type: "svg",
 	sliceNumbers: 50,
 	sliceHeight: 10,

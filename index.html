@@ -2,21 +2,26 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Bob Ross Painting Elements</title>
+    <title>Verbrechensstatistik USA</title>
     <link rel="stylesheet" href="./store/bob.css">
     <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans" rel="stylesheet">
   <!--  <script src="./data/config.js"></script> -->
 </head>
 
 <body>
-    <h1>Crime in the USA</h1>
+  <p class="headline">
+    <img class="logo" src="./pictures/Federal_Bureau_of_Investigation.svg.png" alt="FBIlogo">
+    <h1>Verbrechen in den vereinigten amerikanischen Staaten</h1>
+  </p>
     <div class="buttons">
-      <button id="mapButton">Map</button>
+      <button id="mapButton">Überblicks-Karte</button>
       <button id="timeButton">Zeitverlauf</button>
-      <button id="forceButton">Collapsible Force</button>
+      <button id="forceButton">Beziehungen</button>
       <button id="planetButton">Planeten</button>
     </div>
-    <div id= "dochart" >Raten der Verbrechen auf die USA verteilt</div>
+    <div id= "pageDescription">
+      Verbrechen in den USA
+    </div>
 
     <div id="popup">
     </div>
@@ -33,7 +38,7 @@
     <script src="./libs/d3/d3.js"></script>
     <script src="./scripts/scripts.js"></script>
     <!--<script src="./store/config.js"></script>
-    <script src="./store/commonfunctions.js"></script>-->    
+    <script src="./store/commonfunctions.js"></script>-->
     <script src="./scripts/scriptLoader.js"></script>
     <script>scriptLoader.loadScripts();</script>
     <footer>

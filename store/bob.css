@@ -23,15 +23,25 @@ body {
     font-family: 'Quattrocento Sans', sans-serif;
 }
 
+.logo{
+  position: absolute;
+  height: 150px;
+  width: 150px;
+}
+
 h1{
   margin: auto;
   text-align: center;
+  padding-top: 50px;
+  font-size: 30px;
   color: var(--fonts);
-  height: 50px;
+  height: 100px;
 }
 
-#dochart{
-  text-align: center;
+#pageDescription{
+  padding-top: 50px;
+  padding-left: 100px;
+  text-align: block;
 }
 
 .buttons button{
@@ -58,16 +68,16 @@ h1{
   width: 100%;
   height: 100%;
 }
-
+/*
 #dropDown{
   position: absolute;
   margin-top: 1%;
   margin-left: 1%;
-}
+}*/
 
 #map{
   position: absolute;
-  top: 10%;
+  top: 15%;
   margin-left: auto;
   margin-right: auto;
   left: 0;
@@ -75,6 +85,29 @@ h1{
   width: 960px;
   height: 520px;
   z-index: 0;
+}
+
+.stateInfo{
+  position: absolute;
+  margin-left: 3%;
+  font-family: 'Quattrocento Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+.crimeInfo{
+  position: absolute;
+  margin-left: 4%;
+  margin-top: 3%;
+  font-size: 15px;
+  font-weight: 100;
+}
+
+#dropDown{
+  position: absolute;
+  width: 300px;
+  margin-top: 10%;
+  margin-left: 1%;
 }
 
 #timeLine{
@@ -95,9 +128,9 @@ h1{
   position: absolute;
   background-color: var(--highlight);
   left: 5%;
-  top: 5%;
+  top: 30%;
   width: 90%;
-  height: 90%;
+  height: 60%;
   z-index:1;
   visibility: hidden;
 }
@@ -146,6 +179,10 @@ h1{
   z-index: 0;
 }
 
+#bubblemenu{
+  background-color: pink;
+}
+
 #crimecorrelation{
   position: absolute;
   left: 5%;
@@ -164,7 +201,7 @@ h1{
 #colorlegend{
   position: absolute;
   left: 35%;
-  top: 80%;
+  top: 70%;
 }
 
 .ticks {
@@ -292,19 +329,7 @@ color:white;
 letter-spacing:1px;
 }
 
-.d3-tip {
-  line-height: 1;
-  /*font-weight: bold;*/
-  padding: 12px;
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  border-radius: 2px;
-  -webkit-transition: all 0.5s ease-out;
-  -moz-transition: all 0.5s ease-out;
-  -o-transition: all 0.5s ease-out;
-  -ms-transition: all 0.5s ease-out;
-  transition: all 0.5s ease-out;
-}
+
 d3-tip:hover {
 
 }
@@ -366,4 +391,19 @@ path.state {
   transition: fill 0.5s ease-out;
   /*cursor: -webkit-zoom-in; cursor: -moz-zoom-in;*/
   /*cursor: -webkit-zoom-out; cursor: -moz-zoom-out;*/
+}
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  font-style: italic;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  -ms-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
 }
