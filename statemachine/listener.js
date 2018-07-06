@@ -17,9 +17,25 @@ listenerNamespace.createListener = function (id, type, action) {
 };
 
 //this listeners starts the action drawing
-//and should draw a nice circle
 listenerNamespace.drawUniverseListener = listenerNamespace.createListener("planetButton", "click", actionNamespace.actionDrawUniversePage);
 listenerNamespace.drawLineChartListener = listenerNamespace.createListener("timeButton", "click", actionNamespace.actionDrawLineChartPage);
-listenerNamespace.drawUniverseListener = listenerNamespace.createListener("forceButton", "click", actionNamespace.actionDrawCrimeCorrelationPage);
-listenerNamespace.drawUniverseListener = listenerNamespace.createListener("mapButton", "click", actionNamespace.actionDrawMapPage);
-listenerNamespace.drawUniverseListener = listenerNamespace.createListener("infoButton", "click", actionNamespace.actionDrawInfoPage);
+listenerNamespace.drawForceListener = listenerNamespace.createListener("forceButton", "click", actionNamespace.actionDrawCrimeCorrelationPage);
+listenerNamespace.drawMapListener = listenerNamespace.createListener("mapButton", "click", actionNamespace.actionDrawMapPage);
+listenerNamespace.drawInfoButtonListener = listenerNamespace.createListener("infoButton", "click", actionNamespace.actionDrawInfoPage);
+
+//this listeners show or hide the infoTexts on hover
+//this listeners starts the action drawing
+
+//shows
+listenerNamespace.drawUniverseListener = listenerNamespace.createListener("planetButton", "mouseover", actionNamespace.showInfoTextUniverse);
+listenerNamespace.drawLineChartListener = listenerNamespace.createListener("timeButton", "mouseover", actionNamespace.showInfoTextTimeLine);
+listenerNamespace.drawForceListener = listenerNamespace.createListener("forceButton", "mouseover", actionNamespace.showInfoTextCorrelation);
+listenerNamespace.drawMapListener = listenerNamespace.createListener("mapButton", "mouseover", actionNamespace.showInfoTextMap);
+
+//hides
+listenerNamespace.drawUniverseListener = listenerNamespace.createListener("planetButton", "mouseout", actionNamespace.hideInfoText);
+listenerNamespace.drawLineChartListener = listenerNamespace.createListener("timeButton", "mouseout", actionNamespace.hideInfoText);
+listenerNamespace.drawForceListener = listenerNamespace.createListener("forceButton", "mouseout", actionNamespace.hideInfoText);
+listenerNamespace.drawMapListener = listenerNamespace.createListener("mapButton", "mouseout", actionNamespace.hideInfoText);
+
+

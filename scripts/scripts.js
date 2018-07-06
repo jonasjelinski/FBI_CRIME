@@ -55,6 +55,7 @@ scripts_namespace.SECOND_SCRIPTS = [
 	"./charts/universe.js",
 	"./charts/bubbleMenu.js",
 	"./charts/infoBox.js",
+	"./charts/infoText.js",
 	"./charts/crimeCorrelation.js",
 	"./charts/closeButton.js",
 	"./charts/playButton.js",

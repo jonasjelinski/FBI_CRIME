@@ -26,3 +26,32 @@ actionNamespace.actionDrawInfoPage = function(){
 	"use strict";
 	componentsNamespace.stateMachine.drawInfoPage();
 };
+
+actionNamespace.showInfoTextMap = function(){
+	actionNamespace.showInfoText("das ist eine map");
+};
+
+actionNamespace.showInfoTextTimeLine = function(){
+	actionNamespace.showInfoText("das ist ein line LINE_CHART");
+};
+
+actionNamespace.showInfoTextCorrelation = function(){
+	actionNamespace.showInfoText("das ist eine korrelation");
+
+};
+
+actionNamespace.showInfoTextUniverse = function(){
+	actionNamespace.showInfoText("das sind planeten");
+};
+
+actionNamespace.showInfoText = function(text){
+	"use strict";
+	componentsNamespace.shortInfoText.setInfoText(text);
+	
+	componentsNamespace.shortInfoText.updatesHimself();
+	componentsNamespace.shortInfoText.switchVisibility();
+};
+
+actionNamespace.hideInfoText = function(){
+	componentsNamespace.shortInfoText.switchVisibility();
+};

@@ -164,6 +164,16 @@ htmlelementsNamespace.infoBox = {
 	type: "svg",
 };
 
+
+htmlelementsNamespace.infoText = {
+	parentElement: htmlelementsNamespace.magicCircle,
+	htmlclassname: "infotext",
+	htmlid: "infotext",
+	width: 1000,
+	height: 1000,
+	type: "div",
+};
+
 htmlelementsNamespace.PARENT_PAGE = {
 	width: 2000,
 	height: 1000,
