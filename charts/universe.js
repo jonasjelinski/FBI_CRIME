@@ -25,8 +25,8 @@ class Universe extends MagicCircle{
 			violenceSunY: this.height/2,
 			propertySunX: this.width*this.propertyPos,
 			propertySunY: this.height/2,
-			standardSpeed: 1,
-			minSpeed: 1,
+			standardSpeed: 0.55,
+			minSpeed: 0.25,
 		};		
 		this.animateRotation;
 		this.stopRotation;
@@ -35,6 +35,8 @@ class Universe extends MagicCircle{
 		this.rotationTimer = undefined;
 		this.labelColor = this.htmlelement.labelColor;
 		this.labelSize = this.htmlelement.labelSize;
+		this.hoverOutSize = this.htmlelement.hoverOutLabelSize;
+		this.hoverInSize = this.htmlelement.hoverInLabelSize;
 	}
 
 	//draws the universe
@@ -263,11 +265,8 @@ class Universe extends MagicCircle{
 	}
 
 	//creates an id for the node
-	//by mixing the letters of the statename
 	createId(statename){
-		let maxChars = 8,	
-			id = statename.substring(0,maxChars);
-		return id;
+		return statename;
 	}
 
 	//creates two suns which are objects
@@ -445,7 +444,8 @@ class Universe extends MagicCircle{
 				.attr("fill", that.labelColor )
 				.style("opacity", "0.5")
 				.style("font-size", that.labelSize)			
-				.on("mouseover", function(d){changeFont(d, this);});
+				.on("mouseover", function(d){changeFont(d, this);})
+				.on("mouseout", function(d){resetFont(d, this)});
 		}		
 
 		function enterLink(){
@@ -481,14 +481,26 @@ class Universe extends MagicCircle{
 
 		//changes the font so labels get less visible
 		//if the label d is actived
-		function changeFont(d, that){
-			let n = d3.select(that).node(),
-				opacity = n.style.opacity,
-				fontSize = n.style.fontSize,
+		function changeFont(d, selection){
+			let label = d3.select(selection).node(),
+				opacity = label.style.opacity,
+				fontSize = label.style.fontSize,
 				durationTime = 500;									
-			opacity = opacity === "1" ? "0.1": "1";	
-			fontSize = opacity === "1" ? "30px" : "20px"; 			
-			d3.select(that).transition().duration(durationTime).style("opacity", opacity).style("font-size", fontSize);
+			opacity = "1";	
+			fontSize = that.hoverInSize; 			
+			d3.select(selection).transition().duration(durationTime).style("opacity", opacity).style("font-size", fontSize);
+		}
+
+
+		function resetFont(d, selection){
+			console.log("reset");
+			let label = d3.select(selection).node(),
+				opacity = label.style.opacity,
+				fontSize = label.style.fontSize,
+				durationTime = 500;									
+			opacity = "0.1"
+			fontSize = that.hoverOutSize; 			
+			d3.select(selection).transition().duration(durationTime).style("opacity", opacity).style("font-size", fontSize);
 		}
 
 		//updates the positions of the planets 

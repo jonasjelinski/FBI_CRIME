@@ -60,7 +60,9 @@ htmlelementsNamespace.theUniverse = {
 	height:500,
 	type: "svg",
 	labelColor: "black",
-	labelSize : "10px",
+	labelSize : "5px",
+	hoverInLabelSize: "20px",
+	hoverOutLabelSize: "10px",
 };
 
 htmlelementsNamespace.bubbleMenu = {
