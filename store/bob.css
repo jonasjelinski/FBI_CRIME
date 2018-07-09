@@ -39,6 +39,16 @@ h1{
   height: 100px;
 }
 
+#mapHeadline{
+  position: absolute;
+  height: 180px;
+  width: 600px;
+  right: 0%;
+  top: 1px;
+
+
+}
+
 #pageDescription{
   padding-top: 50px;
   padding-left: 100px;
