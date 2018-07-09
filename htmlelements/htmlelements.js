@@ -193,11 +193,16 @@ htmlelementsNamespace.PARENT_PAGE = {
 htmlelementsNamespace.crimeCorrelationPage = {
 	htmlclassname: "correlationPage",
 	htmlid: "correlationPage",
-	startColor: configNamespace.CRIME_CORRELATION.lowCorrelationColor,
-	endColor: configNamespace.CRIME_CORRELATION.highCorrelationColor,
-	colorLegendTitle: "Correlation between Crime Types",
+	positiveStartColor: configNamespace.CRIME_CORRELATION.lowCorrelationColor,
+	positiveEndColor: configNamespace.CRIME_CORRELATION.highCorrelationColor,
+	negativeStartColor:configNamespace.CRIME_CORRELATION.negativeCorrelationColorLow,
+	negativeEndColor: configNamespace.CRIME_CORRELATION.negativeCorrelationColorHigh,
+	positiveColorLegendTitle: "Positive Correlation between Crime Types",
+	negativeColorLegendTitle: "Negative Correlation between Crime Types",
 	colorLegendStartLabel: "No Correlation",
 	colorLegendEndLabel: "High Correlation",
+	positivecColorLegendId : "CorrelationsPositive",
+	negativeColorLegendId : "CorrelationsNegative",
 };
 
 htmlelementsNamespace.lineChartPage = {

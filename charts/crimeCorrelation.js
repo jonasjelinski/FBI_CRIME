@@ -366,13 +366,33 @@ class CrimeCorrelation extends MagicCircle{
 		}
 
 		//returns a rgb color
-		//it get less red if factor is bigger
+		//depending on correlation
+		//if the correlation is positive color is from red(high correlation) to blue(low correlation)
+		//else
 		function getRGBColor(d){
-			let factor = Math.abs(d.correlation),
+			if(d.correlation >= 0){
+				return getPositiveRGB(d.correlation);
+			}
+			return getNegativeRGB(d.correlation);			
+		}
+
+		//returns a rgb color
+		//it get less red if factor is bigger
+		function getPositiveRGB(correlation){
+			let factor = correlation,
 				red = configNamespace.CRIME_CORRELATION.highCorrelationRed * factor,
 				green = configNamespace.CRIME_CORRELATION.highCorrelationGreen * factor, 
 				blue = configNamespace.CRIME_CORRELATION.lowCorrelationBlue - configNamespace.CRIME_CORRELATION.lowCorrelationBlue* factor;
-			return "rgb(" + red + "," + green + "," + blue+ ")";  
+			return "rgb(" + red + "," + green + "," + blue+ ")"; 
+		}
+
+
+		function getNegativeRGB(correlation){
+			let factor = correlation,
+				red = configNamespace.CRIME_CORRELATION.negativeCorrelationRedHigh,
+				green = configNamespace.CRIME_CORRELATION.negativeCorrelationGreenHigh * factor, 
+				blue = configNamespace.CRIME_CORRELATION.negativeCorrelationBlueHigh;
+			return  "rgb(" + red + "," + green + "," + blue+ ")"; 
 		}		
 
 		//returns linkDistance depending on the correlation
