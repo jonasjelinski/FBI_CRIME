@@ -30,8 +30,22 @@ body {
   width: 150px;
 }
 
+.legal{
+  position: absolute;
+  top: 1px;
+  color: var(--buttonFonts);
+  font-size: 12px;
+  z-index: 1;
+}
+#impressum{
+  right: 15%;
+}
+#datenschutz{
+  right: 5%;
+}
+
 h1{
-  margin: auto;
+  margin-left: -10%;
   text-align: center;
   padding-top: 50px;
   font-size: 30px;
@@ -59,7 +73,8 @@ h1{
   position: absolute;
   width: 99%;
   height: 50%;
-top: 220px;
+  top: 229px;
+  left: 0.5%;
   background-color: var(--buttons);
   -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
   z-index: 9;
@@ -72,7 +87,7 @@ top: 220px;
   color: var(--buttonFonts);
   cursor: pointer;
   float: left;
-  width: 25%;
+  width: 20%;
   z-index: 5;
 }
 
