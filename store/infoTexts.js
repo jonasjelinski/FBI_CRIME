@@ -4,6 +4,7 @@ var infoTextsNamespace = infoTextsNamespace || {};
 infoTextsNamespace.shortPageTexts = {
   mapInfo : "<p>Auf dieser Seite können Sie sich einen Überblick über die verschiedenen ausgeübten Verbrechen in den einzelnen Staaten der USA verschaffen</p>",
   lineChartInfo: "<p>Auf dieser Seite können Sie über den kompletten erfassten Zeitraum die verübten Verbrechen miteinander vergleichen.</p>",
+<<<<<<< HEAD
   collapsibleInfo: "<p>Alle erfassten Kategorien werden auf dieser Seite miteinander verknüft und die bestehende Korrelation dargestellt.</p>",
   universeInfo: "<p>Darstellung der zwei Überkategorien als Sonnen und aller Staaten als Planeten</p>",
 }
@@ -16,3 +17,13 @@ infoTextsNamespace.pageDescription = {
   collapsiblePage: "<p>Die berechneten Korrelationen der Verbrechenskategorieen untereinander beziehen sich auf die komplette USA und den kompletten Zeitraum.</p><p>Jede Kategorie wird als ein Kreis angezeigt, der mit der Maus auf dem Bildschirm positioniert werden kann. Beim Berühren des KReises mit der Maus werden alle Verbindungen hervorgehoben. Anhand der angezeigten Skala kann die Korrelation eingeschätzt werden. Für einen genauen numerischen Wert kann der Verbindung zwischen zwei Kategorien mit der Maus berührt werden.</p><p>Die umerischen Werte liegen im Bereich zwischen -1 und 1.</p>",
   universePage: "<p>Die zwei Sonnen (GEwalt- und Vermögensdelikte) üben auf die Planeten Anziehungskräfte aus. Je näher ein Planet an einer Sonne angezeigt wird, umso mehr Verbrechen dieser Kategorie wurden ausgeübt.</p><p>Jeder Staat in den USA wird einmalig angezeigt. Je nach den verübten Verbrechen in diesem Staat, ordnet er sich einer Sonne unter. Um die Namen der Staaten deutlicher lesen zu können, kann der Planet mit der Maus berührt werden.</p><p>In der Zeitleiste im oberen Bildschirmbereich kann ein Jahr ausgewählt werden, das angezeigt werden soll.</p><p>Der Play-Button lässt das Sonnensystem rotieren.</p>",
 }
+=======
+
+};
+
+infoTextsNamespace.pageDescription = {
+  startPage: "",
+  mapPage: "",
+
+};
+>>>>>>> b1d42f8b68db5bb35a84726a583bef6f1592b141
