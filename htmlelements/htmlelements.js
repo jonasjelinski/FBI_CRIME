@@ -176,7 +176,6 @@ htmlelementsNamespace.infoBox = {
 	type: "svg",
 };
 
-
 htmlelementsNamespace.infoText = {
 	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "infotext",
