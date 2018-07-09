@@ -26,7 +26,7 @@ class InfoBox extends MagicCircle{
 			that =this;
 
 		initTextBox();	
-		appendText();
+		//appendText();
 
 		//appends a new element to container 
 		//and gives it the data textArray
@@ -35,8 +35,12 @@ class InfoBox extends MagicCircle{
 				.attr("class","textBox")
 				.attr("width", that.width)
 				.attr("height", that.height) 			
-				.data(textArray)	            
-				.append("text");	                  		
+				.html(that.infoText)
+
+				console.log(that.infoText);
+				
+				//.data(textArray)	            
+				//.append("text");	                  		
 		}		
 		
 		//appends the text of infoText as text-element	

@@ -36,12 +36,12 @@ actionNamespace.showInfoTextTimeLine = function(){
 };
 
 actionNamespace.showInfoTextCorrelation = function(){
-	actionNamespace.showInfoText("das ist eine korrelation");
+	actionNamespace.showInfoText(infoTextsNamespace.shortPageTexts.correlationInfo);
 
 };
 
 actionNamespace.showInfoTextUniverse = function(){
-	actionNamespace.showInfoText("das sind planeten");
+	actionNamespace.showInfoText(infoTextsNamespace.shortPageTexts.universeInfo);
 };
 
 actionNamespace.showInfoText = function(text){
