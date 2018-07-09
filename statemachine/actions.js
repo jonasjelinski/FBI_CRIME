@@ -28,11 +28,11 @@ actionNamespace.actionDrawInfoPage = function(){
 };
 
 actionNamespace.showInfoTextMap = function(){
-	actionNamespace.showInfoText("das ist eine map");
+	actionNamespace.showInfoText(infoTextsNamespace.shortPageTexts.mapInfo);
 };
 
 actionNamespace.showInfoTextTimeLine = function(){
-	actionNamespace.showInfoText("das ist ein line LINE_CHART");
+	actionNamespace.showInfoText(infoTextsNamespace.shortPageTexts.lineChartInfo);
 };
 
 actionNamespace.showInfoTextCorrelation = function(){

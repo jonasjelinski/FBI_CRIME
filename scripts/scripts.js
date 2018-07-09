@@ -41,6 +41,7 @@ scripts_namespace.FIRST_SCRIPTS = [
 	"./libs/topoJson/topojson.v1.min.js",
 	"./store/config.js",
 	"./store/commonfunctions.js",
+	"./store/infoTexts.js",	
 	"./htmlelements/htmlelements.js",
 ];
 
