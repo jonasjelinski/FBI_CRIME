@@ -17,22 +17,22 @@ class StateMachine{
 		switch(state){
 		case configNamespace.STATE_MACHINE.MAP: 
 			this.drawMapPage();
-			this.infoText = "Hier kommt die Map Info";
+			this.infoText = infoTextsNamespace.pageDescription.mapPage;
 			this.drawShortInfoText = "Hier kommt die krz Map Info";
 			break;
 		case configNamespace.STATE_MACHINE.LINE_CHART:
 			this.drawLineChartPage();
-			this.infoText = "Hier kommt die lineChartPage Info";
+			this.infoText = infoTextsNamespace.pageDescription.lineChartPage;
 			this.drawShortInfoText = "Hier kommt die krz lineChartPage Info";
 			break;
 		case configNamespace.STATE_MACHINE.CRIME_CORRELATION:
 			this.drawCrimeCorrelationPage();
-			this.infoText = "Hier kommt die Korrelation Info";
+			this.infoText = infoTextsNamespace.pageDescription.correlationPage;
 			this.drawShortInfoText = "Hier kommt die krz Korrelation Info";
 			break;
 		case configNamespace.STATE_MACHINE.UNIVERSE:this.drawUniversePage();
-			this.infoText = "Hier kommt die Universe Info";
-			this.drawShortInfoText = "Hier kommt die krz Universe Info";
+			this.infoText = infoTextsNamespace.pageDescription.universePage;
+			this.drawShortInfoText = infoTextsNamespace.pageDescription.universePage;
 			break;
 		default:
 			break;

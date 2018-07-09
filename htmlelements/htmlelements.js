@@ -173,7 +173,7 @@ htmlelementsNamespace.infoBox = {
 	htmlid: "infobox",
 	width: 1000,
 	height: 1000,
-	type: "svg",
+	type: "div",
 };
 
 htmlelementsNamespace.infoText = {
