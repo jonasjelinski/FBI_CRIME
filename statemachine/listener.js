@@ -22,6 +22,7 @@ listenerNamespace.drawLineChartListener = listenerNamespace.createListener("time
 listenerNamespace.drawForceListener = listenerNamespace.createListener("forceButton", "click", actionNamespace.actionDrawCrimeCorrelationPage);
 listenerNamespace.drawMapListener = listenerNamespace.createListener("mapButton", "click", actionNamespace.actionDrawMapPage);
 listenerNamespace.drawInfoButtonListener = listenerNamespace.createListener("infoButton", "click", actionNamespace.actionDrawInfoPage);
+listenerNamespace.drawInfoButtonListener = listenerNamespace.createListener("startButton", "click", actionNamespace.actionDrawStartPage);
 
 //this listeners show or hide the infoTexts on hover
 //this listeners starts the action drawing

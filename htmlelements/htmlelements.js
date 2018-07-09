@@ -248,3 +248,9 @@ htmlelementsNamespace.infoPage = {
 	width: 1000,
 	height: 500,
 };
+
+htmlelementsNamespace.startPage = {
+	htmlclassname: "startPage",
+	htmlid: "startPage",
+	textid: "startPage text",
+};

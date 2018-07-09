@@ -16,7 +16,7 @@ class ParentPage{
 	//inits the page
 	//adds a new chart to the array charts
 	init(){
-		this.mainChart = new Universe(pageId);
+		this.mainChart = new Universe(this.pageId);
 		this.charts = [this.mainChart];
 	}
 

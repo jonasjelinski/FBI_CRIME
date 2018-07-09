@@ -68,6 +68,7 @@ scripts_namespace.SECOND_SCRIPTS = [
 	"./pages/universePage.js",
 	"./pages/popUpPage.js",
 	"./pages/infoPage.js",
+	"./pages/startPage.js",
 	"./statemachine/stateMachine.js",
 	"./statemachine/components.js",
 	"./statemachine/actions.js",

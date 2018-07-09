@@ -2,6 +2,11 @@
 
 var actionNamespace = actionNamespace || {};
 
+actionNamespace.actionDrawStartPage = function(){
+	"use strict";
+	componentsNamespace.stateMachine.switchState(configNamespace.STATE_MACHINE.START);	
+};
+
 actionNamespace.actionDrawUniversePage = function(){
 	"use strict";
 	componentsNamespace.stateMachine.switchState(configNamespace.STATE_MACHINE.UNIVERSE);
@@ -28,26 +33,25 @@ actionNamespace.actionDrawInfoPage = function(){
 };
 
 actionNamespace.showInfoTextMap = function(){
-	actionNamespace.showInfoText(infoTextsNamespace.shortPageTexts.mapInfo);
+	actionNamespace.showInfoText(infoTextsNamespace.shortPageDescription.mapInfo);
 };
 
 actionNamespace.showInfoTextTimeLine = function(){
-	actionNamespace.showInfoText(infoTextsNamespace.shortPageTexts.lineChartInfo);
+	actionNamespace.showInfoText(infoTextsNamespace.shortPageDescription.lineChartInfo);
 };
 
 actionNamespace.showInfoTextCorrelation = function(){
-	actionNamespace.showInfoText(infoTextsNamespace.shortPageTexts.correlationInfo);
+	actionNamespace.showInfoText(infoTextsNamespace.shortPageDescription.correlationInfo);
 
 };
 
 actionNamespace.showInfoTextUniverse = function(){
-	actionNamespace.showInfoText(infoTextsNamespace.shortPageTexts.universeInfo);
+	actionNamespace.showInfoText(infoTextsNamespace.shortPageDescription.universeInfo);
 };
 
 actionNamespace.showInfoText = function(text){
 	"use strict";
-	componentsNamespace.shortInfoText.setInfoText(text);
-	
+	componentsNamespace.shortInfoText.setInfoText(text);	
 	componentsNamespace.shortInfoText.updatesHimself();
 	componentsNamespace.shortInfoText.switchVisibility();
 };

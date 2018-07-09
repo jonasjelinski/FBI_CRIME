@@ -4,42 +4,59 @@
 class StateMachine{
 	constructor(){
 		this.activePage = undefined;
+		this.startPage = new StartPage("mainpage");
 		this.mapPage = new MapPage("mainpage");
 		this.lineChartPage = new LineChartPage("mainpage");
 		this.crimeCorrelationPage = new CrimeCorrelationPage("mainpage");
 		this.universePage = new UniversePage("mainpage");	
 		this.infoPage = new InfoPage("infopage");
-		this.infoText = "";
+		this.longInfoText = "";	
+		this.shortInfoText = new InfoText("pageDescription", "pageDescription", "das");	
+	}
+
+	init(){
+		this.shortInfoText.appendThisCharToPage();
 	}
 
 	switchState(state){
 		this.currentState = state;
 		switch(state){
+		case configNamespace.STATE_MACHINE.START:
+			this.longInfoText = infoTextsNamespace.longPageDescription.startPage;
+			this.drawStartPage();
+			break;
 		case configNamespace.STATE_MACHINE.MAP: 
 			this.drawMapPage();
-			this.infoText = infoTextsNamespace.pageDescription.mapPage;
-			this.drawShortInfoText = "Hier kommt die krz Map Info";
+			this.longInfoText = infoTextsNamespace.longPageDescription.mapPage;
+			this.drawShortInfoText(infoTextsNamespace.shortPageDescription.mapInfo);
 			break;
 		case configNamespace.STATE_MACHINE.LINE_CHART:
 			this.drawLineChartPage();
-			this.infoText = infoTextsNamespace.pageDescription.lineChartPage;
-			this.drawShortInfoText = "Hier kommt die krz lineChartPage Info";
+			this.longInfoText = infoTextsNamespace.longPageDescription.lineChartPage;
+			this.drawShortInfoText(infoTextsNamespace.shortPageDescription.lineChartInfo);
 			break;
 		case configNamespace.STATE_MACHINE.CRIME_CORRELATION:
 			this.drawCrimeCorrelationPage();
-			this.infoText = infoTextsNamespace.pageDescription.correlationPage;
-			this.drawShortInfoText = "Hier kommt die krz Korrelation Info";
+			this.longInfoText = infoTextsNamespace.longPageDescription.correlationPage;
+			this.drawShortInfoText(infoTextsNamespace.shortPageDescription.correlationInfo);
 			break;
 		case configNamespace.STATE_MACHINE.UNIVERSE:this.drawUniversePage();
-			this.infoText = infoTextsNamespace.pageDescription.universePage;
-			this.drawShortInfoText = infoTextsNamespace.pageDescription.universePage;
+			this.longInfoText = infoTextsNamespace.longPageDescription.universePage;
+			this.drawShortInfoText(infoTextsNamespace.shortPageDescription.universeInfo);
 			break;
 		default:
 			break;
 		}
 	}
 
+	drawStartPage(){
+		this.cleanOldPage();
+		this.activePage = this.startPage;
+		this.initAndDrawActivePage();
+	}
+
 	drawMapPage(){	
+		console.log("drawMapPage");
 		this.cleanOldPage();
 		this.activePage = this.mapPage;	
 		this.initAndDrawActivePage();
@@ -60,35 +77,31 @@ class StateMachine{
 
 	drawUniversePage(){
 		this.cleanOldPage();
-		this.activePage = this.universePage;
-		
+		this.activePage = this.universePage;		
 		this.initAndDrawActivePage();
 	}
 
 	initAndDrawActivePage(){
 		if(this.activePage !== undefined){
 			this.activePage.init();
-			this.activePage.drawPage();	
-		}
+			this.activePage.drawPage();		}
 	}
 
 	drawInfoPage(){	
-		this.infoPage.setInfoText(this.infoText);
+		this.infoPage.setInfoText(this.longInfoText);
 		this.infoPage.init();
 		this.infoPage.drawPage();
 	}
 
-	drawInfoBox(){
-		
-	}
-
-	drawShortInfoText(){
-
+	drawShortInfoText(text){
+		this.shortInfoText.setInfoText(text);	
+		this.shortInfoText.updatesHimself();
 	}
 
 	cleanOldPage(){
 		if(this.activePage !== undefined){
-			this.activePage.deletePage();	
+			this.activePage.deletePage();
+			this.infoPage.deletePage();	
 		}		
 	}
 }
