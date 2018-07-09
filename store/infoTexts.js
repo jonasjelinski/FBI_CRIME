@@ -1,14 +1,14 @@
 var infoTextsNamespace = infoTextsNamespace || {};
 
 
-infoTextsNamespace.shortPageTexts = {
+infoTextsNamespace.shortPageDescription = {
   mapInfo : "<p>Auf dieser Seite können Sie sich einen Überblick über die verschiedenen ausgeübten Verbrechen in den einzelnen Staaten der USA verschaffen</p>",
   lineChartInfo: "<p>Auf dieser Seite können Sie über den kompletten erfassten Zeitraum die verübten Verbrechen miteinander vergleichen.</p>",
   collapsibleInfo: "<p>Alle erfassten Kategorien werden auf dieser Seite miteinander verknüft und die bestehende Korrelation dargestellt.</p>",
   universeInfo: "<p>Darstellung der zwei Überkategorien als Sonnen und aller Staaten als Planeten</p>",
 }
 
-infoTextsNamespace.pageDescription = {
+infoTextsNamespace.longPageDescription = {
   startPage: "<p>Diese Webseite soll einen Überblick über die verübten Verbrechen in den USA geben. Die zugrundeliegenden Daten wurden vom FBI (Federal Bureau of Investigation) zur Verfügung gestellt und sind öffentlich abrufbar.</p><p>Die Statistiken beziehen sich auf die Jahre 2000 bis 2016. Alle Daten wurden in verschiednen Grafiken aufbereitet und bieten dem Nutzer die Möglichkeit, sich verschiedene Details anzusehen und sich auf diese zu fokussieren.</p><p>Auf den verschiedenen Einzelseiten gibt es einen Info-Button, der eine genaue Erklärung der dargestellten Grafik anzeigt.</p>",
   mapPage: "<p>Sie können die einzelnen Verbrechen im DropDown-Menü auswählen. Die gesamte Karte bezieht sich jeweils nur auf das ausgewählte Verbrechen.</p><p>Die Farbe im jeweiligen Staat gibt einen ersten Eindruck über die Rate des angezeigten Verbrechens: je heller der Farbton wird, umso geringer war die Verbrechensrate; je dunkler und röter der Farbton ist, umso höher war die Verbrechensrate.</p><p>In der Zeitleiste oben können Sie gezielt ein Jahr auswählen oder mit dem Play-Button alle Jahre nacheinander anzeigen.</p><p>Wenn Sie mit der Maus über die einzelnen Staaten gehen, wird Ihnen der Name des Staates angezeigt sowie die Anzahl der Opfer pro 100.000 Einwohner.</p><p>Für Detailinformationen über den jeweiligen Staat können Sie auf diesen klicken.</p>",
   popupPage: "<p>Sie sehen für den Staat Detail-Informationen.</p><p>Im linken Bildschirmbereich können Sie durch Mausklicks die einzelnen Unterkategorieren öffnen und schließen und so jedes einzelne Verbrechen genau ansehen. Ist eine Kategorie komplett geöffnet, wird ......</p><p>Im rechten Bildschirmbereich können Sie sich erneut einen Überblick über die im ausgewählten Staat erfassten Verbrechen machen. Diese sind vom FBI in die zwei Kategorien Gewalt- und Vermögensdelikte aufgeteilt und mit weiteren Kategorien versehen.</p>",
