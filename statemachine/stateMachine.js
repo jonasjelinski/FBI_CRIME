@@ -88,6 +88,7 @@ class StateMachine{
 	}
 
 	drawInfoPage(){	
+		this.infoPage.deletePage();
 		this.infoPage.setInfoText(this.longInfoText);
 		this.infoPage.init();
 		this.infoPage.drawPage();
