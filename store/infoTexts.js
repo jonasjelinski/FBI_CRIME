@@ -24,7 +24,6 @@ infoTextsNamespace.startPageTexts = {
   universe: "<p> <img src='./pictures/UniverseChart.png' alt='UniverseChart'> Sie wollen eine Übersicht über das Verhältnis von Gewalt- zu Eigentumsdelikten? Klicken Sie auf Universe!<p></p>",
 }
 
-infoTextsNamespace.startPage = {
- 
+infoTextsNamespace.startPage = { 
   startPage: infoTextsNamespace.startPageTexts.map + infoTextsNamespace.startPageTexts.lineChart+infoTextsNamespace.startPageTexts.correlation+ infoTextsNamespace.startPageTexts.universe,
 }
