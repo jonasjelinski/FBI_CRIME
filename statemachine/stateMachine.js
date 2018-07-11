@@ -22,8 +22,9 @@ class StateMachine{
 		this.currentState = state;
 		switch(state){
 		case configNamespace.STATE_MACHINE.START:
-			this.longInfoText = infoTextsNamespace.longPageDescription.startPage;
 			this.drawStartPage();
+			this.longInfoText = infoTextsNamespace.longPageDescription.startPage;
+			this.drawShortInfoText(this.longInfoText);			
 			break;
 		case configNamespace.STATE_MACHINE.MAP: 
 			this.drawMapPage();

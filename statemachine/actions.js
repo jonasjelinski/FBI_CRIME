@@ -53,9 +53,9 @@ actionNamespace.showInfoText = function(text){
 	"use strict";
 	componentsNamespace.shortInfoText.setInfoText(text);	
 	componentsNamespace.shortInfoText.updatesHimself();
-	componentsNamespace.shortInfoText.switchVisibility();
+	componentsNamespace.shortInfoText.showInfoText();
 };
 
 actionNamespace.hideInfoText = function(){
-	componentsNamespace.shortInfoText.switchVisibility();
+	componentsNamespace.shortInfoText.hideInfoText();
 };
