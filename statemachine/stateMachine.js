@@ -1,5 +1,8 @@
 //the StateMachine handles the pages of the website
 //each state shows a different page, e.g. MapPage
+//if the mapPage receives a this.mapPage.onMapClicked event
+//a PopUpPage is created
+//until the PopUpPage is closed no other Page can be selected through switchState(state)
 
 class StateMachine{
 	constructor(){
