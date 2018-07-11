@@ -252,5 +252,21 @@ htmlelementsNamespace.infoPage = {
 htmlelementsNamespace.startPage = {
 	htmlclassname: "startPage",
 	htmlid: "startPage",
-	textid: "startPage text",
+	textid: "startPageText",
+	infoTextId: "StartPage",
+};
+
+htmlelementsNamespace.impressumPage = {
+	htmlclassname: "impressumPage",
+	htmlid: "impressumPage",
+	textid: "impressumText",
+	infoTextId: "ImpressumPage",
+};
+
+
+htmlelementsNamespace.dataRegulationPage = {
+	htmlclassname: "dataRegulationPage",
+	htmlid: "dataRegulationPage",
+	textid: "dataRegulationText",
+	infoTextId: "dataRegulationPage",
 };

@@ -4,7 +4,7 @@
 class StateMachine{
 	constructor(){
 		this.activePage = undefined;
-		this.startPage = new StartPage("mainpage");
+		this.startPage = new StartPage("mainpage", infoTextsNamespace.longPageDescription.startPage);
 		this.mapPage = new MapPage("mainpage");
 		this.lineChartPage = new LineChartPage("mainpage");
 		this.crimeCorrelationPage = new CrimeCorrelationPage("mainpage");
@@ -23,8 +23,7 @@ class StateMachine{
 		switch(state){
 		case configNamespace.STATE_MACHINE.START:
 			this.drawStartPage();
-			this.longInfoText = infoTextsNamespace.longPageDescription.startPage;
-			this.drawShortInfoText(this.longInfoText);			
+			this.longInfoText = infoTextsNamespace.longPageDescription.startPage;			
 			break;
 		case configNamespace.STATE_MACHINE.MAP: 
 			this.drawMapPage();
