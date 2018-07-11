@@ -1,5 +1,4 @@
-//loads the js files in the correct order
-//source: https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement#defer_property 
+//contains all pathes of the script-files
 
 var scripts_namespace = scripts_namespace || {};
 
