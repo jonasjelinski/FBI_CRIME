@@ -95,6 +95,11 @@ class PopUpPage extends ParentPage{
 		this.treeChart.setYear(year);
 		this.mainChart.updatesHimself();
 		this.treeChart.updatesHimself();
+		this.resetBubbleMenu();
 
+	}
+
+	resetBubbleMenu(){
+		this.bubbleMenu.updatesHimself();
 	}
 }
