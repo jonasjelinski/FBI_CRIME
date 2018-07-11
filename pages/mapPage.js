@@ -6,6 +6,8 @@
 //trough the DropDownMenu the user can switch between different crimeTypes
 //if the PlayButton is clicked the TimeLine is running forward in time
 //it can be stopped again through the PlayButton
+//if the MapChart dispatches an clickEvent this page copies the event
+//and dispatches it again, so other other Pages can react to this event
 
 class MapPage extends ParentPage{
 	constructor(pageId){
