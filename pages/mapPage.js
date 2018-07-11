@@ -14,6 +14,8 @@ class MapPage extends ParentPage{
 		this.dropDownIdMap = "Map";
 		this.timeLineId = "Map";
 		this.playButtonId = "Map";
+		this.eventTarget =new EventTarget();
+		this.onMapClicked = "onClick";
 	}
 
 	init(){
@@ -43,7 +45,7 @@ class MapPage extends ParentPage{
 		this.timeLine.eventTarget.addEventListener(this.timeLine.onUpdate, this.updateMapYearAndMoving.bind(this));
 		this.dropDownMenu.eventTarget.addEventListener(this.dropDownMenu.selectionEvent, this.updateCrimeType.bind(this), false);
 		this.playButton.eventTarget.addEventListener(this.playButton.onClick, this.playTimeLine.bind(this), false);
-		this.mainChart.eventTarget.addEventListener(this.playButton.onClick, this.showPopup.bind(this), false);
+		this.mainChart.eventTarget.addEventListener(this.playButton.onClick, this.sendMapClickEvent.bind(this), false);
 	}
 
 	updateMapYearAndMoving(event){
@@ -68,22 +70,17 @@ class MapPage extends ParentPage{
 		}
 		else{
 			this.mainChart.mapClickable();
-
 			this.timeLine.pauseTimeLine();
 		}
 
 	}
 
-	showPopup(event){
-		let state = event.detail.state,
-			year = event.detail.year,
-			popUpPage = new PopUpPage("popup", state, year);
-		popUpPage.eventTarget.addEventListener("closeButton" ,this.onPopUpClosed.bind(this), false);
-		popUpPage.init();
-		popUpPage.drawPage();
+	sendMapClickEvent(ev){
+		let event = new CustomEvent(this.onMapClicked, {detail:{state: ev.detail.state, year: ev.detail.year}});
+		this.eventTarget.dispatchEvent(event);
 	}
 
-	onPopUpClosed(){
+	setMapClickable(){
 		this.mainChart.mapClickable();
 	}
 }
