@@ -1,3 +1,7 @@
+//This class
+//appends and html-text to the container
+//the text is set in the constructor
+//the visibility of the text can be changed
 class InfoText extends MagicCircle{
 	constructor(pageId, chartId, text){
 		super(pageId);

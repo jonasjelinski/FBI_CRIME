@@ -1,3 +1,4 @@
+//This class
 //creates a line chart
 //the linechart shows the crimerates over the time
 //for a special state, for each crime

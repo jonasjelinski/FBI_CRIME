@@ -1,4 +1,4 @@
-//This class creates a SuburstChart with d3
+//This class creates a SuburstChart
 //it shows the distribution between different crimecategories in a single state
 
 class Sunburst extends MagicCircle{

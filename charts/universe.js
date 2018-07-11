@@ -1,7 +1,7 @@
-//This class creates a UniverseChart with d3
+//This class creates a UniverseChart
 //it shows in which states the relation between violentCrimes and propertycrimes  
 //quotient = violentCrimes/propertycrimes 
-//is bigger or smaller then 0.5
+//is bigger or smaller then this.groupSplitter
 
 class Universe extends MagicCircle{
 	constructor(pageId){

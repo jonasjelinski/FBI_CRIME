@@ -65,6 +65,10 @@ class MapPage extends ParentPage{
 		this.mainChart.updatesHimself();
 	}
 
+	//controlls the timeLine
+	//if the timeLine allready moves it'll be paused
+	//else it starts playing 
+	//while the timeLine is playing the map can't be clicked
 	playTimeLine(){
 		if(this.timeLine.isTimeLineMoving() === false){
 			this.mainChart.mapNotClickable();
@@ -82,6 +86,8 @@ class MapPage extends ParentPage{
 		this.eventTarget.dispatchEvent(event);
 	}
 
+	//is used as a setter
+	//so other moduls then this class can set the map clickable
 	setMapClickable(){
 		this.mainChart.mapClickable();
 	}

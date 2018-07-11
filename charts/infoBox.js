@@ -1,3 +1,4 @@
+//This class
 //creates an InfoxBox
 //the InfoBox shows the parameter infoText as a "text"
 

@@ -1,3 +1,4 @@
+//This class
 //creates a BubbleMenu
 //each bubble shows a different category
 //onClick on a a bubble its color changes to this.unselected color

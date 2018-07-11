@@ -1,3 +1,8 @@
+// infoTextsNamespace contains all html-texts
+//which contain informations about the pages
+//they are used in the pages and the statemachines
+//to describe the pages
+
 var infoTextsNamespace = infoTextsNamespace || {};
 
 
