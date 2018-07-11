@@ -40,6 +40,7 @@ class StateMachine{
 
 	onPopUpClosed(){
 		this.mapPage.setMapClickable();
+		this.longInfoText = infoTextsNamespace.longPageDescription.mapPage;
 		this.isStateMachineOn = true;
 	}
 
