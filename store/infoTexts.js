@@ -1,3 +1,8 @@
+// infoTextsNamespace contains all html-texts
+//which contain informations about the pages
+//they are used in the pages and the statemachines
+//to describe the pages
+
 var infoTextsNamespace = infoTextsNamespace || {};
 
 
@@ -17,7 +22,18 @@ infoTextsNamespace.longPageDescription = {
   universePage: "<p>Die zwei Sonnen (Gewalt- und Vermögensdelikte) üben auf die Planeten Anziehungskräfte aus. Je näher ein Planet an einer Sonne angezeigt wird, umso mehr Verbrechen dieser Kategorie wurden ausgeübt.</p><p>Jeder Staat in den USA wird einmalig angezeigt. Je nach den verübten Verbrechen in diesem Staat, ordnet er sich einer Sonne unter. Um die Namen der Staaten deutlicher lesen zu können, kann der Planet mit der Maus berührt werden.</p><p>In der Zeitleiste im oberen Bildschirmbereich kann ein Jahr ausgewählt werden, das angezeigt werden soll.</p><p>Der Play-Button lässt das Sonnensystem rotieren.</p>",
 }
 
+
 infoTextsNamespace.legal = {
   datenschutzText:"da kommt der Datenschutz hin",
   impressumText: "da kommt das Impressum hin",
+
+infoTextsNamespace.startPageTexts = {
+  map :"<p> <img src='./pictures/MapChart.png' alt='MapChart'> Sie wollen eine geographische Übersicht über die Verteilung der Vebrechen in den USA?  Klicken Sie auf Map !<p>",
+  lineChart : " <p> <img src='./pictures/LineChart.png' alt='LineChart'> Sie wollen die Entwicklung Vebrechen im Zeitverlauf verfolgen?  Klicken Sie auf TimeLine !<p>",
+  correlation:" <p> <img src='./pictures/CorrelationChart.png' alt='CorrelationChart'> Sie wollen wissen wie verschiedene Vebrechen miteinander korrelieren?  Klicken Sie auf Correlation !<p>",
+  universe: "<p> <img src='./pictures/UniverseChart.png' alt='UniverseChart'> Sie wollen eine Übersicht über das Verhältnis von Gewalt- zu Eigentumsdelikten? Klicken Sie auf Universe!<p></p>",
+}
+
+infoTextsNamespace.startPage = {
+
 }

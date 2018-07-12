@@ -1,4 +1,4 @@
-//This class creates a TimeLine with d3
+//This class creates a TimeLine
 //An interactive scale bar to chosse the years for the modules "map" and "planets"
 
 class TimeLine extends MagicCircle{

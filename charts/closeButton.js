@@ -1,3 +1,4 @@
+//This class
 //creates a simple button
 //which contains of a filled circle
 //and a simple cross

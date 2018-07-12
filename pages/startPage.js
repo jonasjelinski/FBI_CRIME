@@ -1,11 +1,10 @@
-class StartPage extends ParentPage{
-	constructor(pageId = "mainpage"){
-		super(pageId);
-		this.htmlelement = htmlelementsNamespace.startPage;
-		this.htmlElementID = this.htmlelement.htmlid;
-	}
+//The StartPage
+//extends the TextPage
+//to show the text of the StartPage
+//which is set in the constructor
 
-	init(){
-		
+class StartPage extends TextPage{
+	constructor(pageId = "mainpage", startText = ""){
+		super(pageId, htmlelementsNamespace.startPage, htmlelementsNamespace.startPage.infoTextId, startText);
 	}
 }

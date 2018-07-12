@@ -1,4 +1,5 @@
 //loads the js files in the correct order
+//and starts the startpage
 //source: https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement#defer_property 
 
 var scriptLoader = scriptLoader || {};
@@ -51,6 +52,12 @@ scriptLoader = (function(){
 		});
 	}
 
+	//waits waitingTime and then
+	//sets the dataObjects and starts the startpage
+	//this ensures that the dataObjects are set and the startpage is loaded
+	//after all scripts have been loaded
+	//otherwise the namespaces won't be recognised
+	//and the app is'nt loaded correctly
 	function loadObjectsAfterWaitingForScripts(){
 		let waitingTime = 250;
 		setTimeout(function () {

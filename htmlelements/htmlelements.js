@@ -1,12 +1,12 @@
 //htmlelementsNamespace contains all details of the charts and pages
 //each object (e.g. htmlelementsNamespace.magicCircle)
-//is used in a class of classes or pages
+//is used in a class of charts or pages
 
 var htmlelementsNamespace = htmlelementsNamespace || {};
 
-htmlelementsNamespace.magicCircle = { //Elternelement aller anderen HTML-Elemente
-	htmlclassname: "magicCircle", //im html-Element class="magicCircle"
-	htmlid: "magicCircle", //im html-Element id="magicCircle"
+htmlelementsNamespace.magicCircle = {
+	htmlclassname: "magicCircle", 
+	htmlid: "magicCircle",
 	width:1000,
 	height:1000,
 	type: "svg",
@@ -252,5 +252,21 @@ htmlelementsNamespace.infoPage = {
 htmlelementsNamespace.startPage = {
 	htmlclassname: "startPage",
 	htmlid: "startPage",
-	textid: "startPage text",
+	textid: "startPageText",
+	infoTextId: "StartPage",
+};
+
+htmlelementsNamespace.impressumPage = {
+	htmlclassname: "impressumPage",
+	htmlid: "impressumPage",
+	textid: "impressumText",
+	infoTextId: "ImpressumPage",
+};
+
+
+htmlelementsNamespace.dataRegulationPage = {
+	htmlclassname: "dataRegulationPage",
+	htmlid: "dataRegulationPage",
+	textid: "dataRegulationText",
+	infoTextId: "dataRegulationPage",
 };
