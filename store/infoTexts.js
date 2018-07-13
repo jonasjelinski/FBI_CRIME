@@ -26,6 +26,7 @@ infoTextsNamespace.longPageDescription = {
 infoTextsNamespace.legal = {
   datenschutzText:"da kommt der Datenschutz hin",
   impressumText: "da kommt das Impressum hin",
+}
 
 infoTextsNamespace.startPageTexts = {
   map :"<p> <img src='./pictures/MapChart.png' alt='MapChart'> Sie wollen eine geographische Übersicht über die Verteilung der Vebrechen in den USA?  Klicken Sie auf Map !<p>",
@@ -35,5 +36,5 @@ infoTextsNamespace.startPageTexts = {
 }
 
 infoTextsNamespace.startPage = {
-
+  startPage: infoTextsNamespace.startPageTexts.map + infoTextsNamespace.startPageTexts.lineChart+infoTextsNamespace.startPageTexts.correlation+ infoTextsNamespace.startPageTexts.universe,
 }
