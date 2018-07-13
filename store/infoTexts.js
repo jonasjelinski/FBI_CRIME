@@ -24,7 +24,7 @@ infoTextsNamespace.longPageDescription = {
 
 
 infoTextsNamespace.legal = {
-  datenschutzText:"da kommt der Datenschutz hin",
+  dataRegulationText:"da kommt der Datenschutz hin",
   impressumText: "da kommt das Impressum hin",
 }
 

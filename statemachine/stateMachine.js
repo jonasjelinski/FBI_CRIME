@@ -12,11 +12,11 @@ class StateMachine{
 		this.mapPage = new MapPage("mainpage");
 		this.lineChartPage = new LineChartPage("mainpage");
 		this.crimeCorrelationPage = new CrimeCorrelationPage("mainpage");
-		this.universePage = new UniversePage("mainpage");	
-		this.infoPage = new InfoPage("infopage");		
-		this.impressumPage = new ImpressumPage("mainpage");
-		this.dataRegulationPage= new DataRegulationPage("mainpage");
-		this.longInfoText = "";	
+		this.universePage = new UniversePage("mainpage");
+		this.infoPage = new InfoPage("infopage");
+		this.impressumPage = new ImpressumPage("mainpage", infoTextsNamespace.legal.impressumText);
+		this.dataRegulationPage= new DataRegulationPage("mainpage", infoTextsNamespace.legal.dataRegulationText);
+		this.longInfoText = "";
 		this.shortInfoText = new InfoText("pageDescription", "pageDescription", "");
 		this.isStateMachineOn = true;
 	}
@@ -53,9 +53,9 @@ class StateMachine{
 			switch(state){
 			case configNamespace.STATE_MACHINE.START:
 				this.drawStartPage();
-				this.longInfoText = infoTextsNamespace.longPageDescription.startPage;			
+				this.longInfoText = infoTextsNamespace.longPageDescription.startPage;
 				break;
-			case configNamespace.STATE_MACHINE.MAP: 
+			case configNamespace.STATE_MACHINE.MAP:
 				this.drawMapPage();
 				this.longInfoText = infoTextsNamespace.longPageDescription.mapPage;
 				this.drawShortInfoText(infoTextsNamespace.shortPageDescription.mapInfo);
@@ -75,7 +75,7 @@ class StateMachine{
 				this.longInfoText = infoTextsNamespace.longPageDescription.universePage;
 				this.drawShortInfoText(infoTextsNamespace.shortPageDescription.universeInfo);
 				break;
-			case configNamespace.STATE_MACHINE.IMPRESSUM: 
+			case configNamespace.STATE_MACHINE.IMPRESSUM:
 				this.drawImpressumPage();
 				this.longInfoText = "";
 				this.drawShortInfoText("");
@@ -100,16 +100,16 @@ class StateMachine{
 		this.initAndDrawActivePage();
 	}
 
-	drawMapPage(){	
+	drawMapPage(){
 		this.drawPage(this.mapPage);
 	}
 
 	drawLineChartPage(){
-		this.drawPage(this.lineChartPage);	
+		this.drawPage(this.lineChartPage);
 	}
 
 	drawCrimeCorrelationPage(){
-		this.drawPage(this.crimeCorrelationPage);	
+		this.drawPage(this.crimeCorrelationPage);
 	}
 
 	drawUniversePage(){
@@ -130,22 +130,22 @@ class StateMachine{
 			this.activePage.drawPage();		}
 	}
 
-	drawInfoPage(){	
+	drawInfoPage(){
 		this.infoPage.deletePage();
 		this.infoPage.setInfoText(this.longInfoText);
 		this.infoPage.init();
 		this.infoPage.drawPage();
-	}	
+	}
 
 	drawShortInfoText(text){
-		this.shortInfoText.setInfoText(text);	
+		this.shortInfoText.setInfoText(text);
 		this.shortInfoText.updatesHimself();
 	}
 
 	cleanOldPage(){
 		if(this.activePage !== undefined){
 			this.activePage.deletePage();
-			this.infoPage.deletePage();	
-		}		
+			this.infoPage.deletePage();
+		}
 	}
 }
