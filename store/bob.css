@@ -18,17 +18,20 @@
   --Rape: rgb(255, 188, 0);
   --Robbery: rgb(255, 154, 0);
 }
-
-
 body {
     background-color: var(--background);
     font-family: 'Quattrocento Sans', sans-serif;
 }
 
+
 #FBIlogo{
   position: absolute;
   height: 150px;
   width: 150px;
+}
+
+#FBIlogo:hover{
+  cursor:pointer;
 }
 
 .legal{
@@ -40,6 +43,11 @@ body {
   border: none;
   z-index: 1;
 }
+
+.legal:hover{
+  cursor:pointer;
+}
+
 #impressum{
   right: 15%;
 }
@@ -63,13 +71,12 @@ h1{
   right: 0.56%;
   top: 1px;
 
-
 }
 
 #pageDescription{
-  padding-top: 150px;
+  padding-top: 50px;
   padding-left: 100px;
-  text-align: block;
+  text-align: center;
 }
 
 #infotextshortText{
@@ -78,6 +85,7 @@ h1{
   height: 50%;
   top: 229px;
   left: 0.56%;
+  padding-top: 10px;
   background-color: var(--buttons);
   -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
   color: var(--buttonFonts);
@@ -114,7 +122,7 @@ h1{
 
 #map{
   position: absolute;
-  top: 15%;
+  top: 10%;
   margin-left: auto;
   margin-right: auto;
   left: 0;
@@ -126,7 +134,8 @@ h1{
 
 .stateInfo{
   position: absolute;
-  margin-left: 3%;
+  margin-top: 11.5%;
+  margin-left: 4%;
   font-family: 'Quattrocento Sans', sans-serif;
   font-size: 20px;
   font-weight: 100;
@@ -134,28 +143,40 @@ h1{
 
 .crimeInfo{
   position: absolute;
-  margin-left: 4%;
-  margin-top: 3%;
+  margin-left: 5%;
+  margin-top: 13%;
   font-size: 15px;
   font-weight: 100;
 }
 
-#Burglary9{
-  background-color: blue;
-
+.menu{
+  -moz-appearance: none;
+-webkit-appearance: none;
+appearance: none;
 border: none;
+width: 100%;
+height: 40px;
+padding-left: 10px;
+background: var(--buttons) repeat;
+color: var(--buttonFonts);
+font-size: 16px;
+box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.3);
+border-radius: 3px;
+cursor:pointer;
+}
+.menu option{
+  color: var(--buttons);
 }
 
 #dropDownMap{
   position: absolute;
   width: 300px;
-  margin-top: 1%;
-  margin-left: 1%;
-
+  margin-top: 0%;
+  margin-left: 3%;
 
 }
 
-#timeLine{
+#timeLineMap{
   position: absolute;
   margin-top: 1%;
   margin-left: 40%;
@@ -163,7 +184,7 @@ border: none;
   width: 30%;
 }
 
-#playButton{
+#playButtonMap{
   position: absolute;
   margin-top: 2%;
   margin-left: 35%;
