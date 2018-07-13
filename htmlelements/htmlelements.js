@@ -5,7 +5,7 @@
 var htmlelementsNamespace = htmlelementsNamespace || {};
 
 htmlelementsNamespace.magicCircle = {
-	htmlclassname: "magicCircle", 
+	htmlclassname: "magicCircle",
 	htmlid: "magicCircle",
 	width:1000,
 	height:1000,
@@ -45,13 +45,13 @@ htmlelementsNamespace.lineDiagramm = {
 	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "linediagram",
 	htmlid: "linediagram",
-	width:650,
-	height:600,
+	width:900,
+	height:750,
 	type: "svg",
-	xAxisLabelX : 0,
-	xAxisLabelY : 0,
-	yAxisLabelX : 0,
-	yAxisLabelY : 0,
+	xAxisLabelX : -20,
+	xAxisLabelY : 35,
+	yAxisLabelX : 10,
+	yAxisLabelY : -45,
 };
 
 htmlelementsNamespace.theUniverse = {
@@ -71,11 +71,11 @@ htmlelementsNamespace.bubbleMenu = {
 	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "bubblemenu",
 	htmlid: "bubblemenu",
-	width:100,
-	height:100,
+	width:180,
+	height:200,
 	type: "svg",
 	unselectedColor: "rgb(128, 128, 128)",
-	fontSize : "10px",
+	fontSize : "11px",
 };
 
 htmlelementsNamespace.colorLegend = {

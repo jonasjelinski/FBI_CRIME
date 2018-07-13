@@ -173,7 +173,6 @@ cursor:pointer;
   width: 300px;
   margin-top: 0%;
   margin-left: 3%;
-
 }
 
 #timeLineMap{
@@ -248,8 +247,17 @@ cursor:pointer;
   z-index: 0;
 }
 
-#bubblemenu{
-  background-color: pink;
+#dropDownLineChart{
+  position: absolute;
+  width: 300px;
+  margin-top: 0%;
+  margin-left: 3%;
+}
+
+#bubblemenuLineChart{
+  position: absolute;
+  size: 110%;
+  top: 10%;
 }
 
 #crimecorrelation{
