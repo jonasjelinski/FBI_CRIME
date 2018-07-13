@@ -1,5 +1,6 @@
 
 :root{
+  --noColor: rgb(0,0,0,0);
   --background: #CACACB;
   --highlight: #9B9C9C;
   --fonts: #3F3F42;
@@ -24,7 +25,7 @@ body {
     font-family: 'Quattrocento Sans', sans-serif;
 }
 
-.logo{
+#FBIlogo{
   position: absolute;
   height: 150px;
   width: 150px;
@@ -32,15 +33,17 @@ body {
 
 .legal{
   position: absolute;
-  top: 1px;
+  top: 10px;
   color: var(--buttonFonts);
   font-size: 12px;
+  background-color: var(--noColor);
+  border: none;
   z-index: 1;
 }
 #impressum{
   right: 15%;
 }
-#datenschutz{
+#dataregulation{
   right: 5%;
 }
 
@@ -80,6 +83,7 @@ h1{
   color: var(--buttonFonts);
   text-align: center;
   z-index: 4;
+  opacity: 0;
   pointer-events: none;
 }
 
@@ -107,12 +111,6 @@ h1{
   width: 100%;
   height: 100%;
 }
-/*
-#dropDown{
-  position: absolute;
-  margin-top: 1%;
-  margin-left: 1%;
-}*/
 
 #map{
   position: absolute;
@@ -142,11 +140,19 @@ h1{
   font-weight: 100;
 }
 
-#dropDown{
+#Burglary9{
+  background-color: blue;
+
+border: none;
+}
+
+#dropDownMap{
   position: absolute;
   width: 300px;
-  margin-top: 10%;
+  margin-top: 1%;
   margin-left: 1%;
+
+
 }
 
 #timeLine{
@@ -211,7 +217,10 @@ h1{
   width: 45%;
   height: 85%;
 }
-
+#bubblemenuPopUp{
+  position: absolute;
+  right: 5%;
+}
 #linediagram{
   position: absolute;
   left: 20%;
@@ -401,8 +410,9 @@ d3-tip:hover {
   position: absolute;
   margin-top: auto;
   height: auto;
-  width: 50%;
-  background-color: green;
+  width: 30%;
+  background-color: var(--buttons);
+  color: var(--buttonFonts);
   z-index: 5;
 }
 

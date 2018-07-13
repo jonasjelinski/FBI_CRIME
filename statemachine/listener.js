@@ -24,6 +24,10 @@ listenerNamespace.drawMapListener = listenerNamespace.createListener("mapButton"
 listenerNamespace.drawInfoButtonListener = listenerNamespace.createListener("infoButton", "click", actionNamespace.actionDrawInfoPage);
 listenerNamespace.drawInfoButtonListener = listenerNamespace.createListener("startButton", "click", actionNamespace.actionDrawStartPage);
 
+listenerNamespace.drawStartPage = listenerNamespace.createListener("impressum", "click",  actionNamespace.actionDrawImpressumPage);
+listenerNamespace.drawStartPage = listenerNamespace.createListener("dataregulation", "click", actionNamespace.actionDrawDataPage);
+listenerNamespace.drawStartPage = listenerNamespace.createListener("FBIlogo", "click", actionNamespace.actionDrawStartPage);
+
 //this listeners show or hide the infoTexts on hover
 //this listeners starts the action drawing
 
@@ -38,5 +42,3 @@ listenerNamespace.drawUniverseListener = listenerNamespace.createListener("plane
 listenerNamespace.drawLineChartListener = listenerNamespace.createListener("timeButton", "mouseout", actionNamespace.hideInfoText);
 listenerNamespace.drawForceListener = listenerNamespace.createListener("forceButton", "mouseout", actionNamespace.hideInfoText);
 listenerNamespace.drawMapListener = listenerNamespace.createListener("mapButton", "mouseout", actionNamespace.hideInfoText);
-
-

@@ -9,19 +9,19 @@ class InfoPage extends ParentPage{
 		this.closeButtonId = "InfoPage";
 		this.htmlelement = htmlelementsNamespace.infoPage;
 		this.htmlElementID = this.htmlelement.htmlid;
-		this.infoText = infoText;		
+		this.infoText = infoText;
 	}
 
 	init(){
 		this.initCharts();
 		this.initControlls();
-		this.addEventListeners();		
+		this.addEventListeners();
 	}
 
 	initCharts(){
 		this.mainChart = new InfoBox(this.pageId, this.infoText);
-		this.mainChart.appendThisCharToPage();		
-		this.charts = [this.mainChart];	
+		this.mainChart.appendThisCharToPage();
+		this.charts = [this.mainChart];
 	}
 
 	initControlls(){
@@ -34,7 +34,7 @@ class InfoPage extends ParentPage{
 		this.closeButton.eventTarget.addEventListener(this.closeButton.onClick, this.closePage.bind(this), false);
 	}
 
-	closePage(){		
+	closePage(){
 		super.deletePage();
 	}
 

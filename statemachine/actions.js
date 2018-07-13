@@ -4,7 +4,7 @@ var actionNamespace = actionNamespace || {};
 
 actionNamespace.actionDrawStartPage = function(){
 	"use strict";
-	componentsNamespace.stateMachine.switchState(configNamespace.STATE_MACHINE.START);	
+	componentsNamespace.stateMachine.switchState(configNamespace.STATE_MACHINE.START);
 };
 
 actionNamespace.actionDrawUniversePage = function(){
@@ -51,11 +51,19 @@ actionNamespace.showInfoTextUniverse = function(){
 
 actionNamespace.showInfoText = function(text){
 	"use strict";
-	componentsNamespace.shortInfoText.setInfoText(text);	
+	componentsNamespace.shortInfoText.setInfoText(text);
 	componentsNamespace.shortInfoText.updatesHimself();
 	componentsNamespace.shortInfoText.showInfoText();
 };
 
 actionNamespace.hideInfoText = function(){
 	componentsNamespace.shortInfoText.hideInfoText();
+};
+
+actionNamespace.actionDrawImpressumPage = function(){
+	componentsNamespace.stateMachine.switchState(configNamespace.STATE_MACHINE.IMPRESSUM);
+};
+
+actionNamespace.actionDrawDataPage = function(){
+		componentsNamespace.stateMachine.switchState(configNamespace.STATE_MACHINE.DATA_REGULATION);
 };
