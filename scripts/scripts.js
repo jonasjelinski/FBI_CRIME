@@ -37,7 +37,7 @@ scripts_namespace.SECOND_SCRIPTS = [
 	"./pages/infoPage.js",
 	"./pages/textPage.js",
 	"./pages/startPage.js",
-	"./pages/ImpressumPage.js",
+	"./pages/impressumPage.js",
 	"./pages/dataRegulationPage.js",
 	"./statemachine/stateMachine.js",
 	"./statemachine/components.js",

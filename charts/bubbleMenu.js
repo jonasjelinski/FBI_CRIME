@@ -31,7 +31,7 @@ class BubbleMenu extends MagicCircle{
 			that = this,
 			diameter = this.width/ this.categories.length,
 			radius = diameter/2,
-			x = this.width/2,
+			x = radius,
 			yStart = radius,
 			max = 10,
 			random =Math.floor((Math.random() * max) + 1),
@@ -98,7 +98,7 @@ class BubbleMenu extends MagicCircle{
 			labels.enter()
 				.append("g")
 				.attr("class", "label")
-				.attr("bubbleValue", function(d){
+				.attr("bubbleValue", function(d){					
 					return d;
 				})
 				.append("text")			
@@ -120,9 +120,9 @@ class BubbleMenu extends MagicCircle{
 		function handleBubbleClick() {
 			let bubble = d3.select(this),
 				value = bubble.attr("bubbleValue"),
-				label = getLabelByBubbleValue(value);
-			changeColor(bubble);
-			changeColor(label);
+				label = getLabelByBubbleValue(value);	
+			changeColor(bubble, value);
+			changeColor(label, value);
 			sendSelectedValue(value);
 		}
 
@@ -130,22 +130,20 @@ class BubbleMenu extends MagicCircle{
 		//so it can be selected and changed in handleBubbleClick
 		function getLabelByBubbleValue(value){
 			let selector = "g[bubbleValue='"+value+"']",
-				label = d3.selectAll(selector).filter(".label").select("text");
+				label = d3.selectAll(selector).filter(".label").select("text");				
 			return label;
 		}
 
 		//chagnes the colro of the given item
 		//item is either a bubble or a label
-		function changeColor(item) {
+		function changeColor(item, value) {
 			let currentColor = item.style("fill");
-			if(currentColor === that.unselectedColor){
-				let value = item.attr("bubbleValue");
-				item.style("fill", function(){
+			if(currentColor === that.unselectedColor){				
+				item.style("fill", function(){					
 					return getColor(value);
 				});					
 			}
-			else{
-				
+			else{				
 				item.style("fill", that.unselectedColor);
 			}
 		}
@@ -156,12 +154,12 @@ class BubbleMenu extends MagicCircle{
 		function getColor(d){
 			let crime = d,
 				color = that.defaultColor;
-			try{
+			try{				
 				color = commonfunctionsNamespace.getCrimeColor(crime);
 			}
 			catch(error){
 				color = getDefaultColor();			
-			}			
+			}
 			return color;
 		}
 
