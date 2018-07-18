@@ -55,7 +55,7 @@ body {
   right: 5%;
 }
 
-h1{
+#pageHeadline{
   margin-left: -10%;
   text-align: center;
   padding-top: 50px;
@@ -132,15 +132,6 @@ h1{
   z-index: 0;
 }
 
-.stateInfo{
-  position: absolute;
-  margin-top: 11.5%;
-  margin-left: 4%;
-  font-family: 'Quattrocento Sans', sans-serif;
-  font-size: 20px;
-  font-weight: 100;
-}
-
 .crimeInfo{
   position: absolute;
   margin-left: 5%;
@@ -171,7 +162,6 @@ cursor:pointer;
 #dropDownMap{
   position: absolute;
   width: 300px;
-
 }
 
 #timeLineMap{
@@ -194,52 +184,55 @@ cursor:pointer;
   left: 5%;
   top: 30%;
   width: 90%;
-  height: 60%;
+  height: 67%;
   z-index:5;
   visibility: hidden;
 }
 
-.closeButton{
+.stateInfo{
   position: absolute;
-  top: 0%;
-  right: 0%;
+  top: 5px;
+  left: 50%;
+  font-family: 'Quattrocento Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 100;
 }
-
-
-#stateInformation{
-  background-color: var(--background);
-  position: absolute;
-  border: 1px solid red;
-  left: 5%;
-  top: 7.5%;
-  width: 45%;
-  height: 15%;
-}
-
 
 #tree{
   position: absolute;
-  background-color: var(--background);
-  border: 1px solid red;
-  left: 5%;
+  left: 0%;
   bottom: 5%;
-  width: 45%;
-  height: 70%;
+  width: 60%;
+  height: 80%;
 }
 
 #sunburst{
   position: absolute;
-  background-color: var(--background);
-  border: 1px solid red;
-  right: 5%;
+  right: 0%;
   top: 10%;
-  width: 45%;
+  width: 40%;
   height: 85%;
 }
+
+#dropDownPopUp{
+  position: absolute;
+  width: 300px;
+  margin-top: 15px;
+  margin-left: 3%;
+}
+
 #bubblemenuPopUp{
   position: absolute;
-  right: 5%;
+  right: 1%;
+  top: 15%;
 }
+
+#closeButtonPopUp{
+  position: absolute;
+  top: 15px;
+  right: 25px;
+}
+
 #linediagram{
   position: absolute;
   left: 20%;

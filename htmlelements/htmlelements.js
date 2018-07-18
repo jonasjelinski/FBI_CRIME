@@ -38,7 +38,7 @@ htmlelementsNamespace.sunBurst = {
 	height:500,
 	type: "svg",
 	fontColor: "black",
-	fontSize:"20px",
+	fontSize:"12px",
 };
 
 htmlelementsNamespace.lineDiagramm = {
@@ -71,11 +71,11 @@ htmlelementsNamespace.bubbleMenu = {
 	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "bubblemenu",
 	htmlid: "bubblemenu",
-	width:180,
+	width:100,
 	height:200,
 	type: "svg",
 	unselectedColor: "rgb(128, 128, 128)",
-	fontSize : "11px",
+	fontSize : "10px",
 };
 
 htmlelementsNamespace.colorLegend = {
