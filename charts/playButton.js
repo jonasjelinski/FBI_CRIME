@@ -21,8 +21,8 @@ class PlayButton extends MagicCircle{
 	//draws the button
 	drawButton(){
 		let button = this.container,
-			pause = "Pause",
-			play = "Play",
+			pause = "pauseButton",
+			play = "playButton",
 			isPlaying = false,
 			buttonLabelClass = "buttonLabel",
 			that = this;
@@ -52,10 +52,10 @@ class PlayButton extends MagicCircle{
 		//the player plays or if it is paused
 		function changeButtonLabel(){
 			if(isPlaying){
-				button.text(pause);				
+				button.attr("class",pause)			
 			}
 			else{
-				button.text(play);
+				button.attr("class", play)
 			}
 		}
 
@@ -68,9 +68,10 @@ class PlayButton extends MagicCircle{
 		//appends a new class to button
 		//which contains the text of the button
 		function setButtonLabel(){
+
 			button
-				.append("class", buttonLabelClass)
-				.text(play);
+				.attr("class", play)
+				.append("class", buttonLabelClass);
 		}
 	}
 }
