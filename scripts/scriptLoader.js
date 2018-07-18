@@ -59,7 +59,7 @@ scriptLoader = (function(){
 	//otherwise the namespaces won't be recognised
 	//and the app is'nt loaded correctly
 	function loadObjectsAfterWaitingForScripts(){
-		let waitingTime = 250;
+		let waitingTime = 1000;
 		setTimeout(function () {
 			loadDataObjects();
 			console.log("scripts loaded");
