@@ -73,14 +73,14 @@ class Map extends MagicCircle{
 		function prepareStatusSite(getAllCrimesNumber,crimeType,year,i){
 			d3.select(".crimeInfo").remove();
 			d3.select(".stateInfo").remove();
-			d3.select("#mainpage").append("h2").attr("class","stateInfo").text(getAllCrimesNumber[i].state);
+			d3.select("#mainpage").append("h2").attr("class","stateInfo").attr("id","stateInfoMapId").text(getAllCrimesNumber[i].state);
 			d3.select("#mainpage").append("h2").attr("class","crimeInfo").text(crimeType+': '+getAllCrimesNumber[i].value+' victims per 100.000 inhabitants');
 		}
 
 		function prepareStatusPopup(stateName){
 			d3.select("#map").style("pointer-events", "none");
 			d3.select(".stateInfo").remove();
-			d3.select("#popup").append("h1").attr("class","stateInfo").text(stateName);
+			d3.select("#popup").append("h1").attr("class","stateInfo").attr("id","stateInfoPopUpId").text(stateName);
 		}
 
 
