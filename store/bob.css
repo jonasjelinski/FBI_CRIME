@@ -184,10 +184,34 @@ cursor:pointer;
   width: 30%;
 }
 
+.playButton{
+  border: 0; 
+  background: transparent;
+  background-image:url('../pictures/play.png');
+  background-repeat:no-repeat;
+  width:32px;
+  height:32px; 
+}
+
+.pauseButton{
+	border: 0; 
+  background: transparent;
+  background-image:url('../pictures/pause.png');
+  background-repeat:no-repeat;
+  width:32px;
+  height:32px; 
+	
+}
+
 #playButtonMap{
   position: absolute;
   margin-top: 2%;
   margin-left: 35%;
+}
+
+#playButtonMap:hover{
+	opacity:0.4;
+	cursor:pointer;
 }
 
 #popup{
@@ -206,7 +230,6 @@ cursor:pointer;
   top: 0%;
   right: 0%;
 }
-
 
 #stateInformation{
   background-color: var(--background);
