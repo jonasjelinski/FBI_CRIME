@@ -382,7 +382,7 @@ class Universe extends MagicCircle{
 		}
 
 		//hoverContainer is nearly invisible so it
-		//still recveis events but cant be seen
+		//still receives events but cant be seen
 		function initHoverContainer(){
 			let opacity = 0.001;
 			hoverContainer = zoomContainer
