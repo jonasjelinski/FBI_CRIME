@@ -21,6 +21,7 @@
 body {
     background-color: var(--background);
     font-family: 'Quattrocento Sans', sans-serif;
+    overflow:hidden;
 }
 
 
@@ -173,22 +174,22 @@ cursor:pointer;
 }
 
 .playButton{
-  border: 0; 
+  border: 0;
   background: transparent;
   background-image:url('../pictures/play.png');
   background-repeat:no-repeat;
   width:32px;
-  height:32px; 
+  height:32px;
 }
 
 .pauseButton{
-	border: 0; 
+	border: 0;
   background: transparent;
   background-image:url('../pictures/pause.png');
   background-repeat:no-repeat;
   width:32px;
-  height:32px; 
-	
+  height:32px;
+
 }
 
 #playButtonMap{

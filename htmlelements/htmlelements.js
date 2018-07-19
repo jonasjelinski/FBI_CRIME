@@ -46,11 +46,11 @@ htmlelementsNamespace.lineDiagramm = {
 	htmlclassname: "linediagram",
 	htmlid: "linediagram",
 	width:900,
-	height:750,
+	height:550,
 	type: "svg",
 	xAxisLabelX : -20,
 	xAxisLabelY : 35,
-	yAxisLabelX : 10,
+	yAxisLabelX : 130,
 	yAxisLabelY : -45,
 };
 
