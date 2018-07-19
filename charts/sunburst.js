@@ -119,9 +119,8 @@ class Sunburst extends MagicCircle{
 			parentNode,
 			arc,
 			hoverArc,
-			labelarc;
+			labelarc;		
 		
-		initZoomContainer();
 		initSunburst();
 		initLabels();
 		initLines();
@@ -135,20 +134,10 @@ class Sunburst extends MagicCircle{
 		drawLabels();
 		drawLines();
 
-		function initZoomContainer(){
-			zoomContainer =  container
-				.append("svg")
-				.attr("class", "zoomContainer")
-				.call(d3.zoom()
-					.on("zoom", function () {						
-						zoomContainer.attr("transform", d3.event.transform);
-					}));
-		}
-
 		//appends a new htmlElement to the rootElement and sets his atrributes
 		//this is the container where the suburst will be drawn in
 		function initSunburst(){
-			sunburst = zoomContainer
+			sunburst = container
 				.append(that.htmlElementType)
 				.attr("width", width)
 				.attr("height", height)
@@ -158,7 +147,7 @@ class Sunburst extends MagicCircle{
 		//appends a new htmlElement to the rootElement and sets his atrributes
 		//this is the container where the labels will be drawn in
 		function initLabels(){
-			labels = zoomContainer            
+			labels = container            
 				.append("g")
 				.attr("width", labelWidth)
 				.attr("height", labelHeight)
@@ -170,7 +159,7 @@ class Sunburst extends MagicCircle{
 		//this is the container where the lines will be drawn in
 		//which connect the sunburst with the labels
 		function initLines(){
-			lines = zoomContainer
+			lines = container
 				.append(that.htmlElementType)
 				.attr("width", width)
 				.attr("height", height)
