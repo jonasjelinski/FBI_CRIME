@@ -10,6 +10,7 @@ class InfoPage extends ParentPage{
 		this.htmlelement = htmlelementsNamespace.infoPage;
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.infoText = infoText;
+		this.isVisible = true;
 	}
 
 	init(){
@@ -31,7 +32,16 @@ class InfoPage extends ParentPage{
 	}
 
 	addEventListeners(){
-		this.closeButton.eventTarget.addEventListener(this.closeButton.onClick, this.closePage.bind(this), false);
+		this.closeButton.eventTarget.addEventListener(this.closeButton.onClick, this.handleCloseClick.bind(this), false);
+	}
+
+	toggleVisibility(){	
+		this.isVisible = !this.isVisible;				
+	}
+
+	handleCloseClick(){
+		this.closePage();
+		this.toggleVisibility();
 	}
 
 	closePage(){

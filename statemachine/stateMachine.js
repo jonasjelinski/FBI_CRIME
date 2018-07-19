@@ -130,11 +130,20 @@ class StateMachine{
 			this.activePage.drawPage();		}
 	}
 
-	drawInfoPage(){
-		this.infoPage.deletePage();
-		this.infoPage.setInfoText(this.longInfoText);
-		this.infoPage.init();
-		this.infoPage.drawPage();
+	//shows the infopage if its classvariable isVisible is true
+	//else hides it
+	//allows to 
+	drawInfoPage(){		
+		if(this.infoPage.isVisible){
+			this.infoPage.deletePage();
+			this.infoPage.setInfoText(this.longInfoText);
+			this.infoPage.init();
+			this.infoPage.drawPage();
+		}
+		else{
+			this.infoPage.deletePage();
+		}
+		this.infoPage.toggleVisibility();
 	}
 
 	drawShortInfoText(text){
