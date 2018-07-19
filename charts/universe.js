@@ -350,21 +350,21 @@ class Universe extends MagicCircle{
 			height = this.height,
 			durationTime = 1000,
 			zoomContainer,
+			minZoom = 0.5,
+			maxZoom = 5,
 			node,
 			label,
 			link,
 			canvas;		
 		this.animateRotation = animateRotation;
 		this.stopRotation = stopRotation,
-
 		
-		initZoomContainer();
+		initZoomContainer();	
 		initNode();
 		initLabel();
 		initLink();		
 		setEnterAndExitBehaviour();
-		drawUniverse();
-		//animateRotation();
+		drawUniverse();		
 
 
 		function initZoomContainer(){
@@ -372,12 +372,13 @@ class Universe extends MagicCircle{
 				.append("svg")
 				.attr("class", "zoomContainer")
 				.call(d3.zoom()
-					.on("zoom", function () {
-						console.log("zooming");
-    			zoomContainer.attr("transform", d3.event.transform);
- 				}))
-		}
-
+					.scaleExtent([minZoom, maxZoom])
+					.translateExtent([[0, 0], [width, height]])
+					.extent([[0, 0], [width, height]])
+					.on("zoom", function () {					
+    					zoomContainer.attr("transform", d3.event.transform);
+ 				}));
+		}	
 		
 		//sets width and height of the container for the nodes which are small circles
 		//and gives it the data
