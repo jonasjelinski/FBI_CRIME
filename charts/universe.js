@@ -350,6 +350,7 @@ class Universe extends MagicCircle{
 			height = this.height,
 			durationTime = 1000,
 			zoomContainer,
+			hoverContainer,
 			minZoom = 0.5,
 			maxZoom = 5,
 			node,
@@ -359,7 +360,8 @@ class Universe extends MagicCircle{
 		this.animateRotation = animateRotation;
 		this.stopRotation = stopRotation,
 		
-		initZoomContainer();	
+		initZoomContainer();
+		initHoverContainer();	
 		initNode();
 		initLabel();
 		initLink();		
@@ -377,6 +379,24 @@ class Universe extends MagicCircle{
 					.on("zoom", function () {					
     					zoomContainer.attr("transform", d3.event.transform);
  				}));
+		}
+
+
+		//hoverContainer is nearly invisible so it
+		//still recveis events but cant be seen
+		function initHoverContainer(){
+			let opacity = 0.001;
+			hoverContainer = zoomContainer
+				.append("rect")
+				.attr("class", "hoverContainer")
+				.attr("width", width)
+				.attr("height", height)
+				.attr("fill", "gray")
+				.attr("x", 0)
+				.attr("y", 0)
+				.attr("opacity", opacity)
+				.on("mouseover", commonfunctionsNamespace.disableScroll)
+				.on("mouseout", commonfunctionsNamespace.enableScroll);
 		}	
 		
 		//sets width and height of the container for the nodes which are small circles
