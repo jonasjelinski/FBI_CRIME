@@ -106,7 +106,8 @@ class Sunburst extends MagicCircle{
 			lastLabelYPos = 0,
 			lineWidth = labelWidth,
 			lineHeight = labelHeight,
-			durationTime = 2000,      
+			durationTime = 2000,
+			hoverDuration = 1000,      
 			container = this.container,
 			zoomContainer,
 			visible = 1,
@@ -117,6 +118,7 @@ class Sunburst extends MagicCircle{
 			partition,
 			parentNode,
 			arc,
+			hoverArc,
 			labelarc;
 		
 		initZoomContainer();
@@ -126,22 +128,21 @@ class Sunburst extends MagicCircle{
 		initPartitionStructure();
 		initParentNode();
 		initArc();
+		initHoverArc();
 		initLabelArc();
 		transformHierarchyDataIntoSliceData();
 		drawSlices();	
 		drawLabels();
 		drawLines();
 
-
 		function initZoomContainer(){
 			zoomContainer =  container
 				.append("svg")
 				.attr("class", "zoomContainer")
 				.call(d3.zoom()
-					.on("zoom", function () {
-						console.log("zooming");
-    			zoomContainer.attr("transform", d3.event.transform);
- 				}))
+					.on("zoom", function () {						
+						zoomContainer.attr("transform", d3.event.transform);
+					}));
 		}
 
 		//appends a new htmlElement to the rootElement and sets his atrributes
@@ -204,9 +205,18 @@ class Sunburst extends MagicCircle{
 				.startAngle(function (d) { return d.x0;})
 				.endAngle(function (d) { return d.x1;})
 				.innerRadius(function (d) { return d.y0;})
-				.outerRadius(function (d) { return d.y1;});
-			
+				.outerRadius(function (d) { return d.y1;});			
 		} 
+
+		//inits the arc, which makes the sunburst bigger
+		function initHoverArc(){
+			let factor = radius/2;
+			hoverArc =  d3.arc()
+				.startAngle(function (d) { return d.x0;})
+				.endAngle(function (d) { return d.x1;})
+				.innerRadius(function (d) { return d.y0;})
+				.outerRadius(function (d) { return d.y1+factor;});	
+		}
 
 		//inits the labelArc which determines where the labels appear
 		function initLabelArc(){
@@ -218,15 +228,38 @@ class Sunburst extends MagicCircle{
 		function drawSlices(){
 			sunburst.selectAll("g")
 				.data(parentNode.descendants())
-				.enter().append("g").attr("class", "node").append("path")
+				.enter()
+				.append("g")
+				.attr("class", "node")
+				.append("path")
 				.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")			
 				.attr("display", function (d) { return d.depth ? null : "none"; })
-				.attr("d", computeTransition())  
+				.on("mouseover", function(d){				
+					onHoverInSlice(this);
+				})
+				.on("mouseout", function(d){
+					onHoverOutSlice(this);
+				})
+				.attr("d", computeTransition())				
 				.transition()
 				.ease(d3.easeLinear)
 				.duration(durationTime)            
 				.attr("d", arc)
-				.style("fill", function(d){ return getColorByCrime(d);});  
+				.style("fill", function(d){ return getColorByCrime(d);});				 
+		}
+
+		function onHoverInSlice(that){
+			d3.select(that)
+				.transition()
+				.duration(hoverDuration)
+				.attr("d", hoverArc);
+		}
+
+		function onHoverOutSlice(that){
+			d3.select(that)
+				.transition()
+				.duration(hoverDuration)
+				.attr("d", arc);
 		}
 
 		//returns the Color according to the crime
@@ -381,7 +414,7 @@ class Sunburst extends MagicCircle{
 					.innerRadius(function (data) { return starPosition;})
 					.outerRadius(function (data) { return starPosition;});
 			return startArc;
-		}
+		}	
 
 		function transferToCleanJavascriptObject(jsondata){
 			return JSON.parse(JSON.stringify(jsondata));
@@ -393,8 +426,8 @@ class Sunburst extends MagicCircle{
 			lineId = "line"+crime,        
 			label = d3.select("#"+labelId),
 			line = d3.select("#"+lineId);
-			this.showOrHide(label);
-			this.showOrHide(line);
+		this.showOrHide(label);
+		this.showOrHide(line);
 	} 
 
 	//hides line if visible, shows line if it has been invisible before
