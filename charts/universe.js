@@ -412,8 +412,11 @@ class Universe extends MagicCircle{
 		//sets width and height of the container for the nodes which are small circles
 		//and gives it the data
 		function initNode(){
-			node = zoomContainer.append("g").attr("class", "nodes")
-				.attr("width",width).attr("height",height)
+			node = zoomContainer
+				.append("g")
+				.attr("class", "nodes")
+				.attr("width",width)
+				.attr("height",height)
 				.selectAll("circle")
 				.data(universe);		
 		}
@@ -421,8 +424,11 @@ class Universe extends MagicCircle{
 		//sets width and height of the container for the labels
 		//and gives it the data
 		function initLabel(){
-			label = zoomContainer.append("g").attr("class", "lables")
-				.attr("width",width).attr("height",height)
+			label = zoomContainer
+				.append("g")
+				.attr("class", "lables")
+				.attr("width",width)
+				.attr("height",height)
 				.selectAll(".lables")
 				.data(universe);
 		}
@@ -465,7 +471,10 @@ class Universe extends MagicCircle{
 		}
 
 		function enterNode(){
-			node = node.enter().append("circle");			
+			node = node
+				.enter()
+				.append("circle")
+				.attr("class", "universeNode");			
 		}
 		
 		function enterLabel(){

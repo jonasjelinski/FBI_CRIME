@@ -321,7 +321,8 @@ class CrimeCorrelation extends MagicCircle{
 		//determines drag behaviour
 		function enterNode(){
 			node = node.enter()
-				.append("circle")						
+				.append("circle")
+				.attr("class", "correlationNode")						
 				.attr("r", radius)
 				.attr("fill", fillCircle)				
 				.call(d3.drag()				
