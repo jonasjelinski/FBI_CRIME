@@ -200,7 +200,7 @@ htmlelementsNamespace.crimeCorrelationPage = {
 	negativeEndColor: configNamespace.CRIME_CORRELATION.negativeCorrelationColorHigh,
 	positiveColorLegendTitle: "Positive Correlation between Crime Types",
 	negativeColorLegendTitle: "Negative Correlation between Crime Types",
-	colorLegendStartLabel: "No Correlation",
+	colorLegendStartLabel: "Low Correlation",
 	colorLegendEndLabel: "High Correlation",
 	positivecColorLegendId : "CorrelationsPositive",
 	negativeColorLegendId : "CorrelationsNegative",

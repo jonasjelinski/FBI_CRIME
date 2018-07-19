@@ -199,16 +199,19 @@ class CrimeCorrelation extends MagicCircle{
 
 		}
 
+		//hoverContainer is nearly invisible so it
+		//still receives events but cant be seen
 		function initHoverContainer(){
+			let opacity = 0.001;
 			hoverContainer = zoomContainer
 				.append("rect")
 				.attr("class", "hoverContainer")
 				.attr("width", width)
 				.attr("height", height)
-				.attr("fill", "gray")
+				.attr("fill", that.hoverContainerColor)
 				.attr("x", that.margin.x)
 				.attr("y", that.margin.y)
-				.attr("opacity", 0.01)
+				.attr("opacity", opacity)
 				.on("mouseover", commonfunctionsNamespace.disableScroll)
 				.on("mouseout", commonfunctionsNamespace.enableScroll);
 		}
@@ -318,7 +321,8 @@ class CrimeCorrelation extends MagicCircle{
 		//determines drag behaviour
 		function enterNode(){
 			node = node.enter()
-				.append("circle")						
+				.append("circle")
+				.attr("class", "correlationNode")						
 				.attr("r", radius)
 				.attr("fill", fillCircle)				
 				.call(d3.drag()				
