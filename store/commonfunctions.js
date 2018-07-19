@@ -182,3 +182,19 @@ commonfunctionsNamespace.getCrimeColor = function(crimename){
 		color = "rgb(" + r + "," + g + "," + b + ")";	
 	return color;
 };
+
+commonfunctionsNamespace.disableScroll = function(){
+	"use strict";	
+	window.addEventListener("scroll", commonfunctionsNamespace.freezeScroll);
+};
+
+commonfunctionsNamespace.enableScroll = function(){
+	"use strict";		
+	window.removeEventListener("scroll", commonfunctionsNamespace.freezeScroll);
+};
+
+commonfunctionsNamespace.freezeScroll = function(){
+	"use strict";	
+	let x, y = 0;
+	window.scrollTo( x, y );
+};

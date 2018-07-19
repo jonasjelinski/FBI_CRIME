@@ -18,7 +18,7 @@ htmlelementsNamespace.crimeCorrelation = {
 	htmlid: "crimecorrelation",
 	width:1000,
 	height:1000,
-	margin: {x: 500, y: -100},
+	margin: {x: 400, y: -100},
 	labelPositionX : 10 ,
 	labelPositionY : 0 ,
 	type: "svg",
@@ -28,6 +28,7 @@ htmlelementsNamespace.crimeCorrelation = {
 	correlationFontSize : "10px",
 	highlightLinkColor: "yellow",
 	ignoreLinkColor: "gray",
+	hoverContainerColor : "rgb(63, 63, 66)",
 };
 
 htmlelementsNamespace.sunBurst = {
