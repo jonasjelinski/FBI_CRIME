@@ -1,7 +1,10 @@
 //This class creates a UniverseChart
 //it shows in which states the relation between violentCrimes and propertycrimes  
 //quotient = violentCrimes/propertycrimes 
-//is bigger or smaller then this.groupSplitter
+//in comparison to other states
+//by transforming quotient into a value between 0 and 1
+// 0 is the lowest measured value of all states in this year
+// 1 is the highest
 
 class Universe extends MagicCircle{
 	constructor(pageId){
@@ -89,13 +92,6 @@ class Universe extends MagicCircle{
 		return universeNodes;	 
 	}
 
-	transformQuotientToNodeStructure(quotientsPerStateArray){
-		let sortedQuotientsPerStateArray = this.sortArray(quotientsPerStateArray),
-			percentageArray = this.transformQuotientToPercentages(sortedQuotientsPerStateArray),
-			universeNodes = this.createUniverse(percentageArray);
-		return universeNodes;
-	}
-
 	createViolentCrimeQuotientForEachState(statesArray){
 		let quotientsPerState = [];
 		for(let i = 0; i < statesArray.length; i++){
@@ -104,6 +100,21 @@ class Universe extends MagicCircle{
 			quotientsPerState.push(newQuotientObject);
 		}
 		return quotientsPerState;
+	}
+
+	//receives quotient of violentCrimes/propertyCrimes for each state
+	//transform each quotient into a value between 0 and 1
+	//by comparing it with other quotients of the states
+	//the highest quotient is transformed to 1 
+	//the lowest quotient is tansformed to 0
+	//all other quotients are in between 0 and 1
+	//the higher a quotient is the closer it is to 1
+	//the lower a quotient is the closer it is to 0
+	transformQuotientToNodeStructure(quotientsPerStateArray){
+		let sortedQuotientsPerStateArray = this.sortArray(quotientsPerStateArray),
+			percentageArray = this.transformQuotientToPercentages(sortedQuotientsPerStateArray),
+			universeNodes = this.createUniverse(percentageArray);
+		return universeNodes;
 	} 
 
 	createQuotientPerStateObject(state){
