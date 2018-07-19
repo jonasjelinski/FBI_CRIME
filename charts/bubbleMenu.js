@@ -75,7 +75,8 @@ class BubbleMenu extends MagicCircle{
 		//between labels and used in handleBubbleClick to receive the value 
 		//which is attached to the bubble through a simple d3.select function call 
 		function enterBubble(){
-			bubbles.enter().append("circle")
+			bubbles.enter()
+				.append("circle")
 				.attr("class","bubble")
 				.attr("bubbleValue", function(d){
 					return d;

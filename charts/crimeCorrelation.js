@@ -24,6 +24,7 @@ class CrimeCorrelation extends MagicCircle{
 		this.labelPositionY = this.htmlelement.labelPositionY;
 		this.correlationFontColor = this.htmlelement.correlationFontColor;
 		this.correlationFontSize = this.htmlelement.correlationFontSize;
+		this.hoverContainerColor =  this.htmlelement.hoverContainerColor;
 	}
 
 	doChart(){
@@ -149,6 +150,7 @@ class CrimeCorrelation extends MagicCircle{
 			rootElement = this.container,
 			simulation,
 			zoomContainer,
+			hoverContainer,
 			node,
 			link,
 			label,
@@ -156,7 +158,8 @@ class CrimeCorrelation extends MagicCircle{
 			transitionZoomTime = 2000;
 		
 		initSimulation();
-		initZoomContainer();	
+		initZoomContainer();
+		initHoverContainer();	
 		initLinks();
 		initNodes();							
 		initLabels();		
@@ -182,14 +185,35 @@ class CrimeCorrelation extends MagicCircle{
 		}
 
 		function initZoomContainer(){
+			let minSize = 1,
+				maxSize = 10;
+
 			zoomContainer =  rootElement				
 				.append("svg")
 				.attr("class", "zoomContainer")
 				.call(d3.zoom()
-					.on("zoom", function () {
-						console.log("zooming");
-    			zoomContainer.attr("transform", d3.event.transform);
- 				}))
+					.scaleExtent([minSize, maxSize])
+					.on("zoom", function () {						
+						zoomContainer.attr("transform", d3.event.transform);
+					}));
+
+		}
+
+		//hoverContainer is nearly invisible so it
+		//still receives events but cant be seen
+		function initHoverContainer(){
+			let opacity = 0.001;
+			hoverContainer = zoomContainer
+				.append("rect")
+				.attr("class", "hoverContainer")
+				.attr("width", width)
+				.attr("height", height)
+				.attr("fill", that.hoverContainerColor)
+				.attr("x", that.margin.x)
+				.attr("y", that.margin.y)
+				.attr("opacity", opacity)
+				.on("mouseover", commonfunctionsNamespace.disableScroll)
+				.on("mouseout", commonfunctionsNamespace.enableScroll);
 		}
 
 		//creates circles with data nodes
@@ -201,19 +225,13 @@ class CrimeCorrelation extends MagicCircle{
 				.data(nodes);				
 		}
 
-		function initZoomingBehaviour(){
-			
-			
-
-		}
-
 		//creates lines with data links
 		function initLinks(){
 			link = zoomContainer 
 				.append("svg")     	 	
 				.attr("class", "links")
 				.selectAll("line")
-				.data(links)
+				.data(links);
 
 		}
 
@@ -246,7 +264,7 @@ class CrimeCorrelation extends MagicCircle{
 
 			correlationLabel
 				.attr("x", function(d, i) { return calculatePoint(i,d.source.x, d.source.y, d.target.x, d.target.y)[0]; })
-    			.attr("y", function(d, i) { return calculatePoint(i,d.source.x, d.source.y, d.target.x, d.target.y)[1]; });				
+				.attr("y", function(d, i) { return calculatePoint(i,d.source.x, d.source.y, d.target.x, d.target.y)[1]; });				
 				
 			label
 				.attr("x", function(d) {return d.x +that.labelPositionX; })    		
@@ -303,7 +321,8 @@ class CrimeCorrelation extends MagicCircle{
 		//determines drag behaviour
 		function enterNode(){
 			node = node.enter()
-				.append("circle")						
+				.append("circle")
+				.attr("class", "correlationNode")						
 				.attr("r", radius)
 				.attr("fill", fillCircle)				
 				.call(d3.drag()				

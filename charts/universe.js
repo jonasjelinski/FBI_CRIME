@@ -1,7 +1,10 @@
 //This class creates a UniverseChart
 //it shows in which states the relation between violentCrimes and propertycrimes  
 //quotient = violentCrimes/propertycrimes 
-//is bigger or smaller then this.groupSplitter
+//in comparison to other states
+//by transforming quotient into a value between 0 and 1
+// 0 is the lowest measured value of all states in this year
+// 1 is the highest
 
 class Universe extends MagicCircle{
 	constructor(pageId){
@@ -89,13 +92,6 @@ class Universe extends MagicCircle{
 		return universeNodes;	 
 	}
 
-	transformQuotientToNodeStructure(quotientsPerStateArray){
-		let sortedQuotientsPerStateArray = this.sortArray(quotientsPerStateArray),
-			percentageArray = this.transformQuotientToPercentages(sortedQuotientsPerStateArray),
-			universeNodes = this.createUniverse(percentageArray);
-		return universeNodes;
-	}
-
 	createViolentCrimeQuotientForEachState(statesArray){
 		let quotientsPerState = [];
 		for(let i = 0; i < statesArray.length; i++){
@@ -104,6 +100,21 @@ class Universe extends MagicCircle{
 			quotientsPerState.push(newQuotientObject);
 		}
 		return quotientsPerState;
+	}
+
+	//receives quotient of violentCrimes/propertyCrimes for each state
+	//transform each quotient into a value between 0 and 1
+	//by comparing it with other quotients of the states
+	//the highest quotient is transformed to 1 
+	//the lowest quotient is tansformed to 0
+	//all other quotients are in between 0 and 1
+	//the higher a quotient is the closer it is to 1
+	//the lower a quotient is the closer it is to 0
+	transformQuotientToNodeStructure(quotientsPerStateArray){
+		let sortedQuotientsPerStateArray = this.sortArray(quotientsPerStateArray),
+			percentageArray = this.transformQuotientToPercentages(sortedQuotientsPerStateArray),
+			universeNodes = this.createUniverse(percentageArray);
+		return universeNodes;
 	} 
 
 	createQuotientPerStateObject(state){
@@ -350,40 +361,62 @@ class Universe extends MagicCircle{
 			height = this.height,
 			durationTime = 1000,
 			zoomContainer,
+			hoverContainer,
+			minZoom = 0.5,
+			maxZoom = 5,
 			node,
 			label,
 			link,
 			canvas;		
 		this.animateRotation = animateRotation;
-		this.stopRotation = stopRotation,
-
+		this.stopRotation = stopRotation;
 		
 		initZoomContainer();
+		initHoverContainer();	
 		initNode();
 		initLabel();
 		initLink();		
 		setEnterAndExitBehaviour();
-		drawUniverse();
-		//animateRotation();
-
+		drawUniverse();	
 
 		function initZoomContainer(){
 			zoomContainer =  container
 				.append("svg")
 				.attr("class", "zoomContainer")
 				.call(d3.zoom()
-					.on("zoom", function () {
-						console.log("zooming");
-    			zoomContainer.attr("transform", d3.event.transform);
- 				}))
+					.scaleExtent([minZoom, maxZoom])
+					.translateExtent([[0, 0], [width, height]])
+					.extent([[0, 0], [width, height]])
+					.on("zoom", function () {					
+    					zoomContainer.attr("transform", d3.event.transform);
+ 				}));
 		}
 
+		//hoverContainer is nearly invisible so it
+		//still receives events but cant be seen
+		function initHoverContainer(){
+			let opacity = 0.001;
+			hoverContainer = zoomContainer
+				.append("rect")
+				.attr("class", "hoverContainer")
+				.attr("width", width)
+				.attr("height", height)
+				.attr("fill", "gray")
+				.attr("x", 0)
+				.attr("y", 0)
+				.attr("opacity", opacity)
+				.on("mouseover", commonfunctionsNamespace.disableScroll)
+				.on("mouseout", commonfunctionsNamespace.enableScroll);
+		}	
 		
 		//sets width and height of the container for the nodes which are small circles
 		//and gives it the data
 		function initNode(){
-			node = zoomContainer.append("g").attr("class", "nodes")
-				.attr("width",width).attr("height",height)
+			node = zoomContainer
+				.append("g")
+				.attr("class", "nodes")
+				.attr("width",width)
+				.attr("height",height)
 				.selectAll("circle")
 				.data(universe);		
 		}
@@ -391,8 +424,11 @@ class Universe extends MagicCircle{
 		//sets width and height of the container for the labels
 		//and gives it the data
 		function initLabel(){
-			label = zoomContainer.append("g").attr("class", "lables")
-				.attr("width",width).attr("height",height)
+			label = zoomContainer
+				.append("g")
+				.attr("class", "lables")
+				.attr("width",width)
+				.attr("height",height)
 				.selectAll(".lables")
 				.data(universe);
 		}
@@ -435,7 +471,10 @@ class Universe extends MagicCircle{
 		}
 
 		function enterNode(){
-			node = node.enter().append("circle");			
+			node = node
+				.enter()
+				.append("circle")
+				.attr("class", "universeNode");			
 		}
 		
 		function enterLabel(){
