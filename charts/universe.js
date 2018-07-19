@@ -364,8 +364,7 @@ class Universe extends MagicCircle{
 		initLabel();
 		initLink();		
 		setEnterAndExitBehaviour();
-		drawUniverse();		
-
+		drawUniverse();	
 
 		function initZoomContainer(){
 			zoomContainer =  container
