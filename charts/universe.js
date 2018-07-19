@@ -358,7 +358,7 @@ class Universe extends MagicCircle{
 			link,
 			canvas;		
 		this.animateRotation = animateRotation;
-		this.stopRotation = stopRotation,
+		this.stopRotation = stopRotation;
 		
 		initZoomContainer();
 		initHoverContainer();	
@@ -380,7 +380,6 @@ class Universe extends MagicCircle{
     					zoomContainer.attr("transform", d3.event.transform);
  				}));
 		}
-
 
 		//hoverContainer is nearly invisible so it
 		//still recveis events but cant be seen
