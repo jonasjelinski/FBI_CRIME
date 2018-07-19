@@ -8,6 +8,7 @@
   --buttonFonts: #CACACB;
   --buttonsHover: #7C7C7D;
   --borders: #FFFFFF;
+  --infobox: #5F5F61;
   --violentCrime: rgb(214, 20, 0);
   --propertyCrime : rgb(12, 67, 206);
   --Burglary: rgb(0, 209, 114);
@@ -19,16 +20,31 @@
   --Robbery: rgb(255, 154, 0);
 }
 body {
-    background-color: var(--background);
-    font-family: 'Quattrocento Sans', sans-serif;
-
+  background-color: var(--background);
+  font-family: 'Quattrocento Sans', sans-serif;
+  overflow:hidden;
 }
 
+p{
+  margin-top: 0px;
+}
+
+.headline{
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  width: 100%;
+  height: 20%;
+}
 
 #FBIlogo{
   position: absolute;
-  height: 150px;
-  width: 150px;
+  top: 5%;
+  height: 90%;
+  width: auto;
+  left: 1%;
+  z-index: 1;
 }
 
 #FBIlogo:hover{
@@ -57,53 +73,39 @@ body {
 }
 
 #pageHeadline{
-  margin-left: -10%;
+  position: absolute;
   text-align: center;
-  padding-top: 50px;
+  padding-left: 20%;
+  padding-top: 3%;
   font-size: 30px;
   color: var(--fonts);
-  height: 100px;
+  text-shadow: 2px 2px 5px var(--buttonsHover);
 }
 
 #mapHeadline{
   position: absolute;
-  height: 190px;
+  height: 100%;
   width: 600px;
-  right: 0.56%;
+  right: 0%;
   top: 1px;
-
 }
 
-#pageDescription{
-  padding-top: 50px;
-  padding-left: 100px;
-  text-align: center;
-}
-
-#infotextshortText{
-  position: absolute;
-  width: 98.8%;
-  height: 50%;
-  top: 229px;
-  left: 0.56%;
-  padding-top: 10px;
-  background-color: var(--buttons);
-  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
-  color: var(--buttonFonts);
-  text-align: center;
-  z-index: 4;
-  opacity: 0;
-  pointer-events: none;
+.buttons{
+  position: fixed;
+  left: 0px;
+  top: 20%;
+  height: 100%;
+  width: 100%;
 }
 
 .buttons button{
   background-color: var(--buttons);
   border: 1px solid var(--borders);
-  padding: 10px 24px;
   color: var(--buttonFonts);
   cursor: pointer;
   float: left;
   width: 20%;
+  height: 5%;
   z-index: 5;
 }
 
@@ -115,10 +117,69 @@ body {
   background-color: var(--buttonsHover);
 }
 
-#mainpage{
+#pageDescription{
+  position: fixed;
+  left: 0px;
+  top: 25%;
+  width: 100%;
+  height: 3%;
+  padding-top: 1%;
+  text-align: center;
+  color: var(--fonts);
+  font-size: 90%;
+  z-index: 1;
+}
+
+#infotextshortText{
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 50%;
+  top: 25%;
+  left: 0%;
+  padding-top: 1%;
+  background-color: var(--buttons);
+  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+  color: var(--buttonFonts);
+  text-align: center;
+  z-index: 4;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#mainpage{
+  position: fixed;
+  left: 0px;
+  top: 30%;
+  width: 100%;
+  height: 70%;
+}
+
+.playButton{
+  border: 0;
+  background: transparent;
+  background-image:url('../pictures/play.png');
+  background-repeat:no-repeat;
+  width:32px;
+  height:32px;
+}
+
+.playButton:hover{
+	opacity:0.4;
+	cursor:pointer;
+}
+
+.pauseButton{
+	border: 0;
+  background: transparent;
+  background-image:url('../pictures/pause.png');
+  background-repeat:no-repeat;
+  width:32px;
+  height:32px;
+}
+
+.pauseButton:hover{
+	opacity:0.4;
+	cursor:pointer;
 }
 
 #map{
@@ -143,21 +204,29 @@ body {
 
 .menu{
   -moz-appearance: none;
--webkit-appearance: none;
-appearance: none;
-border: none;
-width: 100%;
-height: 40px;
-padding-left: 10px;
-background: var(--buttons) repeat;
-color: var(--buttonFonts);
-font-size: 16px;
-box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.3);
-border-radius: 3px;
-cursor:pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  width: 100%;
+  height: 40px;
+  padding-left: 10px;
+
+  background: var(--buttons) ;
+  color: var(--buttonFonts);
+  font-size: 16px;
+  box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.3);
+  border-radius: 3px;
+  cursor:pointer;
+  outline: none;
 }
 .menu option{
-  color: var(--buttons);
+  color: var(--buttonFonts);
+
+}
+
+.menu option:hover{
+  color:pink;
+  background-color: var(--buttonsHover);
 }
 
 #dropDownMap{
@@ -173,34 +242,10 @@ cursor:pointer;
   width: 30%;
 }
 
-.playButton{
-  border: 0;
-  background: transparent;
-  background-image:url('../pictures/play.png');
-  background-repeat:no-repeat;
-  width:32px;
-  height:32px;
-}
-
-.pauseButton{
-	border: 0;
-  background: transparent;
-  background-image:url('../pictures/pause.png');
-  background-repeat:no-repeat;
-  width:32px;
-  height:32px;
-
-}
-
 #playButtonMap{
   position: absolute;
   margin-top: 2%;
   margin-left: 35%;
-}
-
-#playButtonMap:hover{
-	opacity:0.4;
-	cursor:pointer;
 }
 
 #popup{
@@ -266,7 +311,7 @@ cursor:pointer;
 
 #dropDownLineChart{
   position: absolute;
-  width: 300px;
+  width: 15%;
   margin-top: 0%;
   margin-left: 3%;
 }
@@ -274,28 +319,69 @@ cursor:pointer;
 #bubblemenuLineChart{
   position: absolute;
   size: 110%;
-  top: 10%;
+  top: 15%;
+  left: 2%;
 }
 
 #crimecorrelation{
   position: absolute;
-  left: 5%;
-  width: 90%;
+  width: 100%;
+  height: 100%;
   z-index: 0;
+}
 
+#colorlegendCorrelationsPositive{
+  position: absolute;
+  bottom: 0%;
+  right: 30%;
+  width: 20%;
+}
+
+#colorlegendCorrelationsNegative{
+  position: absolute;
+  bottom: 0%;
+  left: 30%;
+  width: 20%;
+  transform: scaleX(-1);
 }
 
 #universe{
   position: absolute;
   width: 100%;
+  height: 90%;
+  top: 10%;
   z-index: 0;
 }
 
-
-#colorlegend{
+#colorlegendUniverse{
   position: absolute;
   left: 35%;
-  top: 70%;
+  bottom: 0%;
+  z-index: 5;
+}
+
+#timeLineUniverse{
+  position: absolute;
+  top: 0%;
+  left: 40%;
+  width: 360px;
+  height: 10%;
+  background-color: pink;
+}
+
+#playButtonUniverse{
+  position: absolute;
+  top: 1%;
+  height: 10%;
+  left: 30%;
+}
+
+.bubble:hover{
+  cursor: pointer;
+}
+
+.label{
+  font-size: 12px;
 }
 
 .ticks {
@@ -454,27 +540,37 @@ d3-tip:hover {
 
 #infopage{
   position: absolute;
-  margin-top: auto;
   height: auto;
-  width: 30%;
-  background-color: var(--buttons);
+  width: 40%;
+  bottom: 5%;
+  background-color: var(--infobox);
   color: var(--buttonFonts);
   z-index: 5;
 }
 
+#infobox{
+  margin: 6% 8% 8% 6%;
+  text-align: justify;
+}
 
-#closeButton{
+#closeButtonInfoPage{
   position: absolute;
-  left: 95%;
-  top: 2%;
+  right: 3%;
+  top: 3%;
+  cursor:pointer;
 }
 
 #infoButton{
   position: absolute;
   bottom: 1%;
   left: 1%;
+  cursor:pointer;
 }
 
+#infoButton:hover{
+  opacity: 0.4;
+  border: none;
+}
 
 path.state {
   fill: teal;
@@ -501,4 +597,27 @@ path.state {
   -o-transition: all 0.5s ease-out;
   -ms-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
+}
+
+#infotextImpressumPage{
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: 12px;
+  text-decoration: none;
+  text-align: justify;
+  color: var(--fonts);
+}
+
+#infotextdataRegulationPage{
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: 12px;
+  text-decoration: none;
+  text-align: justify;
+  color: var(--fonts);
+}
+
+a{
+  text-decoration: none;
+  color: var(--fonts);
 }

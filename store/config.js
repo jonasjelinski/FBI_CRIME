@@ -58,12 +58,12 @@ configNamespace.CRIME_CORRELATION = {
 	lowCorrelationColor: "rgb(1,1,255)",
 	negativeCorrelationRedHigh : 0,
 	negativeCorrelationGreenHigh : 255,
-	negativeCorrelationBlueHigh : 0,	
+	negativeCorrelationBlueHigh : 0,
 	negativeCorrelationColorHigh : "rgb(0,255,0)",
 	negativeCorrelationRedLow : 0,
 	negativeCorrelationGreenLow : 0,
-	negativeCorrelationBlueLow : 0,	
-	negativeCorrelationColorLow : "rgb(0,0,0)",
+	negativeCorrelationBlueLow : 0,
+	negativeCorrelationColorLow : "rgb(1,1,255)",
 };
 
 configNamespace.JSON_OBJECT = false;
