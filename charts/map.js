@@ -25,6 +25,7 @@ class Map extends MagicCircle{
 		this.year = year;
 	}
 
+
 	setCrimeType(crimeType){
 		this.crime = crimeType;
 	}

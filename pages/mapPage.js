@@ -16,8 +16,14 @@ class MapPage extends ParentPage{
 		this.dropDownIdMap = "Map";
 		this.timeLineId = "Map";
 		this.playButtonId = "Map";
-		this.eventTarget =new EventTarget();
+		this.eventTarget = new EventTarget();
 		this.onMapClicked = "onClick";
+		this.colorLegendTitle = "Ratio: min/max"; 
+		this.colorLegendId = "Map";
+		this.colorLegendStartLabel = "min"; 
+		this.colorLegendEndLabel = "max";	
+		this.startColor = "rgb(255,253,109)";
+		this.endColor = "rgb(232,12,5)";
 	}
 
 	init(){
@@ -28,8 +34,10 @@ class MapPage extends ParentPage{
 
 	initCharts(){
 		this.mainChart = new Map();
+		this.colorLegend = new ColorLegend(this.colorLegendId, this.pageId, this.colorLegendTitle, this.colorLegendStartLabel, this.colorLegendEndLabel, this.startColor, this.endColor);
 		this.mainChart.appendThisCharToPage();
-		this.charts = [this.mainChart];
+		this.charts = [this.mainChart,this.colorLegend];
+		this.colorLegend.appendThisCharToPage();
 	}
 
 	initControlls(){
@@ -80,7 +88,7 @@ class MapPage extends ParentPage{
 		}
 
 	}
-
+	
 	sendMapClickEvent(ev){
 		let event = new CustomEvent(this.onMapClicked, {detail:{state: ev.detail.state, year: ev.detail.year}});
 		this.eventTarget.dispatchEvent(event);
