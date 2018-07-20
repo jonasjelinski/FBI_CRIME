@@ -191,6 +191,8 @@ class CrimeCorrelation extends MagicCircle{
 			zoomContainer =  rootElement				
 				.append("svg")
 				.attr("class", "zoomContainer")
+				.attr("width", width)
+				.attr("height", height)
 				.call(d3.zoom()
 					.scaleExtent([minSize, maxSize])
 					.on("zoom", function () {						
