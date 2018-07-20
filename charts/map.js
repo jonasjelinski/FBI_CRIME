@@ -25,7 +25,6 @@ class Map extends MagicCircle{
 		this.year = year;
 	}
 
-
 	setCrimeType(crimeType){
 		this.crime = crimeType;
 	}
@@ -60,7 +59,7 @@ class Map extends MagicCircle{
 			crimeType=this.crime,
 			allStates=commonfunctionsNamespace.getAllStates(),
 			that = this,
-			path = d3.geoPath(d3.geoAlbers()),
+			path = d3.geoPath(d3.geoAlbersUsa()),
 			svg = this.container,
 			g = svg.append(this.htmlElementType).attr('class', 'states'),
 			getAllCrimesNumber = getAllCrimesState(allStates,year,crimeType,this.data),
