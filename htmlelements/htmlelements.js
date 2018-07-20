@@ -22,7 +22,6 @@ htmlelementsNamespace.crimeCorrelation = {
 	labelPositionX : 22 ,
 	labelPositionY : 5 ,
 	type: "svg",
-	labelFontColor : "red",
 	labelFontSize : "14px",
 	correlationFontColor : "#3F3F42",
 	correlationFontSize : "12px",

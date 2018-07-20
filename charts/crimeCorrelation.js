@@ -18,7 +18,6 @@ class CrimeCorrelation extends MagicCircle{
 		this.linksIndex = 1;
 		this.ignoreLinkColor = this.htmlelement.ignoreLinkColor;
 		this.highlightLinkColor = this.htmlelement.highlightLinkColor;
-		this.labelFontColor = this.htmlelement.labelFontColor;
 		this.labelFontSize = this.htmlelement.labelFontSize;
 		this.labelPositionX = this.htmlelement.labelPositionX;
 		this.labelPositionY = this.htmlelement.labelPositionY;
@@ -58,7 +57,7 @@ class CrimeCorrelation extends MagicCircle{
 		return nodesAndLinks;
 	}	
 
-	//receives the array crimeNames which contains the names of the crimetype
+	//receives the array commonfunctionsNamespace which contains the names of the crimetype
 	//transforms this crimetypes into node obejects and saves them into an array
 	//returns an array full of node-object 
 	createNodes(crimeNames){
@@ -341,8 +340,12 @@ class CrimeCorrelation extends MagicCircle{
 		function enterLabel(){
 			label = label.enter().append("text")
 				.text(function(d){return d.id;})
-				.attr("fill",that.labelFontColor )      			 
+				.attr("fill", getLabelColor)      			 
 				.style("font-size", that.labelFontSize);     			 
+		}
+
+		function getLabelColor(d){
+			return commonfunctionsNamespace.getCrimeColor(d.id);
 		}
 
 		function enterCorrelationLabel(){
