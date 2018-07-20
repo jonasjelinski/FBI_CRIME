@@ -40,6 +40,8 @@ class Universe extends MagicCircle{
 		this.labelSize = this.htmlelement.labelSize;
 		this.hoverOutSize = this.htmlelement.hoverOutLabelSize;
 		this.hoverInSize = this.htmlelement.hoverInLabelSize;
+		this.translateX = this.htmlelement.translateX;
+		this.translateY = this.htmlelement.translateY;
 	}
 
 	//draws the universe
@@ -417,6 +419,7 @@ class Universe extends MagicCircle{
 				.attr("class", "nodes")
 				.attr("width",width)
 				.attr("height",height)
+				.attr("transform", "translate("+that.translateX+"," +that.translateY+")")
 				.selectAll("circle")
 				.data(universe);		
 		}
@@ -429,6 +432,7 @@ class Universe extends MagicCircle{
 				.attr("class", "lables")
 				.attr("width",width)
 				.attr("height",height)
+				.attr("transform", "translate("+that.translateX+"," +that.translateY+")")		
 				.selectAll(".lables")
 				.data(universe);
 		}
@@ -438,6 +442,7 @@ class Universe extends MagicCircle{
 		function initLink(){
 			link = zoomContainer.append("g").attr("class", "links")
 				.attr("width",width).attr("height",height)
+				.attr("transform", "translate("+that.translateX+"," +that.translateY+")")
 				.selectAll("line")
 				.data(universe);
 		}
@@ -454,8 +459,6 @@ class Universe extends MagicCircle{
 			enterLabel();
 
 			link.data(universe);
-			//exitLink();			
-			//enterLink();
 		}
 
 		function exitNode(){

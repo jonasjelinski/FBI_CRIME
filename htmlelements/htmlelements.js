@@ -16,7 +16,7 @@ htmlelementsNamespace.crimeCorrelation = {
 	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "crimecorrelation",
 	htmlid: "crimecorrelation",
-	width:1000,
+	width:800,
 	height:1000,
 	margin: {x: 100, y: -200},
 	labelPositionX : 22 ,
@@ -60,12 +60,14 @@ htmlelementsNamespace.theUniverse = {
 	htmlclassname: "universe",
 	htmlid: "universe",
 	width:1200,
-	height:500,
+	height:800,
 	type: "svg",
 	labelColor: "#3F3F42",
 	labelSize : "5px",
 	hoverInLabelSize: "20px",
 	hoverOutLabelSize: "10px",
+	translateX : 0,
+	translateY : -200,
 };
 
 htmlelementsNamespace.bubbleMenu = {
@@ -83,7 +85,7 @@ htmlelementsNamespace.colorLegend = {
 	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "colorlegend",
 	htmlid: "colorlegend",
-	width:500,
+	width:600,
 	height:50,
 	type: "svg",
 	sliceNumbers: 50,
