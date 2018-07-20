@@ -111,7 +111,8 @@ class BubbleMenu extends MagicCircle{
 		}
 
 		function calculateYPos(i){
-			return yStart+(diameter)*i;
+			let factor = diameter+2;
+			return yStart+factor*i;
 		}
 
 		//this function is called at onClick on a bubble
