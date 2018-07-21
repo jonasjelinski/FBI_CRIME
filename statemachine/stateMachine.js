@@ -7,7 +7,6 @@
 class StateMachine{
 	constructor(){
 		this.activePage = undefined;
-		this.pop
 		this.startPage = new StartPage("mainpage", infoTextsNamespace.startPage.startPage);
 		this.mapPage = new MapPage("mainpage");
 		this.lineChartPage = new LineChartPage("mainpage");
@@ -27,14 +26,25 @@ class StateMachine{
 	}
 
 	handleMapClick(event){
+		this.drawPopUpPage(event);
+		this.drawPopUpTexts();
+		this.stopStateMachine();
+	}
+
+	drawPopUpPage(event){
 		let state = event.detail.state,
 			year = event.detail.year,
 			popUpPage = new PopUpPage("popup", state, year);
 		popUpPage.eventTarget.addEventListener("closeButton" ,this.onPopUpClosed.bind(this), false);
 		popUpPage.init();
 		popUpPage.drawPage();
+	}
+
+	drawPopUpTexts(){
+		let popUpshortInfoText = new InfoText("popup", "pageDescriptionPopup", infoTextsNamespace.shortPageDescription.popupInfo);
+		popUpshortInfoText.appendThisCharToPage();
+		popUpshortInfoText.drawInfoText();
 		this.longInfoText = infoTextsNamespace.longPageDescription.popupPage;
-		this.stopStateMachine();
 	}
 
 	stopStateMachine(){
