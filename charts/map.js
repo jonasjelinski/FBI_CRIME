@@ -35,13 +35,12 @@ class Map extends MagicCircle{
 
 	mapNotClickable()
 	{
-		d3.select("#map").style("pointer-events", "none");
+		this.page.style("pointer-events", "none");
 
 	}
 
 	mapClickable(){
-		d3.select("#map").style("pointer-events", "visible");
-
+		this.page.style("pointer-events", "visible");
 	}
 
 	createD3Data() {
@@ -73,18 +72,13 @@ class Map extends MagicCircle{
 		function prepareStatusSite(getAllCrimesNumber,crimeType,year,i){
 			d3.select(".crimeInfo").remove();
 			d3.select(".stateInfo").remove();
-			d3.select("#mainpage").append("h2").attr("class","stateInfo").attr("id","stateInfoMapId").text(getAllCrimesNumber[i].state);
-			d3.select("#mainpage").append("h2").attr("class","crimeInfo").text(crimeType+': '+getAllCrimesNumber[i].value+' victims per 100.000 inhabitants');
+			that.page.append("h2").attr("class","stateInfo").attr("id","stateInfoMapId").text(getAllCrimesNumber[i].state);
+			that.page.append("h2").attr("class","crimeInfo").text(crimeType+': '+getAllCrimesNumber[i].value+' victims per 100.000 inhabitants');
 		}
 
-		function prepareStatusPopup(stateName){
-			that.mapNotClickable();
+		function removeStateInfo(){
 			d3.select(".stateInfo").remove();
 		}
-
-
-
-
 
 		function colorizeMap(g,statesData,path,tip,getAllCrimesNumber,moving){
 			g.selectAll("path")
@@ -108,7 +102,7 @@ class Map extends MagicCircle{
 				})
 				.call(tip)
 				.on("click", function(d){
-					prepareStatusPopup(d.properties.name);
+					removeStateInfo();
 					sendClickEvent(d.properties.name.toUpperCase());
 				})
 				.on('mouseover', function(d){

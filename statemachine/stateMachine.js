@@ -39,6 +39,7 @@ class StateMachine{
 	//and the stateMachine cant be switched to another state anymore
 	//this prevents the use from switching to another page
 	handleMapClick(event){
+		this.mapPage.setMapUnClickable();
 		this.drawPopUpPage(event);
 		this.drawPopUpTexts();
 		this.stopStateMachine();

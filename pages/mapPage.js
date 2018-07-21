@@ -99,4 +99,8 @@ class MapPage extends ParentPage{
 	setMapClickable(){
 		this.mainChart.mapClickable();
 	}
+
+	setMapUnClickable(){
+		this.mainChart.mapNotClickable()
+	}
 }
