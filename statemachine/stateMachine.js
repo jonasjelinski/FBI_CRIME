@@ -64,6 +64,7 @@ class StateMachine{
 			case configNamespace.STATE_MACHINE.START:
 				this.drawStartPage();
 				this.longInfoText = infoTextsNamespace.longPageDescription.startPage;
+				this.drawShortInfoText(infoTextsNamespace.shortPageDescription.startPage);
 				break;
 			case configNamespace.STATE_MACHINE.MAP:
 				this.drawMapPage();
@@ -87,12 +88,12 @@ class StateMachine{
 				break;
 			case configNamespace.STATE_MACHINE.IMPRESSUM:
 				this.drawImpressumPage();
-				this.longInfoText = "";
+				this.longInfoText = infoTextsNamespace.longPageDescription.impressumPage;
 				this.drawShortInfoText("");
 				break;
 			case configNamespace.STATE_MACHINE.DATA_REGULATION:
 				this.drawDataRegulationPage();
-				this.longInfoText = "";
+				this.longInfoText = infoTextsNamespace.longPageDescription.dataRegulationPage;
 				this.drawShortInfoText("");
 			default:
 				break;

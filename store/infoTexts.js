@@ -7,6 +7,7 @@ var infoTextsNamespace = infoTextsNamespace || {};
 
 
 infoTextsNamespace.shortPageDescription = {
+  startPage: "<p>Diese Webseite soll einen Überblick über die verübten Verbrechen in den USA geben.</p>",
   mapInfo : "<p>Auf dieser Seite können Sie sich einen Überblick über die verschiedenen ausgeübten Verbrechen in den einzelnen Staaten der USA verschaffen</p>",
   lineChartInfo: "<p>Auf dieser Seite können Sie über den kompletten erfassten Zeitraum die verübten Verbrechen miteinander vergleichen.</p>",
   correlationInfo: "<p>Alle erfassten Kategorien werden auf dieser Seite miteinander verknüft und die bestehende Korrelation dargestellt.</p>",
@@ -21,6 +22,8 @@ infoTextsNamespace.longPageDescription = {
   lineChartPage: "<p>Im DropDown-Menü im linken Bereich wählen Sie bitte einen Staat der USA aus.</p><p>Zentral können Sie ein Diagramm mit den Jahren als horizontale Achse und der Rate der Verbrechen pro 100.000 Einwohner als vertikale Achse sehen. Die abgebildeten Daten können Sie mit der Linie im linken Bildschirmbereich vergleichen.</p><p>Sie können für einen gezielteren Vergleich in der Legende einzelne Verbrechen ab- und wieder anwählen.</p>",
   correlationPage: "<p>Die berechneten Korrelationen der Verbrechenskategorieen untereinander beziehen sich auf die komplette USA und den kompletten Zeitraum.</p><p>Jede Kategorie wird als ein Kreis angezeigt, der mit der Maus auf dem Bildschirm positioniert werden kann. Beim Berühren des KReises mit der Maus werden alle Verbindungen hervorgehoben. Anhand der angezeigten Skala kann die Korrelation eingeschätzt werden. Für einen genauen numerischen Wert kann der Verbindung zwischen zwei Kategorien mit der Maus berührt werden.</p><p>Die numerischen Werte liegen im Bereich zwischen -1 und 1.</p>",
   universePage: "<p>Die zwei Sonnen (Gewalt- und Vermögensdelikte) üben auf die Planeten Anziehungskräfte aus. Je näher ein Planet an einer Sonne angezeigt wird, umso mehr Verbrechen dieser Kategorie wurden ausgeübt.</p><p>Jeder Staat in den USA wird einmalig angezeigt. Je nach den verübten Verbrechen in diesem Staat, ordnet er sich einer Sonne unter. Um die Namen der Staaten deutlicher lesen zu können, kann der Planet mit der Maus berührt werden.</p><p>In der Zeitleiste im oberen Bildschirmbereich kann ein Jahr ausgewählt werden, das angezeigt werden soll.</p><p>Der Play-Button lässt das Sonnensystem rotieren.</p>",
+  dataRegulationPage: "<p> Hier können Sie die Datenschutzerklärung lesen",
+  impressumPage: "<p> Hier können Sie das Impressum lesen",
 }
 
 infoTextsNamespace.legal = {
