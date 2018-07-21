@@ -1,8 +1,13 @@
 //the StateMachine handles the pages of the website
 //each state shows a different page, e.g. MapPage
-//if the mapPage receives a this.mapPage.onMapClicked event
-//a PopUpPage is created
-//until the PopUpPage is closed no other Page can be selected through switchState(state)
+//each states shows a different shortInfoText describing the page
+//each states shows a different longInfoText describing the page
+//the shortInfoText is drawn if the page Changes
+//the longInfoText id drawn if the user hits the infoButton
+//the infoButton is drawn if another modul calls drawInfoPage
+//drawInfoPage is called if the user clicks the infoButton 
+//the listener for the infoButton is set in listeners and 
+//the drawInfoPage is called in actions
 
 class StateMachine{
 	constructor(){
@@ -20,17 +25,28 @@ class StateMachine{
 		this.isStateMachineOn = true;
 	}
 
+	//inits the statemachine
+	//appends the shortInfoText to the tag with id "pageDescription"
+	//adds an eventListener to the mapPage so the stateMachine receives
+	//an event if the user clicked on the map
 	init(){
 		this.shortInfoText.appendThisCharToPage();
 		this.mapPage.eventTarget.addEventListener(this.mapPage.onMapClicked, this.handleMapClick.bind(this));
 	}
 
+	//if the map has been clicked
+	//the popupPge is drawn with its text
+	//and the stateMachine cant be switched to another state anymore
+	//this prevents the use from switching to another page
 	handleMapClick(event){
 		this.drawPopUpPage(event);
 		this.drawPopUpTexts();
 		this.stopStateMachine();
 	}
 
+	//draws the popUpPage.
+	//if the popUpPage is closed by clicking the closeButton
+	//onPopUpClosed is called
 	drawPopUpPage(event){
 		let state = event.detail.state,
 			year = event.detail.year,
@@ -40,6 +56,8 @@ class StateMachine{
 		popUpPage.drawPage();
 	}
 
+	//draws the short infoText for popup to descripe the popup
+	//needs an own function because it is inside "popup" and not "pageDescription" like the others 
 	drawPopUpTexts(){
 		let popUpshortInfoText = new InfoText("popup", "pageDescriptionPopup", infoTextsNamespace.shortPageDescription.popupInfo);
 		popUpshortInfoText.appendThisCharToPage();
@@ -47,16 +65,22 @@ class StateMachine{
 		this.longInfoText = infoTextsNamespace.longPageDescription.popupPage;
 	}
 
+	//stops the statemachine
+	//the state cant be switched anymore
 	stopStateMachine(){
 		this.isStateMachineOn = false;
 	}
 
+	//sets the mapPage clickable so states can be again selected
+	//the stateMachine is on so the user can again switch different pages
 	onPopUpClosed(){
 		this.mapPage.setMapClickable();
 		this.longInfoText = infoTextsNamespace.longPageDescription.mapPage;
 		this.isStateMachineOn = true;
 	}
 
+	//switches to state
+	//each state draws a page and a short and a long intotext descriping the states
 	switchState(state){
 		if(this.isStateMachineOn){
 		this.currentState = state;
@@ -101,15 +125,18 @@ class StateMachine{
 		}
 	}
 
-	drawStartPage(){
-		this.drawPage(this.startPage);
-	}
-
+	//cleanes the old page and draws a new one
+	//by setting this.activPage and calling initAndDrawActivePage
 	drawPage(page){
 		this.cleanOldPage();
 		this.activePage = page;
 		this.initAndDrawActivePage();
 	}
+
+	drawStartPage(){
+		this.drawPage(this.startPage);
+	}
+
 
 	drawMapPage(){
 		this.drawPage(this.mapPage);
@@ -138,12 +165,12 @@ class StateMachine{
 	initAndDrawActivePage(){
 		if(this.activePage !== undefined){
 			this.activePage.init();
-			this.activePage.drawPage();		}
+			this.activePage.drawPage();		
+		}
 	}
 
 	//shows the infopage if its classvariable isVisible is true
 	//else hides it
-	//allows to 
 	drawInfoPage(){		
 		if(this.infoPage.isVisible){
 			this.infoPage.deletePage();
@@ -162,6 +189,7 @@ class StateMachine{
 		this.shortInfoText.updatesHimself();
 	}
 
+	//deletes the infoPage and the activePage
 	cleanOldPage(){
 		if(this.activePage !== undefined){
 			this.activePage.deletePage();
