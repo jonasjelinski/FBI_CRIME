@@ -136,13 +136,10 @@ class CrimeCorrelation extends MagicCircle{
 			width = this.width,
 			height = this.height,
 			radius = width/50,
-			fontSize =	radius+"px",
 			linkDistance = width/2,
 			strokeWidth = width/100,
 			centerX = width/2+this.margin.x,
 			centerY = height/2+this.margin.y,
-			center = [centerX, centerY],
-			distance = width/2,		
 			draggedAlpha = 0.3,
 			dragendedAlpha = 0,
 			rootElement = this.container,
@@ -152,8 +149,7 @@ class CrimeCorrelation extends MagicCircle{
 			node,
 			link,
 			label,
-			correlationLabel, 
-			transitionZoomTime = 2000;
+			correlationLabel;
 		
 		initSimulation();
 		initZoomContainer();
@@ -454,8 +450,7 @@ class CrimeCorrelation extends MagicCircle{
 		}
 
 		function changeLinksColorBySource(source, reset){
-			let filter = "[source='"+source+"']",
-				linksWithThisSource = d3.selectAll(".link").filter(function(d){
+			let linksWithThisSource = d3.selectAll(".link").filter(function(d){
 					return d.source.id !== source && d.target.id !==source; 
 				});
 				if(reset){

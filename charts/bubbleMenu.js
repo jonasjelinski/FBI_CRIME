@@ -35,7 +35,6 @@ class BubbleMenu extends MagicCircle{
 			yStart = radius,
 			max = 10,
 			random =Math.floor((Math.random() * max) + 1),
-			selectId = this.categories[0]+random,
 			fontSize = this.fontSize;
 
 		initBubbles();

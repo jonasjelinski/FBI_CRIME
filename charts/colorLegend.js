@@ -55,8 +55,6 @@ class ColorLegend extends MagicCircle{
 		let colorScale,
 			that = this,
 			container = this.container,
-			scaleWidth = this.width/this.endValue,
-			scaleHeight = this.height/this.endValue,
 			sliceContainer,
 			labelsContainer,
 			titleContainer;

@@ -19,11 +19,8 @@ class InfoBox extends MagicCircle{
 
 	//draws the InfoxBox
 	drawInfoBox(){		
-		let root, 
-			textBox,
-			textLabels,
+		let textBox,
 			container = this.container,
-			textArray = [this.infoText],
 			that =this;
 
 		initTextBox();	

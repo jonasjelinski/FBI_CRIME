@@ -335,20 +335,6 @@ class Universe extends MagicCircle{
 		return node;
 	}
 
-	//creates links which connect the planets with the sun
-	createLinks(sortedQuotients){		
-		let links = [],
-			that = this;
-		// {"source": "Napoleon", "target": "Myriel", "value": 1},
-		sortedQuotients.forEach(function(stateObject){
-			let newLink = {};
-			newLink.source = that.createId(stateObject.state);
-			newLink.target = stateObject.quotient > this.groupSplitter ? "Violence" : "Property";
-			links.push(newLink);
-		});		
-		return links;
-	}
-
 	//draws the universe with the given data
 	//source: https://bl.ocks.org/mbostock/4062045
 	drawTheWholeUniverse(universeNodes){
@@ -364,7 +350,6 @@ class Universe extends MagicCircle{
 			maxZoom = 5,
 			node,
 			label,
-			link,
 			canvas;		
 		this.animateRotation = animateRotation;
 		this.stopRotation = stopRotation;
@@ -372,8 +357,7 @@ class Universe extends MagicCircle{
 		initZoomContainer();
 		initHoverContainer();	
 		initNode();
-		initLabel();
-		initLink();		
+		initLabel();	
 		setEnterAndExitBehaviour();
 		drawUniverse();	
 
@@ -386,8 +370,8 @@ class Universe extends MagicCircle{
 					.translateExtent([[0, 0], [width, height]])
 					.extent([[0, 0], [width, height]])
 					.on("zoom", function () {					
-    					zoomContainer.attr("transform", d3.event.transform);
- 				}));
+						zoomContainer.attr("transform", d3.event.transform);
+				}));
 		}
 
 		//hoverContainer is nearly invisible so it
@@ -433,16 +417,6 @@ class Universe extends MagicCircle{
 				.data(universe);
 		}
 
-		//sets width and height of the container for the links
-		//and gives it the data
-		function initLink(){
-			link = zoomContainer.append("g").attr("class", "links")
-				.attr("width",width).attr("height",height)
-				.attr("transform", "translate("+that.translateX+"," +that.translateY+")")
-				.selectAll("line")
-				.data(universe);
-		}
-	
 		//sets the data to the node, the labels and the lines and how it should be drawn
 		//if new data is given to the sunburst or if data is taken away
 		function setEnterAndExitBehaviour(){
@@ -454,7 +428,7 @@ class Universe extends MagicCircle{
 			exitLabel();			
 			enterLabel();
 
-			link.data(universe);
+			//link.data(universe);
 		}
 
 		function exitNode(){
@@ -463,10 +437,6 @@ class Universe extends MagicCircle{
 
 		function exitLabel(){
 			label.exit().remove();
-		}
-
-		function exitLink(){
-			link.exit().remove();	
 		}
 
 		function enterNode(){
@@ -486,11 +456,6 @@ class Universe extends MagicCircle{
 				.on("mouseout", function(d){resetFont(d, this)});
 		}		
 
-		function enterLink(){
-			link = link.enter().append("line")
-				.attr("stroke-width", 2)
-				.style("stroke", "black");
-		}
 
 		//draws the universe
 		function drawUniverse(){ 	  		
@@ -509,13 +474,8 @@ class Universe extends MagicCircle{
 			label
 				.attr("x", function(d){return d.x;})    		
 				.attr("y", function(d){return d.y;});
-
-			link
-				.attr("x1", function(d) {return d.xSun })
-				.attr("y1", function(d) { return d.ySun; })
-				.attr("x2", function(d) { return d.x; })
-				.attr("y2", function(d) { return d.y; });
 		}
+
 
 		//changes the font so labels get less visible
 		//if the label d is actived
@@ -564,7 +524,6 @@ class Universe extends MagicCircle{
 		function updatePositionsInUniverse(angle){
 			updatePlanetPositions(angle);
 			updateLabelPositions(angle);
-
 		}
 
 		//calculates the planetposition

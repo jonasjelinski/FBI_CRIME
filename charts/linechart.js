@@ -145,7 +145,6 @@ class LineChart extends MagicCircle{
 			deltaAxisY = chartHeight-margin.bottom,
 			durationTime = 1000,
 			zooming,
-			container = this.container,
 			canvas,
 			coordinateSystem,
 			xCoordLine,
@@ -161,11 +160,8 @@ class LineChart extends MagicCircle{
 		initXCoordLine();
 		initYCoordLine();
 		initAllGraphLines();	
-		initLabels();
 		initSingleLine();
-		drawGraph();
-		//drawLabels();		
-		setLabelTextAndClickBehaviour();
+		drawGraph();	
 		appendDateLabel();
 		appendNumberLabel();
 
@@ -221,15 +217,6 @@ class LineChart extends MagicCircle{
 				.style("fill", "white");
 		}
 
-		//inits labels and sets width and height and position of labels
-		function initLabels(){
-			labels = container            
-				.append("g")
-				.attr("width", labelWidth)
-				.attr("height", labelHeight)
-				.attr("class", "labels")       
-				.attr("transform", "translate(" + (width - 4*margin.right-labelWidth) + "," + labelHeight + ")");
-		}
 
 		//inits singleLine which is a d3.line function 
 		function initSingleLine(){
@@ -283,30 +270,6 @@ class LineChart extends MagicCircle{
 				.attr("opacity", visible);
 		}	
 
-		//gives data to labels and draws new labels with new data on enter
-		function drawLabels(){			
-			labels.selectAll("g")
-				.data(data)
-				.enter().append("g").attr("class", "label"); 
-		}
-
-		//sets the tex of the labels and how they should behave if a lable is clicked
-		function setLabelTextAndClickBehaviour(){
-
-			labels.selectAll("g")
-				.attr("class", function(d){return d.key;})
-				.append("text")
-				.on("click", that.showOrHideLine)
-				.transition()
-				.ease(d3.easeLinear)
-				.duration(durationTime)               
-				.attr("x", 0)
-				.attr("y", function(d,i){return i*labelHeight*1.5;})           
-				.attr("font-size", "50px")
-				.style("fill", function(d){return getColor(d)})
-				.text(function(d) { return d.key; });
-		} 				
-		
 		//hides line if visible, shows line if it has been invisible before
 		function showOrHideLine(d){
 			let crime = d.key,

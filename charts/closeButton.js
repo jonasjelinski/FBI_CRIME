@@ -27,7 +27,6 @@ class CloseButton extends MagicCircle{
 	drawCloseButton(){		
 		let container = this.container,
 			radius = this.width/2,
-			offset = radius/3,
 			x = this.width/2,
 			y = this.height/2,
 			that = this,

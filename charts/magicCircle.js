@@ -62,11 +62,11 @@ class MagicCircle{
 			ypos=20,
 			durationTime = 2000,
 			radius = 20,
-			that = this,
 			container =this.container,
 			circle;
 
-		initCircle();	
+		initCircle();
+			
 		function initCircle(){
 			circle = container
 				.append("circle")

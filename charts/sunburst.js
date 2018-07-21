@@ -110,7 +110,7 @@ class Sunburst extends MagicCircle{
 			hoverDuration = 1000,      
 			container = this.container,
 			zoomContainer,
-			visible = 1,
+
 			invisible = 0,
 			sunburst,
 			labels,
@@ -278,7 +278,7 @@ class Sunburst extends MagicCircle{
 				.duration(durationTime)               
 				.attr("x", function (d, i) { return computeTextXPos(d,i); })
 				.attr("y",  function (d, i) { return computeTextYPos(d,i); }) 
-				.attr("text-anchor", function(d,i){return computeTextAnchor(d,i);})
+				.attr("text-anchor", function(d,i){return computeTextAnchor(d);})
 				.attr("font-size", fontSize)
 				.style("fill", "blue")
 				.text(function(d) { return d.parent ? d.data.name : "" })
@@ -300,8 +300,8 @@ class Sunburst extends MagicCircle{
 				.duration(2000)  
 				.attr("x1", function (d, i) {return computeTextXPos(d,i);})
 				.attr("y1", function (d, i) {return computeTextYPos(d,i);}) 
-				.attr("x2", function (d, i) {return computeNodePosition(d,i)[0]})
-				.attr("y2", function (d, i) {return computeNodePosition(d,i)[1]})
+				.attr("x2", function (d, i) {return computeNodePosition(d)[0]})
+				.attr("y2", function (d, i) {return computeNodePosition(d)[1]})
 				.attr("transform", "translate(" + lineWidth + "," + lineHeight + ")")
 				.attr("stroke-width", 1)
 				.attr("stroke", "black");		
@@ -328,7 +328,6 @@ class Sunburst extends MagicCircle{
 			}
 			let centroid = labelarc.centroid(data),
 				midAngle = Math.atan2(centroid[1], centroid[0]),
-				multiplier = index*9,
 				y = Math.sin(midAngle)*labelWidth,
 				sign = 0.75;            
 			y = y*sign;			 
@@ -349,7 +348,7 @@ class Sunburst extends MagicCircle{
 		}
 
 		//calculates anchor of the the text
-		function computeTextAnchor(data, index){
+		function computeTextAnchor(data){
 			let centroid = labelarc.centroid(data),
 				midAngle = Math.atan2(centroid[1], centroid[0]),
 				x = Math.cos(midAngle) * width/2;
@@ -362,30 +361,8 @@ class Sunburst extends MagicCircle{
 			return type + crime;
 		}
 
-		//calculates the second x position of a line
-		function computeLineX2(data, index){
-			if(data.data.name === "Crimes"){
-				return 0;
-			}
-			let centroid = labelarc.centroid(data),
-				midAngle = Math.atan2(centroid[1], centroid[0]),
-				x = Math.cos(midAngle) * labelWidth/2;
-			return x;
-		}
-
-		//calculates the second y position of a line
-		function computeLineY2(data, index){
-			if(data.name === "Crimes"){
-				return 0;
-			}
-			let centroid = labelarc.centroid(data), 
-				midAngle = Math.atan2(centroid[1], centroid[0]),
-				y = Math.sin(midAngle) * labelWidth/2;
-			return y;
-		}
-
 		//calculates the position of a node
-		function computeNodePosition(data, index){
+		function computeNodePosition(data){
 			let pos = [0,0];    
 			if(data.data.name === "Crimes"){					
 				return pos;
@@ -396,12 +373,12 @@ class Sunburst extends MagicCircle{
 
 		//calculates the transition of the sunburst
 		function computeTransition(data){
-			let starPosition = 0,            
+			let startPosition = 0,            
 				startArc = d3.arc()
-					.startAngle(function (data) { return starPosition;})
-					.endAngle(function (data) { return  starPosition;})
-					.innerRadius(function (data) { return starPosition;})
-					.outerRadius(function (data) { return starPosition;});
+					.startAngle(function (data) { return startPosition;})
+					.endAngle(function (data) { return  startPosition;})
+					.innerRadius(function (data) { return startPosition;})
+					.outerRadius(function (data) { return startPosition;});
 			return startArc;
 		}	
 
