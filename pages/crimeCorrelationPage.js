@@ -23,11 +23,13 @@ class CrimeCorrelationPage extends ParentPage{
 
 	init(){
 		this.mainChart = new CrimeCorrelation(this.pageId);
+		this.shortInfoText = new InfoText("pageDescription", "pageDescription", "infoTextsNamespace.shortPageDescription.correlationInfo");
 		this.positiveCorrelationColorLegend = new ColorLegend(this.positivecColorLegendId, this.pageId, this.positiveColorLegendTitle, this.colorLegendStartLabel, this.colorLegendEndLabel, this.positiveStartColor, this.positiveEndColor);
 		this.negativeCorrelationColorLegend = new ColorLegend(this.negativeColorLegendId, this.pageId, this.negativeColorLegendTitle, this.colorLegendStartLabel, this.colorLegendEndLabel, this.negativeStartColor, this.negativeEndColor);
-		this.charts = [this.mainChart, this.positiveCorrelationColorLegend, this.negativeCorrelationColorLegend];
+		this.charts = [this.mainChart, this.positiveCorrelationColorLegend, this.negativeCorrelationColorLegend, this.shortInfoText];
 		this.mainChart.appendThisCharToPage();	
 		this.positiveCorrelationColorLegend.appendThisCharToPage();	
 		this.negativeCorrelationColorLegend.appendThisCharToPage();	
+		this.shortInfoText.appendThisCharToPage();
 	}
 }

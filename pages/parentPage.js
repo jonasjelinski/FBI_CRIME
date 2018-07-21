@@ -70,8 +70,7 @@ class ParentPage{
 
 	//removes all elements appended to this.page
 	//and hides it
-	deletePage(){
-	
+	deletePage(){	
 		this.page.selectAll("*").remove();
 		this.hidePage();
 	}
