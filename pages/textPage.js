@@ -1,3 +1,5 @@
+//This Page shows an InfoText
+//the text is set in the constructor
 class TextPage extends ParentPage{
 	constructor(pageId, htmlid, infoTextId, text){
 		super(pageId);
