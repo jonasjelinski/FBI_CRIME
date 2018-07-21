@@ -27,8 +27,15 @@ class PlayButton extends MagicCircle{
 			buttonLabelClass = "buttonLabel",
 			that = this;
 
+		setEventBehaviour();
 		setClickBehaviour();
 		setButtonLabel();
+
+		//sets event behaviour
+		//button needs always be clickable even if nonClickable layer blocks it
+		function setEventBehaviour(){
+			button.style("pointer-events","all");
+		}
 
 		//determines the cklickbehaviour of the button
 		function setClickBehaviour(){
