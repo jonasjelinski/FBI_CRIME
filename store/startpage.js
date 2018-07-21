@@ -49,7 +49,6 @@ startpage_namespace.loadScripts = function(){
 	q.await(function(error) {
 		if (error) throw error;
 		startpage_namespace.loadSecondScripts();
-		console.log("scripts loaded");	
 	}); 
 };
 

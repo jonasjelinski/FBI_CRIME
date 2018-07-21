@@ -40,7 +40,6 @@ class ColorLegend extends MagicCircle{
 
 	//creates the data and draws with data the colorlegend
 	doChart(){
-		console.log("A lama draws a ColorLegend");
 		let data = this.createScaleArray();
 		this.drawColorLegend(data);
 	}

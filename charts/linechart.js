@@ -20,8 +20,7 @@ class LineChart extends MagicCircle{
 	}
 	
 	//calls drawLineChart
-	doChart(){
-		console.log("ein lama erzeugt einen linechart");       
+	doChart(){      
 		this.drawLineChart();		
 	}
 

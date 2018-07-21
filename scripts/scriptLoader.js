@@ -62,7 +62,6 @@ scriptLoader = (function(){
 		let waitingTime = 1000;
 		setTimeout(function () {
 			loadDataObjects();
-			console.log("scripts loaded");
 			actionNamespace.actionDrawStartPage();	
 		}, waitingTime);
 	}

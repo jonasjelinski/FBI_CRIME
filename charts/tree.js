@@ -80,7 +80,6 @@ class Tree extends MagicCircle{
      nodeUpdate.select('circle.node')
     .attr('r', 10)
     .style("fill", function(d) {
-	console.log(d.children)
         return d._children ? "lightsteelblue" : "red";
     })
     .attr('cursor', 'pointer');

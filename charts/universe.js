@@ -46,7 +46,6 @@ class Universe extends MagicCircle{
 
 	//draws the universe
 	doChart(){
-		console.log("A lama creates the universe");
 		this.drawUniverseChart();
 	}
 
@@ -311,9 +310,6 @@ class Universe extends MagicCircle{
 		else if(node.id === "Property"){
 			sun = this.createPropertySun(sun);
 		}
-		else{
-			console.log("couldnt create sun: ", sun);
-		}
 		return sun;
 	}	
 
@@ -535,7 +531,6 @@ class Universe extends MagicCircle{
 
 
 		function resetFont(d, selection){
-			console.log("reset");
 			let label = d3.select(selection).node(),
 				opacity = label.style.opacity,
 				fontSize = label.style.fontSize,

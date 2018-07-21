@@ -51,7 +51,6 @@ class MagicCircle{
 	//creates the chart
 	//standard function which is used by all instances of the childclass
 	doChart(){
-		console.log("ein magischerKreis erzeugt sich selbst", this.page);
 		this.drawCircle();   
 	}
 

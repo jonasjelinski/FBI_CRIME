@@ -27,7 +27,6 @@ class CrimeCorrelation extends MagicCircle{
 	}
 
 	doChart(){
-		console.log("A lama creates crime correlation");
 		this.drawForceChart();
 	}
 
