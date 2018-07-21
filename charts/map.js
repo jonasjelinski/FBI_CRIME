@@ -78,9 +78,8 @@ class Map extends MagicCircle{
 		}
 
 		function prepareStatusPopup(stateName){
-			d3.select("#map").style("pointer-events", "none");
+			that.mapNotClickable();
 			d3.select(".stateInfo").remove();
-			d3.select("#popup").append("h1").attr("class","stateInfo").attr("id","stateInfoPopUpId").text(stateName);
 		}
 
 

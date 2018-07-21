@@ -21,9 +21,14 @@ class PopUpPage extends ParentPage{
 	}
 
 	init(){
+		this.initHeader();
 		this.initCharts();
 		this.initControlls();
 		this.addEventListeners();
+	}
+
+	initHeader(){
+		this.page.append("h1").attr("class","stateInfo").attr("id","stateInfoPopUpId").text(this.state);
 	}
 
 	initCharts(){
