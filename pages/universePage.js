@@ -16,6 +16,7 @@ class UniversePage extends ParentPage{
 		this.timeLineId = "Universe";
 		this.playButtonId = "Universe";
 		this.colorLegendId = "Universe";
+		this.playButtonText = this.htmlElement.playButtonText;
 	}
 
 	init(){
@@ -35,7 +36,7 @@ class UniversePage extends ParentPage{
 	initControlls(){
 		this.timeLine = new TimeLine(this.pageId, this.timeLineId);
 		this.timeLine.appendThisCharToPage();		
-		this.playButton = new PlayButton(this.pageId, this.playButtonId);		
+		this.playButton = new PlayButton(this.pageId, this.playButtonId, this.playButtonText);		
 		this.playButton.appendThisCharToPage();
 		this.controlls = [this.timeLine,this.playButton];
 	}

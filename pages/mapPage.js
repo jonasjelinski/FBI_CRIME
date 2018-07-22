@@ -24,6 +24,7 @@ class MapPage extends ParentPage{
 		this.colorLegendEndLabel = "max";	
 		this.startColor = "rgb(255,253,109)";
 		this.endColor = "rgb(232,12,5)";
+		this.playButtonText = this.htmlElement.playButtonText;
 	}
 
 	init(){
@@ -46,7 +47,7 @@ class MapPage extends ParentPage{
 		this.crimeTypes = commonfunctionsNamespace.getAllCrimeTypes();
 		this.dropDownMenu = new DropDownMenu(this.pageId, this.crimeTypes, this.dropDownIdMap);
 		this.dropDownMenu.appendThisCharToPage();
-		this.playButton = new PlayButton(this.pageId, this.playButtonId);
+		this.playButton = new PlayButton(this.pageId, this.playButtonId, this.playButtonText);
 		this.playButton.appendThisCharToPage();
 		this.controlls = [this.timeLine,this.dropDownMenu,this.playButton];
 	}

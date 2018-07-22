@@ -166,7 +166,7 @@ htmlelementsNamespace.playButton = {
 	htmlid: "playButton",
 	width: 100,
 	height: 100,
-	type: "button",
+	type: "div",
 };
 
 htmlelementsNamespace.infoBox = {
@@ -217,6 +217,7 @@ htmlelementsNamespace.lineChartPage = {
 htmlelementsNamespace.mapPage = {
 	htmlclassname: "mapPage",
 	htmlid: "mapPage",
+	playButtonText: "show development over years",
 };
 
 htmlelementsNamespace.universePage = {
@@ -224,6 +225,7 @@ htmlelementsNamespace.universePage = {
 	htmlid: "universePage",
 	timeLineClassName: "timeLine universe",
 	timeLineClassid: "timeLine universe",
+	playButtonText: "rotate planets",
 };
 
 htmlelementsNamespace.popupPage = {

@@ -3,7 +3,7 @@
 //which is used to play and stop something
 
 class PlayButton extends MagicCircle{
-	constructor(pageId, chartId){
+	constructor(pageId, chartId, labelText= "playButton"){
 		super(pageId);
 		this.htmlelement = htmlelementsNamespace.playButton;
 		this.htmlElementID = this.htmlelement.htmlid+chartId;
@@ -11,7 +11,8 @@ class PlayButton extends MagicCircle{
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
 		this.eventTarget = new EventTarget();		
-		this.onClick = "onClick";		
+		this.onClick = "onClick";
+		this.labelText = labelText;		
 	}
 
 	doChart(){
@@ -20,16 +21,27 @@ class PlayButton extends MagicCircle{
 
 	//draws the button
 	drawButton(){
-		let button = this.container,
+		let button,
+			label,
 			pause = "pauseButton",
 			play = "playButton",
 			isPlaying = false,
 			buttonLabelClass = "buttonLabel",
-			that = this;
+			that = this,
+			hidden = 0,
+			visible = 1;
 
+		initButton();
 		setEventBehaviour();
 		setClickBehaviour();
 		setButtonLabel();
+		setHoverBehaviour();
+
+		function initButton(){
+			button = that.container
+				.append("button")
+				.attr("class", play);		
+		}
 
 		//sets event behaviour
 		//button needs always be clickable even if nonClickable layer blocks it
@@ -55,7 +67,7 @@ class PlayButton extends MagicCircle{
 			isPlaying = !isPlaying;
 		}
 
-		//changes the label dending on if 
+		//changes the label dending on if<d 
 		//the player plays or if it is paused
 		function changeButtonLabel(){
 			if(isPlaying){
@@ -75,10 +87,24 @@ class PlayButton extends MagicCircle{
 		//appends a new class to button
 		//which contains the text of the button
 		function setButtonLabel(){
+			label = that.container
+					.append("text")
+					.attr("class", "buttonLabel")
+					.style("opacity", hidden)
+					.text(that.labelText);
+		}
 
-			button
-				.attr("class", play)
-				.append("class", buttonLabelClass);
+		function setHoverBehaviour(){
+			button.on("mouseover", showLabel)
+				.on("mouseout", hideLabel)
+		}
+
+		function showLabel(){
+			label.style("opacity", visible);
+		}
+
+		function hideLabel(){
+			label.style("opacity", hidden);
 		}
 	}
 }
