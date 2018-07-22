@@ -1,5 +1,5 @@
 class Map extends MagicCircle{
-	constructor(pageId, year=2000, crimeType="Burglary", isMoving=false){
+	constructor(pageId, year=2000, crimeType="Burglary", moving=false){
 		super(pageId);
 		this.htmlelement = htmlelementsNamespace.theMap;
 		this.htmlElementID = this.htmlelement.htmlid;
@@ -8,7 +8,7 @@ class Map extends MagicCircle{
 		this.mapData = configNamespace.MAP_JSON_OBJECT;
 		this.year = year;
 		this.crime = crimeType;
-		this.isMoving = isMoving;
+		this.moving = moving;
 		this.onClick = "onClick";
 		this.eventTarget = new EventTarget();
 	}
@@ -29,8 +29,8 @@ class Map extends MagicCircle{
 		this.crime = crimeType;
 	}
 
-	setisMoving(isMoving){
-		this.isMoving = isMoving;
+	setMoving(moving){
+		this.moving = moving;
 	}
 
 	mapNotClickable()
@@ -66,7 +66,7 @@ class Map extends MagicCircle{
 			tip = doTip(getAllCrimesNumber);
 
 		prepareStatusSite(getAllCrimesNumber,crimeType,year,0);
-		colorizeMap(g,statesData,path,tip,getAllCrimesNumber,this.isMoving);
+		colorizeMap(g,statesData,path,tip,getAllCrimesNumber,this.moving);
 
 		function prepareStatusSite(getAllCrimesNumber,crimeType,year,i){
 			d3.select(".crimeInfo").remove();
@@ -79,7 +79,7 @@ class Map extends MagicCircle{
 			d3.select(".stateInfo").remove();
 		}
 
-		function colorizeMap(g,statesData,path,tip,getAllCrimesNumber,isMoving){
+		function colorizeMap(g,statesData,path,tip,getAllCrimesNumber,moving){
 			g.selectAll("path")
 				.data(statesData)
 				.enter().append("path")
@@ -93,7 +93,7 @@ class Map extends MagicCircle{
 					sendClickEvent(d.properties.name.toUpperCase());
 				})
 				.on('mouseover', function(d){
-					if(!isMoving){
+					if(!moving){
 						tip.show(d);
 						d3.select(this).style("fill", "#ffe9c2").style("cursor", "pointer")
 					}
