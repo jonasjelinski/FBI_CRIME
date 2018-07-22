@@ -1,5 +1,5 @@
 class Map extends MagicCircle{
-	constructor(pageId, year=2000, crimeType="Burglary", moving=false){
+	constructor(pageId, year=2000, crimeType="Burglary", isMoving=false){
 		super(pageId);
 		this.htmlelement = htmlelementsNamespace.theMap;
 		this.htmlElementID = this.htmlelement.htmlid;
@@ -8,7 +8,7 @@ class Map extends MagicCircle{
 		this.mapData = configNamespace.MAP_JSON_OBJECT;
 		this.year = year;
 		this.crime = crimeType;
-		this.moving = moving;
+		this.isMoving = isMoving;
 		this.onClick = "onClick";
 		this.eventTarget = new EventTarget();
 	}
@@ -29,14 +29,13 @@ class Map extends MagicCircle{
 		this.crime = crimeType;
 	}
 
-	setMoving(moving){
-		this.moving = moving;
+	setisMoving(isMoving){
+		this.isMoving = isMoving;
 	}
 
 	mapNotClickable()
 	{
 		this.page.style("pointer-events", "none");
-
 	}
 
 	mapClickable(){
@@ -67,7 +66,7 @@ class Map extends MagicCircle{
 			tip = doTip(getAllCrimesNumber);
 
 		prepareStatusSite(getAllCrimesNumber,crimeType,year,0);
-		colorizeMap(g,statesData,path,tip,getAllCrimesNumber,this.moving);
+		colorizeMap(g,statesData,path,tip,getAllCrimesNumber,this.isMoving);
 
 		function prepareStatusSite(getAllCrimesNumber,crimeType,year,i){
 			d3.select(".crimeInfo").remove();
@@ -80,25 +79,13 @@ class Map extends MagicCircle{
 			d3.select(".stateInfo").remove();
 		}
 
-		function colorizeMap(g,statesData,path,tip,getAllCrimesNumber,moving){
+		function colorizeMap(g,statesData,path,tip,getAllCrimesNumber,isMoving){
 			g.selectAll("path")
 				.data(statesData)
 				.enter().append("path")
 				.attr("d", path)
 				.attr("class", function(d){
-
-					let styleClass = "state ",
-						quantize = d3.scaleQuantize()
-							.domain([minCrime,maxCrime])
-							.range(d3.range(11).map(function(i){
-								return "q" + i; }));
-
-					for(let i=0;i<getAllCrimesNumber.length;i++){
-						if(getAllCrimesNumber[i].state.toUpperCase()===d.properties.name.toUpperCase()){
-							styleClass+=quantize(parseInt(getAllCrimesNumber[i].value));
-						}
-					}
-					return styleClass;
+					return fillColorInMap(d);
 				})
 				.call(tip)
 				.on("click", function(d){
@@ -106,11 +93,9 @@ class Map extends MagicCircle{
 					sendClickEvent(d.properties.name.toUpperCase());
 				})
 				.on('mouseover', function(d){
-					if(!moving){
+					if(!isMoving){
 						tip.show(d);
 						d3.select(this).style("fill", "#ffe9c2").style("cursor", "pointer")
-					}else{
-						d3.select(this).style("cursor", "not-allowed");
 					}
 				})
 				.on('mouseout', function(d){
@@ -121,6 +106,21 @@ class Map extends MagicCircle{
 						}
 					);
 				});
+		}
+		
+		function fillColorInMap(d){
+			let styleClass = "state ",
+			quantize = d3.scaleQuantize()
+			.domain([minCrime,maxCrime])
+			.range(d3.range(11).map(function(i){
+				return "q" + i; }));
+				
+				for(let i=0;i<getAllCrimesNumber.length;i++){
+					if(getAllCrimesNumber[i].state.toUpperCase()===d.properties.name.toUpperCase()){
+						styleClass+=quantize(parseInt(getAllCrimesNumber[i].value));
+					}
+				}
+				return styleClass;
 		}
 
 		function sendClickEvent(state){
@@ -134,16 +134,20 @@ class Map extends MagicCircle{
 					return [10,10];
 				})
 				.html(function(d){
-					var html = '';
-					for(let i=0;i<getAllCrimesNumber.length;i++){
-						if(getAllCrimesNumber[i].state.toUpperCase()==d.properties.name.toUpperCase()){
-							html = '<div class="stateHover">'+getAllCrimesNumber[i].state+'</div>';
-							prepareStatusSite(getAllCrimesNumber,crimeType,year,i);
-						}
-					}
-					return html;
+					return labelStateOnHover(d);
 				});
 			return tip;
+		}
+		
+		function labelStateOnHover(d){
+			var html = '';
+			for(let i=0;i<getAllCrimesNumber.length;i++){
+				if(getAllCrimesNumber[i].state.toUpperCase()==d.properties.name.toUpperCase()){
+					html = '<div class="stateHover">'+getAllCrimesNumber[i].state+'</div>';
+					prepareStatusSite(getAllCrimesNumber,crimeType,year,i);
+				}
+			}
+			return html;
 		}
 
 		function getAllCrimeValues(getAllCrimesNumber){
@@ -153,23 +157,34 @@ class Map extends MagicCircle{
 			}
 			return allCrimeValues;
 		}
-
+		
 		function getAllCrimesState(allStates,year,crimeType,data){
-			var getAllCrimesNumber=[];
+			let getAllCrimesNumber=[],
+			crimeValue,
+			objectCrimesStatesNumber;
+			
 			for(let i=0;i<allStates.length;i++){
 				let currentCrimeValue=commonfunctionsNamespace.getCrimesAndDataByYearAndState(year, allStates[i], data);
 				if(configNamespace.STATES_AND_CRIMES.crimeCategories.Crimes.violentCrime.includes(crimeType)){
-					let crimeValue=currentCrimeValue.crimes.violentCrime[crimeType];
-					var objectCrimesStatesNumber={state:allStates[i],value:parseInt(crimeValue)};
-					getAllCrimesNumber.push(objectCrimesStatesNumber);
+					fillDataInMapViolentCrime(crimeValue,objectCrimesStatesNumber,currentCrimeValue,i,getAllCrimesNumber);
 				}
-				else if (configNamespace.STATES_AND_CRIMES.crimeCategories.Crimes.propertyCrime.includes(crimeType)) {
-					let crimeValue=currentCrimeValue.crimes.propertyCrime[crimeType];
-					var	objectCrimesStatesNumber={state:allStates[i],value:parseInt(crimeValue)};
-					getAllCrimesNumber.push(objectCrimesStatesNumber);
+				else if(configNamespace.STATES_AND_CRIMES.crimeCategories.Crimes.propertyCrime.includes(crimeType)) {
+					fillDataInMapPropertyCrime(crimeValue,objectCrimesStatesNumber,currentCrimeValue,i,getAllCrimesNumber);
 				}
 			}
 			return getAllCrimesNumber;
+		}
+		
+		function fillDataInMapViolentCrime(crimeValue,objectCrimesStatesNumber,currentCrimeValue,i,getAllCrimesNumber){
+			crimeValue=currentCrimeValue.crimes.violentCrime[crimeType];
+			objectCrimesStatesNumber={state:allStates[i],value:parseInt(crimeValue)};
+			getAllCrimesNumber.push(objectCrimesStatesNumber);
+		}
+		
+		function fillDataInMapPropertyCrime(crimeValue,objectCrimesStatesNumber,currentCrimeValue,i,getAllCrimesNumber){
+			crimeValue=currentCrimeValue.crimes.propertyCrime[crimeType];
+			objectCrimesStatesNumber={state:allStates[i],value:parseInt(crimeValue)};
+			getAllCrimesNumber.push(objectCrimesStatesNumber);
 		}
 	}
 }
