@@ -1,5 +1,5 @@
 //This class creates a TimeLine
-//An interactive scale bar to chosse the years for the modules "map" and "planets"
+//An interactive scale bar to chosse the years for the modules "map" and "universe"
 
 class TimeLine extends MagicCircle{
 
