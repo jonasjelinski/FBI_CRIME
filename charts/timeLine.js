@@ -1,5 +1,6 @@
 //This class creates a TimeLine
 //An interactive scale bar to chosse the years for the modules "map" and "universe"
+//This template was used https://gist.github.com/officeofjane/47d2b0bfeecfcb41d2212d06d095c763#file-circles-csv
 
 class TimeLine extends MagicCircle{
 
@@ -9,10 +10,11 @@ class TimeLine extends MagicCircle{
 		this.htmlElementID = this.htmlelement.htmlid+chartId;
 		this.width = this.htmlelement.width-this.htmlelement.margin.left - this.htmlelement.margin.right;
 		this.height = this.htmlelement.height-this.htmlelement.margin.top - this.htmlelement.margin.bottom;
-		this.yearData=commonfunctionsNamespace.getAllYears();
+		this.yearData = commonfunctionsNamespace.getAllYears();
 		this.eventTarget = new EventTarget();
 		this.onUpdate = "onUpdate";
 		this.timer = 0;
+		this.playTimeIntervalInMs = 100;
 		this.currentValue=0;
 		this.startDate = new Date(String(this.yearData[0]));
 		this.endDate = new Date(String(this.yearData[this.yearData.length-1]));
@@ -22,7 +24,7 @@ class TimeLine extends MagicCircle{
 	}
 
 	doChart(){
-		if(this.yearData!==undefined){
+		if(this.yearData !== undefined){
 			this.doTimeLine();
 		}
 	}
@@ -32,7 +34,7 @@ class TimeLine extends MagicCircle{
 	}
 
 	playTimeLine(){
-		this.timer = setInterval(this.step, 100);
+		this.timer = setInterval(this.step,this.playTimeIntervalInMs);
 		this.isMoving = true;
 	}
 
@@ -42,19 +44,18 @@ class TimeLine extends MagicCircle{
 		this.update();
 	}
 
-	//creates the Timeline
-	//https://gist.github.com/officeofjane/47d2b0bfeecfcb41d2212d06d095c763#file-circles-csv
 	doTimeLine(){
 		let startDate = this.startDate,
 			endDate = this.endDate,
 			targetValue = this.width,
-			xAxis = scaleTime(startDate, endDate, targetValue),
+			xAxis = scaleTime(startDate,endDate,targetValue),
 			formatDateIntoYear=d3.timeFormat("%Y"),
 			currentValue=this.currentValue,
 			timer = this.timer,
 			that = this,
+			margin=50,
 			svg = this.container.append("svg").attr("width", this.width + this.htmlelement.margin.left + this.htmlelement.margin.right).attr("height", this.height+ this.htmlelement.margin.top + this.htmlelement.margin.bottom),
-			g = svg.append("g").attr("class", "slider").attr("transform", "translate(" + this.htmlelement.margin.left + "," + 50 + ")"),
+			g = svg.append("g").attr("class", "slider").attr("transform", "translate(" + this.htmlelement.margin.left + "," + margin + ")"),
 			line = drawLine(g, xAxis),
 			handle = drawHandler(g),
 			label = drawLabel(g, startDate);
@@ -67,11 +68,12 @@ class TimeLine extends MagicCircle{
 
 		//show current date above the drag-Handler as text
 		function drawLabel(g,startDate){
-			let label = g.append("text")
+			let margin=-15,
+			label = g.append("text")
 				.attr("class", "label")
 				.attr("text-anchor", "middle")
 				.text(formatDateIntoYear(startDate))
-				.attr("transform", "translate(0," + (-15) + ")");
+				.attr("transform", "translate(0," + (margin) + ")");
 			return label;
 		}
 
@@ -88,9 +90,10 @@ class TimeLine extends MagicCircle{
 
 		//show drag-Handler as dot
 		function drawHandler(g){
-			let handle = g.insert("circle", ".track-overlay")
+			let radiusDragHandler=9,
+			handle = g.insert("circle", ".track-overlay")
 				.attr("class", "handle")
-				.attr("r", 9);
+				.attr("r", radiusDragHandler);
 			return handle;
 		}
 
@@ -100,16 +103,16 @@ class TimeLine extends MagicCircle{
 				.attr("class", "track")
 				.attr("x1", xAxis.range()[0])
 				.attr("x2", xAxis.range()[1])
-				.select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+				.select(function() {return this.parentNode.appendChild(this.cloneNode(true));})
 				.attr("class", "track-inset")
-				.select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+				.select(function() {return this.parentNode.appendChild(this.cloneNode(true));})
 				.attr("class", "track-overlay");
 			return line;
 		}
 
 		//show the Date-Range below the line
 		function drawYearOutput(g,xAxis){
-			g.insert("g", ".track-overlay")
+			g.insert("g",".track-overlay")
 				.attr("class", "ticks")
 				.attr("transform", "translate(0," + 16 + ")")
 				.selectAll("text")
@@ -142,8 +145,9 @@ class TimeLine extends MagicCircle{
 
 		//
 		function step(){
+			let scaleWidth=99;
 			update();
-			currentValue = currentValue + (targetValue/99);
+			currentValue = currentValue + (targetValue/scaleWidth);
 			if (currentValue > targetValue) {
 				this.isMoving = false;
 				update();
@@ -152,10 +156,10 @@ class TimeLine extends MagicCircle{
 		}
 
 		//define the start -and endScale of the line
-		function scaleTime(startDate, endDate, targetValue){
+		function scaleTime(startDate,endDate,targetValue){
 			let x = d3.scaleTime()
-				.domain([startDate, endDate])
-				.range([0, targetValue])
+				.domain([startDate,endDate])
+				.range([0,targetValue])
 				.clamp(true);
 			return x;
 		}
@@ -163,12 +167,12 @@ class TimeLine extends MagicCircle{
 		//getter-function to drawn Line
 		function getLine(x,g,htmlClass){
 			let line=g.append("line")
-				.attr(htmlClass, "track")
+				.attr(htmlClass,"track")
 				.attr("x1", x.range()[0])
 				.attr("x2", x.range()[1])
-				.select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+				.select(function() {return this.parentNode.appendChild(this.cloneNode(true));})
 				.attr(htmlClass, "track-inset")
-				.select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+				.select(function() {return this.parentNode.appendChild(this.cloneNode(true));})
 				.attr(htmlClass, "track-overlay");
 			return line;
 		}

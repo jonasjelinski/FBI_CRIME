@@ -2,6 +2,7 @@
 //it shows which states in the USA have the highest crimerate by color
 //the more red-shades are seen, the higher is the crimerate
 //the more yellow-shades are seen, the lower is the crimerate
+//This template was used: https://github.com/nixony/d3-choropleth
 
 class Map extends MagicCircle{
 	constructor(pageId,year=configNamespace.STATES_AND_CRIMES.minYear,crimeType=configNamespace.STATES_AND_CRIMES.crimeCategories.Crimes.propertyCrime[0],moving){
