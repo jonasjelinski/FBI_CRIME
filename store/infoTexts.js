@@ -40,5 +40,5 @@ infoTextsNamespace.startPageTexts = {
 
 //this is used to show the text of the startpage
 infoTextsNamespace.startPage = {
-  startPage: infoTextsNamespace.startPageTexts.map + infoTextsNamespace.startPageTexts.lineChart+infoTextsNamespace.startPageTexts.correlation+ infoTextsNamespace.startPageTexts.universe,
+  startPage: "",
 }

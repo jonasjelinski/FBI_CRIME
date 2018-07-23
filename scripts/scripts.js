@@ -27,6 +27,7 @@ scripts_namespace.SECOND_SCRIPTS = [
 	"./charts/crimeCorrelation.js",
 	"./charts/closeButton.js",
 	"./charts/playButton.js",
+	"./charts/startContainer.js",
 	"./pages/parentPage.js",
 	"./pages/crimeCorrelationPage.js",
 	"./charts/dropDownMenu.js",

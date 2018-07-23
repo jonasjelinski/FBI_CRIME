@@ -12,8 +12,10 @@ listenerNamespace.doc = document;
 listenerNamespace.createListener = function (id, type, action) {
 	"use strict";
 	let listener=listenerNamespace.doc.getElementById(id);
-	listener.addEventListener(type, () => { action();});
-	return listener;
+	if(listener){
+		listener.addEventListener(type, () => { action();});
+		return listener;		
+	}
 };
 
 //this listeners starts the action drawing
@@ -24,9 +26,17 @@ listenerNamespace.drawMapListener = listenerNamespace.createListener("mapButton"
 listenerNamespace.drawInfoButtonListener = listenerNamespace.createListener("infoButton", "click", actionNamespace.actionDrawInfoPage);
 listenerNamespace.drawInfoButtonListener = listenerNamespace.createListener("startButton", "click", actionNamespace.actionDrawStartPage);
 
-listenerNamespace.drawStartPage = listenerNamespace.createListener("impressum", "click",  actionNamespace.actionDrawImpressumPage);
-listenerNamespace.drawStartPage = listenerNamespace.createListener("dataregulation", "click", actionNamespace.actionDrawDataPage);
+
+listenerNamespace.drawUniverseStartListener = listenerNamespace.createListener("startUniverse", "click", actionNamespace.actionDrawUniversePage);
+listenerNamespace.drawLineChartStartListener = listenerNamespace.createListener("startLineChart", "click", actionNamespace.actionDrawLineChartPage);
+listenerNamespace.drawForceStartListener = listenerNamespace.createListener("startCorr", "click", actionNamespace.actionDrawCrimeCorrelationPage);
+listenerNamespace.drawMapStartListener = listenerNamespace.createListener("startMap", "click", actionNamespace.actionDrawMapPage);
+
+
+listenerNamespace.drawImpressumPage = listenerNamespace.createListener("impressum", "click",  actionNamespace.actionDrawImpressumPage);
+listenerNamespace.drawDataPage = listenerNamespace.createListener("dataregulation", "click", actionNamespace.actionDrawDataPage);
 listenerNamespace.drawStartPage = listenerNamespace.createListener("FBIlogo", "click", actionNamespace.actionDrawStartPage);
+
 
 
 //this listeners show or hide the infoTexts on hover

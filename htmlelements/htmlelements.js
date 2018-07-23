@@ -187,6 +187,14 @@ htmlelementsNamespace.infoText = {
 	type: "div",
 };
 
+htmlelementsNamespace.startContainer = {
+	parentElement: htmlelementsNamespace.magicCircle,
+	htmlclassname: "startContainer",
+	width: 1000,
+	height: 1000,
+	type: "div",
+};
+
 htmlelementsNamespace.PARENT_PAGE = {
 	width: 2000,
 	height: 1000,

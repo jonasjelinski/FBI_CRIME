@@ -32,6 +32,7 @@ class StateMachine{
 	init(){
 		this.shortInfoText.appendThisCharToPage();
 		this.mapPage.eventTarget.addEventListener(this.mapPage.onMapClicked, this.handleMapClick.bind(this));
+		this.startPage.eventTarget.addEventListener(this.startPage.onClick, this.handleStartPageClick.bind(this));
 	}
 
 	//if the map has been clicked
@@ -44,6 +45,27 @@ class StateMachine{
 		this.drawPopUpTexts();
 		this.stopStateMachine();
 	}
+
+	//if one startContainer has been clicked
+	//this function switches the statemachine
+	//to the side, which the startContainer describes
+	handleStartPageClick(event){
+		let chartId = event.detail.chartId;
+		if(chartId === "startMap"){
+			this.switchState(configNamespace.STATE_MACHINE.MAP);
+		}
+		else if (chartId === "startLineChart"){
+			this.switchState(configNamespace.STATE_MACHINE.LINE_CHART);
+		}
+		else if (chartId === "startUniverse"){
+			this.switchState(configNamespace.STATE_MACHINE.UNIVERSE);
+		}
+		else if(chartId === "startCorr"){
+			this.switchState(configNamespace.STATE_MACHINE.CRIME_CORRELATION);
+		}
+	}
+
+
 
 	//draws the popUpPage.
 	//if the popUpPage is closed by clicking the closeButton
