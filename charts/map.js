@@ -70,7 +70,7 @@ class Map extends MagicCircle{
 			getAllCrimesNumber = getAllCrimesState(allStates,year,crimeType,this.data),
 			allCrimeValues = getAllCrimeValues(getAllCrimesNumber),
 			maxCrime = Math.max.apply(null, allCrimeValues), minCrime = Math.min.apply(null, allCrimeValues),
-			tip = doTip(getAllCrimesNumber);
+			tip = doTip(getAllCrimesNumber, this.crimeText);
 
 		prepareStatusSite(getAllCrimesNumber,crimeType,year,0, this.crimeText);
 		colorizeMap(g,statesData,path,tip,getAllCrimesNumber,this.moving,this.colorRange);
@@ -159,24 +159,24 @@ class Map extends MagicCircle{
 
 		//function uses the libery "tip" by d3 it registrates the "x" and "y"-position of the mouse. So the System knows on which state 
 		//the user is hovering or clicking a state
-		function doTip(getAllCrimesNumber){
+		function doTip(getAllCrimesNumber,crimeText){
 			let maxOfSet=10,
 			tip = d3.tip()
 				.offset(function() {
 					return [maxOfSet,maxOfSet];
 				})
 				.html(function(d){
-					return labelStateOnHover(d);
+					return labelStateOnHover(d,crimeText);
 				});
 			return tip;
 		}
 		
-		function labelStateOnHover(d){
+		function labelStateOnHover(d,crimeText){
 			var html = '';
 			for(let i=0;i<getAllCrimesNumber.length;i++){
 				if(getAllCrimesNumber[i].state.toUpperCase()==d.properties.name.toUpperCase()){
 					html = '<div class="stateHover">'+getAllCrimesNumber[i].state+'</div>';
-					prepareStatusSite(getAllCrimesNumber,crimeType,year,i);
+					prepareStatusSite(getAllCrimesNumber,crimeType,year,i,crimeText);
 				}
 			}
 			return html;
