@@ -221,22 +221,8 @@ function secondNode(treeData,state){
   return treeData;
 }
 
-function lastNode(treeDataState){
-  treeDataState[treeDataState.length-1].children[0].children.push(
-    {
-      "name": "violentCrime",
-      "parent": "null",
-      "value": 10,
-      "type": "black",
-      "level": "red",
-      "children": [
-        {
-          "name": "MurderManslaughter: ",
-          "parent": "null",
-          "value": 10,
-          "type": "black",
-          "level": "red",
-          "children": [
+function childNodeMurderManslaughter(){
+	return [
             {
               "name": ""+crimedata.crimes.violentCrime.MurderManslaughter,
               "parent": "null",
@@ -246,14 +232,10 @@ function lastNode(treeDataState){
               "children": null
             }
           ]
-        },
-        {
-          "name": "Rape: ",
-          "parent": "null",
-          "value": 10,
-          "type": "black",
-          "level": "red",
-          "children": [
+		 }
+		 
+function childNodeRape(){
+	return [
             {
               "name": ""+crimedata.crimes.violentCrime.Rape,
               "parent": "null",
@@ -263,14 +245,10 @@ function lastNode(treeDataState){
               "children": null
             }
           ]
-        },
-        {
-          "name": "Robbery: ",
-          "parent": "null",
-          "value": 10,
-          "type": "black",
-          "level": "red",
-          "children": [
+}
+
+function childNodeRobbery(){
+	return [
             {
               "name": ""+crimedata.crimes.violentCrime.Robbery,
               "parent": "null",
@@ -280,14 +258,10 @@ function lastNode(treeDataState){
               "children": null
             }
           ]
-        },
-        {
-          "name": "Aggravatedassault: ",
-          "parent": "null",
-          "value": 10,
-          "type": "black",
-          "level": "red",
-          "children": [
+}
+
+function childNodeAggravatedassault(){
+	return [
             {
               "name": ""+crimedata.crimes.violentCrime.Aggravatedassault,
               "parent": "null",
@@ -297,23 +271,10 @@ function lastNode(treeDataState){
               "children": null
             }
           ]
-        }
-      ]
-    },
-    {
-      "name": "propertyCrime:",
-      "parent": "null",
-      "value": 10,
-      "type": "black",
-      "level": "red",
-      "children": [
-        {
-          "name": "Burglary: ",
-          "parent": "null",
-          "value": 10,
-          "type": "black",
-          "level": "red",
-          "children": [
+}
+
+function childNodeBuglary(){
+	return [
             {
               "name": ""+crimedata.crimes.propertyCrime.Burglary,
               "parent": "null",
@@ -323,14 +284,10 @@ function lastNode(treeDataState){
               "children": null
             }
           ]
-        },
-        {
-          "name": "Larcenytheft: ",
-          "parent": "null",
-          "value": 10,
-          "type": "black",
-          "level": "red",
-          "children": [
+}
+
+function childNodeLarencytheft(){
+	return [
             {
               "name": ""+crimedata.crimes.propertyCrime.Larcenytheft,
               "parent": "null",
@@ -340,14 +297,10 @@ function lastNode(treeDataState){
               "children": null
             }
           ]
-        },
-        {
-          "name": "Motorvehicletheft: ",
-          "parent": "null",
-          "value": 10,
-          "type": "black",
-          "level": "red",
-          "children": [
+}
+
+function childNodeMotorvehicletheft(){
+	return [
             {
               "name": " "+crimedata.crimes.propertyCrime.Motorvehicletheft,
               "parent": "null",
@@ -357,8 +310,91 @@ function lastNode(treeDataState){
               "children": null
             }
           ]
+}
+
+function childNodeViolentCrime(){
+	return [
+        {
+          "name": "MurderManslaughter: ",
+          "parent": "null",
+          "value": 10,
+          "type": "black",
+          "level": "red",
+          "children": childNodeMurderManslaughter()
+        },
+        {
+          "name": "Rape: ",
+          "parent": "null",
+          "value": 10,
+          "type": "black",
+          "level": "red",
+          "children": childNodeRape()
+        },
+        {
+          "name": "Robbery: ",
+          "parent": "null",
+          "value": 10,
+          "type": "black",
+          "level": "red",
+          "children": childNodeRobbery()
+        },
+        {
+          "name": "Aggravatedassault: ",
+          "parent": "null",
+          "value": 10,
+          "type": "black",
+          "level": "red",
+          "children": childNodeAggravatedassault()
         }
       ]
+}
+
+function childNodePropertyCrime(){
+	return [
+        {
+          "name": "Burglary: ",
+          "parent": "null",
+          "value": 10,
+          "type": "black",
+          "level": "red",
+          "children": childNodeBuglary()
+        },
+        {
+          "name": "Larcenytheft: ",
+          "parent": "null",
+          "value": 10,
+          "type": "black",
+          "level": "red",
+          "children": childNodeLarencytheft()
+        },
+        {
+          "name": "Motorvehicletheft: ",
+          "parent": "null",
+          "value": 10,
+          "type": "black",
+          "level": "red",
+          "children": childNodeMotorvehicletheft()
+        }
+      ]
+}
+
+function lastNode(treeDataState){
+  treeDataState[treeDataState.length-1].children[0].children.push(
+    {
+      "name": "violentCrime",
+      "parent": "null",
+      "value": 10,
+      "type": "black",
+      "level": "red",
+      "children": childNodeViolentCrime()
+    },
+    {
+      "name": "propertyCrime:",
+      "parent": "null",
+      "value": 10,
+      "type": "black",
+      "level": "red",
+      "children": childNodePropertyCrime()
     }
   )
 }
