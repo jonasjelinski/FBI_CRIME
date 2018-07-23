@@ -21,7 +21,7 @@
 }
 body {
   background-color: var(--background);
-  font-family: 'Quattrocento Sans', sans-serif;
+  font-family: 'Overpass', sans-serif;
   overflow:hidden;
 }
 
@@ -31,6 +31,7 @@ p{
 
 .headline{
   position: fixed;
+  font-family: 'Chivo', sans-serif;
   left: 0px;
   right: 0px;
   top: 0px;
@@ -58,11 +59,13 @@ p{
   font-size: 12px;
   background-color: var(--noColor);
   border: none;
+  cursor:pointer;
   z-index: 1;
 }
 
 .legal:hover{
-  cursor:pointer;
+  transition-duration: 0.5s;
+  font-size: 14px;
 }
 
 #impressum{
@@ -99,6 +102,7 @@ p{
 }
 
 .buttons button{
+  font-family: 'Chivo', sans-serif;
   background-color: var(--buttons);
   border: 1px solid var(--borders);
   color: var(--buttonFonts);
@@ -132,6 +136,7 @@ p{
 
 #infotextshortText{
   position: absolute;
+  font-family: 'Chivo', sans-serif;
   width: 100%;
   height: 50%;
   top: 25%;
@@ -161,11 +166,11 @@ p{
   background-repeat:no-repeat;
   width:32px;
   height:32px;
+  cursor:pointer;
 }
 
 .playButton:hover{
 	opacity:0.4;
-	cursor:pointer;
 }
 
 .pauseButton{
@@ -175,11 +180,15 @@ p{
   background-repeat:no-repeat;
   width:32px;
   height:32px;
+  cursor:pointer;
 }
 
 .pauseButton:hover{
 	opacity:0.4;
-	cursor:pointer;
+}
+
+.buttonLabel{
+  top: -10%;
 }
 
 #map{
@@ -194,12 +203,29 @@ p{
   z-index: 0;
 }
 
+#stateInfoMapId{
+  position: absolute;
+  margin-left: 3%;
+  margin-top: 10%;
+  font-size: 14px;
+}
+
+#stateInfoMapId:hover{
+  transition-duration: 0.5s;
+  font-size: 16px;
+}
+
 .crimeInfo{
   position: absolute;
-  margin-left: 5%;
+  margin-left: 4%;
   margin-top: 13%;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 100;
+}
+
+.crimeInfo:hover{
+  transition-duration: 0.5s;
+  font-size: 14px;
 }
 
 .menu{
@@ -210,7 +236,6 @@ p{
   width: 100%;
   height: 40px;
   padding-left: 10px;
-
   background: var(--buttons) ;
   color: var(--buttonFonts);
   font-size: 16px;
@@ -219,26 +244,18 @@ p{
   cursor:pointer;
   outline: none;
 }
-.menu option{
-  color: var(--buttonFonts);
-
-}
-
-.menu option:hover{
-  color:pink;
-  background-color: var(--buttonsHover);
-}
 
 #dropDownMap{
   position: absolute;
-  width: 300px;
+  width: 15%;
+  left: 3%;
 }
 
 #timeLineMap{
   position: absolute;
-  margin-top: 1%;
+  top: -5%;
   margin-left: 40%;
-  height: 20%;
+  height: 15%;
   width: 30%;
 }
 
@@ -248,23 +265,39 @@ p{
   margin-left: 35%;
 }
 
+#colorlegendMap{
+  position: absolute;
+
+  bottom: 0%;
+  right: 1%;
+}
+
 #popup{
   position: absolute;
   background-color: var(--highlight);
   left: 5%;
-  top: 30%;
+  top: 27%;
   width: 90%;
-  height: 67%;
-  z-index:5;
+  height: 70%;
+  z-index:3;
   visibility: hidden;
 }
 
-.stateInfo{
+#infotextpageDescriptionPopup{
   position: absolute;
-  top: 5px;
-  left: 50%;
-  font-family: 'Quattrocento Sans', sans-serif;
-  font-size: 20px;
+  left: 2%;
+  top: 38px;
+  left: 35%;
+  font-size: 14px;
+  font-weight: 60;
+}
+
+#stateInfoPopUpId{
+  position: absolute;
+  top: 3px;
+  left: 45%;
+  font-family: 'Chivo', sans-serif;
+  font-size: 18px;
   font-weight: 100;
 }
 
@@ -287,7 +320,7 @@ p{
 #dropDownPopUp{
   position: absolute;
   width: 300px;
-  margin-top: 15px;
+  top: 40px;
   margin-left: 3%;
 }
 
@@ -299,6 +332,7 @@ p{
 
 #closeButtonPopUp{
   position: absolute;
+  cursor:pointer;
   top: 15px;
   right: 25px;
 }
@@ -333,16 +367,15 @@ p{
 #colorlegendCorrelationsPositive{
   position: absolute;
   bottom: 0%;
-  right: 30%;
-  width: 20%;
+  right: 15%;
+
 }
 
 #colorlegendCorrelationsNegative{
   position: absolute;
   bottom: 0%;
-  left: 30%;
-  width: 20%;
-  transform: scaleX(-1);
+  left: 15%;
+
 }
 
 #universe{
@@ -357,16 +390,14 @@ p{
   position: absolute;
   left: 35%;
   bottom: 0%;
-  z-index: 5;
+  width: 450px;
 }
 
 #timeLineUniverse{
   position: absolute;
-  top: 0%;
-  left: 40%;
-  width: 360px;
-  height: 10%;
-  background-color: pink;
+  top: -5%;
+  left: 2%;
+  width: 30%;
 }
 
 #playButtonUniverse{
@@ -436,70 +467,6 @@ stroke-width: 1.25px;
   stroke: white;
   stroke-width: 2px;
 }
-
-
-/*
-#play-button {
-background: #f08080;
-padding-right: 26px;
-border-radius: 3px;
-border: none;
-color: white;
-margin: 0;
-padding: 0 12px;
-width: 60px;
-cursor: pointer;
-height: 30px;
-}
-
-#play-button:hover {
-background-color: #696969;
-}
-
-.ticks {
-font-size: 10px;
-}
-
-.track,
-.track-inset,
-.track-overlay {
-stroke-linecap: round;
-}
-
-.track {
-stroke: #000;
-stroke-opacity: 0.3;
-stroke-width: 10px;
-}
-
-.track-inset {
-stroke: #dcdcdc;
-stroke-width: 8px;
-}
-
-.track-overlay {
-pointer-events: stroke;
-stroke-width: 50px;
-stroke: transparent;
-cursor: pointer;
-}
-
-.handle {
-fill: #fff;
-stroke: #000;
-stroke-opacity: 0.5;
-stroke-width: 1.25px;
-}
-
-
-
-
-path.state:hover {
-  /*fill: black;*/
-  /*stroke: black;*/
-
-}
-
 
 .stateHover {
 background: rgba(0, 0, 0, 0.7);
@@ -620,4 +587,94 @@ path.state {
 a{
   text-decoration: none;
   color: var(--fonts);
+}
+
+.startContainer{
+  position: absolute;
+  top: 10%;
+  width: 300px;
+  height: 150px;
+  color: var(--background);
+  font-size: 0px;
+  cursor: pointer;
+}
+
+.startPics{
+  width: 300px;
+  height: 150px;
+  border-radius: 2px 2px 2px 2px;
+  -moz-border-radius: 2px 2px 2px 2px;
+  -webkit-border-radius: 2px 2px 2px 2px;
+  border: 7px solid var(--buttons);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+#startMap{
+  left: 2.5%;
+}
+
+#startLineChart{
+  left: 27.5%;
+}
+
+#startCorr{
+  left: 52.5%;
+}
+
+#startUniverse{
+  left: 77.5%;
+}
+
+#startMap:hover{
+     transition-duration: 3s;
+     background: linear-gradient(var(--background),var(--buttons), var(--background));
+     left: 7.5%;
+     width: 85%;
+     height: 70%;
+     padding-left: 2%;
+     padding-top: 2%;
+     font-size: 14px;
+     z-index: 5;
+}
+
+#startLineChart:hover{
+     transition-duration: 3s;
+     background: linear-gradient(var(--background),var(--buttons), var(--background));
+     left: 7.5%;
+     width: 85%;
+     height: 70%;
+     padding-left: 2%;
+     padding-top: 2%;
+     font-size: 14px;
+     z-index: 5;
+}
+
+#startCorr:hover{
+     transition-duration: 3s;
+     background: linear-gradient(var(--background),var(--buttons), var(--background));
+     left: 7.5%;
+     width: 85%;
+     height: 70%;
+     padding-left: 2%;
+     padding-top: 2%;
+     font-size: 14px;
+     z-index: 5;
+}
+
+#startUniverse:hover{
+     transition-duration: 3s;
+     background: linear-gradient(var(--background),var(--buttons), var(--background));
+     left: 7.5%;
+     width: 85%;
+     height: 70%;
+     padding-left: 2%;
+     padding-top: 2%;
+     font-size: 14px;
+     z-index: 5;
+}
+
+.startText{
+  padding-top: 3%;
 }

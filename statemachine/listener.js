@@ -28,6 +28,7 @@ listenerNamespace.drawStartPage = listenerNamespace.createListener("impressum", 
 listenerNamespace.drawStartPage = listenerNamespace.createListener("dataregulation", "click", actionNamespace.actionDrawDataPage);
 listenerNamespace.drawStartPage = listenerNamespace.createListener("FBIlogo", "click", actionNamespace.actionDrawStartPage);
 
+
 //this listeners show or hide the infoTexts on hover
 //this listeners starts the action drawing
 
