@@ -80,10 +80,10 @@ class Map extends MagicCircle{
 		function prepareStatusSite(getAllCrimesNumber,crimeType,year,i,crimeText){
 			d3.select(".crimeInfo").remove();
 			d3.select(".stateInfo").remove();
-			d3.select("#infoText").remove();
+			d3.select("#infoLabelMap").remove();
 			that.page.append("h2").attr("class","stateInfo").attr("id","stateInfoMapId").text(getAllCrimesNumber[i].state);
 			that.page.append("h2").attr("class","crimeInfo").text(crimeType+': '+getAllCrimesNumber[i].value+ " "+crimeText);
-			that.page.append("div").attr("id","infoText");
+			that.page.append("div").attr("id","infoLabelMap");
 		}
 
 		function removeStateInfo(){
