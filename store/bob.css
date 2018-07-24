@@ -5,10 +5,14 @@
   --highlight: #9B9C9C;
   --fonts: #3F3F42;
   --buttons: #3F3F42;
+  --brightButtons: rgb(63,63,66, 0.7);
   --buttonFonts: #CACACB;
   --buttonsHover: #7C7C7D;
   --borders: #FFFFFF;
   --infobox: #5F5F61;
+  --fancyHighlight: #BFEBEB;
+  --shadow: rgba(0,0,0,0.75);
+  --brightShadow: rgb(155,156,156);
   --violentCrime: rgb(214, 20, 0);
   --propertyCrime : rgb(12, 67, 206);
   --Burglary: rgb(0, 209, 114);
@@ -23,6 +27,7 @@ body {
   background-color: var(--background);
   font-family: 'Overpass', sans-serif;
   overflow:hidden;
+  cursor: default;
 }
 
 p{
@@ -129,9 +134,18 @@ p{
   height: 3%;
   padding-top: 1%;
   text-align: center;
-  color: var(--fonts);
+  color: var(--buttonFonts);
   font-size: 90%;
+  background: linear-gradient(var(--background),var(--buttons), var(--background));
+  opacity: 0.8;
   z-index: 1;
+}
+
+#pageDescription:hover{
+  transition-duration: 0.5s;
+
+  color: var(--fancyHighlight);
+  font-size: 100%;
 }
 
 #infotextshortText{
@@ -206,7 +220,7 @@ p{
 #stateInfoMapId{
   position: absolute;
   margin-left: 3%;
-  margin-top: 10%;
+  margin-top: 15%;
   font-size: 14px;
 }
 
@@ -218,7 +232,7 @@ p{
 .crimeInfo{
   position: absolute;
   margin-left: 4%;
-  margin-top: 13%;
+  margin-top: 17%;
   font-size: 12px;
   font-weight: 100;
 }
@@ -241,6 +255,10 @@ p{
   font-size: 16px;
   box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.3);
   border-radius: 3px;
+  background-image:url('../pictures/select-arrow.png');
+  background-position: right;
+  background-size: 10%;
+  background-repeat: no-repeat;
   cursor:pointer;
   outline: none;
 }
@@ -253,21 +271,20 @@ p{
 
 #timeLineMap{
   position: absolute;
-  top: -5%;
-  margin-left: 40%;
+  top: 14%;
+  margin-left: 2%;
   height: 15%;
-  width: 30%;
+  width: 25%;
 }
 
 #playButtonMap{
   position: absolute;
-  margin-top: 2%;
-  margin-left: 35%;
+  top: 12%;
+  margin-left: 2%;
 }
 
 #colorlegendMap{
   position: absolute;
-
   bottom: 0%;
   right: 1%;
 }
@@ -341,7 +358,12 @@ p{
   position: absolute;
   left: 20%;
   z-index: 0;
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
 }
+
+
 
 #dropDownLineChart{
   position: absolute;
@@ -358,24 +380,38 @@ p{
 }
 
 #crimecorrelation{
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  position: relative;
+  margin: 0 auto;
+  top: 3%;
+  display: block;
+  border-radius: 2px 2px 2px 2px;
+  -moz-border-radius: 2px 2px 2px 2px;
+  -webkit-border-radius: 2px 2px 2px 2px;
+  border: 7px solid var(--buttons);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  background-color: var(--infobox);
   z-index: 0;
 }
 
 #colorlegendCorrelationsPositive{
   position: absolute;
   bottom: 0%;
-  right: 15%;
-
+  right: 1%;
 }
 
 #colorlegendCorrelationsNegative{
   position: absolute;
-  bottom: 0%;
-  left: 15%;
+  bottom: 10%;
+  right: 1%;
+}
 
+.correlationNode{
+  -webkit-box-shadow: -11px 34px 11px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: -11px 34px 11px 0px rgba(0,0,0,0.75);
+box-shadow: -11px 34px 11px 0px rgba(0,0,0,0.75);
+  cursor: pointer;
 }
 
 #universe{
@@ -388,31 +424,27 @@ p{
 
 #colorlegendUniverse{
   position: absolute;
-  left: 35%;
   bottom: 0%;
-  width: 450px;
+  right: 1%;
 }
 
 #timeLineUniverse{
   position: absolute;
-  top: -5%;
-  left: 2%;
+  top: 0%;
+  left: 40%;
   width: 30%;
+  position: absolute;
 }
 
 #playButtonUniverse{
   position: absolute;
-  top: 1%;
+  top: 5%;
   height: 10%;
   left: 30%;
 }
 
 .bubble:hover{
   cursor: pointer;
-}
-
-.label{
-  font-size: 12px;
 }
 
 .ticks {
@@ -469,11 +501,11 @@ stroke-width: 1.25px;
 }
 
 .stateHover {
-background: rgba(0, 0, 0, 0.7);
-padding:8px;
-font-size:16px;
-color:white;
-letter-spacing:1px;
+  background: var(--brightButtons);
+  padding:8px;
+  font-size:12px;
+  color: var(--buttonFonts);
+  letter-spacing: 0.5px;
 }
 
 
@@ -511,6 +543,7 @@ d3-tip:hover {
   width: 40%;
   bottom: 5%;
   background-color: var(--infobox);
+  opacity: 0.9;
   color: var(--buttonFonts);
   z-index: 5;
 }
@@ -529,9 +562,16 @@ d3-tip:hover {
 
 #infoButton{
   position: absolute;
+  height: 25px;
+  width: 25px;
   bottom: 1%;
   left: 1%;
-  cursor:pointer;
+  background-color: var(--buttons);
+  color: var(--buttonFonts);
+  -webkit-box-shadow: -5px 5px 10px 0px var(--brightShadow);
+  -moz-box-shadow: -5px 5px 10px 0px var(--brightShadow);
+  box-shadow: -5px 5px 10px 0px var(--brightShadow);
+  cursor: help;
 }
 
 #infoButton:hover{
@@ -596,7 +636,7 @@ a{
   height: 150px;
   color: var(--background);
   font-size: 0px;
-  cursor: pointer;
+  cursor: help;
 }
 
 .startPics{
