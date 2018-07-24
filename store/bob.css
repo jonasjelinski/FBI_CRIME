@@ -13,15 +13,15 @@
   --fancyHighlight: #BFEBEB;
   --shadow: rgba(0,0,0,0.75);
   --brightShadow: rgb(155,156,156);
-  --violentCrime: rgb(214, 20, 0);
-  --propertyCrime : rgb(12, 67, 206);
-  --Burglary: rgb(0, 209, 114);
-  --Larcenytheft: rgb(0, 195, 195);
-  --Motorvehicletheft : rgb(7, 117, 201);
-  --Aggravatedassault : rgb(255, 113, 0);
-  --MurderManslaughter : rgb(255, 211, 85);
-  --Rape: rgb(255, 188, 0);
-  --Robbery: rgb(255, 154, 0);
+  --violentCrime: rgb(175, 50, 0);
+  --propertyCrime : rgb(7, 13, 125);
+  --Burglary: rgb(0, 93, 89);
+  --Larcenytheft: rgb(1, 91, 112);
+  --Motorvehicletheft : rgb(4, 54, 118);
+  --Aggravatedassault : rgb(108, 118, 0);
+  --MurderManslaughter : rgb(120, 34, 0);
+  --Rape: rgb(175, 104, 0);
+  --Robbery: rgb(175, 145, 0);
 }
 body {
   background-color: var(--background);
