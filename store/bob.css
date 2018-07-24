@@ -289,6 +289,16 @@ p{
   right: 1%;
 }
 
+#infoLabelMap{
+  position: absolute;
+  height: 25px;
+  width: 100px;
+  left: 70%;
+  top: 5%;
+  background-color: var(--brightButtons);
+  color: var(--buttonFonts);
+}
+
 #popup{
   position: absolute;
   background-color: var(--highlight);
