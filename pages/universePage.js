@@ -58,7 +58,7 @@ class UniversePage extends ParentPage{
 		}
 	}
 
-	rotateOrStopUniverse(){				
+	rotateOrStopUniverse(){					
 		this.mainChart.rotateOrStop();	
 	}
 }

@@ -371,7 +371,7 @@ class Universe extends MagicCircle{
 					.extent([[0, 0], [width, height]])
 					.on("zoom", function () {					
 						zoomContainer.attr("transform", d3.event.transform);
-					}));
+				}));
 		}
 
 		//hoverContainer is nearly invisible so it
