@@ -151,9 +151,10 @@ class LineChart extends MagicCircle{
 			yCoordLine,
 			allGraphLines,
 			singleLine,
-			labels;	
+			label;	
 			
 		initZoomingBehaviour();
+		initLabel();
 		prepareContainer();	
 		initContainer();		
 		initCoordinateSystem();
@@ -174,18 +175,56 @@ class LineChart extends MagicCircle{
 				.on("zoom", zoomCoordSystemAndLines);
 		}
 
+		function initLabel(){
+			let inVisible = 0;
+			label = container.append("text")
+				.attr("x", 0)        
+				.attr("y", 0)        
+				.style("text-anchor", "middle")
+				.text("Scroll to zoom!")
+				.style("opacity", inVisible);
+		}
+
 		//sets width and height of the rootElement
 		function prepareContainer(){
-			container.call(zooming);
-		}	
+			container
+				.call(zooming)
+				.style("pointer-events", "all")
+				.on("mouseenter" ,showAndHideLabel)  
+				.on("mouseleave", hideLabel);  
+		}
+
+		function showAndHideLabel(){
+			let visible = 1,
+				inVisible = 0,
+				durationTime = 2000,
+				coordinates = d3.mouse(this),
+				x = coordinates[0],
+				y = coordinates[1];			
+			label
+				.style("opacity", visible)
+				.attr("x", x)        
+				.attr("y", y)
+				.transition()
+				.ease(d3.easeLinear)
+				.duration(durationTime)  
+				.style("opacity", inVisible); 
+		}
+
+		function hideLabel(){
+			let inVisible = 0;
+			label
+				.style("opacity", inVisible)
+				.attr("transform", "translate(" + margin.left + "," + 0 + ")");
+		}		
 
 		//inits container and sets width and height and position of the canvas
 		function initContainer(){
 			canvas = container.append("svg").attr("class", "canvas").attr("id", "lineChartCanvas")
 				.attr("width", chartWidth)
 				.attr("height", chartHeight)                                            
-				.attr("transform", "translate(" + margin.left + "," + 0 + ")");  
-		}	
+				.attr("transform", "translate(" + margin.left + "," + 0 + ")");
+		}				
 
 		//inits coordinateSystem and sets width and height and position of the coordindate system
 		function initCoordinateSystem(){
@@ -216,7 +255,6 @@ class LineChart extends MagicCircle{
 				.attr("height", chartHeight)                                                                
 				.style("fill", "white");
 		}
-
 
 		//inits singleLine which is a d3.line function 
 		function initSingleLine(){
