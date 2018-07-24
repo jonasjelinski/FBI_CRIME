@@ -287,6 +287,7 @@ p{
   position: absolute;
   bottom: 0%;
   right: 1%;
+  cursor: pointer;
 }
 
 #infoLabelMap{
@@ -422,12 +423,14 @@ p{
   position: absolute;
   bottom: 0%;
   right: 1%;
+  cursor: pointer;
 }
 
 #colorlegendCorrelationsNegative{
   position: absolute;
   bottom: 10%;
   right: 1%;
+  cursor: pointer;
 }
 
 .correlationNode{
@@ -449,6 +452,7 @@ box-shadow: -11px 34px 11px 0px rgba(0,0,0,0.75);
   position: absolute;
   bottom: 0%;
   right: 1%;
+  cursor: pointer;
 }
 
 #timeLineUniverse{
@@ -693,10 +697,10 @@ a{
 #startMap:hover{
      transition-duration: 3s;
      background: linear-gradient(var(--background),var(--buttons), var(--background));
-     left: 7.5%;
-     width: 85%;
+     left: 0%;
+     width: 100%;
      height: 70%;
-     padding-left: 2%;
+     padding-left: 10%;
      padding-top: 2%;
      font-size: 14px;
      z-index: 5;
@@ -705,10 +709,10 @@ a{
 #startLineChart:hover{
      transition-duration: 3s;
      background: linear-gradient(var(--background),var(--buttons), var(--background));
-     left: 7.5%;
-     width: 85%;
+     left: 0%;
+     width: 100%;
      height: 70%;
-     padding-left: 2%;
+     padding-left: 10%;
      padding-top: 2%;
      font-size: 14px;
      z-index: 5;
@@ -717,10 +721,10 @@ a{
 #startCorr:hover{
      transition-duration: 3s;
      background: linear-gradient(var(--background),var(--buttons), var(--background));
-     left: 7.5%;
-     width: 85%;
+     left: 0%;
+     width: 100%;
      height: 70%;
-     padding-left: 2%;
+     padding-left: 10%;
      padding-top: 2%;
      font-size: 14px;
      z-index: 5;
@@ -729,10 +733,10 @@ a{
 #startUniverse:hover{
      transition-duration: 3s;
      background: linear-gradient(var(--background),var(--buttons), var(--background));
-     left: 7.5%;
-     width: 85%;
+     left: 0%;
+     width: 100%;
      height: 70%;
-     padding-left: 2%;
+     padding-left: 10%;
      padding-top: 2%;
      font-size: 14px;
      z-index: 5;
