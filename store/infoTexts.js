@@ -40,5 +40,5 @@ infoTextsNamespace.startPageTexts = {
 
 //this is used to show the text of the startpage
 infoTextsNamespace.startPage = {
-  startPage: "for more details click on the map",
+  startPage: "",
 }

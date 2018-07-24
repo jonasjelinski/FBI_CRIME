@@ -291,12 +291,24 @@ p{
 
 #infoLabelMap{
   position: absolute;
-  height: 25px;
-  width: 100px;
+  height: 24px;
+  width: 90px;
   left: 70%;
   top: 5%;
+  padding-top:7px;
+  padding-left: 5px;
   background-color: var(--brightButtons);
   color: var(--buttonFonts);
+  font-size: 15px;
+  text-align: left;
+  -webkit-box-shadow: 5px -5px 5px 0px rgba(242,237,242,1);
+  -moz-box-shadow: 5px -5px 5px 0px rgba(242,237,242,1);
+  box-shadow: 5px -5px 5px 0px rgba(242,237,242,1);
+}
+
+#infoLabelMap:hover{
+  transition: 1s;
+  width: 200px;
 }
 
 #popup{
