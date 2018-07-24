@@ -106,7 +106,8 @@ class BubbleMenu extends MagicCircle{
 				.attr("y", function(d,i){return calculateYPos(i);})           
 				.attr("font-size", fontSize)
 				.style("fill", function(d){return getColor(d)})
-				.text(function(d) { return d; });
+				.text(function(d) { return d; })
+				.on("click", handleLabelClick);
 		}
 
 		function calculateYPos(i){
@@ -127,11 +128,32 @@ class BubbleMenu extends MagicCircle{
 			sendSelectedValue(value);
 		}
 
+		//this function is called at onClick on a label
+		//it reads the value of the label and
+		//send it as an event
+		//it also changes the color of the label and the bubble
+		function handleLabelClick(){
+			let label = d3.select(this),
+				value = label.attr("bubbleValue"),
+				bubble = getBubbleByLabelValue(value);	
+			changeColor(bubble, value);
+			changeColor(label, value);
+			sendSelectedValue(value);
+		}
+
 		//returns the label containting the bubbleValue value
 		//so it can be selected and changed in handleBubbleClick
 		function getLabelByBubbleValue(value){
 			let selector = "g[bubbleValue='"+value+"']",
 				label = d3.selectAll(selector).filter(".label").select("text");				
+			return label;
+		}
+
+		//returns the label containting the bubbleValue value
+		//so it can be selected and changed in handleBubbleClick
+		function getBubbleByLabelValue(value){
+			let selector = "circle[bubbleValue='"+value+"']",
+				label = d3.selectAll(selector).filter(".bubble").select("text");				
 			return label;
 		}
 
