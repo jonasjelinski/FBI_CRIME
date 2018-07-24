@@ -12,7 +12,8 @@ class PlayButton extends MagicCircle{
 		this.height = this.htmlelement.height;
 		this.eventTarget = new EventTarget();		
 		this.onClick = "onClick";
-		this.labelText = labelText;		
+		this.labelText = labelText;
+		this.isPlaying = false;	
 	}
 
 	doChart(){
@@ -25,8 +26,6 @@ class PlayButton extends MagicCircle{
 			label,
 			pause = "pauseButton",
 			play = "playButton",
-			isPlaying = false,
-			buttonLabelClass = "buttonLabel",
 			that = this,
 			hidden = 0,
 			visible = 1;
@@ -64,17 +63,17 @@ class PlayButton extends MagicCircle{
 		//sets isPlaying true if it is false
 		//sets isPlaying false if it is true
 		function setIsPlaying(){
-			isPlaying = !isPlaying;
+			that.isPlaying = !that.isPlaying;
 		}
 
 		//changes the label dending on if<d 
 		//the player plays or if it is paused
 		function changeButtonLabel(){
-			if(isPlaying){
-				button.attr("class",pause)			
+			if(that.isPlaying){
+				button.attr("class",pause);			
 			}
 			else{
-				button.attr("class", play)
+				button.attr("class", play);
 			}
 		}
 
@@ -88,15 +87,15 @@ class PlayButton extends MagicCircle{
 		//which contains the text of the button
 		function setButtonLabel(){
 			label = that.container
-					.append("text")
-					.attr("class", "buttonLabel")
-					.style("opacity", hidden)
-					.text(that.labelText);
+				.append("text")
+				.attr("class", "buttonLabel")
+				.style("opacity", hidden)
+				.text(that.labelText);
 		}
 
 		function setHoverBehaviour(){
 			button.on("mouseover", showLabel)
-				.on("mouseout", hideLabel)
+				.on("mouseout", hideLabel);
 		}
 
 		function showLabel(){

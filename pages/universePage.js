@@ -43,16 +43,22 @@ class UniversePage extends ParentPage{
 
 	addEventListeners(){
 		this.timeLine.eventTarget.addEventListener(this.timeLine.onUpdate, this.updateUniverseYear.bind(this));		
-		this.playButton.eventTarget.addEventListener(this.playButton.onClick, this.rotateUniverse.bind(this), false);
+		this.playButton.eventTarget.addEventListener(this.playButton.onClick, this.rotateOrStopUniverse.bind(this), false);
 	}
 
+	//draws the universe with a new year
+	//if the universe rotated before
+	//it'll continue with the rotation
 	updateUniverseYear(event){
 		let year = event.detail.year;			
 		this.mainChart.setYear(year);		
 		this.mainChart.updatesHimself();
+		if(this.playButton.isPlaying){
+			this.mainChart.animateRotation();
+		}
 	}
 
-	rotateUniverse(){				
+	rotateOrStopUniverse(){				
 		this.mainChart.rotateOrStop();	
 	}
 }
