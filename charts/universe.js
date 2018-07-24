@@ -65,6 +65,10 @@ class Universe extends MagicCircle{
 		this.year = year;
 	}
 
+	getYear(){
+		return this.year;
+	}
+
 	rotateOrStop(){
 		if(this.isRotating){
 			this.stopRotation();			
@@ -371,7 +375,7 @@ class Universe extends MagicCircle{
 					.extent([[0, 0], [width, height]])
 					.on("zoom", function () {					
 						zoomContainer.attr("transform", d3.event.transform);
-				}));
+			}));
 		}
 
 		//hoverContainer is nearly invisible so it
