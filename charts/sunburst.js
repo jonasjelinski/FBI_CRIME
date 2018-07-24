@@ -107,7 +107,7 @@ class Sunburst extends MagicCircle{
 			lineWidth = labelWidth,
 			lineHeight = labelHeight,
 			durationTime = 2000,
-			hoverDuration = 1000,      
+			hoverDuration = 500,      
 			container = this.container,
 			zoomContainer,
 
