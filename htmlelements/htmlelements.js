@@ -23,7 +23,7 @@ htmlelementsNamespace.crimeCorrelation = {
 	labelPositionY : 5 ,
 	type: "svg",
 	labelFontSize : "14px",
-	correlationFontColor : "#3F3F42",
+	correlationFontColor : "#CACACB",
 	correlationFontSize : "14px",
 	highlightLinkColor: "yellow",
 	ignoreLinkColor: "#7C7C7D",

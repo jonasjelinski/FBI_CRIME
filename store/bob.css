@@ -9,7 +9,8 @@
   --buttonFonts: #CACACB;
   --buttonsHover: #7C7C7D;
   --borders: #FFFFFF;
-  --infobox: #5F5F61;
+  --infobox: rgb(95,95,97,0.9);
+  --boxBackground: #979797;
   --fancyHighlight: #BFEBEB;
   --shadow: rgba(0,0,0,0.75);
   --brightShadow: rgb(155,156,156);
@@ -23,6 +24,7 @@
   --Rape: rgb(175, 104, 0);
   --Robbery: rgb(175, 145, 0);
 }
+
 body {
   background-color: var(--background);
   font-family: 'Overpass', sans-serif;
@@ -280,7 +282,7 @@ p{
 #playButtonMap{
   position: absolute;
   top: 12%;
-  margin-left: 2%;
+  margin-left: 5%;
 }
 
 #colorlegendMap{
@@ -311,6 +313,11 @@ p{
 #infoLabelMap:hover{
   transition: 1s;
   width: 200px;
+}
+
+#colorlegendMap:hover{
+  background-color: pink;
+  transform: scale3d(2);
 }
 
 #popup{
@@ -381,13 +388,14 @@ p{
 #linediagram{
   position: absolute;
   left: 20%;
-  z-index: 0;
   cursor: -moz-zoom-in;
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
 }
 
+#lineChartCanvas{
 
+}
 
 #dropDownLineChart{
   position: absolute;
@@ -415,7 +423,7 @@ p{
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  background-color: var(--infobox);
+  background-color: var(--boxBackground);
   z-index: 0;
 }
 
@@ -437,7 +445,7 @@ p{
   -webkit-box-shadow: -11px 34px 11px 0px rgba(0,0,0,0.75);
 -moz-box-shadow: -11px 34px 11px 0px rgba(0,0,0,0.75);
 box-shadow: -11px 34px 11px 0px rgba(0,0,0,0.75);
-  cursor: pointer;
+  cursor: move;
 }
 
 #universe{
@@ -525,6 +533,7 @@ stroke-width: 1.25px;
   fill: none;
   stroke: white;
   stroke-width: 2px;
+  cursor: pointer;
 }
 
 .stateHover {
@@ -570,7 +579,6 @@ d3-tip:hover {
   width: 40%;
   bottom: 5%;
   background-color: var(--infobox);
-  opacity: 0.9;
   color: var(--buttonFonts);
   z-index: 5;
 }
