@@ -405,7 +405,6 @@ class CrimeCorrelation extends MagicCircle{
 			return "rgb(" + red + "," + green + "," + blue+ ")"; 
 		}
 
-
 		function getNegativeRGB(correlation){
 			let factor = correlation,
 				red = configNamespace.CRIME_CORRELATION.negativeCorrelationRedHigh,

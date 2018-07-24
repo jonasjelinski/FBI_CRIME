@@ -11,6 +11,8 @@ class ColorLegend extends MagicCircle{
 		this.htmlElementID = this.htmlelement.htmlid+chartId;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
+		this.bigWidth = this.htmlelement.bigWidth;
+		this.bigHeight = this.htmlelement.bigHeight;
 		this.title = title;
 		this.startLabel = startLabel;
 		this.endLabel = endLabel;
@@ -35,7 +37,6 @@ class ColorLegend extends MagicCircle{
 		this.titleType = this.htmlelement.titleType;
 		this.labelClass = this.htmlelement.labelClass;
 		this.labelType = this.htmlelement.labelType;
-
 	}
 
 	//creates the data and draws with data the colorlegend
@@ -55,10 +56,12 @@ class ColorLegend extends MagicCircle{
 		let colorScale,
 			that = this,
 			container = this.container,
+			isSmall = true,
 			sliceContainer,
 			labelsContainer,
 			titleContainer;
 			
+		initClickBevhaviour();
 		initColorScale();
 		initSliceContainer();
 		initLabelsContainer();
@@ -66,6 +69,27 @@ class ColorLegend extends MagicCircle{
 		appendSlices();
 		appendLabels();
 		appendTitle();
+
+		//inits click beavhiour
+		//container changes size
+		function initClickBevhaviour(){
+			container.on("click", changeSize);
+		}
+
+		//container gets smaller if container was big else big
+		function changeSize(){
+			if(isSmall){
+				container
+					.attr("width", that.bigWidth)
+					.attr("height", that.bigHeight);
+			}
+			else{
+				container
+					.attr("width",that.width)
+					.attr("height",that.height);
+			}
+			isSmall = !isSmall;
+		}
 
 		//inits the linear colorScale 
 		function initColorScale(){

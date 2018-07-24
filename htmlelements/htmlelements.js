@@ -84,8 +84,10 @@ htmlelementsNamespace.colorLegend = {
 	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "colorlegend",
 	htmlid: "colorlegend",
-	width:400,
-	height:50,
+	width:200,
+	height:25,
+	bigWidth: 400,
+	bigHeight: 50,
 	type: "svg",
 	sliceNumbers: 50,
 	sliceHeight: 10,
@@ -274,7 +276,6 @@ htmlelementsNamespace.impressumPage = {
 	textid: "impressumText",
 	infoTextId: "ImpressumPage",
 };
-
 
 htmlelementsNamespace.dataRegulationPage = {
 	htmlclassname: "dataRegulationPage",

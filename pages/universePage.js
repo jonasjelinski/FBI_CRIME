@@ -22,7 +22,7 @@ class UniversePage extends ParentPage{
 	init(){
 		this.initCharts();
 		this.initControlls();
-		this.addEventListeners();		
+		this.addEventListeners();	
 	}
 
 	initCharts(){
@@ -50,15 +50,19 @@ class UniversePage extends ParentPage{
 	//if the universe rotated before
 	//it'll continue with the rotation
 	updateUniverseYear(event){
-		let year = event.detail.year;			
-		this.mainChart.setYear(year);		
-		this.mainChart.updatesHimself();
-		if(this.playButton.isPlaying){
-			this.mainChart.animateRotation();
-		}
+		let newYear = event.detail.year,
+			oldYear = this.mainChart.getYear(); 
+		if(newYear!== oldYear){
+			this.mainChart.setYear(newYear);		
+			this.mainChart.updatesHimself();
+			if(this.playButton.isPlaying){
+				this.mainChart.animateRotation();
+			}
+		}		
+		
 	}
 
-	rotateOrStopUniverse(){				
+	rotateOrStopUniverse(){					
 		this.mainChart.rotateOrStop();	
 	}
 }
