@@ -28,7 +28,7 @@ class PopUpPage extends ParentPage{
 	}
 
 	initHeader(){
-		this.page.append("h1").attr("class","stateInfo").attr("id","stateInfoPopUpId").text(this.state);
+		this.header = this.page.append("h1").attr("class","stateInfo").attr("id","stateInfoPopUpId").text("State: "+this.state+ "Year :"+ this.year);
 	}
 
 	initCharts(){
@@ -96,12 +96,19 @@ class PopUpPage extends ParentPage{
 
 	updateYear(event){
 		let year = event.detail.selection;
+		this.year = year;
+		this.updateHeader();
 		this.mainChart.setYear(year);
 		this.treeChart.setYear(year);
 		this.mainChart.updatesHimself();
 		this.treeChart.updatesHimself();
 		this.resetBubbleMenu();
 
+	}
+
+	updateHeader(){
+		this.header.text("");
+		this.initHeader();
 	}
 
 	resetBubbleMenu(){
