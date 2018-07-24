@@ -371,7 +371,7 @@ class Universe extends MagicCircle{
 					.extent([[0, 0], [width, height]])
 					.on("zoom", function () {					
 						zoomContainer.attr("transform", d3.event.transform);
-				}));
+					}));
 		}
 
 		//hoverContainer is nearly invisible so it
@@ -454,8 +454,7 @@ class Universe extends MagicCircle{
 				.style("font-size", that.labelSize)			
 				.on("mouseover", function(d){changeFont(d, this);})
 				.on("mouseout", function(d){resetFont(d, this)});
-		}		
-
+		}
 
 		//draws the universe
 		function drawUniverse(){ 	  		
@@ -476,7 +475,6 @@ class Universe extends MagicCircle{
 				.attr("y", function(d){return d.y;});
 		}
 
-
 		//changes the font so labels get less visible
 		//if the label d is actived
 		function changeFont(d, selection){
@@ -488,7 +486,6 @@ class Universe extends MagicCircle{
 			fontSize = that.hoverInSize; 			
 			d3.select(selection).transition().duration(durationTime).style("opacity", opacity).style("font-size", fontSize);
 		}
-
 
 		function resetFont(d, selection){
 			let label = d3.select(selection).node(),
