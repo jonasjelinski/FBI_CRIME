@@ -18,6 +18,7 @@ class Map extends MagicCircle{
 		this.onClick = "onClick";
 		this.colorRange = 11;
 		this.crimeText = "victims per 100.000 inhabitants";
+		this.infoLabelMap = "click on map for more details";
 		this.eventTarget = new EventTarget();
 	}
 
@@ -71,19 +72,19 @@ class Map extends MagicCircle{
 			getAllCrimesNumber = getAllCrimesState(allStates,year,crimeType,this.data),
 			allCrimeValues = getAllCrimeValues(getAllCrimesNumber),
 			maxCrime = Math.max.apply(null, allCrimeValues), minCrime = Math.min.apply(null, allCrimeValues),
-			tip = doTip(getAllCrimesNumber, this.crimeText);
+			tip = doTip(getAllCrimesNumber, this.crimeText, this.infoLabelMap);
 
-		prepareStatusSite(getAllCrimesNumber,crimeType,year,0, this.crimeText);
+		prepareStatusSite(getAllCrimesNumber,crimeType,year,0,this.crimeText,this.infoLabelMap);
 		colorizeMap(g,statesData,path,tip,getAllCrimesNumber,this.moving,this.colorRange);
 
 		// This function is the first call and prepares the start values, simultaneously it deletes after every call the old values 
-		function prepareStatusSite(getAllCrimesNumber,crimeType,year,i,crimeText){
+		function prepareStatusSite(getAllCrimesNumber,crimeType,year,i,crimeText,infoLabelMap){
 			d3.select(".crimeInfo").remove();
 			d3.select(".stateInfo").remove();
 			d3.select("#infoLabelMap").remove();
 			that.page.append("h2").attr("class","stateInfo").attr("id","stateInfoMapId").text(getAllCrimesNumber[i].state);
 			that.page.append("h2").attr("class","crimeInfo").text(crimeType+': '+getAllCrimesNumber[i].value+ " "+crimeText);
-			that.page.append("div").attr("id","infoLabelMap");
+			that.page.append("div").attr("id","infoLabelMap").text(""+infoLabelMap);
 		}
 
 		function removeStateInfo(){
@@ -162,24 +163,24 @@ class Map extends MagicCircle{
 
 		//function uses the libery "tip" by d3 it registrates the "x" and "y"-position of the mouse. So the System knows on which state 
 		//the user is hovering or clicking a state
-		function doTip(getAllCrimesNumber,crimeText){
+		function doTip(getAllCrimesNumber,crimeText,infoLabelMap){
 			let maxOfSet=10,
 			tip = d3.tip()
 				.offset(function() {
 					return [maxOfSet,maxOfSet];
 				})
 				.html(function(d){
-					return labelStateOnHover(d,crimeText);
+					return labelStateOnHover(d,crimeText,infoLabelMap);
 				});
 			return tip;
 		}
 		
-		function labelStateOnHover(d,crimeText){
+		function labelStateOnHover(d,crimeText,infoLabelMap){
 			var html = '';
 			for(let i=0;i<getAllCrimesNumber.length;i++){
 				if(getAllCrimesNumber[i].state.toUpperCase()==d.properties.name.toUpperCase()){
 					html = '<div class="stateHover">'+getAllCrimesNumber[i].state+'</div>';
-					prepareStatusSite(getAllCrimesNumber,crimeType,year,i,crimeText);
+					prepareStatusSite(getAllCrimesNumber,crimeType,year,i,crimeText,infoLabelMap);
 				}
 			}
 			return html;
