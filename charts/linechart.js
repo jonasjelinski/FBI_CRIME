@@ -181,7 +181,7 @@ class LineChart extends MagicCircle{
 
 		//inits container and sets width and height and position of the canvas
 		function initContainer(){
-			canvas = container.append("svg").attr("class", "canvas")
+			canvas = container.append("svg").attr("class", "canvas").attr("id", "lineChartCanvas")
 				.attr("width", chartWidth)
 				.attr("height", chartHeight)                                            
 				.attr("transform", "translate(" + margin.left + "," + 0 + ")");  
