@@ -64,7 +64,7 @@ htmlelementsNamespace.theUniverse = {
 	labelColor: "#3F3F42",
 	labelSize : "5px",
 	hoverInLabelSize: "20px",
-	hoverOutLabelSize: "10px",
+	hoverOutLabelSize: "5px",
 	translateX : 150,
 	translateY : -200,
 };
