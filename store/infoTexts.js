@@ -9,7 +9,7 @@ var infoTextsNamespace = infoTextsNamespace || {};
 
 
 infoTextsNamespace.shortPageDescription = {
-  startPage: "<p> This website gives an overview of the crimes committed in the USA between 2000 and 2016 recorded by the Federal Bureau of Investigation (FBI).You can see your options if you hover the pictures with your mouse.</p>",
+  startPage: "<p> This website gives an overview of the crimes committed in the USA between 2000 and 2016 recorded by the Federal Bureau of Investigation (FBI).Hover the pictures with your mouse to see what the websites offers you.</p>",
   mapInfo : "<p>Here you can see a color map representing the different crimes committed in each state of the USA per 100 000 inhabitants.</p>",
   lineChartInfo: "<p>On this page you can compare the crimes committed over the entire recorded period through a line chart.</p>",
   correlationInfo: "<p>All recorded crimecategories are linked together on this page and their correlation is displayed through the color of the links.</p>",
@@ -43,10 +43,10 @@ infoTextsNamespace.legal = {
 }
 
 infoTextsNamespace.startPageTexts = {
-  map : { infoText: "This page gives you a first overview of the whole United States and you can see all the crimes over the entire period.", buttonText: "Please click now on the big map icon or use the buttons in the headline to try it.", },
-  lineChart : { infoText: "On this page, you can look at individual states and the crimes committed there in an annual comparison.", buttonText: "Please click now on the big timeline icon or use the buttons in the headline to try it.", },
-  correlation: { infoText: "For this page, the correlation was calculated for all crimes. You can investigate the result further here.", buttonText: "Please click now on the big correlation icon or use the buttons in the headline to try it.", },
-  universe: {infoText: "An overview of the distribution of violent and property crimes can be found on this page.", buttonText: "Please click now on the big universe icon or use the buttons in the headline to try it.", }, 
+  map : { infoText: "This page gives you a first overview of the whole United States and you can see all the crimes over the entire period.", buttonText: "Please click now on the big 'Map' icon or use the buttons in the headline to get to the map.", },
+  lineChart : { infoText: "On this page you can look at individual states and the crimes committed there in an annual comparison.", buttonText: "Please click now on the big 'Timeline' icon or use the buttons in the headline to see the line chart.", },
+  correlation: { infoText: "For this page the correlation was calculated for all crimes. You can investigate the result further in a 3d animation.", buttonText: "Please click now on the big 'Correlation' icon or use the buttons in the headline to see the correlation", },
+  universe: {infoText: "An overview of the distribution of violent and property crimes can be found on this page.", buttonText: "Please click now on the big 'Universe' icon or use the buttons in the headline to get to the universe.", }, 
 }
 
 
