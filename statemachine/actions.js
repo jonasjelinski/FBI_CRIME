@@ -35,21 +35,25 @@ actionNamespace.actionDrawInfoPage = function(){
 	componentsNamespace.stateMachine.drawInfoPage();
 };
 
+actionNamespace.showInfoTextStart = function(){
+	actionNamespace.showInfoText(infoTextsNamespace.buttonPageDescription.startPage);
+};
+
 actionNamespace.showInfoTextMap = function(){
-	actionNamespace.showInfoText(infoTextsNamespace.shortPageDescription.mapInfo);
+	actionNamespace.showInfoText(infoTextsNamespace.buttonPageDescription.mapInfo);
 };
 
 actionNamespace.showInfoTextTimeLine = function(){
-	actionNamespace.showInfoText(infoTextsNamespace.shortPageDescription.lineChartInfo);
+	actionNamespace.showInfoText(infoTextsNamespace.buttonPageDescription.lineChartInfo);
 };
 
 actionNamespace.showInfoTextCorrelation = function(){
-	actionNamespace.showInfoText(infoTextsNamespace.shortPageDescription.correlationInfo);
+	actionNamespace.showInfoText(infoTextsNamespace.buttonPageDescription.correlationInfo);
 
 };
 
 actionNamespace.showInfoTextUniverse = function(){
-	actionNamespace.showInfoText(infoTextsNamespace.shortPageDescription.universeInfo);
+	actionNamespace.showInfoText(infoTextsNamespace.buttonPageDescription.universeInfo);
 };
 
 actionNamespace.showInfoText = function(text){
