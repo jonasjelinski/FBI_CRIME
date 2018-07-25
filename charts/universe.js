@@ -44,6 +44,7 @@ class Universe extends MagicCircle{
 		this.hoverInSize = this.htmlelement.hoverInLabelSize;
 		this.translateX = this.htmlelement.translateX;
 		this.translateY = this.htmlelement.translateY;
+		this.sunFactor = 2;
 	}
 
 	//draws the universe
@@ -303,7 +304,7 @@ class Universe extends MagicCircle{
 
 	//creates a single suns which is an object
 	createSun(node){
-		let factor = 2,
+		let factor = this.sunFactor,
 			sun = node;	
 		sun.quotient = factor;
 		sun.distanceToSun =0;
@@ -322,7 +323,7 @@ class Universe extends MagicCircle{
 	//creates a sun for the violence
 	createViolenceSun(node){
 		node.group = this.violenceGroup;
-		node.color = "red";		
+		node.color = "rgb(255,125,0)";		
 		node.xSun = this.standards.violenceSunX;
 		node.ySun = this.standards.violenceSunY;
 		node.x = node.xSun;
@@ -333,7 +334,7 @@ class Universe extends MagicCircle{
 	//creates a sun for the properties
 	createPropertySun(node){
 		node.group = this.propertyGroup;
-		node.color = "blue";		
+		node.color = "rgb(255,255,125)";		
 		node.xSun = this.standards.propertySunX;
 		node.ySun = this.standards.propertySunY;
 		node.x = node.xSun;
@@ -377,7 +378,7 @@ class Universe extends MagicCircle{
 					.extent([[0, 0], [width, height]])
 					.on("zoom", function () {					
 						zoomContainer.attr("transform", d3.event.transform);
-			}));
+					}));
 		}
 
 		//hoverContainer is nearly invisible so it
@@ -456,29 +457,20 @@ class Universe extends MagicCircle{
 			label = label.enter().append("text")
 				.text(function(d){return d.id;})
 				.attr("fill", that.labelColor )
-				.style("opacity", "0.5")
-				.style("font-size", that.labelSize)			
+				.style("opacity", setLabelOpacity)
+				.style("font-size", that.labelSize)
+				.style("text-anchor", "middle")			
 				.on("mouseover", function(d){changeFont(d, this);})
-				.on("mouseout", function(d){resetFont(d, this)});
+				.on("mouseout", function(d){resetFont(d, this);});
 		}
 
-		//draws the universe
-		function drawUniverse(){ 	  		
-			
-			node	
-				.attr("cx", function(d){return d.x;})      			
-				.attr("cy", function(d){return d.y;})
-				.attr("r", function(d){return 0;})
-				.attr("fill", function(d){return "black";})
-				.transition()
-				.ease(d3.easeLinear)
-				.duration(durationTime)  			
-				.attr("r", function(d){return d.radius;})
-				.attr("fill", function(d){return d.color;}); 
-
-			label
-				.attr("x", function(d){return d.x;})    		
-				.attr("y", function(d){return d.y;});
+		//the label is nearly invisible if its not describing a sun
+		function setLabelOpacity(d){
+			let opacity = 0.5;
+			if(d.quotient === that.sunFactor){
+				opacity = 1;	
+			}
+			return opacity;		
 		}
 
 		//changes the font so labels get less visible
@@ -498,10 +490,29 @@ class Universe extends MagicCircle{
 				opacity = label.style.opacity,
 				fontSize = label.style.fontSize,
 				durationTime = 500;									
-			opacity = "0.1"
+			opacity = "0.1";
 			fontSize = that.hoverOutSize; 			
 			d3.select(selection).transition().duration(durationTime).style("opacity", opacity).style("font-size", fontSize);
 		}
+
+		//draws the universe
+		function drawUniverse(){ 	  		
+			
+			node	
+				.attr("cx", function(d){return d.x;})      			
+				.attr("cy", function(d){return d.y;})
+				.attr("r", function(d){return 0;})
+				.attr("fill", function(d){return "black";})
+				.transition()
+				.ease(d3.easeLinear)
+				.duration(durationTime)  			
+				.attr("r", function(d){return d.radius;})
+				.attr("fill", function(d){return d.color;}); 
+
+			label
+				.attr("x", function(d){return d.x;})    		
+				.attr("y", function(d){return d.y;});
+		}		
 
 		//updates the positions of the planets 
 		//keine Transition sonst funktioniert Kreisbwegung nicht!
