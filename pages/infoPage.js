@@ -1,3 +1,5 @@
+/*---PAGE: INFO--*/
+
 //this page shows an infoText
 //by appending a InfoBox-chart to the page
 //it has a CloseButton as controll which deletes this page

@@ -1,3 +1,5 @@
+/*---PAGE: IMPRESSUM--*/
+
 //The ImpressumPage
 //extends the TextPage
 //to show the Impressum

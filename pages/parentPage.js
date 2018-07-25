@@ -1,3 +1,5 @@
+/*---PAGE: PARENT--*/
+
 //This page is the parentPage for all other pages
 //it contains nearly all functions the child-pages need
 

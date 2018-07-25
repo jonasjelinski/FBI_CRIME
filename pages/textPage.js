@@ -1,3 +1,5 @@
+/*---PAGE: TEXT--*/
+
 //This Page shows an InfoText
 //the text is set in the constructor
 class TextPage extends ParentPage{

@@ -1,3 +1,5 @@
+/*---SUNBURST--*/
+
 //This class creates a SuburstChart
 //it shows the distribution between different crimecategories in a single state
 

@@ -1,3 +1,5 @@
+/*---BUBBLE MENU--*/
+
 //This class
 //creates a BubbleMenu
 //each bubble shows a different category

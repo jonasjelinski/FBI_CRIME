@@ -1,3 +1,5 @@
+/*---CRIME CORRELATION--*/
+
 //This class creates a d3.forceSimulation
 //it shows the correlations between different crimetypes
 //if the correlation is bigger then the line between the nodes is bigger

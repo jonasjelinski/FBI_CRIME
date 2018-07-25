@@ -1,3 +1,5 @@
+/*---COLOR LEGEND--*/
+
 //This class
 //creates a legend which contains colors
 //with the colorvalues from startColor to endColor

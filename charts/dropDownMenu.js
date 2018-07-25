@@ -1,3 +1,5 @@
+/*---DROP DOWN MENU--*/
+
 //This class
 //creates a dropdown menu 
 //the dropDownArray contains the values which are shown as options in the menu

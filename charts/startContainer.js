@@ -1,3 +1,11 @@
+/*---START CONTAINER--*/
+
+//this class creates a startcontainer
+//a startcontainer consists of a picture
+//and a label which descripes the picture
+//and a buttonText which explains the user what
+//happens if he clickes on the container
+
 class StartContainer extends MagicCircle{
 	constructor(pageId, chartId, picSrc, picId, alt, textId, labelText, buttonText){
 		super(pageId);

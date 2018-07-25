@@ -1,3 +1,5 @@
+/*---PAGE: MAP--*/
+
 //this page shows an intercative Map of the USA
 //representing the crimerate for each state as color
 //by appending a Map-chart to the page

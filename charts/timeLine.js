@@ -1,3 +1,5 @@
+/*--TIMELINE--*/
+
 //This class creates a TimeLine
 //An interactive scale bar to chosse the years for the modules "map" and "universe"
 //This template was used https://gist.github.com/officeofjane/47d2b0bfeecfcb41d2212d06d095c763#file-circles-csv

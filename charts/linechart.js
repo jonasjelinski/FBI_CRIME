@@ -1,3 +1,5 @@
+/*---LINE CHART--*/
+
 //This class
 //creates a line chart
 //the linechart shows the crimerates over the time

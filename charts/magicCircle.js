@@ -1,3 +1,5 @@
+/*---MAGIC CIRCLE--*/
+
 //This class is the
 //parentclass of all other classes
 //this class is only used to act as a parentclass

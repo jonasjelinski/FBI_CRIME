@@ -1,3 +1,5 @@
+/*---PAGE: START--*/
+
 //The StartPage
 //extends the TextPage
 //to show the text of the StartPage

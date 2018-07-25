@@ -1,3 +1,5 @@
+/*---HTML ELEMENTS--*/
+
 //htmlelementsNamespace contains all details of the charts and pages
 //each object (e.g. htmlelementsNamespace.magicCircle)
 //is used in a class of charts or pages

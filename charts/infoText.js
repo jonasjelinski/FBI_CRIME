@@ -1,3 +1,5 @@
+/*---INFO TEXT--*/
+
 //This class
 //appends and html-text to the container
 //the text is set in the constructor

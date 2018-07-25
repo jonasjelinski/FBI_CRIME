@@ -1,3 +1,5 @@
+/*---PAGE: DATA REGULATION--*/
+
 //The DataRegulationPage
 //extends the TextPage
 //to show the DataRegulations

@@ -1,3 +1,5 @@
+/*--TREE--*/
+
 class Tree extends MagicCircle{
 
 	constructor(pageId, state = configNamespace.STATES_AND_CRIMES.states[0], year = 2000){

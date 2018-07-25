@@ -1,3 +1,5 @@
+/*---CLOSE BUTTON--*/
+
 //This class
 //creates a simple button
 //which contains of a filled circle

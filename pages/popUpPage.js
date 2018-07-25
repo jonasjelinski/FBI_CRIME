@@ -1,3 +1,5 @@
+/*---PAGE: POPUP--*/
+
 //this page shows an poup
 //containing a Sunburst and a Tree
 //to show the details of the crimerate of a specific state during a specific year

@@ -1,3 +1,5 @@
+/*---MAP--*/
+
 //This class creates a Choropleth-Chart
 //it shows which states in the USA have the highest crimerate by color
 //the more red-shades are seen, the higher is the crimerate

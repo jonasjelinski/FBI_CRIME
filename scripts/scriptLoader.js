@@ -1,3 +1,5 @@
+/*---SCRIPT LOADER--*/
+
 //loads the js files in the correct order
 //and starts the startpage
 //source: https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement#defer_property 

@@ -1,3 +1,5 @@
+/*---PLAY BUTTON--*/
+
 //This class
 //creates a simple button
 //which is used to play and stop something

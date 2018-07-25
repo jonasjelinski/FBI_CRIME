@@ -1,3 +1,5 @@
+/*---INFO TEXTS--*/
+
 // infoTextsNamespace contains all html-texts
 //which contain informations about the pages
 //they are used in the pages and the statemachines

@@ -1,3 +1,5 @@
+/*---PAGE: LINE CHART--*/
+
 //this page shows a lineChart
 //showing the crimerates over years for different crimes and states 
 //by appending a LineChart-chart to the page
