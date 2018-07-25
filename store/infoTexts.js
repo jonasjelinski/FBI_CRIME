@@ -9,7 +9,7 @@ var infoTextsNamespace = infoTextsNamespace || {};
 
 
 infoTextsNamespace.shortPageDescription = {
-  startPage: "<p> This website gives an overview of the crimes committed in the USA between 2000 and 2016 recorded by the Federal Bureau of Investigation (FBI).Hover the pictures with your mouse to see what the websites offers you.</p>",
+  startPage: "<p> This website gives an overview of the crimes committed in the USA between 2000 and 2016, recorded by the Federal Bureau of Investigation (FBI).Hover the pictures with your mouse to see what the websites offers you.</p>",
   mapInfo : "<p>Here you can see a color map representing the different crimes committed in each state of the USA per 100 000 inhabitants.</p>",
   lineChartInfo: "<p>On this page you can compare the crimes committed over the entire recorded period through a line chart.</p>",
   correlationInfo: "<p>All recorded crimecategories are linked together on this page and their correlation is displayed through the color of the links.</p>",
