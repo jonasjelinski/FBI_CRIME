@@ -175,6 +175,8 @@ class LineChart extends MagicCircle{
 				.on("zoom", zoomCoordSystemAndLines);
 		}
 
+		//inits the label which tells the user
+		//how to interact with the chart
 		function initLabel(){
 			let inVisible = 0;
 			label = container.append("text")
@@ -215,7 +217,7 @@ class LineChart extends MagicCircle{
 			let inVisible = 0;
 			label
 				.style("opacity", inVisible)
-				.attr("transform", "translate(" + margin.left + "," + 0 + ")");
+				.attr("transform", "translate(" + 0 + "," + 0 + ")");
 		}		
 
 		//inits container and sets width and height and position of the canvas

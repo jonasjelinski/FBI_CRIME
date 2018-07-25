@@ -59,9 +59,12 @@ class ColorLegend extends MagicCircle{
 			isSmall = true,
 			sliceContainer,
 			labelsContainer,
-			titleContainer;
+			titleContainer,
+			promptLabel;
 			
+		initLabel();
 		initClickBevhaviour();
+		initHoverBevhaviour();
 		initColorScale();
 		initSliceContainer();
 		initLabelsContainer();
@@ -70,11 +73,56 @@ class ColorLegend extends MagicCircle{
 		appendLabels();
 		appendTitle();
 
+		//inits the label which tells the user
+		//how to interact with the chart
+		function initLabel(){
+			let inVisible = 0;
+			promptLabel = container.append("text")
+				.attr("x", 0)        
+				.attr("y", 0)        
+				.style("text-anchor", "middle")
+				.text("click me!")
+				.style("opacity", inVisible);
+		}
+
 		//inits click beavhiour
 		//container changes size
 		function initClickBevhaviour(){
 			container.on("click", changeSize);
 		}
+
+		function initHoverBevhaviour(){
+			container
+				.on("mouseenter" ,showAndHideLabel)  
+				.on("mouseleave", hideLabel);  
+		}
+
+		function showAndHideLabel(){
+			let visible = 1,
+				inVisible = 0,
+				durationTime = 1000,
+				coordinates = d3.mouse(this),
+				x = that.sliceX+ that.width/2,
+				y = that.sliceHeight;
+
+			promptLabel
+				.style("opacity", visible)
+				.attr("x", x)        
+				.attr("y", y)
+				.transition()
+				.ease(d3.easeLinear)
+				.duration(durationTime)  
+				.style("opacity", inVisible); 
+		}
+
+		function hideLabel(){
+			let inVisible = 0;
+			promptLabel
+				.style("opacity", inVisible)
+				.attr("transform", "translate(" + 0 + "," + 0 + ")");
+		}		
+
+		
 
 		//container gets smaller if container was big else big
 		function changeSize(){
