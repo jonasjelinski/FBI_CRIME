@@ -1,7 +1,7 @@
-/*eslint-env browser*/
+/*--- LISTENERS --*/
 
 /*This js file connects all listners of the html page which listen to the button-clicks
-and call the actions of the action folder*/
+and call the actions*/
 
 var listenerNamespace = listenerNamespace || {};
 

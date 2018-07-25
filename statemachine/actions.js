@@ -1,4 +1,7 @@
-//this file includes all actions, which the listeners in listener.js call
+/*--- ACTIONS --*/
+
+//this file includes all actions
+//actions are functions, which the listeners in listener.js call
 
 var actionNamespace = actionNamespace || {};
 
@@ -51,13 +54,12 @@ actionNamespace.showInfoTextUniverse = function(){
 
 actionNamespace.showInfoText = function(text){
 	"use strict";
-	componentsNamespace.shortInfoText.setInfoText(text);
-	componentsNamespace.shortInfoText.updatesHimself();
-	componentsNamespace.shortInfoText.showInfoText();
+	componentsNamespace.stateMachine.showButtonPageDescription(text);
 };
 
 actionNamespace.hideInfoText = function(){
-	componentsNamespace.shortInfoText.hideInfoText();
+	"use strict";
+	componentsNamespace.stateMachine.hideButtonPageDescription();
 };
 
 actionNamespace.actionDrawImpressumPage = function(){
