@@ -32,13 +32,11 @@ infoTextsNamespace.legal = {
 }
 
 infoTextsNamespace.startPageTexts = {
-  map :"<div class='startContainer' id='startMap'><img src='./pictures/MapChart.png' alt='MapChart' class='startPics' id='mapPic'></img><p class='startText' id='mapText'>This page gives you a first overview of the whole United States and you can see all the crimes over the entire period.</p> <p>Please click now on the big map icon or use the buttons in the headline to try it.</p></div>",
-  lineChart : "<div class='startContainer' id='startLineChart'><img src='./pictures/LineChart.png' alt='LineChart' class='startPics' id='lineChartPic'> <p class='startText' id='lineChartText'> On this page, you can look at individual states and the crimes committed there in an annual comparison.</p><p>Please click now on the big timeline icon or use the buttons in the headline to try it.</p></div>",
-  correlation:"<div class='startContainer' id='startCorr'><img src='./pictures/CorrelationChart.png' alt='CorrelationChart' class='startPics' id='corrPic'><p class='startText' id='corrText'>For this page, the correlation was calculated for all crimes. You can investigate the result further here.</p><p>Please click now on the big correlation icon or use the buttons in the headline to try it.</p></div>",
-  universe: "<div class='startContainer' id='startUniverse'><img src='./pictures/UniverseChart.png' alt='UniverseChart' class='startPics' id='universePic'><p class='startText' id='universeText'> An overview of the distribution of violent and property crimes can be found on this page.</p><p>Please click now on the big universe icon or use the buttons in the headline to try it.</p></div>",
+  map : { infoText: "This page gives you a first overview of the whole United States and you can see all the crimes over the entire period.", buttonText: "Please click now on the big map icon or use the buttons in the headline to try it.", },
+  lineChart : { infoText: "On this page, you can look at individual states and the crimes committed there in an annual comparison.", buttonText: "Please click now on the big timeline icon or use the buttons in the headline to try it.", },
+  correlation: { infoText: "For this page, the correlation was calculated for all crimes. You can investigate the result further here.", buttonText: "Please click now on the big correlation icon or use the buttons in the headline to try it.", },
+  universe: {infoText: "An overview of the distribution of violent and property crimes can be found on this page.", buttonText: "Please click now on the big universe icon or use the buttons in the headline to try it.", }, 
+
 }
 
-//this is used to show the text of the startpage
-infoTextsNamespace.startPage = {
-  startPage: "",
-}
+

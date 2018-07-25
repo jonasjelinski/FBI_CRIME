@@ -12,7 +12,7 @@
 class StateMachine{
 	constructor(){
 		this.activePage = undefined;
-		this.startPage = new StartPage("mainpage", infoTextsNamespace.startPage.startPage);
+		this.startPage = new StartPage("mainpage", "", infoTextsNamespace.startPageTexts);
 		this.mapPage = new MapPage("mainpage");
 		this.lineChartPage = new LineChartPage("mainpage");
 		this.crimeCorrelationPage = new CrimeCorrelationPage("mainpage");
