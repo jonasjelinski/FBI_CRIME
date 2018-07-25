@@ -158,7 +158,7 @@ class LineChart extends MagicCircle{
 		initZoomingBehaviour();
 		initLabel();
 		prepareContainer();	
-		initContainer();		
+		initCanvas();		
 		initCoordinateSystem();
 		initXCoordLine();
 		initYCoordLine();
@@ -223,7 +223,7 @@ class LineChart extends MagicCircle{
 		}		
 
 		//inits container and sets width and height and position of the canvas
-		function initContainer(){
+		function initCanvas(){
 			canvas = container.append("svg").attr("class", "canvas").attr("id", "lineChartCanvas")
 				.attr("width", chartWidth)
 				.attr("height", chartHeight)                                            
