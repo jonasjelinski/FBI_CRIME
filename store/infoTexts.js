@@ -9,12 +9,12 @@ var infoTextsNamespace = infoTextsNamespace || {};
 
 
 infoTextsNamespace.shortPageDescription = {
-  startPage: "<p>This website is intended to give an overview of the crimes committed in the USA. You can see your possibilities when you hover the pictures with your mouse.</p>",
-  mapInfo : "<p>On this page, you can get an overview of the various crimes committed in each US state.</p>",
-  lineChartInfo: "<p>On this page, you can compare the crimes committed over the entire recorded period.</p>",
-  correlationInfo: "<p>All recorded categories are linked together on this page and the existing correlation is displayed.</p>",
-  universeInfo: "<p>Solar systems represent the two super-categories and all states are assigned as planets.</p>",
-  popupInfo: "<p>Here you can find a few details about your choosen state. On the left you can open a tree to explore each crime as numerical values.<br>On the right you can hover the donut to zoom each crime.</p>",
+  startPage: "<p>This website is intended to give an overview of the crimes committed in the USA. You can see your options if you hover the pictures with your mouse.</p>",
+  mapInfo : "<p>On this page you can get an overview of the different crimes committed in each state of the USA.</p>",
+  lineChartInfo: "<p>On this page you can compare the crimes committed over the entire recorded period.</p>",
+  correlationInfo: "<p>All recorded categories are linked together on this page and their correlation is displayed.</p>",
+  universeInfo: "<p>Solar systems represent the two super-categories 'violent-crimes' and 'property-crimes'. All states are assigned as planets.</p>",
+  popupInfo: "<p><br>Here you can see crimedetails about your choosen state.</br><br> On the left you can open a tree to see the number of crimes per 100 000 inhabitants.</br><br>On the right you can see the percentage of each crime as a sunburst. You can hover the sunburst.</p>",
 }
 
 infoTextsNamespace.longPageDescription = {
@@ -23,7 +23,7 @@ infoTextsNamespace.longPageDescription = {
   popupPage: "<p>You can explore details of the selected state.</p><p>On the left you can open and close the individual subcategories by mouse clicks and look closely at each individual crime. If a category is completely open, you get the numerical value of the crime.</p><p>On the right you can once again review the crimes recorded in the selected state. These are divided by the FBI into the two categories of violent and property crime and provided with further categories.</p><p>The dropdown menu at the top allows you to select a year.</p>",
   lineChartPage: "<p>You can select a state in the dropdown menu at the top.</p><p>At the center you see a graph with the years as the horizontal axis and the crime rate per 100.000 population as the vertical axis. You can compare the displayed data with the legend in the left.</p><p>You can select and redo individual crimes for a better comparison in the legend.</p><p>To have a better view to the details of the data you can zoom inte the chart.",
   correlationPage: "<p>The calculated correlations of the crime categories among themselves refer to the entire US and the entire time span.</p><p>Each category is displayed as a circle that can be positioned with the mouse on the screen. Touching the circle with the mouse highlights all links. You can also hover the links to highlight them, you will see the numerical value of the correlation.</p><p>Based on the displayed scale the correlation can be estimated using the color of the link.</p> <p>The numeric values range from -1 to 1. The closer the value is to 0, the lower the correlation. The closer the value is to 1, the higher the correlation. The algebraic sign indicates whether there is a negative or positive correlation.</p>",
-  universePage: "<p>The two suns in the middle represent the two categories of property and violent crime. Each planet represents a state that revolves around a sun. The sum of the planets form a solar system.</p><p>The redder a planet is, the more violent crimes are perpetrated in the state in comparison to the other states. In addition, the number of property offenses increases the attraction to the respective sun. Planets that are closer to a sun have more property offenses than planets that are farther away from the same sun in the same solar system.</p><p>A state is reported in the violent crimes (the right sun), if in this state more violent than property crimes were committed  in the state in comparison to the other states.</p><p>With the timeline at the top you can choose a year. The play button starts a rotate simulation and will satisfy you so much.</p>",
+  universePage: "<p>The two suns in the middle represent the two categories of property and violent crime. Each planet represents a state that revolves around a sun. The sum of the planets form a solar system.</p><p>The redder a planet is, the more violent crimes are perpetrated in the state in comparison to the other states. In addition, the number of property offenses increases the attraction to the respective sun. Planets that are closer to a sun have more property offenses than planets that are farther away from the same sun in the same solar system.</p><p>A state is reported in the violent crimes (the right sun), if in this state more violent than property crimes were committed  in the state in comparison to the other states.</p><p>With the timeline at the top you can choose a year. The play button starts a rotate simulation. Slower planets are more violent.</p>",
   dataRegulationPage: "<p>Here you can read the privacy policy.</p>",
   impressumPage: "<p>Here you can read the imprint.</p>",
 }
@@ -38,7 +38,6 @@ infoTextsNamespace.startPageTexts = {
   lineChart : { infoText: "On this page, you can look at individual states and the crimes committed there in an annual comparison.", buttonText: "Please click now on the big timeline icon or use the buttons in the headline to try it.", },
   correlation: { infoText: "For this page, the correlation was calculated for all crimes. You can investigate the result further here.", buttonText: "Please click now on the big correlation icon or use the buttons in the headline to try it.", },
   universe: {infoText: "An overview of the distribution of violent and property crimes can be found on this page.", buttonText: "Please click now on the big universe icon or use the buttons in the headline to try it.", }, 
-
 }
 
 
