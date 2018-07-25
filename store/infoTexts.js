@@ -43,10 +43,10 @@ infoTextsNamespace.legal = {
 }
 
 infoTextsNamespace.startPageTexts = {
-  map : { infoText: "This page gives you a first overview of the whole United States and you can see all the crimes over the entire period.", buttonText: "Please click now on the big 'Map' icon or use the buttons in the headline to get to the map.", },
-  lineChart : { infoText: "On this page you can look at individual states and the crimes committed there in an annual comparison.", buttonText: "Please click now on the big 'Timeline' icon or use the buttons in the headline to see the line chart.", },
-  correlation: { infoText: "For this page the correlation was calculated for all crimes. You can investigate the result further in a 3d animation.", buttonText: "Please click now on the big 'Correlation' icon or use the buttons in the headline to see the correlation", },
-  universe: {infoText: "An overview of the distribution of violent and property crimes can be found on this page.", buttonText: "Please click now on the big 'Universe' icon or use the buttons in the headline to get to the universe.", }, 
+  map : { infoText: "'MAP' gives you a geographical overview of the whole United States and you can see all the crimes over the entire period.", buttonText: "Please click now on the big 'Map' icon or use the buttons in the headline to get to the map.", },
+  lineChart : { infoText: " On the page 'TIMELINE' you can look at individual states and the crimes committed there in an annual comparison.", buttonText: "Please click now on the big 'Timeline' icon or use the buttons in the headline to see the line chart.", },
+  correlation: { infoText: "'CORRELATION' shows the correlation between all crimes. You can investigate the result in a 3d animation.", buttonText: "Please click now on the big 'Correlation' icon or use the buttons in the headline to see the correlation", },
+  universe: {infoText: "'UNIVERSE' contains an overview of the distribution of violent and property crimes between states.", buttonText: "Please click now on the big 'Universe' icon or use the buttons in the headline to get to the universe.", }, 
 }
 
 
