@@ -80,8 +80,6 @@ class Tree extends MagicCircle{
 		//Creates Nodecircle
 		function nodeCircle(nodeUpdate){
 			let radiusNode = 10;
-			console.log(nodeUpdate);
-
 			nodeUpdate.select('circle.node')
 				.attr("r", radiusNode)
 				.style("fill", function(d, i) {
@@ -89,19 +87,18 @@ class Tree extends MagicCircle{
 						return;
 					}
 					function hasNumber(myString) {
-  					return /\d/.test(myString);
+						return /\d/.test(myString);
 					}
-
 
 					let name = d.data.name;
 					if(hasNumber(name)){
 						return;
 					}
 					let	crime = name.replace(/\s/g, '');
-						crime = crime.replace(/[:]/g, '');
+					crime = crime.replace(/[:]/g, '');
 
-						let color = commonfunctionsNamespace.getCrimeColor(crime);
-						return color;
+					let color = commonfunctionsNamespace.getCrimeColor(crime);
+					return color;
 				})
 				.attr("cursor", "pointer");
 		}
