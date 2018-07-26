@@ -20,10 +20,10 @@ class MapPage extends ParentPage{
 		this.playButtonId = "Map";
 		this.eventTarget = new EventTarget();
 		this.onMapClicked = "onClick";
-		this.colorLegendTitle = "Ratio: min/max"; 
+		this.colorLegendTitle = "Ratio: min/max";
 		this.colorLegendId = "Map";
-		this.colorLegendStartLabel = "min"; 
-		this.colorLegendEndLabel = "max";	
+		this.colorLegendStartLabel = "min";
+		this.colorLegendEndLabel = "max";
 		this.startColor = "rgb(255,253,109)";
 		this.endColor = "rgb(232,12,5)";
 		this.playButtonText = this.htmlElement.playButtonText;
@@ -52,6 +52,7 @@ class MapPage extends ParentPage{
 		this.playButton = new PlayButton(this.pageId, this.playButtonId, this.playButtonText);
 		this.playButton.appendThisCharToPage();
 		this.controlls = [this.timeLine,this.dropDownMenu,this.playButton];
+		this.canShowPopup = true;
 	}
 
 	addEventListeners(){
@@ -78,23 +79,33 @@ class MapPage extends ParentPage{
 
 	//controlls the timeLine
 	//if the timeLine allready moves it'll be paused
-	//else it starts playing 
+	//else it starts playing
 	//while the timeLine is playing the map can't be clicked
 	playTimeLine(){
 		if(this.timeLine.isTimeLineMoving() === false){
-			this.mainChart.mapNotClickable();
 			this.timeLine.playTimeLine();
+			this.setPopUpNotShowAble();
 		}
 		else{
-			this.mainChart.mapClickable();
+			this.setPopUpShowAble();
 			this.timeLine.pauseTimeLine();
 		}
 
 	}
-	
+
+	setPopUpNotShowAble(){
+			this.canShowPopup = false;
+	}
+
+	setPopUpShowAble(){
+		this.canShowPopup = true;
+	}
+
 	sendMapClickEvent(ev){
-		let event = new CustomEvent(this.onMapClicked, {detail:{state: ev.detail.state, year: ev.detail.year}});
-		this.eventTarget.dispatchEvent(event);
+		if(this.canShowPopup){
+			let event = new CustomEvent(this.onMapClicked, {detail:{state: ev.detail.state, year: ev.detail.year}});
+			this.eventTarget.dispatchEvent(event);
+		}
 	}
 
 	//is used as a setter

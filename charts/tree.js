@@ -80,11 +80,45 @@ class Tree extends MagicCircle{
 		//Creates Nodecircle
 		function nodeCircle(nodeUpdate){
 			let radiusNode = 10;
+			console.log(nodeUpdate);
 
 			nodeUpdate.select('circle.node')
 				.attr("r", radiusNode)
-				.style("fill", function(d) {
-					return d._children ? "lightsteelblue" : "red";
+				.style("fill", function(d, i) {
+					if(i===0){
+						return;
+					}
+					function hasNumber(myString) {
+  					return /\d/.test(myString);
+					}
+
+
+					let name = d.data.name;
+					if(hasNumber(name)){
+						return;
+					}
+					let	crime = name.replace(/\s/g, '');
+						crime = crime.replace(/[:]/g, '');
+					console.log(typeof crime);
+						let color = commonfunctionsNamespace.getCrimeColor(crime);
+						return color;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					return d._children ? "lightsteelblue" : "white";
 				})
 				.attr("cursor", "pointer");
 		}
@@ -369,7 +403,7 @@ createHierarchyData(){
 					"children": childNodeViolentCrime()
 				},
 				{
-					"name": "propertyCrime:",
+					"name": "propertyCrime",
 					"type": "black",
 					"level": "red",
 					"children": childNodePropertyCrime()
