@@ -16,7 +16,7 @@ class TimeLine extends MagicCircle{
 		this.eventTarget = new EventTarget();
 		this.onUpdate = "onUpdate";
 		this.timer = 0;
-		this.playTimeIntervalInMs = 100;
+		this.playTimeIntervalInMs = 200;
 		this.currentValue=0;
 		this.startDate = new Date(String(this.yearData[0]));
 		this.endDate = new Date(String(this.yearData[this.yearData.length-1]));
@@ -61,7 +61,7 @@ class TimeLine extends MagicCircle{
 			line = drawLine(g, xAxis),
 			handle = drawHandler(g),
 			label = drawLabel(g, startDate);
-			
+
 		this.update = update;
 		this.step = step;
 
