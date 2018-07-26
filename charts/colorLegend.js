@@ -4,12 +4,12 @@
 //creates a legend which contains colors
 //with the colorvalues from startColor to endColor
 //a title and
-//two labels which describe the highest and the lowest value  
+//two labels which describe the highest and the lowest value
 
 class ColorLegend extends MagicCircle{
 	constructor(chartId, pageId = "mainpage", title = "ColorLegend", startLabel= "0", endLabel= "1", startColor = "rgb(0,0,255)", endColor ="rgb(255,0,0)", startValue = 0, endValue = 1){
 		super(pageId);
-		this.htmlelement = htmlelementsNamespace.colorLegend; 
+		this.htmlelement = htmlelementsNamespace.colorLegend;
 		this.htmlElementID = this.htmlelement.htmlid+chartId;
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
@@ -49,7 +49,7 @@ class ColorLegend extends MagicCircle{
 
 	//returns an array in the range of the number of slices
 	//so the ColorLegend has that many slices
-	createScaleArray(){		
+	createScaleArray(){
 		return d3.range(this.sliceNumbers);
 	}
 
@@ -63,7 +63,7 @@ class ColorLegend extends MagicCircle{
 			labelsContainer,
 			titleContainer,
 			promptLabel;
-			
+
 		initLabel();
 		initClickBevhaviour();
 		initHoverBevhaviour();
@@ -80,8 +80,8 @@ class ColorLegend extends MagicCircle{
 		function initLabel(){
 			let inVisible = 0;
 			promptLabel = container.append("text")
-				.attr("x", 0)        
-				.attr("y", 0)        
+				.attr("x", 0)
+				.attr("y", 0)
 				.style("text-anchor", "middle")
 				.text("click me!")
 				.style("opacity", inVisible);
@@ -90,13 +90,13 @@ class ColorLegend extends MagicCircle{
 		//inits click beavhiour
 		//container changes size
 		function initClickBevhaviour(){
-			container.on("click", changeSize);
+			container.on("click", changeSizeAndBackgroundColor);
 		}
 
 		function initHoverBevhaviour(){
 			container
-				.on("mouseenter" ,showAndHideLabel)  
-				.on("mouseleave", hideLabel);  
+				.on("mouseenter" ,showAndHideLabel)
+				.on("mouseleave", hideLabel);
 		}
 
 		function showAndHideLabel(){
@@ -109,12 +109,12 @@ class ColorLegend extends MagicCircle{
 
 			promptLabel
 				.style("opacity", visible)
-				.attr("x", x)        
+				.attr("x", x)
 				.attr("y", y)
 				.transition()
 				.ease(d3.easeLinear)
-				.duration(durationTime)  
-				.style("opacity", inVisible); 
+				.duration(durationTime)
+				.style("opacity", inVisible);
 		}
 
 		function hideLabel(){
@@ -122,26 +122,28 @@ class ColorLegend extends MagicCircle{
 			promptLabel
 				.style("opacity", inVisible)
 				.attr("transform", "translate(" + 0 + "," + 0 + ")");
-		}		
+		}
 
-		
+
 
 		//container gets smaller if container was big else big
-		function changeSize(){
+		function changeSizeAndBackgroundColor(){
 			if(isSmall){
 				container
 					.attr("width", that.bigWidth)
-					.attr("height", that.bigHeight);
+					.attr("height", that.bigHeight)
+					.attr("class", "colorLegendBig");
 			}
 			else{
 				container
 					.attr("width",that.width)
-					.attr("height",that.height);
+					.attr("height",that.height)
+					.attr("class", "colorLegendSmall");
 			}
 			isSmall = !isSmall;
 		}
 
-		//inits the linear colorScale 
+		//inits the linear colorScale
 		function initColorScale(){
 			colorScale = d3.scaleLinear().domain([that.startValue,that.sliceNumbers]).range([that.startColor, that.endColor]);
 		}
@@ -170,10 +172,10 @@ class ColorLegend extends MagicCircle{
 				.append("rect")
 				.attr("y", that.sliceHeight)
 				.attr("x", function(d,i){return that.sliceX + i*that.sliceWidth;})
-				.attr("height", that.sliceHeight)				
+				.attr("height", that.sliceHeight)
 				.attr("width", that.sliceWidth)
 				.attr("fill", function(d,i){return getColor(i);})
-				.attr("stroke", "gray");						
+				.attr("stroke", "gray");
 		}
 
 		//appends this.startLabel and this.endLabel as textElements to this chart
@@ -207,7 +209,7 @@ class ColorLegend extends MagicCircle{
 		}
 
 		function getColor(i){
-			return colorScale(i);		
+			return colorScale(i);
 		}
 
 		//returns the startLabel if i is the startvalue
@@ -220,7 +222,7 @@ class ColorLegend extends MagicCircle{
 			else if(i === that.sliceNumbers-1){
 				return that.endLabel;
 			}
-			return "";		
+			return "";
 		}
 	}
 

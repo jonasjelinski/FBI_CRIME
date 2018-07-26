@@ -14,7 +14,7 @@ infoTextsNamespace.shortPageDescription = {
   lineChartInfo: "<p>On this page you can compare the crimes committed over the entire recorded period through a line chart.</p>",
   correlationInfo: "<p>All recorded crimecategories are linked together on this page and their correlation is displayed through the color of the links.</p>",
   universeInfo: "<p>The solar systems represent the two super-categories 'violent-crimes' and 'property-crimes'. All states are assigned as planets showing which state fits in which super-category in comparison to other states.</p>",
-  popupInfo: "<p><br>Here you can see crimedetails about your choosen state.</br><br> On the left you can open a tree to see the number of crimes per 100 000 inhabitants.</br><br>On the right you can see the percentage of each crime as a sunburst. You can hover the sunburst.</p>",
+  popupInfo: "<p>Here you can see crimedetails about your choosen state.<br>On the left you can open a tree to see the number of crimes per 100 000 inhabitants.<br>On the right you can see the percentage of each crime as a sunburst. You can hover the sunburst.</p>",
 }
 
 infoTextsNamespace.buttonPageDescription = {
@@ -22,8 +22,8 @@ infoTextsNamespace.buttonPageDescription = {
   mapInfo : "<p>Choose this page to see a color map representing the different crimes committed in each state of the USA.</p>",
   lineChartInfo: "<p>Compare the crimes committed over the entire recorded period through a line chart? Choose Timeline!</p>",
   correlationInfo: "<p>Find out everything about the correlations between the different crimes!</p>",
-  universeInfo: "<p>Which state is more violent in comparison to other states? Click here to see the distribution as an universe.</p>", 
-  popupInfo: "<p><br>Here you can see crimedetails about your choosen state.</br><br> On the left you can open a tree to see the number of crimes per 100 000 inhabitants.</br><br>On the right you can see the percentage of each crime as a sunburst. You can hover the sunburst.</p>",
+  universeInfo: "<p>Which state is more violent in comparison to other states? Click here to see the distribution as an universe.</p>",
+  popupInfo: "<p>Here you can see crimedetails about your choosen state.</br>On the left you can open a tree to see the number of crimes per 100 000 inhabitants.</p><p>On the right you can see the percentage of each crime as a sunburst. You can hover the sunburst.</p>",
 }
 
 infoTextsNamespace.longPageDescription = {
@@ -46,7 +46,5 @@ infoTextsNamespace.startPageTexts = {
   map : { infoText: "'MAP' gives you an overview of the geographical crime distribution in the United States.", buttonText: "Please click now on the big 'Map' icon or use the buttons in the headline to get to the map.", },
   lineChart : { infoText: " On the page 'TIMELINE' you can look at individual states and the crimes committed there in an annual comparison.", buttonText: "Please click now on the big 'Timeline' icon or use the buttons in the headline to see the line chart.", },
   correlation: { infoText: "'CORRELATION' shows the correlation between all crimes. You can investigate the result in a 3d animation.", buttonText: "Please click now on the big 'Correlation' icon or use the buttons in the headline to see the correlation", },
-  universe: {infoText: "'UNIVERSE' contains an overview of the distribution of violent and property crimes between states.", buttonText: "Please click now on the big 'Universe' icon or use the buttons in the headline to get to the universe.", }, 
+  universe: {infoText: "'UNIVERSE' contains an overview of the distribution of violent and property crimes between states.", buttonText: "Please click now on the big 'Universe' icon or use the buttons in the headline to get to the universe.", },
 }
-
-

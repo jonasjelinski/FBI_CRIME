@@ -22,8 +22,9 @@ class MapPage extends ParentPage{
 		this.onMapClicked = "onClick";
 		this.colorLegendTitle = "Ratio: min/max";
 		this.colorLegendId = "Map";
-		this.colorLegendStartLabel = "min";
-		this.colorLegendEndLabel = "max";
+		this.colorLegendStartLabel = this.htmlElement.colorLegendStartLabel;
+		this.colorLegendEndLabel = this.htmlElement.colorLegendEndLabel;
+		this.colorLegendTitle = this.htmlElement.colorLegendTitle;
 		this.startColor = "rgb(255,253,109)";
 		this.endColor = "rgb(232,12,5)";
 		this.playButtonText = this.htmlElement.playButtonText;

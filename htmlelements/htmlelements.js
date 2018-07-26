@@ -104,7 +104,7 @@ htmlelementsNamespace.colorLegend = {
 	titleClass: "legendtitle",
 	titleType: "g",
 	labelY: 35,
-	labelX: 7,
+	labelX: 6,
 	labeSize: "10px",
 	labelClass: "legendlabel",
 	labelType: "g",
@@ -211,8 +211,8 @@ htmlelementsNamespace.crimeCorrelationPage = {
 	positiveEndColor: configNamespace.CRIME_CORRELATION.highCorrelationColor,
 	negativeStartColor:configNamespace.CRIME_CORRELATION.negativeCorrelationColorLow,
 	negativeEndColor: configNamespace.CRIME_CORRELATION.negativeCorrelationColorHigh,
-	positiveColorLegendTitle: "Positive Correlation between Crime Types",
-	negativeColorLegendTitle: "Negative Correlation between Crime Types",
+	positiveColorLegendTitle: "Positive Correlation",
+	negativeColorLegendTitle: "Negative Correlation",
 	colorLegendStartLabel: "Low Correlation",
 	colorLegendEndLabel: "High Correlation",
 	positivecColorLegendId : "CorrelationsPositive",
@@ -230,6 +230,9 @@ htmlelementsNamespace.mapPage = {
 	htmlclassname: "mapPage",
 	htmlid: "mapPage",
 	playButtonText: "show development over years",
+	colorLegendStartLabel: "lowest crime rate",
+	colorLegendEndLabel: "highest crime rate",
+	colorLegendTitle: "",
 };
 
 htmlelementsNamespace.universePage = {

@@ -20,7 +20,7 @@ class Map extends MagicCircle{
 		this.onClick = "onClick";
 		this.colorRange = 11;
 		this.crimeText = "victims per 100.000 inhabitants";
-		this.infoLabelMap = "Click on map for more details";
+		this.infoLabelMap = "Click on map";
 		this.infoLabelMoving = "Map not clickable"
 		this.eventTarget = new EventTarget();
 	}

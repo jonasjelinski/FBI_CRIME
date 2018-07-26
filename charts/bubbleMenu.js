@@ -28,7 +28,7 @@ class BubbleMenu extends MagicCircle{
 
 	drawBubbleMenu(){
 		let bubbles,
-			labels, 
+			labels,
 			container = this.container,
 			that = this,
 			diameter = this.width/ this.categories.length,
@@ -41,21 +41,21 @@ class BubbleMenu extends MagicCircle{
 
 		initBubbles();
 		initLabels();
-		setEnterAndExitBehaviour();			
+		setEnterAndExitBehaviour();
 
-		//appends a svg bubbles to container 
+		//appends a svg bubbles to container
 		function initBubbles(){
 			bubbles = container
 				.selectAll("bubbles")
 				.append("svg")
 				.attr("class", "bubbles")
-				.data(that.categories);							
+				.data(that.categories);
 		}
-		
+
 		//appends a svg labels and sets width and height and position of labels
 		function initLabels(){
-			labels = container   
-				.selectAll("labels")         
+			labels = container
+				.selectAll("labels")
 				.append("svg")
 				.attr("width", that.width)
 				.attr("height", that.label)
@@ -71,10 +71,10 @@ class BubbleMenu extends MagicCircle{
 			labels.exit().remove();
 		}
 
-		//if a new  data point is entered a circle is appended 
+		//if a new  data point is entered a circle is appended
 		//the attr bubbleValue contains the value and is used to communicate
-		//between labels and used in handleBubbleClick to receive the value 
-		//which is attached to the bubble through a simple d3.select function call 
+		//between labels and used in handleBubbleClick to receive the value
+		//which is attached to the bubble through a simple d3.select function call
 		function enterBubble(){
 			bubbles.enter()
 				.append("circle")
@@ -92,20 +92,23 @@ class BubbleMenu extends MagicCircle{
 		}
 
 		//if a new data point is appended
-		//a new textlable is attached to labels		
+		//a new textlable is attached to labels
 		//which shows the value of the given data as an readable
 		//text so the user knows the value of each bubble
 		//as the text is next to the bubble containing the value
-		function enterLabel(){			
+		function enterLabel(){
 			labels.enter()
 				.append("g")
-				.attr("class", "label")
-				.attr("bubbleValue", function(d){					
+				.attr("class", "bubbleLabel")
+				.attr("bubbleValue", function(d){
 					return d;
 				})
-				.append("text")			
+				.append("text")
+				.attr("bubbleValue", function(d){
+					return d;
+				})
 				.attr("x", x + diameter)
-				.attr("y", function(d,i){return calculateYPos(i);})           
+				.attr("y", function(d,i){return calculateYPos(i);})
 				.attr("font-size", fontSize)
 				.style("fill", function(d){return getColor(d)})
 				.text(function(d) { return d; })
@@ -124,7 +127,7 @@ class BubbleMenu extends MagicCircle{
 		function handleBubbleClick() {
 			let bubble = d3.select(this),
 				value = bubble.attr("bubbleValue"),
-				label = getLabelByBubbleValue(value);	
+				label = getLabelByBubbleValue(value);
 			changeColor(bubble, value);
 			changeColor(label, value);
 			sendSelectedValue(value);
@@ -137,7 +140,7 @@ class BubbleMenu extends MagicCircle{
 		function handleLabelClick(){
 			let label = d3.select(this),
 				value = label.attr("bubbleValue"),
-				bubble = getBubbleByLabelValue(value);	
+				bubble = getBubbleByLabelValue(value);
 			changeColor(bubble, value);
 			changeColor(label, value);
 			sendSelectedValue(value);
@@ -147,7 +150,7 @@ class BubbleMenu extends MagicCircle{
 		//so it can be selected and changed in handleBubbleClick
 		function getLabelByBubbleValue(value){
 			let selector = "g[bubbleValue='"+value+"']",
-				label = d3.selectAll(selector).filter(".label").select("text");				
+				label = d3.selectAll(selector).filter(".bubbleLabel").select("text");
 			return label;
 		}
 
@@ -155,20 +158,20 @@ class BubbleMenu extends MagicCircle{
 		//so it can be selected and changed in handleBubbleClick
 		function getBubbleByLabelValue(value){
 			let selector = "circle[bubbleValue='"+value+"']",
-				label = d3.selectAll(selector).filter(".bubble").select("text");				
-			return label;
+				bubble = d3.selectAll(selector).filter(".bubble");
+			return bubble;
 		}
 
 		//chagnes the colro of the given item
 		//item is either a bubble or a label
 		function changeColor(item, value) {
 			let currentColor = item.style("fill");
-			if(currentColor === that.unselectedColor){				
-				item.style("fill", function(){					
+			if(currentColor === that.unselectedColor){
+				item.style("fill", function(){
 					return getColor(value);
-				});					
+				});
 			}
-			else{				
+			else{
 				item.style("fill", that.unselectedColor);
 			}
 		}
@@ -179,34 +182,34 @@ class BubbleMenu extends MagicCircle{
 		function getColor(d){
 			let crime = d,
 				color = that.defaultColor;
-			try{				
+			try{
 				color = commonfunctionsNamespace.getCrimeColor(crime);
 			}
 			catch(error){
-				color = getDefaultColor();			
+				color = getDefaultColor();
 			}
 			return color;
 		}
 
 		//returns a default color
 		function getDefaultColor(){
-			let random =Math.floor((Math.random() *  Math.floor(that.categories.length*2)) + 1),				
+			let random =Math.floor((Math.random() *  Math.floor(that.categories.length*2)) + 1),
 				r = random,
 				g = random,
 				b = random;
-			return "rgb(" + r + "," + g + "," + b + ")";	
+			return "rgb(" + r + "," + g + "," + b + ")";
 		}
-		
+
 		//sends an event which contains the value of the selected select
-		function sendSelectedValue(value){		
-			sendEvent(value);			
-		}	
+		function sendSelectedValue(value){
+			sendEvent(value);
+		}
 
 		//dispatches a new CustomEvent containing value as value of property selection
 		function sendEvent(value){
-			let event = new CustomEvent(that.selectionEvent, {detail: {selection : value}});							
+			let event = new CustomEvent(that.selectionEvent, {detail: {selection : value}});
 			that.eventTarget.dispatchEvent(event);
 		}
-	}	
+	}
 
 }

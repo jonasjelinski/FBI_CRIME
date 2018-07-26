@@ -99,26 +99,9 @@ class Tree extends MagicCircle{
 					}
 					let	crime = name.replace(/\s/g, '');
 						crime = crime.replace(/[:]/g, '');
-					console.log(typeof crime);
+
 						let color = commonfunctionsNamespace.getCrimeColor(crime);
 						return color;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-					return d._children ? "lightsteelblue" : "white";
 				})
 				.attr("cursor", "pointer");
 		}
