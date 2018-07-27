@@ -32,6 +32,20 @@ configNamespace.STATES_AND_CRIMES = {
 	minYear : 2000,
 };
 
+configNamespace.REALCRIMENAMES = {
+	realCrimeNames: {
+		propertyCrime: "Property crime",
+		Burglary: "Burglary",
+		Larcenytheft: "Larency theft",
+		Motorvehicletheft: "Motor vehicle theft",
+		violentCrime: "Violent crime",
+		Aggravatedassault: "Aggravated assault",
+		MurderManslaughter: "Murder manslaughter",
+		Rape: "Rape",
+		Robbery: "Robbery",
+	},
+};
+
 configNamespace.STATE_MACHINE = {
 	START : "START",
 	MAP: "MAP",
