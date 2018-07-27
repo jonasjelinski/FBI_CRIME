@@ -12,8 +12,9 @@
 //the drawInfoPage is called in actions
 
 class StateMachine{
-	constructor(){
+	constructor(startButton, mapButton, timeLineButton, correlationButton, universeButton){
 		this.activePage = undefined;
+		this.activeButton = undefined;
 		this.startPage = new StartPage("mainpage", "", infoTextsNamespace.startPageTexts);
 		this.mapPage = new MapPage("mainpage");
 		this.lineChartPage = new LineChartPage("mainpage");
@@ -25,6 +26,11 @@ class StateMachine{
 		this.longInfoText = "";
 		this.shortPageDescription = new InfoText("pageDescription", "pageDescription", "");
 		this.buttonPageDescription = new InfoText("shortPageText", "shortText", "das ist ein Text");
+		this.startButton = startButton;
+		this.mapButton = mapButton;
+		this.timeLineButton = timeLineButton;
+		this.correlationButton = correlationButton;
+		this.universeButton = universeButton;
 	}
 
 	//inits the statemachine
@@ -36,6 +42,7 @@ class StateMachine{
 		this.buttonPageDescription.appendThisCharToPage();
 		this.mapPage.eventTarget.addEventListener(this.mapPage.onMapClicked, this.handleMapClick.bind(this));
 		this.startPage.eventTarget.addEventListener(this.startPage.onClick, this.handleStartPageClick.bind(this));
+		this.switchState(configNamespace.STATE_MACHINE.START);
 	}
 
 	//if the map has been clicked
@@ -118,36 +125,43 @@ class StateMachine{
 			this.drawStartPage();
 			this.longInfoText = infoTextsNamespace.longPageDescription.startPage;
 			this.drawShortInfoText(infoTextsNamespace.shortPageDescription.startPage);
+			this.changeButtonPointerEvents(this.startButton);
 			break;
 		case configNamespace.STATE_MACHINE.MAP:
 			this.drawMapPage();
 			this.longInfoText = infoTextsNamespace.longPageDescription.mapPage;
 			this.drawShortInfoText(infoTextsNamespace.shortPageDescription.mapInfo);
+			this.changeButtonPointerEvents(this.mapButton);
 			break;
 		case configNamespace.STATE_MACHINE.LINE_CHART:
 			this.drawLineChartPage();
 			this.longInfoText = infoTextsNamespace.longPageDescription.lineChartPage;
 			this.drawShortInfoText(infoTextsNamespace.shortPageDescription.lineChartInfo);
+			this.changeButtonPointerEvents(this.timeLineButton);
 			break;
 		case configNamespace.STATE_MACHINE.CRIME_CORRELATION:
 			this.drawCrimeCorrelationPage();
 			this.longInfoText = infoTextsNamespace.longPageDescription.correlationPage;
 			this.drawShortInfoText(infoTextsNamespace.shortPageDescription.correlationInfo);
+			this.changeButtonPointerEvents(this.correlationButton);
 			break;
 		case configNamespace.STATE_MACHINE.UNIVERSE:
 			this.drawUniversePage();
 			this.longInfoText = infoTextsNamespace.longPageDescription.universePage;
 			this.drawShortInfoText(infoTextsNamespace.shortPageDescription.universeInfo);
+			this.changeButtonPointerEvents(this.universeButton);
 			break;
 		case configNamespace.STATE_MACHINE.IMPRESSUM:
 			this.drawImpressumPage();
 			this.longInfoText = infoTextsNamespace.longPageDescription.impressumPage;
 			this.drawShortInfoText("");
+			this.enableButton(this.activeButton);
 			break;
 		case configNamespace.STATE_MACHINE.DATA_REGULATION:
 			this.drawDataRegulationPage();
 			this.longInfoText = infoTextsNamespace.longPageDescription.dataRegulationPage;
 			this.drawShortInfoText("");
+			this.enableButton(this.activeButton);
 		default:
 			break;
 		}
@@ -160,6 +174,28 @@ class StateMachine{
 		this.activePage = page;
 		this.initAndDrawActivePage();
 	}
+
+	changeButtonPointerEvents(button){
+		let clickedButton= button,
+			oldButton = this.activeButton;
+		this.enableButton(oldButton);
+		this.disableButton(clickedButton);
+		this.activeButton = clickedButton;	
+		console.log(button);
+	}
+
+	enableButton(button){
+		if(button){
+			button.style("pointer-events", "all");
+		}		
+	};
+
+	disableButton(button){
+		if(button){
+			button.style("pointer-events", "none");
+		}		
+	};
+
 
 	drawStartPage(){
 		this.drawPage(this.startPage);
