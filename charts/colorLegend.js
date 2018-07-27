@@ -7,7 +7,7 @@
 //two labels which describe the highest and the lowest value
 
 class ColorLegend extends MagicCircle{
-	constructor(chartId, pageId = "mainpage", title = "ColorLegend", startLabel= "0", endLabel= "1", startColor = "rgb(0,0,255)", endColor ="rgb(255,0,0)", startValue = 0, endValue = 1){
+	constructor(chartId, pageId = "mainpage", title = "ColorLegend", startLabel= "0", endLabel= "1", startColor = "rgb(0,0,255)", endColor ="rgb(255,0,0)", startValue = 0, endValue = 1, valueMessage = ""){
 		super(pageId);
 		this.htmlelement = htmlelementsNamespace.colorLegend;
 		this.htmlElementID = this.htmlelement.htmlid+chartId;
@@ -22,6 +22,7 @@ class ColorLegend extends MagicCircle{
 		this.endColor = endColor;
 		this.startValue = startValue;
 		this.endValue = endValue;
+		this.valueMessage = valueMessage;
 		this.sliceNumbers = this.htmlelement.sliceNumbers;
 		this.sliceHeight = this.htmlelement.sliceHeight;
 		this.sliceWidth = this.htmlelement.sliceWidth;
@@ -50,7 +51,23 @@ class ColorLegend extends MagicCircle{
 	//returns an array in the range of the number of slices
 	//so the ColorLegend has that many slices
 	createScaleArray(){
-		return d3.range(this.sliceNumbers);
+		let numberOfSlices = this.sliceNumbers,
+			scaleArray = [];
+			for(let i = numberOfSlices; i > 0; i--){
+				let value;
+				if(i === numberOfSlices){
+					value = this.startValue;
+				}
+				else if( i === 1){
+					value= this.endValue;
+				}
+				else{
+					value = this.endValue/i,
+					value = (value).toFixed(2);
+				}
+				scaleArray.push(value);
+			}
+		return scaleArray;
 	}
 
 	//draws the color legend
@@ -62,9 +79,10 @@ class ColorLegend extends MagicCircle{
 			sliceContainer,
 			labelsContainer,
 			titleContainer,
-			promptLabel;
+			promptLabel,
+			title;
 
-		initLabel();
+		initPromptLabel();
 		initClickBevhaviour();
 		initHoverBevhaviour();
 		initColorScale();
@@ -77,7 +95,7 @@ class ColorLegend extends MagicCircle{
 
 		//inits the label which tells the user
 		//how to interact with the chart
-		function initLabel(){
+		function initPromptLabel(){
 			let inVisible = 0;
 			promptLabel = container.append("text")
 				.attr("x", 0)
@@ -175,7 +193,18 @@ class ColorLegend extends MagicCircle{
 				.attr("height", that.sliceHeight)
 				.attr("width", that.sliceWidth)
 				.attr("fill", function(d,i){return getColor(i);})
-				.attr("stroke", "gray");
+				.attr("stroke", "gray")
+				.on("mouseenter", showValue)
+				.on("mouseout", hideValue);
+		}
+
+		function showValue(d) {
+			let message = that.valueMessage + d; 
+			title.text(message);
+		}
+
+		function hideValue(d) {
+			title.text(that.title);
 		}
 
 		//appends this.startLabel and this.endLabel as textElements to this chart
@@ -198,7 +227,7 @@ class ColorLegend extends MagicCircle{
 
 		//apends this.title to the chart
 		function appendTitle(){
-			titleContainer
+			title = titleContainer
 				.append("text")
 				.attr("y", that.titleY)
 				.attr("x", that.titleX)
