@@ -231,6 +231,10 @@ class Sunburst extends MagicCircle{
 				.on("mouseout", function(d){
 					onHoverOutSlice(this);
 				})
+				.on("click", function(d) {
+					let crime = d.data.name;
+					that.showOrHideLinesAndLabels(crime);
+				})
 				.attr("d", computeTransition())				
 				.transition()
 				.ease(d3.easeLinear)
