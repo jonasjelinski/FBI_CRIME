@@ -283,7 +283,8 @@ class LineChart extends MagicCircle{
 		function drawGraph(){
 			let selectedGraphLines = container.selectAll(".lines"),
 				invisible = 0,
-				visible =1;        
+				visible =1;  
+
 			selectedGraphLines
 				.selectAll("line")
 				.data(data)
@@ -293,9 +294,6 @@ class LineChart extends MagicCircle{
 				.attr("id", function(d){
 					return d.key;
 				})
-				.transition()
-				.ease(d3.easeLinear)
-				.duration(durationTime)  
 				.attr("d", function(d){				
 					let line = singleLine(d.values);    
 					return line;
