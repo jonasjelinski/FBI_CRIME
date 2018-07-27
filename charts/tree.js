@@ -24,6 +24,10 @@ class Tree extends MagicCircle{
 		this.drawTree();
 	}
 
+	setYear(year){
+		this.year = year;
+	}
+
 	drawTree(){
 
 		let hierarchyData = this.createHierarchyData(),
@@ -183,7 +187,11 @@ class Tree extends MagicCircle{
 			nodeEnter= node.enter().append("g")
 				.attr("class", "node")
 				.attr("transform", function(d) {
-					return "translate(" + source.y0 + "," + source.x0 + ")";
+					let dx = source.x0,
+							dy = source.y0;
+						dx = isNaN(dx) ? 0 : source.x0;
+						dy = isNaN(dy) ? 0 : source.y0;
+					return "translate(" + dy + "," + dx + ")";
 				})
 				.on("click", click);
 
