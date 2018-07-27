@@ -203,8 +203,8 @@ class LineChart extends MagicCircle{
 				inVisible = 0,
 				durationTime = 2000,
 				coordinates = d3.mouse(this),
-				x = coordinates[0],
-				y = coordinates[1];			
+				x = that.width/2,
+				y = that.height/2;			
 			label
 				.style("opacity", visible)
 				.attr("x", x)        
