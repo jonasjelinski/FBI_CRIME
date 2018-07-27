@@ -181,7 +181,6 @@ class StateMachine{
 		this.enableButton(oldButton);
 		this.disableButton(clickedButton);
 		this.activeButton = clickedButton;	
-		console.log(button);
 	}
 
 	enableButton(button){
