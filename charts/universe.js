@@ -468,6 +468,7 @@ class Universe extends MagicCircle{
 				.style("opacity", setLabelOpacity)
 				.style("font-size", that.labelSize)
 				.style("text-anchor", "middle")
+				.attr("transform","translate("+0+"," + - that.standards.standardRadius+")")
 				.on("mouseover", function(d){changeFont(d, this);})
 				.on("mouseout", function(d){resetFont(d, this);});
 		}
@@ -492,8 +493,7 @@ class Universe extends MagicCircle{
 			fontSize = that.hoverInSize;
 			d3.select(selection)
 				.transition().duration(durationTime)
-				.style("opacity", opacity).style("font-size", fontSize)
-				.attr("transform","translate("+0+"," + - that.standards.standardRadius+")");
+				.style("opacity", opacity).style("font-size", fontSize);
 		}
 
 		function resetFont(d, selection){
@@ -504,8 +504,7 @@ class Universe extends MagicCircle{
 			opacity = "0.1";
 			fontSize = that.hoverOutSize;
 			d3.select(selection).transition().duration(durationTime)
-				.style("opacity", opacity).style("font-size", fontSize)
-				.attr("transform","translate("+0+"," + that.standards.standardRadius +")");
+				.style("opacity", opacity).style("font-size", fontSize);
 		}
 
 		//draws the universe
