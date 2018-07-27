@@ -21,12 +21,23 @@ class CrimeCorrelationPage extends ParentPage{
 		this.negativeEndColor = this.htmlElement.negativeEndColor;
 		this.positivecColorLegendId = "CorrelationsPositive";
 		this.negativeColorLegendId = "CorrelationsNegative";
+		this.positiveMin = 0;
+		this.positiveMax = 1;
+		this.negativeMin = 0;
+		this.negativeMax = -1;
+		this.colorLegendValueDescription = this.htmlElement.colorLegendValueDescription;
 	}
 
 	init(){
 		this.mainChart = new CrimeCorrelation(this.pageId);
-		this.positiveCorrelationColorLegend = new ColorLegend(this.positivecColorLegendId, this.pageId, this.positiveColorLegendTitle, this.colorLegendStartLabel, this.colorLegendEndLabel, this.positiveStartColor, this.positiveEndColor);
-		this.negativeCorrelationColorLegend = new ColorLegend(this.negativeColorLegendId, this.pageId, this.negativeColorLegendTitle, this.colorLegendStartLabel, this.colorLegendEndLabel, this.negativeStartColor, this.negativeEndColor);
+		this.positiveCorrelationColorLegend = new ColorLegend(this.positivecColorLegendId, this.pageId, this.positiveColorLegendTitle, 
+				this.colorLegendStartLabel, this.colorLegendEndLabel, this.positiveStartColor, this.positiveEndColor,
+				this.colorLegendValueDescription, this.positiveMin, this.positiveMax);
+
+		this.negativeCorrelationColorLegend = new ColorLegend(this.negativeColorLegendId, this.pageId, this.negativeColorLegendTitle, 
+			this.colorLegendStartLabel, this.colorLegendEndLabel, this.negativeStartColor, this.negativeEndColor,
+			this.colorLegendValueDescription, this.negativeMin, this.negativeMax);
+
 		this.charts = [this.mainChart, this.positiveCorrelationColorLegend, this.negativeCorrelationColorLegend];
 		this.mainChart.appendThisCharToPage();	
 		this.positiveCorrelationColorLegend.appendThisCharToPage();	

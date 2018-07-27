@@ -25,6 +25,7 @@ class MapPage extends ParentPage{
 		this.colorLegendStartLabel = this.htmlElement.colorLegendStartLabel;
 		this.colorLegendEndLabel = this.htmlElement.colorLegendEndLabel;
 		this.colorLegendTitle = this.htmlElement.colorLegendTitle;
+		this.colorLegendValueDescription = this.htmlElement.colorLegendValueDescription;
 		this.startColor = "rgb(255,253,109)";
 		this.endColor = "rgb(232,12,5)";
 		this.playButtonText = this.htmlElement.playButtonText;
@@ -36,10 +37,10 @@ class MapPage extends ParentPage{
 		this.addEventListeners();
 	}
 
-	initCharts(){
+	initCharts(){		
 		this.mainChart = new Map();
-		this.colorLegend = new ColorLegend(this.colorLegendId, this.pageId, this.colorLegendTitle, this.colorLegendStartLabel, this.colorLegendEndLabel, this.startColor, this.endColor);
 		this.mainChart.appendThisCharToPage();
+		this.colorLegend = new ColorLegend(this.colorLegendId, this.pageId, this.colorLegendTitle, this.colorLegendStartLabel, this.colorLegendEndLabel, this.startColor, this.endColor, this.colorLegendValueDescription);		
 		this.charts = [this.mainChart,this.colorLegend];
 		this.colorLegend.appendThisCharToPage();
 	}
@@ -61,6 +62,7 @@ class MapPage extends ParentPage{
 		this.dropDownMenu.eventTarget.addEventListener(this.dropDownMenu.selectionEvent, this.updateCrimeType.bind(this), false);
 		this.playButton.eventTarget.addEventListener(this.playButton.onClick, this.playTimeLine.bind(this), false);
 		this.mainChart.eventTarget.addEventListener(this.playButton.onClick, this.sendMapClickEvent.bind(this), false);
+		this.mainChart.eventTarget.addEventListener(this.mainChart.onBuilded, this.updateColorLegend.bind(this), false);
 	}
 
 	updateMapYearAndMoving(event){
@@ -107,6 +109,14 @@ class MapPage extends ParentPage{
 			let event = new CustomEvent(this.onMapClicked, {detail:{state: ev.detail.state, year: ev.detail.year}});
 			this.eventTarget.dispatchEvent(event);
 		}
+	}
+
+	updateColorLegend(){
+		let maxLegendValue,
+			minLegendValue;
+		maxLegendValue = this.mainChart.getMaxCrime();
+		minLegendValue = this.mainChart.getMinCrime();
+		this.colorLegend.updateLegendValueAndDrawChart(minLegendValue, maxLegendValue);
 	}
 
 	//is used as a setter

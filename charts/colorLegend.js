@@ -7,7 +7,7 @@
 //two labels which describe the highest and the lowest value
 
 class ColorLegend extends MagicCircle{
-	constructor(chartId, pageId = "mainpage", title = "ColorLegend", startLabel= "0", endLabel= "1", startColor = "rgb(0,0,255)", endColor ="rgb(255,0,0)", startValue = 0, endValue = 1, valueMessage = ""){
+	constructor(chartId, pageId = "mainpage", title = "ColorLegend", startLabel= "0", endLabel= "1", startColor = "rgb(0,0,255)", endColor ="rgb(255,0,0)", valueMessage = "Value: ", startValue = 0, endValue = 1){
 		super(pageId);
 		this.htmlelement = htmlelementsNamespace.colorLegend;
 		this.htmlElementID = this.htmlelement.htmlid+chartId;
@@ -48,8 +48,15 @@ class ColorLegend extends MagicCircle{
 		this.drawColorLegend(data);
 	}
 
+	updateLegendValueAndDrawChart(minValue, maxValue){
+		this.startValue = minValue;
+		this.endValue = maxValue;
+		this.doChart();
+	}
+
 	//returns an array in the range of the number of slices
 	//so the ColorLegend has that many slices
+	//fills the array with values between to startValue and minValue
 	createScaleArray(){
 		let numberOfSlices = this.sliceNumbers,
 			scaleArray = [];
@@ -163,7 +170,7 @@ class ColorLegend extends MagicCircle{
 
 		//inits the linear colorScale
 		function initColorScale(){
-			colorScale = d3.scaleLinear().domain([that.startValue,that.sliceNumbers]).range([that.startColor, that.endColor]);
+			colorScale = d3.scaleLinear().domain([0,that.sliceNumbers]).range([that.startColor, that.endColor]);
 		}
 
 		//inits the sliceContainer
@@ -199,7 +206,7 @@ class ColorLegend extends MagicCircle{
 		}
 
 		function showValue(d) {
-			let message = that.valueMessage + d; 
+			let message = that.valueMessage + d;
 			title.text(message);
 		}
 
@@ -245,7 +252,7 @@ class ColorLegend extends MagicCircle{
 		//if i is at the last slice it returns the endValue
 		//so the labels are set at the beginning and the end of the chart
 		function getText(i){
-			if(i === that.startValue){
+			if(i === 0){
 				return that.startLabel;
 			}
 			else if(i === that.sliceNumbers-1){

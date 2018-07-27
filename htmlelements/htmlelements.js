@@ -217,6 +217,7 @@ htmlelementsNamespace.crimeCorrelationPage = {
 	colorLegendEndLabel: "High Correlation",
 	positivecColorLegendId : "CorrelationsPositive",
 	negativeColorLegendId : "CorrelationsNegative",
+	colorLegendValueDescription : " correlation: ",
 };
 
 htmlelementsNamespace.lineChartPage = {
@@ -233,6 +234,7 @@ htmlelementsNamespace.mapPage = {
 	colorLegendStartLabel: "lowest crime rate",
 	colorLegendEndLabel: "highest crime rate",
 	colorLegendTitle: "",
+	colorLegendValueDescription: "crimes per 100k:  ",
 };
 
 htmlelementsNamespace.universePage = {
@@ -241,6 +243,7 @@ htmlelementsNamespace.universePage = {
 	timeLineClassName: "timeLine universe",
 	timeLineClassid: "timeLine universe",
 	playButtonText: "rotate planets",
+	colorLegendValueDescription: "percentage:  ",
 };
 
 htmlelementsNamespace.popupPage = {

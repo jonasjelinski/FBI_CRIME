@@ -23,6 +23,8 @@ class Map extends MagicCircle{
 		this.infoLabelMap = "Click on map";
 		this.infoLabelMoving = "Map not clickable"
 		this.eventTarget = new EventTarget();
+		this.maxCrime = undefined;
+		this.minCrime = undefined;
 	}
 
 	doChart(){
@@ -31,6 +33,14 @@ class Map extends MagicCircle{
 		if(statesData !== undefined){
 			this.doMap(statesData);
 		}
+	}
+
+	getMaxCrime(){
+		return this.maxCrime;
+	}
+
+	getMinCrime(){
+		return this.minCrime;
 	}
 
 	setYear(year){
@@ -75,11 +85,15 @@ class Map extends MagicCircle{
 			g = svg.append(this.htmlElementType).attr('class', 'states'),
 			getAllCrimesNumber = getAllCrimesState(allStates,year,crimeType,this.data),
 			allCrimeValues = getAllCrimeValues(getAllCrimesNumber),
-			maxCrime = Math.max.apply(null, allCrimeValues), minCrime = Math.min.apply(null, allCrimeValues),
+			maxCrime = Math.max.apply(null, allCrimeValues), 
+			minCrime = Math.min.apply(null, allCrimeValues),
 			tip = doTip(getAllCrimesNumber, this.crimeText, this.infoLabelMap);
+			this.maxCrime = maxCrime;
+			this.minCrime = minCrime;
 
 		prepareStatusSite(getAllCrimesNumber,crimeType,year,0,this.crimeText,this.infoLabelMap);
 		colorizeMap(g,statesData,path,tip,getAllCrimesNumber,this.moving,this.colorRange,that,this.infoLabelMap);
+		that.dispatchChartBuildedEvent();
 
 		//This function is the first call and prepares the start values, simultaneously it deletes after every call the old values
 		function prepareStatusSite(getAllCrimesNumber,crimeType,year,i,crimeText,infoLabelMap){
@@ -227,5 +241,6 @@ class Map extends MagicCircle{
 			objectCrimesStatesNumber={state:allStates[i],value:parseInt(crimeValue)};
 			getAllCrimesNumber.push(objectCrimesStatesNumber);
 		}
+		
 	}
 }

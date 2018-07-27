@@ -21,7 +21,9 @@ class MagicCircle{
 		this.width = this.htmlelement.width;
 		this.height = this.htmlelement.height;
 		this.getRootElement = this.getRootElement.bind(this);      
-		this.container = {};		
+		this.container = {};
+		this.eventTarget = new EventTarget();
+		this.onBuilded = "onBuilded";		
 	}
 	
 	//returns a rootElement where charts are appended	
@@ -89,5 +91,10 @@ class MagicCircle{
 	//all elements which are drawn into the container a removed
 	killsHimself(){
 		this.container.selectAll("*").remove();
+	}
+
+	dispatchChartBuildedEvent(){
+		let event = new Event(this.onBuilded);
+		this.eventTarget.dispatchEvent(event);
 	}
 }

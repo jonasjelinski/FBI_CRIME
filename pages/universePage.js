@@ -12,13 +12,16 @@ class UniversePage extends ParentPage{
 	constructor(pageId){
 		super(pageId);		
 		this.htmlElement = htmlelementsNamespace.universePage;
-		this.colorLegendTitle = "Ratio: ViolentCrimes/Propertycrimes"; 		
+		this.colorLegendTitle = "Relative Ratio"; 		
 		this.colorLegendStartLabel = "Propertycrimes"; 		
 		this.colorLegendEndLabel = "ViolentCrimes";	
 		this.timeLineId = "Universe";
 		this.playButtonId = "Universe";
 		this.colorLegendId = "Universe";
 		this.playButtonText = this.htmlElement.playButtonText;
+		this.colorLegendValueDescription = this.htmlElement.colorLegendValueDescription;
+		this.startColor = "rgb(0,0,255)";
+		this.endColor = "rgb(255,0,0)";
 	}
 
 	init(){
@@ -29,7 +32,7 @@ class UniversePage extends ParentPage{
 
 	initCharts(){
 		this.mainChart = new Universe(this.pageId);
-		this.colorLegend = new ColorLegend(this.colorLegendId, this.pageId, this.colorLegendTitle, this.colorLegendStartLabel, this.colorLegendEndLabel);
+		this.colorLegend = new ColorLegend(this.colorLegendId, this.pageId, this.colorLegendTitle, this.colorLegendStartLabel, this.colorLegendEndLabel, this.startColor, this.endColor, this.colorLegendValueDescription);
 		this.charts = [this.mainChart, this.colorLegend ];
 		this.mainChart.appendThisCharToPage();
 		this.colorLegend.appendThisCharToPage();
