@@ -13,4 +13,4 @@ componentsNamespace.forceButton = d3.select("#forceButton");
 componentsNamespace.planetButton = d3.select("#planetButton");
 componentsNamespace.stateMachine = new StateMachine(componentsNamespace.startButton, componentsNamespace.mapButton, componentsNamespace.timeButton, componentsNamespace.forceButton, componentsNamespace.planetButton);
 componentsNamespace.stateMachine.init();
-componentsNamespace.currentButton = d3.select("#startButton");
+

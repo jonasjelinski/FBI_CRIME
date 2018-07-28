@@ -73,19 +73,3 @@ actionNamespace.actionDrawImpressumPage = function(){
 actionNamespace.actionDrawDataPage = function(){
 		componentsNamespace.stateMachine.switchState(configNamespace.STATE_MACHINE.DATA_REGULATION);
 };
-
-actionNamespace.changeButtonPointerEventOnButtonClick = function (event) {
-	let clickedButton= event.target,
-		oldButton = componentsNamespace.currentButton;
-	actionNamespace.enableButton(oldButton);
-	actionNamespace.disableButton(clickedButton);
-	componentsNamespace.currentButton = clickedButton;
-}
-
-actionNamespace.enableButton = function(button){		
-		button.style("pointer-events", "none");
-};
-
-actionNamespace.disableButton = function(button){
-		button.style("pointer-events", "all");
-};
