@@ -1,3 +1,7 @@
+//Commonfunctions are functions that are used several
+//times in different charts and pages
+//it is implemented to save time during programming and avoid repetitions in the code
+
 var commonfunctionsNamespace = commonfunctionsNamespace || {};
 
 commonfunctionsNamespace.setCrimeCorrelationCSV= function(){
