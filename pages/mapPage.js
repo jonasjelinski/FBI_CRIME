@@ -38,7 +38,7 @@ class MapPage extends ParentPage{
 	}
 
 	initCharts(){		
-		this.mainChart = new Map();
+		this.mainChart = new Map(this.pageId);
 		this.mainChart.appendThisCharToPage();
 		this.colorLegend = new ColorLegend(this.colorLegendId, this.pageId, this.colorLegendTitle, this.colorLegendStartLabel, this.colorLegendEndLabel, this.startColor, this.endColor, this.colorLegendValueDescription);		
 		this.charts = [this.mainChart,this.colorLegend];
@@ -72,7 +72,6 @@ class MapPage extends ParentPage{
 		this.mainChart.setYear(year);
 		this.mainChart.setMoving(moving);
 		this.mainChart.updatesHimself();
-
 	}
 
 	updateCrimeType(event){

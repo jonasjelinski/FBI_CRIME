@@ -7,7 +7,7 @@
 //This template was used: https://github.com/nixony/d3-choropleth
 
 class Map extends MagicCircle{
-	constructor(pageId,year=configNamespace.STATES_AND_CRIMES.minYear,crimeType=configNamespace.STATES_AND_CRIMES.crimeCategories.Crimes.propertyCrime[0],moving){
+	constructor(pageId,year=configNamespace.STATES_AND_CRIMES.minYear,crimeType=configNamespace.STATES_AND_CRIMES.crimeCategories.Crimes.violentCrime[0],moving){
 		super(pageId);
 		this.htmlelement = htmlelementsNamespace.theMap;
 		this.htmlElementID = this.htmlelement.htmlid;
