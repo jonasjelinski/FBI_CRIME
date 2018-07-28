@@ -130,7 +130,7 @@ class LineChart extends MagicCircle{
 			maxYear = configNamespace.STATES_AND_CRIMES.maxYear,
 			minYear = configNamespace.STATES_AND_CRIMES.minYear,
 			minCrime = 0,
-			maxCrime = 4000,
+			maxCrime = 8000,
 			mindate = new Date(minYear,0,1),
 			maxdate = new Date(maxYear,0,31),			
 			margin = {top: height/8, right: width/10, bottom: height/10, left: width/10},
