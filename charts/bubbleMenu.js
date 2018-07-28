@@ -7,8 +7,9 @@
 //and an event with the value of the bubble atteched to it is dispatched
 
 class BubbleMenu extends MagicCircle{
-	constructor(pageId, categories, chartId){
+	constructor(pageId,categories, chartId){
 		super(pageId);
+		this.chartId = chartId;
 		this.htmlelement = htmlelementsNamespace.bubbleMenu;
 		this.htmlElementID = this.htmlelement.htmlid + chartId;
 		this.htmlclassname = this.htmlelement.htmlclassname;
@@ -29,6 +30,8 @@ class BubbleMenu extends MagicCircle{
 	drawBubbleMenu(){
 		let bubbles,
 			labels,
+			labelId = this.chartId,
+			bubbleId = this.chartId,
 			container = this.container,
 			that = this,
 			diameter = this.width/ this.categories.length,
@@ -38,7 +41,6 @@ class BubbleMenu extends MagicCircle{
 			max = 10,
 			random =Math.floor((Math.random() * max) + 1),
 			fontSize = this.fontSize;
-
 		initBubbles();
 		initLabels();
 		setEnterAndExitBehaviour();
@@ -79,6 +81,9 @@ class BubbleMenu extends MagicCircle{
 			bubbles.enter()
 				.append("circle")
 				.attr("class","bubble")
+				.attr("bubbleId", function(d){
+					return bubbleId+d;
+				})
 				.attr("bubbleValue", function(d){
 					return d;
 				})
@@ -100,6 +105,9 @@ class BubbleMenu extends MagicCircle{
 			labels.enter()
 				.append("g")
 				.attr("class", "bubbleLabel")
+				.attr("labelId", function(d){
+					return labelId+d;
+				})
 				.attr("bubbleValue", function(d){
 					return d;
 				})
@@ -167,17 +175,17 @@ class BubbleMenu extends MagicCircle{
 
 		//returns the label containting the bubbleValue value
 		//so it can be selected and changed in handleBubbleClick
-		function getLabelByBubbleValue(value){
-			let selector = "g[bubbleValue='"+value+"']",
-				label = d3.selectAll(selector).filter(".bubbleLabel").select("text");
+		function getLabelByBubbleValue(value){		
+			let selector = "g[labelId='"+labelId+value+"']",
+				label = d3.selectAll(selector).select("text");
 			return label;
 		}
 
 		//returns the label containting the bubbleValue value
 		//so it can be selected and changed in handleBubbleClick
 		function getBubbleByLabelValue(value){
-			let selector = "circle[bubbleValue='"+value+"']",
-				bubble = d3.selectAll(selector).filter(".bubble");
+			let selector = "circle[bubbleId='"+bubbleId+value+"']",
+				bubble = d3.selectAll(selector);
 			return bubble;
 		}
 

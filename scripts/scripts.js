@@ -34,6 +34,7 @@ scripts_namespace.SECOND_SCRIPTS = [
 	"./pages/parentPage.js",
 	"./pages/crimeCorrelationPage.js",
 	"./charts/dropDownMenu.js",
+	"./pages/halfLineChartPage.js",
 	"./pages/lineChartPage.js",
 	"./pages/mapPage.js",
 	"./pages/universePage.js",

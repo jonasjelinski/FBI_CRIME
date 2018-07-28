@@ -1,73 +1,45 @@
 /*---PAGE: LINE CHART--*/
 
-//this page shows a lineChart
-//showing the crimerates over years for different crimes and states 
-//by appending a LineChart-chart to the page
-//it has a DropDownMenu and a BubbleMenu as controlls
-//in bubbleMenu the user can select between different crimetypes
-//to show or hide the line of the crimetype
-//in dropDownMenuStates the user can switch between different states like Alaska
+//this page shows two lineCharts an their controlls
+//it inits two HalfLineChartPages which are both Pages extending the ParentPage
+//a HalfLineChartPage consists of a Linchart, a BubbleMenu and a DropDownMenu
+//for detailed informations look in the class HalfLineChartPage
 
 class LineChartPage extends ParentPage{
 	constructor(pageId){
 		super(pageId);
+		this.pageId = pageId;
+		this.firstContainerId = "firstHalfLineChartPage";
+		this.secondContainerId = "secondHalfLineChartPage";		
 		this.htmlElement = htmlelementsNamespace.lineChartPage;
-		this.dropDownIdStates = "LineChart"
-		this.bubbleMenuId = "LineChart";
+		this.firstDropDownIdStates = "firstLineChartHalf";
+		this.firstBubbleMenuId = "firstLineChartHalf";
+		this.secondDropDownIdStates = "secondLineChartHalf";
+		this.secondBubbleMenuId = "secondLineChartHalf";
+		this.firstLineChartId = "firstLineChart";
+		this.secondLineChartId = "secondLineChart";
 	}
 
+	//creates the two halfs of the page an inits them
 	init(){
-		this.initCharts();
-		this.initControlls();
-		this.addListeners();
+		this.initContainers();
+		this.initPageHalfs();
 	}
 
-	initCharts(){
-		this.mainChart = new LineChart(this.pageId);		
-		this.mainChart.appendThisCharToPage();
-		this.charts = [this.mainChart];		
+	initContainers(){
+		this.firstHalfContainer = this.page.append("div").attr("id", this.firstContainerId); 
+		this.secondHalfContainer = this.page.append("div").attr("id", this.secondContainerId); 
 	}
 
-	initControlls(){
-		this.initBubbleMenu();
-		this.initDropDownStates();		
-		this.controlls = [this.bubbleMenu, this.dropDownMenuStates];
+	initPageHalfs(){
+		this.firstHalf = new HalfLineChartPage(this.firstContainerId, this.firstLineChartId , this.firstDropDownIdStates, this.firstBubbleMenuId);
+		this.secondHalf = new HalfLineChartPage(this.secondContainerId, this.secondLineChartId , this.secondDropDownIdStates, this.secondBubbleMenuId);
+		this.firstHalf.init();
+		this.secondHalf.init();
 	}
 
-	initBubbleMenu(){
-		let crimeTypes = commonfunctionsNamespace.getAllCrimeTypes();
-		this.bubbleMenu = new BubbleMenu(this.pageId,crimeTypes, this.bubbleMenuId);
-		this.bubbleMenu.appendThisCharToPage();
-	}
-
-	initDropDownStates(){
-		let states = configNamespace.STATES_AND_CRIMES.states;
-		this.dropDownMenuStates = new DropDownMenu(this.pageId, states, this.dropDownIdStates);
-		this.dropDownMenuStates.appendThisCharToPage();
-	}
-
-	addListeners(){
-		this.dropDownMenuStates.eventTarget.addEventListener(this.dropDownMenuStates.selectionEvent, this.handleDropDown.bind(this), false);
-		this.bubbleMenu.eventTarget.addEventListener(this.bubbleMenu.selectionEvent, this.updateChartCrimeType.bind(this), false);
-	}
-
-	updateChartCrimeType(event){				
-		let crimeType = event.detail.selection;
-		this.mainChart.showOrHideLine(crimeType);
-	}
-
-	handleDropDown(event){
-		this.resetBubbleMenu();
-		this.updateChartState(event);
-	}
-
-	resetBubbleMenu(){
-		this.bubbleMenu.updatesHimself();
-	}
-
-	updateChartState(event){
-		let state = event.detail.selection;
-		this.mainChart.setState(state);
-		this.mainChart.updatesHimself();
+	drawPage(){
+		this.firstHalf.drawPage();
+		this.secondHalf.drawPage();	
 	}
 }	

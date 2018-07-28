@@ -8,9 +8,10 @@
 //chart can be zoomed
 
 class LineChart extends MagicCircle{
-	constructor(pageId, state = configNamespace.STATES_AND_CRIMES.states[0]){
+	constructor(pageId, chartId, state = configNamespace.STATES_AND_CRIMES.states[0]){
 		super(pageId);
 		this.state = state;
+		this.chartId = chartId;
 		this.htmlelement = htmlelementsNamespace.lineDiagramm; 
 		this.htmlElementID = this.htmlelement.htmlid;
 		this.width = this.htmlelement.width;
@@ -22,7 +23,7 @@ class LineChart extends MagicCircle{
 	}
 	
 	//calls drawLineChart
-	doChart(){      
+	doChart(){     
 		this.drawLineChart();		
 	}
 
@@ -291,8 +292,8 @@ class LineChart extends MagicCircle{
 				.enter()
 				.append("path")				
 				.attr("class", "line")      
-				.attr("id", function(d){
-					return d.key;
+				.attr("lineId", function(d){
+					return that.getId(d.key);
 				})
 				.attr("d", function(d){				
 					let line = singleLine(d.values);    
@@ -308,18 +309,6 @@ class LineChart extends MagicCircle{
 				.duration(durationTime)  
 				.attr("opacity", visible);
 		}	
-
-		//hides line if visible, shows line if it has been invisible before
-		function showOrHideLine(d){
-			let crime = d.key,
-				isHidden = 0,
-				isVisible = 1,
-				id = "[id="+crime+"]",        
-				line = d3.select(id),
-				visible = parseInt(line.attr("opacity")),           
-				newOpacity = visible === isVisible ? isHidden : isVisible;           
-			line.attr("opacity", newOpacity);        
-		}
 
 		//returns color according to crimeType
 		function getColor(d){
@@ -365,11 +354,15 @@ class LineChart extends MagicCircle{
 		let crime = crimeType,
 			isHidden = 0,
 			isVisible = 1,
-			id = "[id="+crime+"]",        
+			id = "[lineId="+this.getId(crime)+"]",        
 			line = d3.select(id),
 			visible = parseInt(line.attr("opacity")),           
 			newOpacity = visible === isVisible ? isHidden : isVisible;           
 		line.attr("opacity", newOpacity);        
+	}
+
+	getId(crime){
+		return this.chartId +crime;
 	}	
 
 }

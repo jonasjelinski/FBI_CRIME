@@ -113,8 +113,7 @@ class StateMachine{
 
 	hideButtonPageDescription(){
 		this.buttonPageDescription.hideInfoText();
-	}
-	
+	}	
 
 	//switches to state
 	//each state draws a page and a short and a long intotext descriping the states
@@ -187,19 +186,17 @@ class StateMachine{
 		if(button){
 			button.style("pointer-events", "all");
 		}		
-	};
+	}
 
 	disableButton(button){
 		if(button){
 			button.style("pointer-events", "none");
 		}		
-	};
-
+	}
 
 	drawStartPage(){
 		this.drawPage(this.startPage);
 	}
-
 
 	drawMapPage(){
 		this.drawPage(this.mapPage);
