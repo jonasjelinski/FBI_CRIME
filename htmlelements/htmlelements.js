@@ -47,8 +47,8 @@ htmlelementsNamespace.lineDiagramm = {
 	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "linediagram",
 	htmlid: "linediagram",
-	width:900,
-	height:550,
+	width:450,
+	height:250,
 	type: "svg",
 	xAxisLabelX : -20,
 	xAxisLabelY : 35,
@@ -225,6 +225,17 @@ htmlelementsNamespace.lineChartPage = {
 	htmlid: "lineChartPage",
 	dropDownClassName: "dropDown crimetypes linechart",
 	dropDownid: "dropDown crimetypes linechart",
+	firstContainerId : "firstHalfLineChartPage",
+	secondContainerId : "secondHalfLineChartPage",		
+	containerType: "div",
+	containerWidth: 450,
+	containerHeight: 200,
+	firstDropDownIdStates : "firstLineChartHalf",
+	firstBubbleMenuId : "firstLineChartHalf",
+	secondDropDownIdStates : "secondLineChartHalf",
+	secondBubbleMenuId : "secondLineChartHalf",
+	firstLineChartId : "firstLineChart",
+	secondLineChartId : "secondLineChart",
 };
 
 htmlelementsNamespace.mapPage = {

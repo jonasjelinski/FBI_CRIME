@@ -8,16 +8,19 @@
 class LineChartPage extends ParentPage{
 	constructor(pageId){
 		super(pageId);
-		this.pageId = pageId;
-		this.firstContainerId = "firstHalfLineChartPage";
-		this.secondContainerId = "secondHalfLineChartPage";		
+		this.pageId = pageId;		
 		this.htmlElement = htmlelementsNamespace.lineChartPage;
-		this.firstDropDownIdStates = "firstLineChartHalf";
-		this.firstBubbleMenuId = "firstLineChartHalf";
-		this.secondDropDownIdStates = "secondLineChartHalf";
-		this.secondBubbleMenuId = "secondLineChartHalf";
-		this.firstLineChartId = "firstLineChart";
-		this.secondLineChartId = "secondLineChart";
+		this.firstContainerId = this.htmlElement.firstContainerId;
+		this.secondContainerId = this.htmlElement.secondContainerId;
+		this.containerType = this.htmlElement.containerType;
+		this.containerWidth = this.htmlElement.containerWidth;
+		this.containerHeight = this.htmlElement.containerHeight;
+		this.firstDropDownIdStates = this.htmlElement.firstDropDownIdStates;
+		this.firstBubbleMenuId = this.htmlElement.firstBubbleMenuId;
+		this.secondDropDownIdStates = this.htmlElement.secondDropDownIdStates;
+		this.secondBubbleMenuId = this.htmlElement.secondBubbleMenuId;
+		this.firstLineChartId = this.htmlElement.firstLineChartId;
+		this.secondLineChartId = this.htmlElement.secondLineChartId;
 	}
 
 	//creates the two halfs of the page an inits them
@@ -27,8 +30,8 @@ class LineChartPage extends ParentPage{
 	}
 
 	initContainers(){
-		this.firstHalfContainer = this.page.append("div").attr("id", this.firstContainerId); 
-		this.secondHalfContainer = this.page.append("div").attr("id", this.secondContainerId); 
+		this.firstHalfContainer =this.createContainer(this.firstContainerId);
+		this.secondHalfContainer = this.createContainer(this.secondContainerId); 
 	}
 
 	initPageHalfs(){
@@ -41,5 +44,9 @@ class LineChartPage extends ParentPage{
 	drawPage(){
 		this.firstHalf.drawPage();
 		this.secondHalf.drawPage();	
+	}
+
+	createContainer(id){
+		return  this.page.append(this.containerType).attr("id", id).attr("width", this.containerWidth).attr("height", this.containerHeight); 
 	}
 }	

@@ -19,7 +19,6 @@ class HalfLineChartPage extends ParentPage{
 	}
 
 	init(){
-
 		this.initCharts();
 		this.initControlls();
 		this.addListeners();
