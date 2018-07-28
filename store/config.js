@@ -34,15 +34,24 @@ configNamespace.STATES_AND_CRIMES = {
 
 configNamespace.REALCRIMENAMES = {
 	realCrimeNames: {
-		propertyCrime: "Property crime",
-		Burglary: "Burglary",
-		Larcenytheft: "Larency theft",
-		Motorvehicletheft: "Motor vehicle theft",
-		violentCrime: "Violent crime",
-		Aggravatedassault: "Aggravated assault",
-		MurderManslaughter: "Murder manslaughter",
-		Rape: "Rape",
-		Robbery: "Robbery",
+		["propertyCrime"]: "Property crime",
+		["Property crime"]: "propertyCrime",
+		["Burglary"]: "Burglary",
+		["Burglary "]: "Burglary",
+		["Larcenytheft"]: "Larency theft",
+		["Larency theft"]: "Larcenytheft",
+		["Motorvehicletheft"]: "Motor vehicle theft",
+		["Motor vehicle theft"]: "Motorvehicletheft",
+		["violentCrime"]: "Violent crime",
+		["Violent crime"]: "violentCrime",
+		["Aggravatedassault"]: "Aggravated assault",
+		["Aggravated assault"]: "Aggravatedassault",
+		["MurderManslaughter"]: "Murder manslaughter",
+		["Murder manslaughter"]: "MurderManslaughter",
+		["Rape"]: "Rape",
+		["Rape "]: "Rape",
+		["Robbery"]: "Robbery",
+		["Robbery "]: "Robbery",
 	},
 };
 
