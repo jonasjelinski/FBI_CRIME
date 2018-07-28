@@ -141,8 +141,7 @@ class LineChart extends MagicCircle{
 			axisNumberLabelX = - chartWidth/2 + this.yAxisLabelX,			
 			axisNumberLabelY = + margin.left + this.yAxisLabelY,			
 			xRange = d3.scaleTime().domain([mindate, maxdate]).range([0,chartWidth ]), 
-			yRange = d3.scaleLinear().domain([minCrime, maxCrime]).range([chartHeight, 0]),
-			
+			yRange = d3.scaleLinear().domain([minCrime, maxCrime]).range([chartHeight, 0]),			
 			xAxis = d3.axisBottom(xRange), 
 			yAxis = d3.axisLeft(yRange),
 			deltaAxisY = chartHeight-margin.bottom,
@@ -154,7 +153,9 @@ class LineChart extends MagicCircle{
 			yCoordLine,
 			allGraphLines,
 			singleLine,
-			label;	
+			label,
+			lineClass = "line"+this.chartId,
+			linesClass = "lines"+this.chartId;	
 			
 		initZoomingBehaviour();
 		initLabel();
@@ -254,7 +255,7 @@ class LineChart extends MagicCircle{
 
 		//inits allGraphLines and sets width and height and position of allGraphLines
 		function initAllGraphLines(){
-			allGraphLines = canvas.append("g").attr("class", "lines")
+			allGraphLines = canvas.append("g").attr("class", linesClass)
 				.attr("width", chartWidth)
 				.attr("height", chartHeight)                                                                
 				.style("fill", "white");
@@ -282,7 +283,7 @@ class LineChart extends MagicCircle{
 
 		//gives data to selectedGraphLines and draws new lines with new data on enter
 		function drawGraph(){
-			let selectedGraphLines = container.selectAll(".lines"),
+			let selectedGraphLines = container.selectAll("."+linesClass),
 				invisible = 0,
 				visible =1;  
 
@@ -291,7 +292,7 @@ class LineChart extends MagicCircle{
 				.data(data)
 				.enter()
 				.append("path")				
-				.attr("class", "line")      
+				.attr("class", lineClass)      
 				.attr("lineId", function(d){
 					return that.getId(d.key);
 				})
@@ -319,10 +320,10 @@ class LineChart extends MagicCircle{
 		//zooms in and out of the chart
 		function zoomCoordSystemAndLines() { 
 			let transitionZoomTime = 750,                
-				allLines = container.selectAll(".lines")
+				allLines = container.selectAll("."+linesClass)
 					.transition().duration(transitionZoomTime)
 					.attr("transform", d3.event.transform),     
-				lines = d3.selectAll(".line").style("stroke-width", 2/d3.event.transform.k),             
+				lines = d3.selectAll("."+lineClass).style("stroke-width", 2/d3.event.transform.k),             
 				xCall = xCoordLine.transition().duration(transitionZoomTime).call(xAxis.scale(d3.event.transform.rescaleX(xRange))),
 				yCall = yCoordLine.transition().duration(transitionZoomTime).call(yAxis.scale(d3.event.transform.rescaleY(yRange)));                       
 		}
