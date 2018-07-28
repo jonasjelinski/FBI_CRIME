@@ -143,6 +143,8 @@ class ColorLegend extends MagicCircle{
 			isSmall = !isSmall;
 		}
 
+		//shows lavel if mouse hovers in container
+		//lese hides it
 		function initHoverBehaviour(){
 			container
 				.on("mouseenter" ,showAndHideLabel)
