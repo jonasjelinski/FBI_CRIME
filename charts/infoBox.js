@@ -34,7 +34,7 @@ class InfoBox extends MagicCircle{
 				.attr("class","textBox")
 				.attr("width", that.width)
 				.attr("height", that.height) 			
-				.html(that.infoText)	                  		
+				.html(that.infoText);                  		
 		}				
 	}	
 }

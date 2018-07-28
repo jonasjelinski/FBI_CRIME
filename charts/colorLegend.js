@@ -60,20 +60,20 @@ class ColorLegend extends MagicCircle{
 	createScaleArray(){
 		let numberOfSlices = this.sliceNumbers,
 			scaleArray = [];
-			for(let i = numberOfSlices; i > 0; i--){
-				let value;
-				if(i === numberOfSlices){
-					value = this.startValue;
-				}
-				else if( i === 1){
-					value= this.endValue;
-				}
-				else{
-					value = this.endValue/i,
-					value = (value).toFixed(2);
-				}
-				scaleArray.push(value);
+		for(let i = numberOfSlices; i > 0; i--){
+			let value;
+			if(i === numberOfSlices){
+				value = this.startValue;
 			}
+			else if( i === 1){
+				value= this.endValue;
+			}
+			else{
+				value = this.endValue/i;
+				value = (value).toFixed(2);
+			}
+			scaleArray.push(value);
+		}
 		return scaleArray;
 	}
 
@@ -148,7 +148,7 @@ class ColorLegend extends MagicCircle{
 				.style("opacity", inVisible)
 				.attr("transform", "translate(" + 0 + "," + 0 + ")");
 		}
-		
+
 		//container gets smaller if container was big else big
 		function changeSizeAndBackgroundColor(){
 			if(isSmall){
