@@ -148,9 +148,7 @@ class ColorLegend extends MagicCircle{
 				.style("opacity", inVisible)
 				.attr("transform", "translate(" + 0 + "," + 0 + ")");
 		}
-
-
-
+		
 		//container gets smaller if container was big else big
 		function changeSizeAndBackgroundColor(){
 			if(isSmall){

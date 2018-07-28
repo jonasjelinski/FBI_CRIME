@@ -32,28 +32,28 @@ configNamespace.STATES_AND_CRIMES = {
 	minYear : 2000,
 };
 
-configNamespace.REALCRIMENAMES = {
-	realCrimeNames: {
-		["propertyCrime"]: "Property crime",
-		["Property crime"]: "propertyCrime",
-		["Burglary"]: "Burglary ",
-		["Burglary "]: "Burglary",
-		["Larcenytheft"]: "Larency theft",
-		["Larency theft"]: "Larcenytheft",
-		["Motorvehicletheft"]: "Motor vehicle theft",
-		["Motor vehicle theft"]: "Motorvehicletheft",
-		["violentCrime"]: "Violent crime",
-		["Violent crime"]: "violentCrime",
-		["Aggravatedassault"]: "Aggravated assault",
-		["Aggravated assault"]: "Aggravatedassault",
-		["MurderManslaughter"]: "Murder manslaughter",
-		["Murder manslaughter"]: "MurderManslaughter",
-		["Rape"]: "Rape ",
-		["Rape "]: "Rape",
-		["Robbery"]: "Robbery ",
-		["Robbery "]: "Robbery",
-	},
+configNamespace.REAL_CRIME_NAMES = {
+	["propertyCrime"]: "Property crime",
+	["Property crime"]: "propertyCrime",
+	["Burglary"]: "Burglary ",
+	["Burglary "]: "Burglary",
+	["Larcenytheft"]: "Larency theft",
+	["Larency theft"]: "Larcenytheft",
+	["Motorvehicletheft"]: "Motor vehicle theft",
+	["Motor vehicle theft"]: "Motorvehicletheft",
+	["violentCrime"]: "Violent crime",
+	["Violent crime"]: "violentCrime",
+	["Aggravatedassault"]: "Aggravated assault",
+	["Aggravated assault"]: "Aggravatedassault",
+	["MurderManslaughter"]: "Murder manslaughter",
+	["Murder manslaughter"]: "MurderManslaughter",
+	["Rape"]: "Rape ",
+	["Rape "]: "Rape",
+	["Robbery"]: "Robbery ",
+	["Robbery "]: "Robbery",
 };
+
+configNamespace.NICE_WRITTEN_CRIMENAME = ["Burglary ", "Larency theft", "Motor vehicle theft", "Violent crime", "Aggravated assault", "Murder manslaughter", " Rape ", " Robbery"];
 
 configNamespace.STATE_MACHINE = {
 	START : "START",

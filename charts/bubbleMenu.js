@@ -110,14 +110,33 @@ class BubbleMenu extends MagicCircle{
 				.attr("x", x + diameter)
 				.attr("y", function(d,i){return calculateYPos(i);})
 				.attr("font-size", fontSize)
-				.style("fill", function(d){return getColor(d)})
-				.text(function(d) { return d; })
+				.style("fill", function(d){return getColor(d);})
+				.text(function(d) { return getText(d); })
 				.on("click", handleLabelClick);
 		}
 
 		function calculateYPos(i){
 			let factor = diameter+2;
 			return yStart+factor*i;
+		}
+
+		//converts text to easy readable strings
+		//if the text is a crime
+		//else returns just the text
+		function getText(d){
+			let text = d;
+			if(isACrime(text)){
+				text = configNamespace.REAL_CRIME_NAMES[text];
+			}
+			return text;		
+		}
+
+		//returns true if the is a crime
+		function isACrime(text){
+			let crimeTypes = commonfunctionsNamespace.getAllCrimeTypes(),
+				categories = ["violentCrime", "propertyCrime"],
+				allCrimeNames = crimeTypes.concat(categories);
+			return allCrimeNames.includes(text);
 		}
 
 		//this function is called at onClick on a bubble
@@ -182,12 +201,12 @@ class BubbleMenu extends MagicCircle{
 		function getColor(d){
 			let crime = d,
 				color = that.defaultColor;
-			try{
+			if(isACrime(crime)){
 				color = commonfunctionsNamespace.getCrimeColor(crime);
-			}
-			catch(error){
+			}			
+			else{
 				color = getDefaultColor();
-			}
+			}		
 			return color;
 		}
 
