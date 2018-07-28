@@ -36,7 +36,7 @@ configNamespace.REALCRIMENAMES = {
 	realCrimeNames: {
 		["propertyCrime"]: "Property crime",
 		["Property crime"]: "propertyCrime",
-		["Burglary"]: "Burglary",
+		["Burglary"]: "Burglary ",
 		["Burglary "]: "Burglary",
 		["Larcenytheft"]: "Larency theft",
 		["Larency theft"]: "Larcenytheft",
@@ -48,9 +48,9 @@ configNamespace.REALCRIMENAMES = {
 		["Aggravated assault"]: "Aggravatedassault",
 		["MurderManslaughter"]: "Murder manslaughter",
 		["Murder manslaughter"]: "MurderManslaughter",
-		["Rape"]: "Rape",
+		["Rape"]: "Rape ",
 		["Rape "]: "Rape",
-		["Robbery"]: "Robbery",
+		["Robbery"]: "Robbery ",
 		["Robbery "]: "Robbery",
 	},
 };
