@@ -64,8 +64,9 @@ class PopUpPage extends ParentPage{
 	initBubbleMenu(){
 		let crimeTypes = commonfunctionsNamespace.getAllCrimeTypes(),
 			categories = ["violentCrime", "propertyCrime"],
-			selections = crimeTypes.concat(categories);
-		this.bubbleMenu = new BubbleMenu(this.pageId,selections, this.bubbleMenuId);
+			selections = crimeTypes.concat(categories),
+			sortedSelections = selections.sort();
+		this.bubbleMenu = new BubbleMenu(this.pageId, sortedSelections, this.bubbleMenuId);
 		this.bubbleMenu.appendThisCharToPage();
 	}
 

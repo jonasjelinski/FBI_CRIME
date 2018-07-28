@@ -38,7 +38,7 @@ class HalfLineChartPage extends ParentPage{
 	}
 
 	initBubbleMenu(){
-		let crimeTypes = commonfunctionsNamespace.getAllCrimeTypes();
+		let crimeTypes = commonfunctionsNamespace.getAllCrimeTypes().sort();   
 		this.bubbleMenu = new BubbleMenu(this.pageId,crimeTypes, this.bubbleMenuId);
 		this.bubbleMenu.appendThisCharToPage();
 	}

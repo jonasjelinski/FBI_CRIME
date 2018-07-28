@@ -31,8 +31,8 @@ class CrimeCorrelationPage extends ParentPage{
 	init(){
 		this.mainChart = new CrimeCorrelation(this.pageId);
 		this.positiveCorrelationColorLegend = new ColorLegend(this.positivecColorLegendId, this.pageId, this.positiveColorLegendTitle, 
-				this.colorLegendStartLabel, this.colorLegendEndLabel, this.positiveStartColor, this.positiveEndColor,
-				this.colorLegendValueDescription, this.positiveMin, this.positiveMax);
+			this.colorLegendStartLabel, this.colorLegendEndLabel, this.positiveStartColor, this.positiveEndColor,
+			this.colorLegendValueDescription, this.positiveMin, this.positiveMax);
 
 		this.negativeCorrelationColorLegend = new ColorLegend(this.negativeColorLegendId, this.pageId, this.negativeColorLegendTitle, 
 			this.colorLegendStartLabel, this.colorLegendEndLabel, this.negativeStartColor, this.negativeEndColor,

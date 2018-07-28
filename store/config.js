@@ -50,7 +50,7 @@ configNamespace.REAL_CRIME_NAMES = {
 	["Robbery"]: "Robbery",
 };
 
-configNamespace.NICE_WRITTEN_CRIMENAMES = ["Burglary", "Larency theft", "Motor vehicle theft", "Aggravated assault", "Murder manslaughter", " Rape", " Robbery", "Violent crime", "Property crime"];
+configNamespace.NICE_WRITTEN_CRIMENAMES = ["Aggravated assault", "Burglary", "Larency theft", "Motor vehicle theft", "Murder manslaughter", " Rape", " Robbery", "Violent crime", "Property crime"];
 
 configNamespace.STATE_MACHINE = {
 	START : "START",
