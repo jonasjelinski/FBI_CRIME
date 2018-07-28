@@ -232,6 +232,7 @@ class Map extends MagicCircle{
 
 		function fillDataInMapViolentCrime(crimeValue,objectCrimesStatesNumber,currentCrimeValue,i,getAllCrimesNumber){
 			crimeValue=currentCrimeValue.crimes.violentCrime[crimeType];
+			
 			objectCrimesStatesNumber={state:allStates[i],value:parseInt(crimeValue)};
 			getAllCrimesNumber.push(objectCrimesStatesNumber);
 		}
