@@ -77,7 +77,7 @@ class DropDownMenu extends MagicCircle{
 
 		//sends an event which contains the value of the selected select
 		function sendSelectedValue(){			
-			let value = d3.select("#"+selectId).property("value");
+			let value = d3.select("[id='"+selectId+"']").property("value");
 			sendEvent(value);			
 		}	
 

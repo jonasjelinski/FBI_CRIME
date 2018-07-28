@@ -35,8 +35,7 @@ configNamespace.STATES_AND_CRIMES = {
 configNamespace.REAL_CRIME_NAMES = {
 	["propertyCrime"]: "Property crime",
 	["Property crime"]: "propertyCrime",
-	["Burglary"]: "Burglary ",
-	["Burglary "]: "Burglary",
+	["Burglary"]: "Burglary",
 	["Larcenytheft"]: "Larency theft",
 	["Larency theft"]: "Larcenytheft",
 	["Motorvehicletheft"]: "Motor vehicle theft",
@@ -47,13 +46,11 @@ configNamespace.REAL_CRIME_NAMES = {
 	["Aggravated assault"]: "Aggravatedassault",
 	["MurderManslaughter"]: "Murder manslaughter",
 	["Murder manslaughter"]: "MurderManslaughter",
-	["Rape"]: "Rape ",
-	["Rape "]: "Rape",
-	["Robbery"]: "Robbery ",
-	["Robbery "]: "Robbery",
+	["Rape"]: "Rape",
+	["Robbery"]: "Robbery",
 };
 
-configNamespace.NICE_WRITTEN_CRIMENAME = ["Burglary ", "Larency theft", "Motor vehicle theft", "Violent crime", "Aggravated assault", "Murder manslaughter", " Rape ", " Robbery"];
+configNamespace.NICE_WRITTEN_CRIMENAMES = ["Burglary", "Larency theft", "Motor vehicle theft", "Aggravated assault", "Murder manslaughter", " Rape", " Robbery", "Violent crime", "Property crime"];
 
 configNamespace.STATE_MACHINE = {
 	START : "START",

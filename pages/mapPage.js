@@ -46,9 +46,10 @@ class MapPage extends ParentPage{
 	}
 
 	initControlls(){
+		let niceWrittenCrimes = this.crimeTypes = configNamespace.NICE_WRITTEN_CRIMENAMES;
 		this.timeLine = new TimeLine(this.pageId, this.timeLineId);
-		this.timeLine.appendThisCharToPage();
-		this.crimeTypes = commonfunctionsNamespace.getAllCrimeTypes();
+		this.timeLine.appendThisCharToPage();		
+		this.crimeTypes = niceWrittenCrimes.slice(0, niceWrittenCrimes.length-2);	
 		this.dropDownMenu = new DropDownMenu(this.pageId, this.crimeTypes, this.dropDownIdMap);
 		this.dropDownMenu.appendThisCharToPage();
 		this.playButton = new PlayButton(this.pageId, this.playButtonId, this.playButtonText);
@@ -76,6 +77,7 @@ class MapPage extends ParentPage{
 
 	updateCrimeType(event){
 		let crimeType = event.detail.selection;
+		crimeType = configNamespace.REAL_CRIME_NAMES[crimeType];
 		this.mainChart.setCrimeType(crimeType);
 		this.mainChart.updatesHimself();
 	}
@@ -97,7 +99,7 @@ class MapPage extends ParentPage{
 	}
 
 	setPopUpNotShowAble(){
-			this.canShowPopup = false;
+		this.canShowPopup = false;
 	}
 
 	setPopUpShowAble(){
