@@ -137,6 +137,11 @@ class CrimeCorrelation extends MagicCircle{
 			links = nodesAndLinks[this.linksIndex],	
 			width = this.width,
 			height = this.height,
+			sizeFactor = 10,
+			zoomContainerWidth = width* sizeFactor,
+			zooomContainerHeight = height * sizeFactor,
+			hoverContainerWidth = width* sizeFactor,
+			hoverContainerHeight = height * sizeFactor,
 			radius = width/50,
 			linkDistance = width/2,
 			strokeWidth = width/100,
@@ -157,8 +162,8 @@ class CrimeCorrelation extends MagicCircle{
 		initZoomContainer();
 		initHoverContainer();	
 		initLinks();
-		initNodes();							
-		initLabels();		
+		initLabels();	
+		initNodes();			
 		setNodeDataAndEnterAndExitSettings();	
 
 		//inits the d3.forceSimulation 
@@ -187,8 +192,8 @@ class CrimeCorrelation extends MagicCircle{
 			zoomContainer =  rootElement				
 				.append("svg")
 				.attr("class", "zoomContainer")
-				.attr("width", width)
-				.attr("height", height)
+				.attr("width", zoomContainerWidth)
+				.attr("height", zooomContainerHeight)
 				.call(d3.zoom()
 					.scaleExtent([minSize, maxSize])
 					.on("zoom", function () {						
@@ -204,8 +209,8 @@ class CrimeCorrelation extends MagicCircle{
 			hoverContainer = zoomContainer
 				.append("rect")
 				.attr("class", "hoverContainer")
-				.attr("width", width)
-				.attr("height", height)
+				.attr("width", hoverContainerWidth)
+				.attr("height", hoverContainerHeight)
 				.attr("fill", that.hoverContainerColor)
 				.attr("x", that.margin.x)
 				.attr("y", that.margin.y)
@@ -322,15 +327,15 @@ class CrimeCorrelation extends MagicCircle{
 				.append("circle")
 				.attr("class", "correlationNode")						
 				.attr("r", radius)
-				.attr("fill", fillCircle)				
+				.attr("fill", fillCircle)	
+				.style("pointer-events","visible")			
 				.call(d3.drag()				
 					.on("start", startDragging)
 					.on("drag", dragNode)
 					.on("end", endDragging)
 				)
 				.on("mouseover", ingoreNotConnectedLLinks)
-				.on("mouseout", resetConnectedLinksColor);
-			
+				.on("mouseout", resetConnectedLinksColor)			
 		}		
 
 		//creates a label if there is new data
