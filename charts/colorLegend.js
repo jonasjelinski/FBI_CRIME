@@ -11,10 +11,12 @@ class ColorLegend extends MagicCircle{
 		super(pageId);
 		this.htmlelement = htmlelementsNamespace.colorLegend;
 		this.htmlElementID = this.htmlelement.htmlid+chartId;
-		this.width = this.htmlelement.width;
-		this.height = this.htmlelement.height;
+		this.smallWidth = this.htmlelement.smallWidth;
+		this.smallHeight = this.htmlelement.smallHeight;
 		this.bigWidth = this.htmlelement.bigWidth;
 		this.bigHeight = this.htmlelement.bigHeight;
+		this.width = this.bigWidth;
+		this.height = this.bigHeight;
 		this.title = title;
 		this.startLabel = startLabel;
 		this.endLabel = endLabel;
@@ -82,16 +84,17 @@ class ColorLegend extends MagicCircle{
 		let colorScale,
 			that = this,
 			container = this.container,
-			isSmall = true,
+			isSmall = false,
 			sliceContainer,
 			labelsContainer,
 			titleContainer,
 			promptLabel,
 			title;
 
+		initContainer();
 		initPromptLabel();
-		initClickBevhaviour();
-		initHoverBevhaviour();
+		initClickBehaviour();
+		initHoverBehaviour();
 		initColorScale();
 		initSliceContainer();
 		initLabelsContainer();
@@ -100,25 +103,47 @@ class ColorLegend extends MagicCircle{
 		appendLabels();
 		appendTitle();
 
+		//sets the big class to the container
+		function initContainer(){
+			container.attr("class", "colorLegendBig");
+		}
+
 		//inits the label which tells the user
 		//how to interact with the chart
 		function initPromptLabel(){
-			let inVisible = 0;
+			let visible = 0;
 			promptLabel = container.append("text")
 				.attr("x", 0)
 				.attr("y", 0)
 				.style("text-anchor", "middle")
-				.text("click me!")
-				.style("opacity", inVisible);
+				.text("click me!")				
+				.style("opacity", visible);
 		}
 
 		//inits click beavhiour
 		//container changes size
-		function initClickBevhaviour(){
+		function initClickBehaviour(){
 			container.on("click", changeSizeAndBackgroundColor);
 		}
 
-		function initHoverBevhaviour(){
+		//container gets smaller if container was big else big
+		function changeSizeAndBackgroundColor(){		
+			if(isSmall){
+				container
+					.attr("width", that.bigWidth)
+					.attr("height", that.bigHeight)
+					.attr("class", "colorLegendBig");
+			}
+			else{
+				container
+					.attr("width",that.smallWidth)
+					.attr("height",that.smallHeight)
+					.attr("class", "colorLegendSmall");
+			}
+			isSmall = !isSmall;
+		}
+
+		function initHoverBehaviour(){
 			container
 				.on("mouseenter" ,showAndHideLabel)
 				.on("mouseleave", hideLabel);
@@ -147,24 +172,7 @@ class ColorLegend extends MagicCircle{
 			promptLabel
 				.style("opacity", inVisible)
 				.attr("transform", "translate(" + 0 + "," + 0 + ")");
-		}
-
-		//container gets smaller if container was big else big
-		function changeSizeAndBackgroundColor(){
-			if(isSmall){
-				container
-					.attr("width", that.bigWidth)
-					.attr("height", that.bigHeight)
-					.attr("class", "colorLegendBig");
-			}
-			else{
-				container
-					.attr("width",that.width)
-					.attr("height",that.height)
-					.attr("class", "colorLegendSmall");
-			}
-			isSmall = !isSmall;
-		}
+		}		
 
 		//inits the linear colorScale
 		function initColorScale(){
@@ -227,7 +235,6 @@ class ColorLegend extends MagicCircle{
 				.attr("font-family", "sans-serif")
 				.attr("font-size", that.labeSize)
 				.attr("fill", "black");
-
 		}
 
 		//apends this.title to the chart
