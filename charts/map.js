@@ -58,6 +58,14 @@ class Map extends MagicCircle{
 		}
 	}
 
+	mapNotClickable() {
+		d3.select(".state").style("pointer-events", "none");
+	}
+
+	mapClickable(){
+		d3.select("#map").style("pointer-events", "visible");
+	}
+
 	createD3Data() {
 		let statesData;
 		if(this.mapData !== false){
