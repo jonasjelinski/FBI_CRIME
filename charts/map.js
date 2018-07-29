@@ -50,21 +50,12 @@ class Map extends MagicCircle{
 
 	isMoving(moving){
 		this.moving=moving;
+		
 		if(moving){
-			d3.select("#map .states").style("cursor","not-allowed");
+			d3.select("#map").style("cursor", "not-allowed");
 		}else{
-			console.log("is allowed");
-			d3.select("#map").style("cursor","pointer");
+			d3.select("#map").style("cursor", "pointer");
 		}
-	}
-
-	mapNotClickable() {
-		d3.select(".state").style("pointer-events", "none");
-	}
-
-	mapClickable(){
-		d3.select("#map").style("pointer-events", "visible");
-		d3.selectAll("#infoLabelMap").remove();
 	}
 
 	createD3Data() {
@@ -94,7 +85,7 @@ class Map extends MagicCircle{
 		this.minCrime = minCrime;
 
 		prepareStatusSite(getAllCrimesNumber,crimeType,year,0,this.infoLabelMap);
-		colorizeMap(g,statesData,path,tip,getAllCrimesNumber,this.moving,this.colorRange,that,this.infoLabelMap);
+		colorizeMap(g,statesData,path,tip,getAllCrimesNumber,this.colorRange,that,this.infoLabelMap);
 		that.dispatchChartBuildedEvent();
 
 
@@ -128,11 +119,11 @@ class Map extends MagicCircle{
 				.on("click", function(d){
 					removeStateInfo();
 					sendClickEvent(d.properties.name.toUpperCase());
-				})
+				});
 		}
 
 		//Chagne color than the user is on hover on a state
-		function onStateHover(onClick,moving,tip,that){
+		function onStateHover(onClick,tip,that){
 
 			return onClick.on('mouseover', function(d){
 				tip.show(d);
@@ -157,10 +148,10 @@ class Map extends MagicCircle{
 		}
 
 		//Call all the functions that needed for colorizig the map
-		function colorizeMap(g,statesData,path,tip,getAllCrimesNumber,moving,colorRange,that){
+		function colorizeMap(g,statesData,path,tip,getAllCrimesNumber,colorRange,that){
 			let colorMap = createColorMap(g,statesData,path,getAllCrimesNumber,colorRange),
 				onClick = onStateClick(colorMap,tip),
-				onHover = onStateHover(onClick,moving,tip,that),
+				onHover = onStateHover(onClick,tip,that),
 				onLeave = onStateLeave(onHover,tip);
 		}
 

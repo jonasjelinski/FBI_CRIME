@@ -242,6 +242,7 @@ htmlelementsNamespace.mapPage = {
 	htmlclassname: "mapPage",
 	htmlid: "mapPage",
 	mapVictimInhabitants: "victims per 100.000 inhabitants",
+	mapNotClickableHint: "not clickable",
 	mapInfoLabel: "Click on map",
 	playButtonText: "show development over years",
 	colorLegendStartLabel: "lowest crime rate",
