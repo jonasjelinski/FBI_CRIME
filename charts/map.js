@@ -16,12 +16,9 @@ class Map extends MagicCircle{
 		this.mapData = configNamespace.MAP_JSON_OBJECT;
 		this.year = year;
 		this.crime = crimeType;
-		this.moving = moving;
+		this.moving = false;
 		this.onClick = "onClick";
 		this.colorRange = 11;
-		this.crimeText = "victims per 100.000 inhabitants";
-		this.infoLabelMap = "Click on map";
-		this.infoLabelMoving = "Map not clickable"
 		this.eventTarget = new EventTarget();
 		this.maxCrime = undefined;
 		this.minCrime = undefined;
@@ -51,18 +48,21 @@ class Map extends MagicCircle{
 		this.crime = crimeType;
 	}
 
-	setMoving(moving){
-		this.moving = moving;
+	isMoving(moving){
+		if(moving){
+			d3.select("#map").style("cursor","not-allowed")
+		}else{
+			d3.select("#map").style("cursor","allowed")
+		}
 	}
 
 	mapNotClickable() {
-		d3.select("#map").style("pointer-events", "none");
-		this.page.append("div").attr("id","infoLabelMap").text(this.infoLabelMoving);
+		d3.select(".state").style("pointer-events", "none");
 	}
 
 	mapClickable(){
 		d3.select("#map").style("pointer-events", "visible");
-		d3.select("#infoLabelMap").remove();
+		d3.selectAll("#infoLabelMap").remove();
 	}
 
 	createD3Data() {
@@ -85,23 +85,24 @@ class Map extends MagicCircle{
 			g = svg.append(this.htmlElementType).attr('class', 'states'),
 			getAllCrimesNumber = getAllCrimesState(allStates,year,crimeType,this.data),
 			allCrimeValues = getAllCrimeValues(getAllCrimesNumber),
-			maxCrime = Math.max.apply(null, allCrimeValues), 
+			maxCrime = Math.max.apply(null, allCrimeValues),
 			minCrime = Math.min.apply(null, allCrimeValues),
-			tip = doTip(getAllCrimesNumber, this.crimeText, this.infoLabelMap);
-			this.maxCrime = maxCrime;
-			this.minCrime = minCrime;
+			tip = doTip(getAllCrimesNumber,this.infoLabelMap);
+		this.maxCrime = maxCrime;
+		this.minCrime = minCrime;
 
-		prepareStatusSite(getAllCrimesNumber,crimeType,year,0,this.crimeText,this.infoLabelMap);
+		prepareStatusSite(getAllCrimesNumber,crimeType,year,0,this.infoLabelMap);
 		colorizeMap(g,statesData,path,tip,getAllCrimesNumber,this.moving,this.colorRange,that,this.infoLabelMap);
 		that.dispatchChartBuildedEvent();
 
+
 		//This function is the first call and prepares the start values, simultaneously it deletes after every call the old values
-		function prepareStatusSite(getAllCrimesNumber,crimeType,year,i,crimeText,infoLabelMap){
+		function prepareStatusSite(getAllCrimesNumber,crimeType,year,i,infoLabelMap){
 			d3.select(".crimeInfo").remove();
 			d3.select(".stateInfo").remove();
 
 			that.page.append("h2").attr("class","stateInfo").attr("id","stateInfoMapId").text(getAllCrimesNumber[i].state);
-			that.page.append("h2").attr("class","crimeInfo").text(crimeType+': '+getAllCrimesNumber[i].value+ " "+crimeText);
+			that.page.append("h2").attr("class","crimeInfo").text(configNamespace.REAL_CRIME_NAMES[crimeType]+': '+getAllCrimesNumber[i].value+ " "+htmlelementsNamespace.mapPage.mapVictimInhabitants);
 		}
 
 		function removeStateInfo(){
@@ -121,7 +122,7 @@ class Map extends MagicCircle{
 
 		//Send Event to MapPage that a specific state was clicked. Send all informations about the state to "mapPage"
 		function onStateClick(colorMap,tip){
-			return	colorMap.call(tip)
+			return colorMap.call(tip)
 				.on("click", function(d){
 					removeStateInfo();
 					sendClickEvent(d.properties.name.toUpperCase());
@@ -129,9 +130,10 @@ class Map extends MagicCircle{
 		}
 
 		//Chagne color than the user is on hover on a state
-		function onStateHover(onClick,moving,tip,that,infoLabelMap){
+		function onStateHover(onClick,moving,tip,that){
+
 			return onClick.on('mouseover', function(d){
-				that.page.append("div").attr("id","infoLabelMap").text(infoLabelMap);
+				that.page.append("div").attr("id","infoLabelMap").text(htmlelementsNamespace.mapPage.mapInfoLabel);
 				tip.show(d);
 				d3.select(this).style("fill", "#ffe9c2").style("cursor", "pointer");
 			})
@@ -141,7 +143,7 @@ class Map extends MagicCircle{
 		function onStateLeave(onHover,tip){
 			return onHover.on('mouseout', function(d){
 				tip.hide(d);
-				d3.select("#infoLabelMap").remove();
+				d3.selectAll("#infoLabelMap").remove();
 				d3.select(this).style("fill",
 					function(d){
 						return d.color;
@@ -151,25 +153,25 @@ class Map extends MagicCircle{
 		}
 
 		//Call all the functions that needed for colorizig the map
-		function colorizeMap(g,statesData,path,tip,getAllCrimesNumber,moving,colorRange,that,infoLabelMap){
+		function colorizeMap(g,statesData,path,tip,getAllCrimesNumber,moving,colorRange,that){
 			let colorMap = createColorMap(g,statesData,path,getAllCrimesNumber,colorRange),
 				onClick = onStateClick(colorMap,tip),
-				onHover = onStateHover(onClick,moving,tip,that,infoLabelMap),
+				onHover = onStateHover(onClick,moving,tip,that),
 				onLeave = onStateLeave(onHover,tip);
 		}
 
 		function fillColorInMap(d,getAllCrimesNumber,colorRange){
 			let styleClass = "state ",
-			quantize = d3.scaleQuantize()
-			.domain([minCrime,maxCrime])
-			.range(d3.range(colorRange).map(function(i){
-				return "q" + i; }));
+				quantize = d3.scaleQuantize()
+					.domain([minCrime,maxCrime])
+					.range(d3.range(colorRange).map(function(i){
+						return "q" + i; }));
 
-				for(let i=0;i<getAllCrimesNumber.length;i++){
-					if(getAllCrimesNumber[i].state.toUpperCase()===d.properties.name.toUpperCase()){
-						styleClass+=quantize(parseInt(getAllCrimesNumber[i].value));
-					}
+			for(let i=0;i<getAllCrimesNumber.length;i++){
+				if(getAllCrimesNumber[i].state.toUpperCase()===d.properties.name.toUpperCase()){
+					styleClass+=quantize(parseInt(getAllCrimesNumber[i].value));
 				}
+			}
 			return styleClass;
 		}
 
@@ -180,24 +182,24 @@ class Map extends MagicCircle{
 
 		//Function uses the libery "tip" by d3 it registrates the "x" and "y"-position of the mouse. So the System knows on which state
 		//the user is hovering or clicking a state
-		function doTip(getAllCrimesNumber,crimeText,infoLabelMap){
+		function doTip(getAllCrimesNumber){
 			let maxOfSet=10,
-			tip = d3.tip()
-				.offset(function() {
-					return [maxOfSet,maxOfSet];
-				})
-				.html(function(d){
-					return labelStateOnHover(d,crimeText,infoLabelMap);
-				});
+				tip = d3.tip()
+					.offset(function() {
+						return [maxOfSet,maxOfSet];
+					})
+					.html(function(d){
+						return labelStateOnHover(d);
+					});
 			return tip;
 		}
 
-		function labelStateOnHover(d,crimeText,infoLabelMap){
+		function labelStateOnHover(d){
 			var html = '';
 			for(let i=0;i<getAllCrimesNumber.length;i++){
 				if(getAllCrimesNumber[i].state.toUpperCase()==d.properties.name.toUpperCase()){
 					html = '<div class="stateHover">'+getAllCrimesNumber[i].state+'</div>';
-					prepareStatusSite(getAllCrimesNumber,crimeType,year,i,crimeText,infoLabelMap);
+					prepareStatusSite(getAllCrimesNumber,crimeType,year,i);
 				}
 			}
 			return html;
@@ -232,7 +234,7 @@ class Map extends MagicCircle{
 
 		function fillDataInMapViolentCrime(crimeValue,objectCrimesStatesNumber,currentCrimeValue,i,getAllCrimesNumber){
 			crimeValue=currentCrimeValue.crimes.violentCrime[crimeType];
-			
+
 			objectCrimesStatesNumber={state:allStates[i],value:parseInt(crimeValue)};
 			getAllCrimesNumber.push(objectCrimesStatesNumber);
 		}
@@ -242,6 +244,6 @@ class Map extends MagicCircle{
 			objectCrimesStatesNumber={state:allStates[i],value:parseInt(crimeValue)};
 			getAllCrimesNumber.push(objectCrimesStatesNumber);
 		}
-		
+
 	}
 }

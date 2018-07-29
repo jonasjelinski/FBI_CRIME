@@ -70,7 +70,6 @@ class MapPage extends ParentPage{
 		let year = event.detail.year,
 			moving = event.detail.moving;
 		this.mainChart.setYear(year);
-		this.mainChart.setMoving(moving);
 		this.mainChart.updatesHimself();
 	}
 
@@ -89,12 +88,13 @@ class MapPage extends ParentPage{
 		if(this.timeLine.isTimeLineMoving() === false){
 			this.timeLine.playTimeLine();
 			this.setPopUpNotShowAble();
+			this.mainChart.isMoving(true);
 		}
 		else{
 			this.setPopUpShowAble();
 			this.timeLine.pauseTimeLine();
+			this.mainChart.isMoving(false);
 		}
-
 	}
 
 	setPopUpNotShowAble(){

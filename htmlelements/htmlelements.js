@@ -241,6 +241,8 @@ htmlelementsNamespace.lineChartPage = {
 htmlelementsNamespace.mapPage = {
 	htmlclassname: "mapPage",
 	htmlid: "mapPage",
+	mapVictimInhabitants: "victims per 100.000 inhabitants",
+	mapInfoLabel: "Click on map",
 	playButtonText: "show development over years",
 	colorLegendStartLabel: "lowest crime rate",
 	colorLegendEndLabel: "highest crime rate",

@@ -98,11 +98,16 @@ class Tree extends MagicCircle{
 					if(hasNumber(name)){
 						return;
 					}
-					let	crime = name.replace(/\s/g, '');
-					crime = crime.replace(/[:]/g, '');
 
-					let color = commonfunctionsNamespace.getCrimeColor(crime);
-					return color;
+					for(var key in configNamespace.REAL_CRIME_NAMES) {
+						if(configNamespace.REAL_CRIME_NAMES[key] === name) {
+							let	crime,color;
+							crime = key.replace(/\s/g, '');
+							crime = crime.replace(/[:]/g, '');
+							color = commonfunctionsNamespace.getCrimeColor(crime);
+							return color;
+						}
+					}
 				})
 				.attr("cursor", "pointer");
 		}
@@ -188,9 +193,9 @@ class Tree extends MagicCircle{
 				.attr("class", "node")
 				.attr("transform", function(d) {
 					let dx = source.x0,
-							dy = source.y0;
-						dx = isNaN(dx) ? 0 : source.x0;
-						dy = isNaN(dy) ? 0 : source.y0;
+						dy = source.y0;
+					dx = isNaN(dx) ? 0 : source.x0;
+					dy = isNaN(dy) ? 0 : source.y0;
 					return "translate(" + dy + "," + dx + ")";
 				})
 				.on("click", click);
@@ -252,8 +257,6 @@ createHierarchyData(){
 			let treeData =[];
 			treeData.push({
 				"name": year,
-				"type": "black",
-				"level": "red",
 				"children": []
 			});
 			return treeData;
@@ -263,8 +266,6 @@ createHierarchyData(){
 			treeData[treeData.length-1].children=[];
 			treeData[treeData.length-1].children.push({
 				"name": state,
-				"type": "black",
-				"level": "red",
 				"children":[]
 			});
 			return treeData;
@@ -273,8 +274,6 @@ createHierarchyData(){
 		function childNodeMurderManslaughter(){
 			return [{
 				"name": ""+crimedata.crimes.violentCrime.MurderManslaughter,
-				"type": "black",
-				"level": "red",
 				"children": null
 			}]
 		}
@@ -282,8 +281,6 @@ createHierarchyData(){
 		function childNodeRape(){
 			return [{
 				"name": ""+crimedata.crimes.violentCrime.Rape,
-				"type": "black",
-				"level": "red",
 				"children": null
 			}]
 		}
@@ -291,8 +288,6 @@ createHierarchyData(){
 		function childNodeRobbery(){
 			return [{
 				"name": ""+crimedata.crimes.violentCrime.Robbery,
-				"type": "black",
-				"level": "red",
 				"children": null
 			}]
 		}
@@ -300,8 +295,6 @@ createHierarchyData(){
 		function childNodeAggravatedassault(){
 			return [{
 				"name": ""+crimedata.crimes.violentCrime.Aggravatedassault,
-				"type": "black",
-				"level": "red",
 				"children": null
 			}]
 		}
@@ -309,8 +302,6 @@ createHierarchyData(){
 		function childNodeBuglary(){
 			return [{
 				"name": ""+crimedata.crimes.propertyCrime.Burglary,
-				"type": "black",
-				"level": "red",
 				"children": null
 			}]
 		}
@@ -318,8 +309,6 @@ createHierarchyData(){
 		function childNodeLarencytheft(){
 			return [{
 				"name": ""+crimedata.crimes.propertyCrime.Larcenytheft,
-				"type": "black",
-				"level": "red",
 				"children": null
 			}]
 		}
@@ -327,8 +316,6 @@ createHierarchyData(){
 		function childNodeMotorvehicletheft(){
 			return [{
 				"name": " "+crimedata.crimes.propertyCrime.Motorvehicletheft,
-				"type": "black",
-				"level": "red",
 				"children": null
 			}]
 		}
@@ -336,48 +323,34 @@ createHierarchyData(){
 
 		function childNodeViolentCrime(){
 			return [{
-				"name": "MurderManslaughter: ",
-				"type": "black",
-				"level": "red",
+				"name": configNamespace.REAL_CRIME_NAMES["MurderManslaughter"],
 				"children": childNodeMurderManslaughter()
 			},
 			{
-				"name": "Rape: ",
-				"type": "black",
-				"level": "red",
+				"name": configNamespace.REAL_CRIME_NAMES["Rape"],
 				"children": childNodeRape()
 			},
 			{
-				"name": "Robbery: ",
-				"type": "black",
-				"level": "red",
+				"name": configNamespace.REAL_CRIME_NAMES["Robbery"],
 				"children": childNodeRobbery()
 			},
 			{
-				"name": "Aggravatedassault: ",
-				"type": "black",
-				"level": "red",
+				"name": configNamespace.REAL_CRIME_NAMES["Aggravatedassault"],
 				"children": childNodeAggravatedassault()
 			}]
 		}
 
 		function childNodePropertyCrime(){
 			return [{
-				"name": "Burglary: ",
-				"type": "black",
-				"level": "red",
+				"name": configNamespace.REAL_CRIME_NAMES["Burglary"],
 				"children": childNodeBuglary()
 			},
 			{
-				"name": "Larcenytheft: ",
-				"type": "black",
-				"level": "red",
+				"name": configNamespace.REAL_CRIME_NAMES["Larcenytheft"],
 				"children": childNodeLarencytheft()
 			},
 			{
-				"name": "Motorvehicletheft: ",
-				"type": "black",
-				"level": "red",
+				"name": configNamespace.REAL_CRIME_NAMES["Motorvehicletheft"],
 				"children": childNodeMotorvehicletheft()
 			}]
 		}
@@ -385,15 +358,11 @@ createHierarchyData(){
 		function lastNode(treeDataState){
 			treeDataState[treeDataState.length-1].children[0].children.push(
 				{
-					"name": "violentCrime",
-					"type": "black",
-					"level": "red",
+					"name": configNamespace.REAL_CRIME_NAMES["violentCrime"],
 					"children": childNodeViolentCrime()
 				},
 				{
-					"name": "propertyCrime",
-					"type": "black",
-					"level": "red",
+					"name": configNamespace.REAL_CRIME_NAMES["propertyCrime"],
 					"children": childNodePropertyCrime()
 				})
 		}
