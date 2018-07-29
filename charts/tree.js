@@ -212,7 +212,8 @@ class Tree extends MagicCircle{
 		//After every click make new tree
 		function update(source) {
 			let treeData = treemap(root),
-				degree=180,
+				degreeAllLines=180,
+				degreeLastLine=140,
 				nodes = treeData.descendants(),
 				links = treeData.descendants().slice(1),
 				node = svg.selectAll("g.node").data(nodes, function(d) {return d.id || (d.id = ++increaseNode); }),
@@ -224,7 +225,13 @@ class Tree extends MagicCircle{
 				linkUpdate,
 				linkExit;
 
-			nodes.forEach(function(d){ d.y = d.depth * degree;});
+			nodes.forEach(function(d){ 
+			if(d.depth>2){
+				d.y = d.depth * degreeLastLine;
+			}else{
+				d.y = d.depth * degreeAllLines;
+			}	
+			});
 			nodeEnterNode=nodeEnter(node,source);
 			nodeText(nodeEnterNode);
 			nodeUpdate = nodeEnterNode.merge(node);
