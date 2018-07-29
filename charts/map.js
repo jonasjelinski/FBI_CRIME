@@ -49,10 +49,12 @@ class Map extends MagicCircle{
 	}
 
 	isMoving(moving){
+		this.moving=moving;
 		if(moving){
-			d3.select("#map").style("cursor","not-allowed")
+			d3.select("#map .states").style("cursor","not-allowed");
 		}else{
-			d3.select("#map").style("cursor","allowed")
+			console.log("is allowed");
+			d3.select("#map").style("cursor","pointer");
 		}
 	}
 
@@ -133,9 +135,11 @@ class Map extends MagicCircle{
 		function onStateHover(onClick,moving,tip,that){
 
 			return onClick.on('mouseover', function(d){
-				that.page.append("div").attr("id","infoLabelMap").text(htmlelementsNamespace.mapPage.mapInfoLabel);
 				tip.show(d);
-				d3.select(this).style("fill", "#ffe9c2").style("cursor", "pointer");
+				if(!that.moving){
+					that.page.append("div").attr("id","infoLabelMap").text(htmlelementsNamespace.mapPage.mapInfoLabel);
+					d3.select(this).style("fill", "#ffe9c2").style("cursor", "pointer");
+				}
 			})
 		}
 
