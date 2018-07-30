@@ -238,7 +238,6 @@ p{
 	opacity:0.4;
 }
 
-
 #map{
   position: absolute;
   top: 10%;
@@ -506,7 +505,7 @@ p{
 .correlationNode{
   -webkit-filter: drop-shadow(4px 4px 3px var(--shadow));
   filter: drop-shadow(4px 4px 3px var(--shadow));
-
+  cursor: pointer;
 }
 
 .lables{

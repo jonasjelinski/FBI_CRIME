@@ -75,11 +75,11 @@ htmlelementsNamespace.bubbleMenu = {
 	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "bubblemenu",
 	htmlid: "bubblemenu",
-	width:180,
-	height:200,
+	width:135,
+	height:150,
 	type: "svg",
 	unselectedColor: "rgb(124, 124, 125)",
-	fontSize : "12px",
+	fontSize : "11px",
 };
 
 htmlelementsNamespace.colorLegend = {
