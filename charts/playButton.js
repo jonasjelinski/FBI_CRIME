@@ -29,7 +29,6 @@ class PlayButton extends MagicCircle{
 			label,
 			pause = "pauseButton",
 			play = "playButton",
-			playUniverse = "playButtonWhite",
 			that = this,
 			hidden = 0,
 			visible = 1;
@@ -41,15 +40,23 @@ class PlayButton extends MagicCircle{
 		setHoverBehaviour();
 
 		function initButton(){
-			button = that.container
-			.append("button");
 			
-			if(that.chartId=="Universe"){
-				button.attr("class", playUniverse);	
-			}else if(that.chartId=="Map"){
-				button.attr("class", play);	
-			}
-	
+			
+		if(that.chartId=="Map"){
+			button = that.container
+				.append("button")
+				.attr("class", play);
+		}else{
+			button = that.container
+				.append("button")
+				.attr("class", "playButtonWhite");
+		}
+
+			
+		
+					
+			
+				
 		}
 
 		//sets event behaviour
@@ -80,20 +87,22 @@ class PlayButton extends MagicCircle{
 		//the player plays or if it is paused
 		function changeButtonLabel(){
 			if(that.isPlaying){
-				if(that.ChartId=="Map"){
+				
+				if(that.chartId=="Map"){
 					button.attr("class",pause);	
 				}
-				else if(that.ChartId=="Universe"){
-					button.attr("class",pauseButtonWhite);	
-				}
-						
+else if(that.chartId=="Universe"){
+	button.attr("class","pauseButtonWhite");	
+}				
 			}
+			
+			
 			else{
-				if(that.ChartId=="Map"){
-					button.attr("class",play);	
+				if(that.chartId=="Map"){
+				button.attr("class", play);
 				}
-				else if(that.ChartId=="Universe"){
-					button.attr("class",playButtonWhite);	
+				else if(that.chartId=="Universe"){
+					button.attr("class", "playButtonWhite");
 				}
 			}
 		}
