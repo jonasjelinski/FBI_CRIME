@@ -178,7 +178,7 @@ p{
   height: 70%;
 }
 
-.playButton{
+.playMap{
   border: 0;
   background: transparent;
   background-image:url('../pictures/play.png');
@@ -188,11 +188,11 @@ p{
   cursor:pointer;
 }
 
-.playButton:hover{
+.playMap:hover{
 	opacity:0.4;
 }
 
-.pauseButton{
+.pauseMap{
 	border: 0;
   background: transparent;
   background-image:url('../pictures/pause.png');
@@ -202,7 +202,7 @@ p{
   cursor:pointer;
 }
 
-.pauseButton:hover{
+.pauseMap:hover{
 	opacity:0.4;
 }
 
@@ -210,7 +210,7 @@ p{
   top: -10%;
 }
 
-.playButtonWhite{
+.playUniverse{
   border: 0;
   background: transparent;
   background-image:url('../pictures/play_white.png');
@@ -220,11 +220,11 @@ p{
   cursor:pointer;
 }
 
-.playButtonWhite:hover{
+.playUniverse:hover{
 	opacity:0.4;
 }
 
-.pauseButtonWhite{
+.pauseUniverse{
 	border: 0;
   background: transparent;
   background-image:url('../pictures/pause_white.png');
@@ -234,7 +234,7 @@ p{
   cursor:pointer;
 }
 
-.pauseButtonWhite:hover{
+.pauseUniverse:hover{
 	opacity:0.4;
 }
 
@@ -429,7 +429,7 @@ p{
 
 #linediagram{
   position: absolute;
-  top: 30%;
+  top: 25%;
   left: 3%;
   cursor: -moz-zoom-in;
   cursor: -webkit-zoom-in;
