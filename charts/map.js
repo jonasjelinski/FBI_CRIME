@@ -96,7 +96,6 @@ class Map extends MagicCircle{
 		colorizeMap(g,statesData,path,tip,getAllCrimesNumber,this.colorRange,that,this.infoLabelMap);
 		that.dispatchChartBuildedEvent();
 
-
 		//This function is the first call and prepares the start values, simultaneously it deletes after every call the old values
 		function prepareStatusSite(getAllCrimesNumber,crimeType,year,i,infoLabelMap){
 			d3.select(".crimeInfo").remove();
@@ -139,7 +138,7 @@ class Map extends MagicCircle{
 					that.page.append("div").attr("id","infoLabelMap").text(htmlelementsNamespace.mapPage.mapInfoLabel);
 					d3.select(this).style("fill", "#ffe9c2").style("cursor", "pointer");
 				}
-			})
+			});
 		}
 
 		//Change color back than the user leaves the hover on a state
