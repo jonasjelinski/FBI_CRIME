@@ -210,6 +210,35 @@ p{
   top: -10%;
 }
 
+.playButtonWhite{
+  border: 0;
+  background: transparent;
+  background-image:url('../pictures/play_white.png');
+  background-repeat:no-repeat;
+  width:32px;
+  height:32px;
+  cursor:pointer;
+}
+
+.playButtonWhite:hover{
+	opacity:0.4;
+}
+
+.pauseButtonWhite{
+	border: 0;
+  background: transparent;
+  background-image:url('../pictures/pause_white.png');
+  background-repeat:no-repeat;
+  width:32px;
+  height:32px;
+  cursor:pointer;
+}
+
+.pauseButtonWhite:hover{
+	opacity:0.4;
+}
+
+
 #map{
   position: absolute;
   top: 10%;
