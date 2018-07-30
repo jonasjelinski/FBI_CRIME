@@ -570,6 +570,10 @@ p{
   left: 30%;
 }
 
+#labelUniverse{
+  color: var(--buttonFonts);
+}
+
 .bubble{
   cursor: pointer;
 }
