@@ -15,8 +15,10 @@ class Sunburst extends MagicCircle{
 		this.year = year;
 		this.categories = [];
 		this.crimes = [];
-		this.fontSize = this.htmlelement.fontSize;		 
-	}    
+		this.fontSize = this.htmlelement.fontSize;
+		this.eventTarget = new EventTarget();
+		this.onClick = "onClick";	
+	}
 	
 	//returns the data which is necassray to build the sunburst	
 	getData(){
@@ -234,13 +236,14 @@ class Sunburst extends MagicCircle{
 				.on("click", function(d) {
 					let crime = d.data.name;
 					that.showOrHideLinesAndLabels(crime);
+					sendClickEvent(crime);
 				})
+				.style("fill", function(d){ return getColorByCrime(d);})				 
 				.attr("d", computeTransition())				
 				.transition()
 				.ease(d3.easeLinear)
 				.duration(durationTime)            
-				.attr("d", arc)
-				.style("fill", function(d){ return getColorByCrime(d);});				 
+				.attr("d", arc);		 
 		}
 
 		function onHoverInSlice(that){
@@ -255,6 +258,13 @@ class Sunburst extends MagicCircle{
 				.transition()
 				.duration(hoverDuration)
 				.attr("d", arc);
+		}
+
+		function sendClickEvent(crime){
+			let event = new Event(that.onClick);
+			event.details = {};
+			event.details.crime = crime;
+			that.eventTarget.dispatchEvent(event);
 		}
 
 		//returns the Color according to the crime

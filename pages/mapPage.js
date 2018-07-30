@@ -105,6 +105,10 @@ class MapPage extends ParentPage{
 		this.canShowPopup = true;
 	}
 
+	handleMapClick(event){
+		this.sendMapClickEvent(event);
+	}
+
 	sendMapClickEvent(ev){
 		if(this.canShowPopup){
 			let event = new CustomEvent(this.onMapClicked, {detail:{state: ev.detail.state, year: ev.detail.year}});
@@ -127,6 +131,6 @@ class MapPage extends ParentPage{
 	}
 
 	setMapUnClickable(){
-		this.mainChart.mapNotClickable()
+		this.mainChart.mapNotClickable();
 	}
 }

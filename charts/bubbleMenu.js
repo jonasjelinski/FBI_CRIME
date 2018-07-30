@@ -10,6 +10,8 @@ class BubbleMenu extends MagicCircle{
 	constructor(pageId,categories, chartId){
 		super(pageId);
 		this.chartId = chartId;
+		this.labelId = this.chartId;
+		this.bubbleId = this.chartId;
 		this.htmlelement = htmlelementsNamespace.bubbleMenu;
 		this.htmlElementID = this.htmlelement.htmlid + chartId;
 		this.htmlclassname = this.htmlelement.htmlclassname;
@@ -30,8 +32,6 @@ class BubbleMenu extends MagicCircle{
 	drawBubbleMenu(){
 		let bubbles,
 			labels,
-			labelId = this.chartId,
-			bubbleId = this.chartId,
 			container = this.container,
 			that = this,
 			diameter = this.width/ this.categories.length,
@@ -40,7 +40,8 @@ class BubbleMenu extends MagicCircle{
 			yStart = radius,
 			max = 10,
 			random =Math.floor((Math.random() * max) + 1),
-			fontSize = this.fontSize;
+			fontSize = this.fontSize,
+			getColor = this.getColor.bind(this);
 		initBubbles();
 		initLabels();
 		setEnterAndExitBehaviour();
@@ -82,7 +83,7 @@ class BubbleMenu extends MagicCircle{
 				.append("circle")
 				.attr("class","bubble")
 				.attr("bubbleId", function(d){
-					return bubbleId+d;
+					return that.bubbleId+d;
 				})
 				.attr("bubbleValue", function(d){
 					return d;
@@ -106,7 +107,7 @@ class BubbleMenu extends MagicCircle{
 				.append("g")
 				.attr("class", "bubbleLabel")
 				.attr("labelId", function(d){
-					return labelId+d;
+					return that.labelId+d;
 				})
 				.attr("bubbleValue", function(d){
 					return d;
@@ -133,18 +134,10 @@ class BubbleMenu extends MagicCircle{
 		//else returns just the text
 		function getText(d){
 			let text = d;
-			if(isACrime(text)){
+			if(that.isACrime(text)){
 				text = configNamespace.REAL_CRIME_NAMES[text];
 			}
 			return text;		
-		}
-
-		//returns true if the is a crime
-		function isACrime(text){
-			let crimeTypes = commonfunctionsNamespace.getAllCrimeTypes(),
-				categories = ["violentCrime", "propertyCrime"],
-				allCrimeNames = crimeTypes.concat(categories);
-			return allCrimeNames.includes(text);
 		}
 
 		//this function is called at onClick on a bubble
@@ -152,11 +145,8 @@ class BubbleMenu extends MagicCircle{
 		//send it as an event
 		//it also changes the color of the label and the bubble
 		function handleBubbleClick() {
-			let bubble = d3.select(this),
-				value = bubble.attr("bubbleValue"),
-				label = getLabelByBubbleValue(value);
-			changeColor(bubble, value);
-			changeColor(label, value);
+			let value = d3.select(this).attr("bubbleValue");
+			that.changeBubblesAndLabelsByValue(value);
 			sendSelectedValue(value);
 		}
 
@@ -165,66 +155,9 @@ class BubbleMenu extends MagicCircle{
 		//send it as an event
 		//it also changes the color of the label and the bubble
 		function handleLabelClick(){
-			let label = d3.select(this),
-				value = label.attr("bubbleValue"),
-				bubble = getBubbleByLabelValue(value);
-			changeColor(bubble, value);
-			changeColor(label, value);
+			let value = d3.select(this).attr("bubbleValue");
+			that.changeBubblesAndLabelsByValue(value);
 			sendSelectedValue(value);
-		}
-
-		//returns the label containting the bubbleValue value
-		//so it can be selected and changed in handleBubbleClick
-		function getLabelByBubbleValue(value){		
-			let selector = "g[labelId='"+labelId+value+"']",
-				label = d3.selectAll(selector).select("text");
-			return label;
-		}
-
-		//returns the label containting the bubbleValue value
-		//so it can be selected and changed in handleBubbleClick
-		function getBubbleByLabelValue(value){
-			let selector = "circle[bubbleId='"+bubbleId+value+"']",
-				bubble = d3.selectAll(selector);
-			return bubble;
-		}
-
-		//chagnes the colro of the given item
-		//item is either a bubble or a label
-		function changeColor(item, value) {
-			let currentColor = item.style("fill");
-			if(currentColor === that.unselectedColor){
-				item.style("fill", function(){
-					return getColor(value);
-				});
-			}
-			else{
-				item.style("fill", that.unselectedColor);
-			}
-		}
-
-		//returns color according to value
-		//if the color is a crime the crimeColor is returned
-		//else the default value is returned
-		function getColor(d){
-			let crime = d,
-				color = that.defaultColor;
-			if(isACrime(crime)){
-				color = commonfunctionsNamespace.getCrimeColor(crime);
-			}			
-			else{
-				color = getDefaultColor();
-			}		
-			return color;
-		}
-
-		//returns a default color
-		function getDefaultColor(){
-			let random =Math.floor((Math.random() *  Math.floor(that.categories.length*2)) + 1),
-				r = random,
-				g = random,
-				b = random;
-			return "rgb(" + r + "," + g + "," + b + ")";
 		}
 
 		//sends an event which contains the value of the selected select
@@ -237,6 +170,82 @@ class BubbleMenu extends MagicCircle{
 			let event = new CustomEvent(that.selectionEvent, {detail: {selection : value}});
 			that.eventTarget.dispatchEvent(event);
 		}
+	}
+
+	//this function is called at onClick on a label
+	//it reads the value of the label and
+	//send it as an event
+	//it also changes the color of the label and the bubble
+	changeBubblesAndLabelsByValue(value){
+		let label = this.getLabelByBubbleValue(value),
+			bubble = this.getBubbleByLabelValue(value);
+		this.changeColor(bubble, value);
+		this.changeColor(label, value);
+	}
+
+	//returns the label containting the bubbleValue value
+	//so it can be selected and changed in handleBubbleClick
+	getLabelByBubbleValue(value){		
+		let selector = "g[labelId='"+this.labelId+value+"']",
+			label = d3.selectAll(selector).select("text");
+		return label;
+	}
+
+	//returns the label containting the bubbleValue value
+	//so it can be selected and changed in handleBubbleClick
+	getBubbleByLabelValue(value){
+		let selector = "circle[bubbleId='"+this.bubbleId+value+"']",
+			bubble = d3.selectAll(selector);
+		return bubble;
+	}
+
+	//chagnes the colro of the given item
+	//item is either a bubble or a label
+	changeColor(item, value) {
+		let currentColor = item.style("fill"),
+			that = this;
+		if(currentColor === this.unselectedColor){
+			item.style("fill", function(){
+				
+				return that.getColor(value);
+			});
+		}
+		else{
+			item.style("fill", that.unselectedColor);
+		}
+	}
+
+	//returns color according to value
+	//if the color is a crime the crimeColor is returned
+	//else the default value is returned
+	getColor(d){
+		let crime = d,
+			color = this.defaultColor,
+			that = this;
+		if(that.isACrime(crime)){
+			color = commonfunctionsNamespace.getCrimeColor(crime);
+		}			
+		else{
+			color = this.getDefaultColor();
+		}		
+		return color;
+	}
+
+	//returns true if the is a crime
+	isACrime(text){
+		let crimeTypes = commonfunctionsNamespace.getAllCrimeTypes(),
+			categories = ["violentCrime", "propertyCrime"],
+			allCrimeNames = crimeTypes.concat(categories);
+		return allCrimeNames.includes(text);
+	}
+
+	//returns a default color
+	getDefaultColor(){
+		let random =Math.floor((Math.random() *  Math.floor(that.categories.length*2)) + 1),
+			r = random,
+			g = random,
+			b = random;
+		return "rgb(" + r + "," + g + "," + b + ")";
 	}
 
 }
