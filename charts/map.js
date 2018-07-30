@@ -50,7 +50,7 @@ class Map extends MagicCircle{
 
 	isMoving(moving){
 		this.moving=moving;
-		
+
 		if(moving){
 			this.container.style("cursor", "not-allowed");
 		}else{
@@ -109,7 +109,8 @@ class Map extends MagicCircle{
 			d3.select(".stateInfo").remove();
 		}
 
-		//Mainfunction: Make sure that the map presents colors for the states
+		//Make sure that the map presents colors for the states
+		//Fills all d3-attributes like svg, g, d, etc.
 		function createColorMap(g,statesData,path,getAllCrimesNumber,colorRange){
 			return g.selectAll("path")
 				.data(statesData)
@@ -130,8 +131,8 @@ class Map extends MagicCircle{
 		}
 
 		//Chagne color than the user is on hover on a state
+		//Change pointer than the user is on hover on state
 		function onStateHover(onClick,tip,that){
-
 			return onClick.on('mouseover', function(d){
 				tip.show(d);
 				if(!that.moving){
@@ -154,7 +155,8 @@ class Map extends MagicCircle{
 			});
 		}
 
-		//Call all the functions that needed for colorizig the map
+		//Call all needed html pointer functions
+		//onClick, onLeave, onHover
 		function colorizeMap(g,statesData,path,tip,getAllCrimesNumber,colorRange,that){
 			let colorMap = createColorMap(g,statesData,path,getAllCrimesNumber,colorRange),
 				onClick = onStateClick(colorMap,tip),
@@ -162,6 +164,9 @@ class Map extends MagicCircle{
 				onLeave = onStateLeave(onHover,tip);
 		}
 
+		//Fills the right color for the states
+		//As low the crime rate fill bright colors
+		//As high the crime rate fill darker colors
 		function fillColorInMap(d,getAllCrimesNumber,colorRange){
 			let styleClass = "state ",
 				quantize = d3.scaleQuantize()
@@ -196,6 +201,8 @@ class Map extends MagicCircle{
 			return tip;
 		}
 
+		//Uses d3.tip libary to check where the user is with the mouse
+		//Shows as label state name when user is hovering on map
 		function labelStateOnHover(d){
 			var html = '';
 			for(let i=0;i<getAllCrimesNumber.length;i++){

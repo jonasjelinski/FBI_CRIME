@@ -47,7 +47,7 @@ class Tree extends MagicCircle{
 
 		update(root);
 
-		// Collapse the node and all it's children
+		//Collapse the node and all it's children
 		function collapse(d) {
 			if(d.children) {
 				d._children = d.children
@@ -56,13 +56,14 @@ class Tree extends MagicCircle{
 			}
 		}
 
-		//Creates the text for nodes
+		//Creates the text for crime-types for nodes
 		function nodeText(nodeEnter){
 			let marginLeft = 13,
-				marginRight = 13;
+				marginRight = 13,
+				fontSize = ".35em"
 
 			nodeEnter.append("text")
-				.attr("dy", ".35em")
+				.attr("dy", fontSize)
 				.attr("x", function(d) {
 					return d.children || d._children ? -marginLeft : marginRight;
 				})
@@ -81,7 +82,7 @@ class Tree extends MagicCircle{
 				});
 		}
 
-		//Creates Nodecircle
+		//Creates Nodecircle-radius and the right color for the nodes
 		function nodeCircle(nodeUpdate){
 			let radiusNode = 10;
 			nodeUpdate.select('circle.node')
@@ -90,6 +91,7 @@ class Tree extends MagicCircle{
 					if(i===0){
 						return;
 					}
+					//If node-Text has functions return a dummy as test
 					function hasNumber(myString) {
 						return /\d/.test(myString);
 					}
@@ -99,7 +101,7 @@ class Tree extends MagicCircle{
 						return;
 					}
 
-					for(var key in configNamespace.REAL_CRIME_NAMES) {
+					for(let key in configNamespace.REAL_CRIME_NAMES) {
 						if(configNamespace.REAL_CRIME_NAMES[key] === name) {
 							let	crime,color;
 							crime = key.replace(/\s/g, '');
@@ -112,7 +114,7 @@ class Tree extends MagicCircle{
 				.attr("cursor", "pointer");
 		}
 
-		//Make back old state
+		//Transition exiting nodes to the parent's new position
 		function nodeOnExit(nodeExit,node,source){
 			return node.exit().transition()
 				.duration(duration)
@@ -122,7 +124,6 @@ class Tree extends MagicCircle{
 				.remove();
 		}
 
-		//Prepares old state
 		function nodeLeave(nodeExit){
 			let eulerNum = 1e-6;
 			nodeExit.select("circle")
@@ -131,7 +132,7 @@ class Tree extends MagicCircle{
 				.style("fill-opacity", eulerNum);
 		}
 
-		//Creates connection to the nodes
+		//Creates connection to the nodes as lines
 		function nodeLink(links){
 			return svg.selectAll("path.link")
 				.data(links, function(d) { return d.id; });
@@ -163,6 +164,7 @@ class Tree extends MagicCircle{
 		}
 
 		//Prepares old state
+		//Transition exiting nodes to the parent's new position
 		function linkOnExit(link,source){
 			return link.exit().transition()
 				.duration(duration)
@@ -209,7 +211,7 @@ class Tree extends MagicCircle{
 			return nodeEnter;
 		}
 
-		//After every click make new tree
+		//Fills all d3-attributes like svg, g, d, etc.
 		function update(source) {
 			let treeData = treemap(root),
 				degreeAllLines=180,
@@ -225,12 +227,12 @@ class Tree extends MagicCircle{
 				linkUpdate,
 				linkExit;
 
-			nodes.forEach(function(d){ 
-			if(d.depth>2){
-				d.y = d.depth * degreeLastLine;
-			}else{
-				d.y = d.depth * degreeAllLines;
-			}	
+			nodes.forEach(function(d){
+				if(d.depth>2){
+					d.y = d.depth * degreeLastLine;
+				}else{
+					d.y = d.depth * degreeAllLines;
+				}
 			});
 			nodeEnterNode=nodeEnter(node,source);
 			nodeText(nodeEnterNode);
@@ -326,7 +328,6 @@ createHierarchyData(){
 				"children": null
 			}]
 		}
-
 
 		function childNodeViolentCrime(){
 			return [{
