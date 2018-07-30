@@ -16,6 +16,7 @@ class PlayButton extends MagicCircle{
 		this.onClick = "onClick";
 		this.labelText = labelText;
 		this.isPlaying = false;	
+		this.chartId = chartId;
 	}
 
 	doChart(){
@@ -28,6 +29,7 @@ class PlayButton extends MagicCircle{
 			label,
 			pause = "pauseButton",
 			play = "playButton",
+			playUniverse = "playButtonWhite",
 			that = this,
 			hidden = 0,
 			visible = 1;
@@ -40,8 +42,14 @@ class PlayButton extends MagicCircle{
 
 		function initButton(){
 			button = that.container
-				.append("button")
-				.attr("class", play);		
+			.append("button");
+			
+			if(that.chartId=="Universe"){
+				button.attr("class", playUniverse);	
+			}else if(that.chartId=="Map"){
+				button.attr("class", play);	
+			}
+	
 		}
 
 		//sets event behaviour
@@ -72,10 +80,21 @@ class PlayButton extends MagicCircle{
 		//the player plays or if it is paused
 		function changeButtonLabel(){
 			if(that.isPlaying){
-				button.attr("class",pause);			
+				if(that.ChartId=="Map"){
+					button.attr("class",pause);	
+				}
+				else if(that.ChartId=="Universe"){
+					button.attr("class",pauseButtonWhite);	
+				}
+						
 			}
 			else{
-				button.attr("class", play);
+				if(that.ChartId=="Map"){
+					button.attr("class",play);	
+				}
+				else if(that.ChartId=="Universe"){
+					button.attr("class",playButtonWhite);	
+				}
 			}
 		}
 
