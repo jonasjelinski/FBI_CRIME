@@ -52,18 +52,18 @@ class Map extends MagicCircle{
 		this.moving=moving;
 		
 		if(moving){
-			this.page.style("cursor", "not-allowed");
+			this.container.style("cursor", "not-allowed");
 		}else{
-			this.page.style("cursor", "pointer");
+			this.container.style("cursor", "pointer");
 		}
 	}
 
 	mapNotClickable() {
-		this.page.style("pointer-events", "none");
+		this.container.style("pointer-events", "none");
 	}
 
 	mapClickable(){
-		this.page.style("pointer-events", "visible");
+		this.container.style("pointer-events", "visible");
 	}
 
 	createD3Data() {
