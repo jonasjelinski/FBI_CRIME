@@ -77,9 +77,15 @@ class PopUpPage extends ParentPage{
 	}
 
 	addEventListeners(){
+		this.mainChart.eventTarget.addEventListener(this.mainChart.onClick, this.updateBubbleMenu.bind(this), false);
 		this.closeButton.eventTarget.addEventListener(this.closeButton.onClick, this.closePage.bind(this), false);
 		this.bubbleMenu.eventTarget.addEventListener(this.bubbleMenu.selectionEvent, this.updateChartCrimeType.bind(this), false);
-		this.dropDownMenu.eventTarget.addEventListener(this.dropDownMenu.selectionEvent, this.updateYear.bind(this), false);
+		this.dropDownMenu.eventTarget.addEventListener(this.dropDownMenu.selectionEvent, this.updateYear.bind(this), false);		
+	}
+
+	updateBubbleMenu(event){
+		let crime = event.details.crime;
+		this.bubbleMenu.changeBubblesAndLabelsByValue(crime);
 	}
 
 	closePage(){
