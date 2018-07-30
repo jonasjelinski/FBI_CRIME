@@ -30,7 +30,7 @@ class PopUpPage extends ParentPage{
 	}
 
 	initHeader(){
-		this.header = this.page.append("h1").attr("class","stateInfo").attr("id","stateInfoPopUpId").text("State: "+this.state+ "  Year: "+ this.year);
+		this.header = this.page.append("h1").attr("id","stateInfoPopUpId").text("State: "+this.state+ "  Year: "+ this.year);
 	}
 
 	initCharts(){
