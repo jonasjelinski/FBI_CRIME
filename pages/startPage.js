@@ -1,9 +1,10 @@
 /*---PAGE: START--*/
 
 //The StartPage
-//extends the TextPage
-//to show the text of the StartPage
-//which is set in the constructor
+//contains four StartContainers
+//each StartContainer contains of a picture and a text to describe the picture
+//if a startcontainer is clieck it will send an event
+//the PAGE START dispatches this event so other modules can use it
 
 class StartPage extends TextPage{
 	constructor(pageId = "mainpage", startText = "", chartTextObject){
@@ -21,10 +22,10 @@ class StartPage extends TextPage{
 	}
 
 	initCharts(){
-			this.startMap = new StartContainer(this.pageId, "startMap", "./pictures/MapChart.png", "mapPic", "MapChart", "mapText", this.chartTextObject.map.infoText, this.chartTextObject.map.buttonText),
-			this.startLineChart = new StartContainer(this.pageId, "startLineChart", "./pictures/LineChart.png", "lineChartPic", "LineChart", "lineChartText",  this.chartTextObject.lineChart.infoText, this.chartTextObject.lineChart.buttonText),
-			this.startCorrelation = new StartContainer(this.pageId, "startCorr", "./pictures/CorrelationChart.png", "corrPic", "CorrelationChart", "corrText",  this.chartTextObject.correlation.infoText, this.chartTextObject.correlation.buttonText),
-			this.startUniverse = new StartContainer(this.pageId, "startUniverse", "./pictures/UniverseChart.png", "universePic", "UniverseChart", "universeText",  this.chartTextObject.universe.infoText, this.chartTextObject.universe.buttonText);
+		this.startMap = new StartContainer(this.pageId, "startMap", "./pictures/MapChart.png", "mapPic", "MapChart", "mapText", this.chartTextObject.map.infoText, this.chartTextObject.map.buttonText);
+		this.startLineChart = new StartContainer(this.pageId, "startLineChart", "./pictures/LineChart.png", "lineChartPic", "LineChart", "lineChartText", this.chartTextObject.lineChart.infoText, this.chartTextObject.lineChart.buttonText);
+		this.startCorrelation = new StartContainer(this.pageId, "startCorr", "./pictures/CorrelationChart.png", "corrPic", "CorrelationChart", "corrText", this.chartTextObject.correlation.infoText, this.chartTextObject.correlation.buttonText);
+		this.startUniverse = new StartContainer(this.pageId, "startUniverse", "./pictures/UniverseChart.png", "universePic", "UniverseChart", "universeText", this.chartTextObject.universe.infoText, this.chartTextObject.universe.buttonText);
 	}
 
 	addCharts(){
@@ -47,6 +48,4 @@ class StartPage extends TextPage{
 		event.detail = clickEvent.detail;
 		this.eventTarget.dispatchEvent(event);	
 	}
-
-
 }

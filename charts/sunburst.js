@@ -352,8 +352,9 @@ class Sunburst extends MagicCircle{
 		}
 		
 		//asures labels dont overlap
-		function asureDistanceToLabels(y){	  
-			let minDistance = 40,
+		function asureDistanceToLabels(oldY){	  
+			let y = oldY,
+				minDistance = 40,
 				distance = Math.abs(lastLabelYPos-y);
 			if(distance < minDistance){			
 				y = y+minDistance;
