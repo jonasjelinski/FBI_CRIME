@@ -133,4 +133,9 @@ class MapPage extends ParentPage{
 	setMapUnClickable(){
 		this.mainChart.mapNotClickable();
 	}
+
+	drawPage(){
+		super.drawPage();
+		this.setMapClickable();
+	}
 }
