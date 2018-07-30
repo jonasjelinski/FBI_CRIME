@@ -164,7 +164,6 @@ class Tree extends MagicCircle{
 		}
 
 		//Prepares old state
-		//Transition exiting nodes to the parent's new position
 		function linkOnExit(link,source){
 			return link.exit().transition()
 				.duration(duration)
@@ -211,7 +210,7 @@ class Tree extends MagicCircle{
 			return nodeEnter;
 		}
 
-		//Fills all d3-attributes like svg, g, d, etc.
+		//After every click make new tree
 		function update(source) {
 			let treeData = treemap(root),
 				degreeAllLines=180,
