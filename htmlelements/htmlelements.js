@@ -47,13 +47,13 @@ htmlelementsNamespace.lineDiagramm = {
 	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "linediagram",
 	htmlid: "linediagram",
-	width:450,
-	height:250,
+	width:700,
+	height:400,
 	type: "svg",
 	xAxisLabelX : -20,
 	xAxisLabelY : 35,
 	yAxisLabelX : 130,
-	yAxisLabelY : -70,
+	yAxisLabelY : -55,
 };
 
 htmlelementsNamespace.theUniverse = {
@@ -68,14 +68,14 @@ htmlelementsNamespace.theUniverse = {
 	hoverInLabelSize: "20px",
 	hoverOutLabelSize: "5px",
 	translateX : 150,
-	translateY : -200,
+	translateY : -125,
 };
 
 htmlelementsNamespace.bubbleMenu = {
 	parentElement: htmlelementsNamespace.magicCircle,
 	htmlclassname: "bubblemenu",
 	htmlid: "bubblemenu",
-	width:150,
+	width:180,
 	height:200,
 	type: "svg",
 	unselectedColor: "rgb(124, 124, 125)",
@@ -135,7 +135,7 @@ htmlelementsNamespace.tree = {
 	parentElement: htmlelementsNamespace.magicCircle,
 	rootclassname: "tree",
 	htmlid: "tree",
-	width:300,
+	width:250,
 	height:380,
 	type: "g",
 	margin: {top:20, bottom:20, left: 140, right: 140},
@@ -159,8 +159,8 @@ htmlelementsNamespace.closeButton = {
 	width: 15,
 	height: 15,
 	type: "svg",
-	strokeColor : "black",
-	fillColor : "gray",
+	strokeColor : "#3F3F42",
+	fillColor : "#CACACB",
 	strokeWidth :2,
 };
 
@@ -226,7 +226,7 @@ htmlelementsNamespace.lineChartPage = {
 	dropDownClassName: "dropDown crimetypes linechart",
 	dropDownid: "dropDown crimetypes linechart",
 	firstContainerId : "firstHalfLineChartPage",
-	secondContainerId : "secondHalfLineChartPage",		
+	secondContainerId : "secondHalfLineChartPage",
 	containerType: "div",
 	containerWidth: 450,
 	containerHeight: 200,
