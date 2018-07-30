@@ -457,15 +457,14 @@ class CrimeCorrelation extends MagicCircle{
 
 		function changeLinksColorBySource(source, reset){
 			let linksWithThisSource = d3.selectAll(".link").filter(function(d){
-					return d.source.id !== source && d.target.id !==source; 
-				});
-				if(reset){
-					resetLinksColor(linksWithThisSource);
-				}
-				else{
-					changeLinksColor(linksWithThisSource);
-				}				
-						
+				return d.source.id !== source && d.target.id !==source; 
+			});
+			if(reset){
+				resetLinksColor(linksWithThisSource);
+			}
+			else{
+				changeLinksColor(linksWithThisSource);
+			}						
 		}
 
 		function resetLinksColor(links){

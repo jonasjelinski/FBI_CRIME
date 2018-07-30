@@ -226,11 +226,11 @@ class Tree extends MagicCircle{
 				linkExit;
 
 			nodes.forEach(function(d){ 
-			if(d.depth>2){
-				d.y = d.depth * degreeLastLine;
-			}else{
-				d.y = d.depth * degreeAllLines;
-			}	
+				if(d.depth>2){
+					d.y = d.depth * degreeLastLine;
+				}else{
+					d.y = d.depth * degreeAllLines;
+				}	
 			});
 			nodeEnterNode=nodeEnter(node,source);
 			nodeText(nodeEnterNode);
@@ -250,11 +250,11 @@ class Tree extends MagicCircle{
 		}
 	}
 
-//This is the Data for Tree with three Levels
-//-->"firstNode"-->treeData with "state" as rootNode
-//-->"secondNode"-->treeData with "crime-type" as second-Level
-//-->"lastNode"-->treeData with all crimenames and number
-createHierarchyData(){
+	//This is the Data for Tree with three Levels
+	//-->"firstNode"-->treeData with "state" as rootNode
+	//-->"secondNode"-->treeData with "crime-type" as second-Level
+	//-->"lastNode"-->treeData with all crimenames and number
+	createHierarchyData(){
 		let crimedata = commonfunctionsNamespace.getCrimesAndDataByYearAndState(this.year, this.state, this.data),
 			treeData=firstNode(this.year),
 			treeDataState=secondNode(treeData,this.state),
@@ -282,51 +282,50 @@ createHierarchyData(){
 			return [{
 				"name": ""+crimedata.crimes.violentCrime.MurderManslaughter,
 				"children": null
-			}]
+			}];
 		}
 
 		function childNodeRape(){
 			return [{
 				"name": ""+crimedata.crimes.violentCrime.Rape,
 				"children": null
-			}]
+			}];
 		}
 
 		function childNodeRobbery(){
 			return [{
 				"name": ""+crimedata.crimes.violentCrime.Robbery,
 				"children": null
-			}]
+			}];
 		}
 
 		function childNodeAggravatedassault(){
 			return [{
 				"name": ""+crimedata.crimes.violentCrime.Aggravatedassault,
 				"children": null
-			}]
+			}];
 		}
 
 		function childNodeBuglary(){
 			return [{
 				"name": ""+crimedata.crimes.propertyCrime.Burglary,
 				"children": null
-			}]
+			}];
 		}
 
 		function childNodeLarencytheft(){
 			return [{
 				"name": ""+crimedata.crimes.propertyCrime.Larcenytheft,
 				"children": null
-			}]
+			}];
 		}
 
 		function childNodeMotorvehicletheft(){
 			return [{
 				"name": " "+crimedata.crimes.propertyCrime.Motorvehicletheft,
 				"children": null
-			}]
+			}];
 		}
-
 
 		function childNodeViolentCrime(){
 			return [{
@@ -344,7 +343,7 @@ createHierarchyData(){
 			{
 				"name": configNamespace.REAL_CRIME_NAMES["Aggravatedassault"],
 				"children": childNodeAggravatedassault()
-			}]
+			}];
 		}
 
 		function childNodePropertyCrime(){
@@ -359,7 +358,7 @@ createHierarchyData(){
 			{
 				"name": configNamespace.REAL_CRIME_NAMES["Motorvehicletheft"],
 				"children": childNodeMotorvehicletheft()
-			}]
+			}];
 		}
 
 		function lastNode(treeDataState){
@@ -371,7 +370,7 @@ createHierarchyData(){
 				{
 					"name": configNamespace.REAL_CRIME_NAMES["propertyCrime"],
 					"children": childNodePropertyCrime()
-				})
+				});
 		}
 		return treeData;
 	}

@@ -1,6 +1,5 @@
 /*---PAGE: SCRIPTS--*/
 
-
 //contains all pathes of the script-files
 
 var scripts_namespace = scripts_namespace || {};
