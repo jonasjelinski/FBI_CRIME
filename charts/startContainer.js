@@ -46,7 +46,7 @@ class StartContainer extends MagicCircle{
 
 		function initStartContainer(){
 			startContainer = that.container
-				.attr("class", "startContainer")
+				.attr("class", "startContainer");
 		}
 
 		function drawPicture(){
