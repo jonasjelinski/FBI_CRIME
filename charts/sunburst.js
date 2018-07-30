@@ -238,12 +238,12 @@ class Sunburst extends MagicCircle{
 					that.showOrHideLinesAndLabels(crime);
 					sendClickEvent(crime);
 				})
+				.style("fill", function(d){ return getColorByCrime(d);})				 
 				.attr("d", computeTransition())				
 				.transition()
 				.ease(d3.easeLinear)
 				.duration(durationTime)            
-				.attr("d", arc)
-				.style("fill", function(d){ return getColorByCrime(d);});				 
+				.attr("d", arc);		 
 		}
 
 		function onHoverInSlice(that){
